@@ -1,0 +1,16 @@
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.category-chip {
+    transition: all 0.3s ease;
+}
+
+.category-chip:hover {
+    transform: scale(1.05);
+}
+
+#searchInput:focus {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+}
