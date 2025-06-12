@@ -1,0 +1,13 @@
+/megasite
+  /frontend
+    /public
+    /src
+      /components
+      /pages
+      /tools
+    index.html
+  /backend
+    /routes
+    /controllers
+    /utils
+    server.js
