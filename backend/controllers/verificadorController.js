@@ -6,4 +6,10 @@ function verificadorValor(req, res) {
     res.json({ encontrado })
 }
 
-module.exports = { verificadorValor }
+function listarCategorias(req, res) {
+    console.log(dados)
+    const categorias = dados.map(obj => obj.category)
+    res.json({ categorias })
+}
+
+module.exports = { verificadorValor, listarCategorias }

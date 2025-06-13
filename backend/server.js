@@ -11,5 +11,5 @@ app.use(express.json())
 app.use('/', verificadorRoutes)
 
 app.listen(PORT, () => {
-    console.log(`Servidor rodando em PORT`)
+    console.log(`Servidor rodando na porta ${PORT}`)
 })
