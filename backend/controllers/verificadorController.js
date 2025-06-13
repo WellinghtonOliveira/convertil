@@ -7,9 +7,11 @@ function verificadorValor(req, res) {
 }
 
 function listarCategorias(req, res) {
-    console.log(dados)
+    console.log('Dados enviados com sucesso')
     const categorias = dados.map(obj => obj.category)
-    res.json({ categorias })
+    const nome = dados.map(obj => obj.name)
+    const descricao = dados.map(obj => obj.description)
+    res.json({ categorias, nome, descricao })
 }
 
 module.exports = { verificadorValor, listarCategorias }

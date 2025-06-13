@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./src/styles/style.css">
 </head>
+
 <body class="bg-gray-50">
     <!-- Header/Navbar -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
@@ -21,10 +23,14 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-center space-x-4">
-                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-900 bg-gray-100">Início</a>
-                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Categorias</a>
-                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Sobre</a>
-                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Contato</a>
+                        <a href="#"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-900 bg-gray-100">Início</a>
+                        <a href="#"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Categorias</a>
+                        <a href="#"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Sobre</a>
+                        <a href="#"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Contato</a>
                     </div>
                 </div>
                 <div class="md:hidden flex items-center">
@@ -46,8 +52,10 @@
                             <span class="block">Descubra mais</span>
                             <span class="block" style="color: #F59E0B;">de 5 ferramentas úteis</span>
                         </h1>
-                        <p class="mt-3 text-base text-white sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                            Tudo o que você precisa em um só lugar. Ferramentas organizadas por categoria para facilitar seu trabalho e produtividade.
+                        <p
+                            class="mt-3 text-base text-white sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                            Tudo o que você precisa em um só lugar. Ferramentas organizadas por categoria para facilitar
+                            seu trabalho e produtividade.
                         </p>
                     </div>
                 </main>
@@ -66,32 +74,35 @@
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <i class="fas fa-search text-gray-400"></i>
                 </div>
-                <input 
-                    id="searchInput" 
-                    type="text" 
-                    class="block w-full pl-10 pr-3 py-4 border border-gray-300 rounded-full bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
-                    placeholder="Digite o nome da ferramenta..."
-                    onkeyup="filterTools()">
+                <input id="searchInput" type="text"
+                    class="block w-full pl-10 pr-3 py-4 border border-gray-300 rounded-full bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Digite o nome da ferramenta..." onkeyup="filterTools()">
             </div>
-            
+
             <!-- Categories Filter -->
             <div class="flex flex-wrap justify-center gap-3 mt-6">
-                <button onclick="filterByCategory('all')" class="category-chip px-4 py-2 rounded-full text-sm font-medium bg-blue-600 text-white">
+                <button onclick="filterByCategory('all')"
+                    class="category-chip px-4 py-2 rounded-full text-sm font-medium bg-blue-600 text-white">
                     Todas
                 </button>
-                <button onclick="filterByCategory('design')" class="category-chip px-4 py-2 rounded-full text-sm font-medium bg-green-500 text-white">
+                <button onclick="filterByCategory('design')"
+                    class="category-chip px-4 py-2 rounded-full text-sm font-medium bg-green-500 text-white">
                     Design
                 </button>
-                <button onclick="filterByCategory('dev')" class="category-chip px-4 py-2 rounded-full text-sm font-medium bg-yellow-500 text-white">
+                <button onclick="filterByCategory('dev')"
+                    class="category-chip px-4 py-2 rounded-full text-sm font-medium bg-yellow-500 text-white">
                     Desenvolvimento
                 </button>
-                <button onclick="filterByCategory('productivity')" class="category-chip px-4 py-2 rounded-full text-sm font-medium bg-red-500 text-white">
+                <button onclick="filterByCategory('productivity')"
+                    class="category-chip px-4 py-2 rounded-full text-sm font-medium bg-red-500 text-white">
                     Produtividade
                 </button>
-                <button onclick="filterByCategory('marketing')" class="category-chip px-4 py-2 rounded-full text-sm font-medium bg-purple-500 text-white">
+                <button onclick="filterByCategory('marketing')"
+                    class="category-chip px-4 py-2 rounded-full text-sm font-medium bg-purple-500 text-white">
                     Marketing
                 </button>
-                <button onclick="filterByCategory('finance')" class="category-chip px-4 py-2 rounded-full text-sm font-medium bg-gray-600 text-white">
+                <button onclick="filterByCategory('finance')"
+                    class="category-chip px-4 py-2 rounded-full text-sm font-medium bg-gray-600 text-white">
                     Finanças
                 </button>
             </div>
@@ -102,11 +113,11 @@
     <section class="py-12 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-2xl font-bold text-gray-900 mb-8">Todas as Ferramentas Disponíveis</h2>
-            
+
             <div id="toolsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 <script src="./src/scripts/script.js"></script>
             </div>
-            
+
             <div class="mt-8 flex justify-center">
                 <nav class="flex items-center space-x-2">
                     <a href="#" class="px-3 py-1 rounded-md bg-blue-600 text-white font-medium">1</a>
@@ -192,12 +203,14 @@
             </h2>
             <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
                 <div class="inline-flex rounded-md shadow">
-                    <a href="#toolsContainer" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                    <a href="#toolsContainer"
+                        class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
                         Ver todas ferramentas
                     </a>
                 </div>
                 <div class="ml-3 inline-flex rounded-md shadow">
-                    <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50">
+                    <a href="#"
+                        class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50">
                         Como usar
                     </a>
                 </div>

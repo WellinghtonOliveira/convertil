@@ -1,18 +1,18 @@
 const dados = [
     // desing
-    { category: 'design' },
+    { category: 'design', name: 'mineca', description: 'Loren Ipsum Ipsum Ipsum oren Ipsum Ipsum Ipsum '}
 
     // dev
-    { category: 'dev' },
+    //{ category: 'dev' },
 
     // productivity
-    { category: 'productivity' },
+    //{ category: 'productivity' },
 
     // marketing
-    { category: 'marketing' },
+    //{ category: 'marketing' },
 
     // finance
-    { category: 'finance' }
+    //{ category: 'finance' }
 ]
 
 module.exports = dados
