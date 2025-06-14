@@ -2,19 +2,62 @@
 <html lang="pt-BR">
 
 <head>
-    <link rel="shortcut icon" href="./icon/icon.png" type="image/x-icon">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ferramentas Úteis - Portal Completo</title>
+    <!-- TODO lembrar de trocar o link test pelo link real -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Ferramentas Online Gratuitas | Portal Completo</title>
+
+    <meta name="description"
+        content="Use mais de 200 ferramentas online grátis. Conversores, calculadoras, geradores e utilitários úteis para o seu dia a dia em um só lugar." />
+
+    <meta name="robots" content="index, follow" />
+
+    <!-- <link rel="canonical" href="https://seusite.com/" /> -->
+
+    <link rel="shortcut icon" href="./icon/icon.png" type="image/x-icon" />
+
+    <meta property="og:title" content="Ferramentas Online Gratuitas | Portal Completo" />
+    <meta property="og:description" content="Mais de 200 ferramentas gratuitas e úteis para facilitar seu dia." />
+    <meta property="og:type" content="website" />
+    <!-- <meta property="og:url" content="https://seusite.com/" /> -->
+    <!-- <meta property="og:image" content="https://seusite.com/icon/og-image.png" /> -->
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ferramentas Online Gratuitas" />
+    <meta name="twitter:description" content="Mais de 200 ferramentas úteis em um só lugar." />
+    <!-- <meta name="twitter:image" content="https://seusite.com/icon/og-image.png" /> -->
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Portal de Ferramentas Online",
+    <!-- "url": "https://seusite.com", -->
+    "description": "Mais de 200 ferramentas úteis e gratuitas para seu dia a dia. Calculadoras, geradores, conversores e muito mais.",
+    "inLanguage": "pt-BR",
+    "publisher": {
+      "@type": "Organization",
+      "name": "SeuNomeOuMarca",
+      "logo": {
+        "@type": "ImageObject",
+        <!-- "url": "https://seusite.com/icon/logo.png" -->
+      }
+    }
+  }
+  </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./src/styles/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="./src/styles/style.css" />
 </head>
+
 
 <body class="bg-gray-50">
     <!-- Header/Navbar -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
@@ -22,6 +65,8 @@
                         <span class="text-xl font-bold text-gray-900">ToolMaster</span>
                     </div>
                 </div>
+
+                <!-- Menu desktop -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-center space-x-4">
                         <a href="#id-inicio"
@@ -30,20 +75,35 @@
                             class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Categorias</a>
                         <a href="#" onclick="openAboutModal()"
                             class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Sobre</a>
-
                         <a href="#" onclick="openContactModal()"
                             class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Contatar</a>
-
                     </div>
                 </div>
+
+                <!-- Botão hamburguer -->
                 <div class="md:hidden flex items-center">
-                    <button class="text-gray-700 focus:outline-none">
+                    <button id="menu-toggle" class="text-gray-700 focus:outline-none">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
+
+            <!-- Menu mobile sobreposto -->
+            <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white shadow-md z-40">
+                <div class="flex flex-col px-4 py-3 space-y-2">
+                    <a href="#id-inicio" class="block px-4 py-2 text-sm text-gray-900 bg-gray-100 rounded">Início</a>
+                    <a href="#id-category"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded">Categorias</a>
+                    <a href="#" onclick="openAboutModal()"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded">Sobre</a>
+                    <a href="#" onclick="openContactModal()"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded">Contatar</a>
+                </div>
+            </div>
         </nav>
     </header>
+
+
 
     <!-- Hero Section -->
     <div id="id-inicio" class="relative bg-gradient-to-r from-blue-600 to-blue-400 overflow-hidden">
@@ -436,6 +496,13 @@
         function fecharComoUsar() {
             document.getElementById("comoUsarModal").classList.add("hidden")
         }
+
+        const toggleBtn = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        toggleBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
 
 
     </script>

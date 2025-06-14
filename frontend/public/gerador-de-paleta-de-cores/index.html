@@ -1,12 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+<!-- TODO lembrar de colocar o link do site correto ao subi-lo -->
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HarmonyPalette - Gerador de Paletas de Cores</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>HarmonyPalette | Gerador de Paletas de Cores Harmoniosas</title>
+
+    <meta name="description"
+        content="Gere paletas de cores harmoniosas com facilidade usando o HarmonyPalette. Ideal para designers, desenvolvedores e criadores de conteúdo." />
+
+    <meta name="robots" content="index, follow" />
+
+    <link rel="canonical" href="https://seusite.com/harmonypalette/" />
+
+    <link rel="shortcut icon" href="icon.png" type="image/x-icon" />
+
+    <meta property="og:title" content="HarmonyPalette - Gerador de Paletas de Cores Harmoniosas" />
+    <meta property="og:description"
+        content="Descubra combinações de cores perfeitas com o HarmonyPalette. Gere paletas de design para seus projetos em segundos." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://seusite.com/harmonypalette/" />
+    <meta property="og:image" content="https://seusite.com/icon/og-harmonypalette.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="HarmonyPalette - Gerador de Paletas" />
+    <meta name="twitter:description"
+        content="Ferramenta online para gerar paletas de cores harmoniosas para seus projetos." />
+    <meta name="twitter:image" content="https://seusite.com/icon/og-harmonypalette.png" />
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "HarmonyPalette",
+    "url": "https://seusite.com/harmonypalette",
+    "applicationCategory": "DesignApplication",
+    "description": "Gere paletas de cores harmoniosas online com o HarmonyPalette. Ideal para projetos de design, interfaces e conteúdo visual.",
+    "inLanguage": "pt-BR",
+    "image": "https://seusite.com/icon/og-harmonypalette.png",
+    "offers": {
+      "@type": "Offer",
+      "price": "0.00",
+      "priceCurrency": "BRL"
+    }
+  }
+  </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
     <script>
         tailwind.config = {
             theme: {
@@ -23,6 +68,7 @@
             }
         }
     </script>
+
     <style>
         .color-box {
             transition: all 0.3s ease;
@@ -71,17 +117,32 @@
                     <i class="fas fa-palette text-3xl text-primary"></i>
                     <h1 class="text-2xl font-bold">Harmony<span class="text-primary">Palette</span></h1>
                 </div>
+
+                <!-- Menu desktop -->
                 <nav class="hidden md:flex space-x-6">
                     <a href="../../index.html" class="hover:text-primary transition">Voltar</a>
                     <a href="#sobre" class="hover:text-primary transition">Sobre</a>
                     <a href="#como-funciona" class="hover:text-primary transition">Tutoriais</a>
                 </nav>
-                <button class="md:hidden text-2xl">
+
+                <!-- Botão hamburguer -->
+                <button id="toggle-menu" class="md:hidden text-2xl focus:outline-none">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
+
+            <!-- Menu mobile expansível -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="../../index.html" class="text-lg hover:text-primary transition">Voltar</a>
+                    <a href="#sobre" class="text-lg hover:text-primary transition">Sobre</a>
+                    <a href="#como-funciona" class="text-lg hover:text-primary transition">Tutoriais</a>
+                </div>
+            </div>
         </div>
     </header>
+
+
 
     <!-- Hero Section -->
     <section class="py-16 bg-gradient-to-r from-dark to-primary text-white">
@@ -289,7 +350,8 @@
                 <div>
                     <h5 class="text-lg font-bold mb-4">Ajuda</h5>
                     <ul class="space-y-2">
-                        <li><a href="#como-funciona" class="text-gray-400 hover:text-primary transition">Tutorial</a></li>
+                        <li><a href="#como-funciona" class="text-gray-400 hover:text-primary transition">Tutorial</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -764,6 +826,13 @@
                 modalComo.classList.add('hidden');
                 modalComo.classList.remove('flex');
             }
+        });
+
+        const toggleBtn = document.getElementById('toggle-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        toggleBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
 
 
