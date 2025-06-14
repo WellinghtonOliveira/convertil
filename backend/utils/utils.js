@@ -1,6 +1,6 @@
 const dados = [
     // desing
-    { category: 'design', name: 'Gerador de Paleta de Cores', description: 'Cria combinações de cores harmoniosas para projetos visuais', link: './public/gerador-de-paleta-de-cores.html'}
+    { category: 'design', name: 'Gerador de Paleta de Cores', description: 'Cria combinações de cores harmoniosas para projetos visuais', link: './public/gerador-de-paleta-de-cores/index.html'}
 
     // dev
     //{ category: 'dev' },

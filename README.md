@@ -1,5 +1,6 @@
 /megasite
   /frontend
+    /icon
     /public
     /src
       /components
