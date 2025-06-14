@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const container = document.getElementById('toolsContainer')
     const paginationContainer = document.getElementById('pagination')
 
-    const itemsPerPage = 24
+    const itemsPerPage = 30
     let currentPage = 1
 
     const arraycategorias = []

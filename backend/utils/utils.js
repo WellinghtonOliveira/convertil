@@ -16,6 +16,9 @@ const dados = [
 ]
 
 module.exports = dados
-// TODO colocando as categorias/ ferramentas por aqui
 
+
+
+
+// TODO colocando as categorias/ferramentas por aqui
 // TODO categorias ==> design, dev, productivity, marketing, finance

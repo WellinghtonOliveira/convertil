@@ -200,7 +200,7 @@
                     </a>
                 </div>
                 <div class="ml-3 inline-flex rounded-md shadow">
-                    <a href="#"
+                    <a href="javascript:void(0);" onclick="abrirComoUsar()"
                         class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50">
                         Como usar
                     </a>
@@ -245,24 +245,24 @@
                     </a>
                 </div>
             </nav>
-            <div class="mt-8 flex justify-center space-x-6">
-                <a href="#" class="text-gray-400 hover:text-gray-500">
+            <div class="mt-8 flex justify-center space-x-6" style="display: none;">
+                <a href="#" class="text-gray-400 hover:text-gray-500" target="_blank">
                     <span class="sr-only">Facebook</span>
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="#" class="text-gray-400 hover:text-gray-500">
+                <a href="#" class="text-gray-400 hover:text-gray-500" target="_blank">
                     <span class="sr-only">Twitter</span>
                     <i class="fab fa-twitter"></i>
                 </a>
-                <a href="#" class="text-gray-400 hover:text-gray-500">
+                <a href="#" class="text-gray-400 hover:text-gray-500" target="_blank">
                     <span class="sr-only">Instagram</span>
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="#" class="text-gray-400 hover:text-gray-500">
+                <a href="#" class="text-gray-400 hover:text-gray-500" target="_blank">
                     <span class="sr-only">LinkedIn</span>
                     <i class="fab fa-linkedin-in"></i>
                 </a>
-                <a href="#" class="text-gray-400 hover:text-gray-500">
+                <a href="#" class="text-gray-400 hover:text-gray-500" target="_blank">
                     <span class="sr-only">GitHub</span>
                     <i class="fab fa-github"></i>
                 </a>
@@ -275,6 +275,27 @@
 
     <script src="./src/scripts/filterTools.js"></script>
     <script src="./src/scripts/script.js"></script>
+
+    <!-- Modal Como Usar -->
+    <div id="comoUsarModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 max-w-2xl w-full relative">
+            <button onclick="fecharComoUsar()" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-2xl font-bold text-blue-700 mb-4 text-center">Como Usar o ToolMaster</h2>
+            <p class="text-gray-700 text-lg leading-relaxed">
+                Usar nossas ferramentas é rápido e intuitivo. Basta navegar pelas categorias ou usar o campo de busca
+                para encontrar a ferramenta ideal para você.
+            </p>
+            <p class="mt-4 text-gray-600 text-base">
+                Ao clicar em qualquer ferramenta, ela será carregada instantaneamente no seu navegador, pronta para uso
+                — sem necessidade de instalação, cadastro ou configurações complicadas.
+            </p>
+            <p class="mt-4 text-gray-500 italic text-sm text-center">
+                Um clique. Uma solução. Sua produtividade em movimento.
+            </p>
+        </div>
+    </div>
 
     <!-- Modal Contatar -->
     <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
@@ -406,6 +427,15 @@
         function closeContactModal() {
             document.getElementById("contactModal").classList.add("hidden")
         }
+
+        function abrirComoUsar() {
+            document.getElementById("comoUsarModal").classList.remove("hidden")
+        }
+
+        function fecharComoUsar() {
+            document.getElementById("comoUsarModal").classList.add("hidden")
+        }
+
 
     </script>
 </body>
