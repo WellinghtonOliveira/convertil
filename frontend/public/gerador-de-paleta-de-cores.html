@@ -72,10 +72,9 @@
                     <h1 class="text-2xl font-bold">Harmony<span class="text-primary">Palette</span></h1>
                 </div>
                 <nav class="hidden md:flex space-x-6">
-                    <a href="#" class="hover:text-primary transition">Início</a>
-                    <a href="#" class="hover:text-primary transition">Sobre</a>
-                    <a href="#" class="hover:text-primary transition">Tutoriais</a>
-                    <a href="#" class="hover:text-primary transition">Contato</a>
+                    <a href="../index.html" class="hover:text-primary transition">Voltar</a>
+                    <a href="#sobre" class="hover:text-primary transition">Sobre</a>
+                    <a href="#como-funciona" class="hover:text-primary transition">Tutoriais</a>
                 </nav>
                 <button class="md:hidden text-2xl">
                     <i class="fas fa-bars"></i>
@@ -104,7 +103,7 @@
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-2xl font-bold text-dark">Sua Paleta de Cores</h3>
                 <div class="flex space-x-3">
-                    <button id="save-btn" onclick="salvarNovaPaleta()"
+                    <button id="save-btn"
                         class="bg-primary hover:bg-opacity-90 text-white py-2 px-4 rounded-lg flex items-center space-x-2 transition">
                         <i class="fas fa-save"></i>
                         <span>Salvar</span>
@@ -251,36 +250,9 @@
         <div class="bg-white rounded-xl shadow-lg p-6">
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-2xl font-bold text-dark">Paletas Salvas</h3>
-                <button class="text-primary hover:text-opacity-80 transition">
-                    <i class="fas fa-ellipsis-h"></i>
-                </button>
             </div>
 
             <div id="saved-palettes" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                <!-- Sample saved palette -->
-                <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition">
-                    <div class="h-4 flex">
-                        <div class="w-1/6 bg-primary"></div>
-                        <div class="w-1/6 bg-secondary"></div>
-                        <div class="w-1/6 bg-light"></div>
-                        <div class="w-1/6 bg-dark"></div>
-                        <div class="w-1/6 bg-danger"></div>
-                        <div class="w-1/6 bg-success"></div>
-                    </div>
-                    <div class="p-4">
-                        <h4 class="font-bold text-lg mb-1">Paleta Padrão</h4>
-                        <p class="text-gray-600 text-sm mb-3">6 cores</p>
-                        <div class="flex justify-between">
-                            <button class="text-primary hover:text-opacity-80 transition">
-                                <i class="fas fa-eye"></i> Visualizar
-                            </button>
-                            <button class="text-danger hover:text-opacity-80 transition">
-                                <i class="fas fa-trash"></i> Excluir
-                            </button>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Empty state -->
                 <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
@@ -317,7 +289,7 @@
                 <div>
                     <h5 class="text-lg font-bold mb-4">Ajuda</h5>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition">Documentação</a></li>
+                        <li><a href="#como-funciona" class="text-gray-400 hover:text-primary transition">Tutorial</a></li>
                     </ul>
                 </div>
             </div>
@@ -327,21 +299,122 @@
         </div>
     </footer>
 
-    <script>
-        const listaContainer = document.querySelector('.grid');
+    <!-- Modal Como Funciona -->
+    <div id="modal-como-funciona" class="fixed inset-0 bg-black bg-opacity-60 z-50 items-center justify-center hidden">
+        <div class="bg-white rounded-lg shadow-lg max-w-xl w-full p-6 relative">
+            <button id="fechar-como-funciona" class="absolute top-3 right-4 text-gray-600 hover:text-black text-xl">
+                &times;
+            </button>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Como funciona esta ferramenta</h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+                Este site foi criado para ajudar você a gerar <strong>paletas de cores harmoniosas</strong> de forma
+                rápida, intuitiva e profissional.
+            </p>
+            <ul class="list-disc list-inside text-gray-700 mb-4 space-y-2">
+                <li>Selecione uma cor base ou use a padrão</li>
+                <li>Escolha o número de cores que deseja gerar</li>
+                <li>Defina um estilo de harmonia (como análoga, complementar, triádica, etc.)</li>
+                <li>Visualize as combinações automaticamente geradas</li>
+                <li>Copie os códigos hexadecimais ou salve suas paletas favoritas</li>
+                <li>Exporte as paletas como imagem PNG com as cores e seus códigos</li>
+            </ul>
+            <p class="text-gray-700">
+                Ideal para <strong>designers</strong>, <strong>desenvolvedores</strong>, criadores de conteúdo ou
+                qualquer pessoa que busca <strong>inspiração visual</strong> com praticidade.
+            </p>
+        </div>
+    </div>
 
-        let coresGeradas = [] // Guarda as cores atuais geradas
+
+    <div id="modal-sobre" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-2xl w-full p-6 relative">
+            <button id="fechar-sobre"
+                class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl">&times;</button>
+            <h2 class="text-2xl font-bold mb-4 text-center text-primary">Sobre a Ferramenta</h2>
+            <div class="text-gray-700 text-justify leading-relaxed">
+                <p class="mb-4">
+                    Esta ferramenta foi desenvolvida para oferecer uma experiência prática, moderna e intuitiva na
+                    criação de paletas de cores harmoniosas. Pensada especialmente para designers, desenvolvedores e
+                    criativos em geral, ela permite gerar, salvar, visualizar, exportar e copiar combinações de cores
+                    com precisão e elegância.
+                </p>
+                <p class="mb-4">
+                    Com suporte a diferentes harmonias cromáticas, controle total de quantidade de cores e exportação em
+                    imagem, esta solução é perfeita tanto para projetos profissionais quanto para uso educacional e
+                    criativo.
+                </p>
+                <p>
+                    Simples de usar, rápida e 100% gratuita, esta ferramenta é um recurso completo para quem busca
+                    inspiração e qualidade no design visual. Explore, experimente e leve seus projetos a um novo nível
+                    com paletas que realmente fazem sentido.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Mensagem de status -->
+    <div id="mensagem-status"
+        class="fixed bottom-4 right-4 hidden items-center gap-2 bg-white shadow-lg px-4 py-2 rounded-lg border border-gray-300 text-sm z-50">
+        <i class="fas fa-check-circle text-green-500 hidden" id="icon-sucesso"></i>
+        <i class="fas fa-times-circle text-red-500 hidden" id="icon-erro"></i>
+        <span id="mensagem-texto" class="text-gray-700"></span>
+    </div>
+
+    <!-- Modal de visualização -->
+    <div id="modal-paleta" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
+            <button id="fechar-modal"
+                class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl">&times;</button>
+            <h2 id="modal-paleta-nome" class="text-xl font-bold mb-4">Paleta</h2>
+            <div id="cores-modal" class="grid grid-cols-1 gap-2"></div>
+        </div>
+    </div>
+
+
+
+    <script>
+        const listaContainer = document.querySelector('#saved-palettes');
+
+        let coresGeradas = [];
+
+        function mostrarMensagem(texto, tipo = 'sucesso') {
+            const msgBox = document.getElementById('mensagem-status');
+            const msgTexto = document.getElementById('mensagem-texto');
+            const iconSucesso = document.getElementById('icon-sucesso');
+            const iconErro = document.getElementById('icon-erro');
+
+            msgTexto.textContent = texto;
+            iconSucesso.classList.add('hidden');
+            iconErro.classList.add('hidden');
+
+            if (tipo === 'sucesso') {
+                iconSucesso.classList.remove('hidden');
+                msgBox.classList.remove('border-red-300');
+                msgBox.classList.add('border-green-300');
+            } else {
+                iconErro.classList.remove('hidden');
+                msgBox.classList.remove('border-green-300');
+                msgBox.classList.add('border-red-300');
+            }
+
+            msgBox.classList.remove('hidden');
+
+            setTimeout(() => {
+                msgBox.classList.add('hidden');
+            }, 3000);
+        }
 
         function salvarNovaPaleta(nome, cores) {
             if (!cores || cores.length === 0) {
-                alert('Nenhuma cor válida para salvar!');
+                mostrarMensagem('erro', 'Nenhuma cor válida para salvar!');
                 return;
             }
-
             let dados = JSON.parse(localStorage.getItem('paletas')) || [];
             dados.push({ nome, cores });
             localStorage.setItem('paletas', JSON.stringify(dados));
             renderizarPaletas();
+            mostrarMensagem('sucesso', 'Paleta salva com sucesso!');
         }
 
         function excluirPaleta(index) {
@@ -349,12 +422,12 @@
             dados.splice(index, 1);
             localStorage.setItem('paletas', JSON.stringify(dados));
             renderizarPaletas();
+            mostrarMensagem('sucesso', 'Paleta excluída com sucesso!');
         }
 
         function renderizarPaletas() {
             let dados = JSON.parse(localStorage.getItem('paletas')) || [];
             listaContainer.innerHTML = '';
-
             if (dados.length === 0) {
                 listaContainer.innerHTML = `
 <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center col-span-3">
@@ -367,10 +440,8 @@
 </div>`;
                 return;
             }
-
             dados.forEach((paleta, index) => {
                 if (!paleta.cores || paleta.cores.length === 0) return;
-
                 const blocos = paleta.cores.map(cor => `<div class="w-1/6" style="background-color:${cor}"></div>`).join('');
                 const item = document.createElement('div');
                 item.className = 'border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition';
@@ -395,10 +466,29 @@
         function visualizarPaleta(index) {
             let dados = JSON.parse(localStorage.getItem('paletas')) || [];
             const paleta = dados[index];
+
             if (paleta) {
-                alert(`Visualizando paleta "${paleta.nome}" com cores:\n${paleta.cores.join(', ')}`);
+                const modal = document.getElementById('modal-paleta');
+                const coresContainer = document.getElementById('cores-modal');
+                coresContainer.innerHTML = '';
+
+                paleta.cores.forEach(cor => {
+                    const corItem = document.createElement('div');
+                    corItem.className = 'w-full rounded shadow mb-2 overflow-hidden';
+
+                    corItem.innerHTML = `
+                <div class="h-12" style="background-color: ${cor};"></div>
+                <div class="text-center text-sm text-gray-700 py-1 font-mono">${cor}</div>
+            `;
+
+                    coresContainer.appendChild(corItem);
+                });
+
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
             }
         }
+
 
         window.addEventListener('DOMContentLoaded', renderizarPaletas);
 
@@ -432,10 +522,8 @@
             const baseColor = document.getElementById('base-color').value || '#ff0000';
             const paletteContainer = document.getElementById('palette-container');
             paletteContainer.innerHTML = '';
-
             let colors = [];
             let h, s, l;
-
             const r = parseInt(baseColor.substr(1, 2), 16) / 255;
             const g = parseInt(baseColor.substr(3, 2), 16) / 255;
             const b = parseInt(baseColor.substr(5, 2), 16) / 255;
@@ -452,10 +540,8 @@
                 }
                 h *= 60;
             }
-
             s = Math.round(s * 100);
             l = Math.round(l * 100);
-
             for (let i = 0; i < count; i++) {
                 let offset = 0;
                 switch (harmony) {
@@ -468,9 +554,7 @@
                 let newHue = (h + offset + 360) % 360;
                 colors.push(hslToHex(newHue, s, l));
             }
-
-            coresGeradas = colors; // Atualiza o array global com as cores geradas
-
+            coresGeradas = colors;
             colors.forEach(color => {
                 const box = document.createElement('div');
                 box.className = 'color-box h-48 rounded-lg flex flex-col justify-end p-4 relative overflow-hidden group';
@@ -487,7 +571,6 @@
 `;
                 paletteContainer.appendChild(box);
             });
-
             attachCopyEvents();
         }
 
@@ -496,38 +579,22 @@
                 btn.addEventListener('click', function () {
                     const color = this.getAttribute('data-color');
                     navigator.clipboard.writeText(color).then(() => {
-                        const notification = document.getElementById('copy-notification');
-                        if (notification) {
-                            notification.classList.remove('hidden');
-                            notification.classList.add('flex');
-                            setTimeout(() => {
-                                notification.classList.add('hidden');
-                                notification.classList.remove('flex');
-                            }, 2000);
-                        }
+                        mostrarMensagem('sucesso');
                     });
                 });
             });
         }
 
-        // Evento para gerar paleta padrão
         document.getElementById('generate-btn').addEventListener('click', () => generatePalette());
-
-        // Evento para gerar paleta pelo botão dentro do placeholder
         document.addEventListener('click', e => {
             if (e.target.id === 'generate-btn-2') generatePalette();
         });
-
-        // Eventos para botões de harmonias
         document.querySelectorAll('.harmony-btn').forEach(btn => {
             btn.addEventListener('click', () => generatePalette(btn.dataset.type));
         });
 
-        // Evento salvar paleta, corrigido para pegar as cores da tela no momento do clique
         document.getElementById('save-btn').addEventListener('click', () => {
             const name = document.getElementById('palette-name').value.trim() || 'Paleta sem nome';
-
-            // Pega as cores diretamente das caixas visíveis
             const colorBoxes = document.querySelectorAll('.color-box');
             const coresAtuais = [];
 
@@ -542,24 +609,19 @@
             });
 
             if (coresAtuais.length === 0) {
-                alert('Nenhuma cor válida para salvar!');
+                mostrarMensagem('Nenhuma cor válida para salvar!', 'erro');
                 return;
             }
 
-            coresGeradas = coresAtuais; // Mantém a variável global atualizada
-
+            coresGeradas = coresAtuais;
             salvarNovaPaleta(name, coresAtuais);
-            alert('Paleta salva com sucesso!');
+            mostrarMensagem('Paleta salva com sucesso!');
         });
 
-        // Evento exportar paleta em PNG
         document.getElementById('export-btn').addEventListener('click', () => {
             const name = document.getElementById('palette-name').value.trim() || 'paleta';
-
-            // Pega as cores da tela
             const colorBoxes = document.querySelectorAll('.color-box');
             const coresAtuais = [];
-
             colorBoxes.forEach(box => {
                 const cor = box.style.backgroundColor;
                 if (cor) {
@@ -569,22 +631,78 @@
                     }
                 }
             });
-
             if (coresAtuais.length === 0) {
-                alert('Nenhuma cor válida para exportar!');
+                mostrarMensagem('erro', 'Nenhuma cor válida para exportar!');
                 return;
             }
-
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
-            const width = 100 * coresAtuais.length;
-            const height = 100;
-            canvas.width = width;
-            canvas.height = height;
+            const largura = 120;
+            const altura = 140;
+            canvas.width = largura * coresAtuais.length;
+            canvas.height = altura;
+
+            ctx.font = '14px monospace';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
 
             coresAtuais.forEach((color, index) => {
+                const x = index * largura;
+
+                // Desenha o fundo colorido
                 ctx.fillStyle = color;
-                ctx.fillRect(index * 100, 0, 100, height);
+                ctx.fillRect(x, 0, largura, 100);
+
+                // Escreve o hexadecimal embaixo
+                ctx.fillStyle = '#000';
+                ctx.fillText(color, x + largura / 2, 105);
+            });
+
+            canvas.toBlob(blob => {
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = name.replace(/\s+/g, '_') + '.png';
+                a.click();
+            });
+        });
+        document.getElementById('export-btn').addEventListener('click', () => {
+            const name = document.getElementById('palette-name').value.trim() || 'paleta';
+            const colorBoxes = document.querySelectorAll('.color-box');
+            const coresAtuais = [];
+            colorBoxes.forEach(box => {
+                const cor = box.style.backgroundColor;
+                if (cor) {
+                    const hex = rgbToHex(cor);
+                    if (!coresAtuais.includes(hex)) {
+                        coresAtuais.push(hex);
+                    }
+                }
+            });
+            if (coresAtuais.length === 0) {
+                mostrarMensagem('erro', 'Nenhuma cor válida para exportar!');
+                return;
+            }
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const largura = 120;
+            const altura = 140;
+            canvas.width = largura * coresAtuais.length;
+            canvas.height = altura;
+
+            ctx.font = '14px monospace';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+
+            coresAtuais.forEach((color, index) => {
+                const x = index * largura;
+
+                // Desenha o fundo colorido
+                ctx.fillStyle = color;
+                ctx.fillRect(x, 0, largura, 100);
+
+                // Escreve o hexadecimal embaixo
+                ctx.fillStyle = '#000';
+                ctx.fillText(color, x + largura / 2, 105);
             });
 
             canvas.toBlob(blob => {
@@ -595,10 +713,72 @@
             });
         });
 
-        // Gera paleta inicial automaticamente ao carregar a página
+
+        document.getElementById('fechar-modal').addEventListener('click', () => {
+            document.getElementById('modal-paleta').classList.add('hidden');
+        });
+
+        // Abrir modal "Sobre"
+        document.querySelectorAll('a[href="#sobre"], #sobre-btn').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('modal-sobre').classList.remove('hidden');
+                document.getElementById('modal-sobre').classList.add('flex');
+            });
+        });
+
+        // Fechar modal "Sobre"
+        document.getElementById('fechar-sobre').addEventListener('click', () => {
+            document.getElementById('modal-sobre').classList.add('hidden');
+            document.getElementById('modal-sobre').classList.remove('flex');
+        });
+
+        // Fechar clicando fora do conteúdo
+        window.addEventListener('click', (e) => {
+            const modalSobre = document.getElementById('modal-sobre');
+            if (e.target === modalSobre) {
+                modalSobre.classList.add('hidden');
+                modalSobre.classList.remove('flex');
+            }
+        });
+
+        // Abrir modal "Como Funciona"
+        document.querySelectorAll('a[href="#como-funciona"], #como-funciona-btn').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('modal-como-funciona').classList.remove('hidden');
+                document.getElementById('modal-como-funciona').classList.add('flex');
+            });
+        });
+
+        // Fechar modal "Como Funciona"
+        document.getElementById('fechar-como-funciona').addEventListener('click', () => {
+            document.getElementById('modal-como-funciona').classList.add('hidden');
+            document.getElementById('modal-como-funciona').classList.remove('flex');
+        });
+
+        // Fechar clicando fora do conteúdo
+        window.addEventListener('click', (e) => {
+            const modalComo = document.getElementById('modal-como-funciona');
+            if (e.target === modalComo) {
+                modalComo.classList.add('hidden');
+                modalComo.classList.remove('flex');
+            }
+        });
+
+
         generatePalette();
 
     </script>
+
+    <div id="toast"
+        class="fixed bottom-4 right-4 hidden items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-opacity duration-300">
+        <i id="toast-icon" class="fas"></i>
+        <span id="toast-message" class="text-sm"></span>
+    </div>
+
 </body>
 
 </html>
+
+<!-- _k -->
