@@ -23,14 +23,16 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-center space-x-4">
-                        <a href="#"
+                        <a href="#id-inicio"
                             class="px-3 py-2 rounded-md text-sm font-medium text-gray-900 bg-gray-100">Início</a>
-                        <a href="#"
+                        <a href="#id-category"
                             class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Categorias</a>
-                        <a href="#"
+                        <a href="#" onclick="openAboutModal()"
                             class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Sobre</a>
-                        <a href="#"
-                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Contato</a>
+
+                        <a href="#" onclick="openContactModal()"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Contatar</a>
+
                     </div>
                 </div>
                 <div class="md:hidden flex items-center">
@@ -43,7 +45,7 @@
     </header>
 
     <!-- Hero Section -->
-    <div class="relative bg-gradient-to-r from-blue-600 to-blue-400 overflow-hidden">
+    <div id="id-inicio" class="relative bg-gradient-to-r from-blue-600 to-blue-400 overflow-hidden">
         <div class="max-w-7xl mx-auto">
             <div class="relative z-10 pb-8 bg-transparent sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
                 <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
@@ -64,7 +66,7 @@
     </div>
 
     <!-- Search Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 -mt-10 z-20 relative">
+    <section id="id-category" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 -mt-10 z-20 relative">
         <div class="bg-white rounded-lg shadow-xl p-6">
             <div class="text-center mb-6">
                 <h2 class="text-3xl font-bold text-gray-800">Encontre a ferramenta perfeita</h2>
@@ -115,21 +117,10 @@
             <h2 class="text-2xl font-bold text-gray-900 mb-8">Todas as Ferramentas Disponíveis</h2>
 
             <div id="toolsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <script src="./src/scripts/script.js"></script>
             </div>
 
             <div class="mt-8 flex justify-center">
-                <nav class="flex items-center space-x-2">
-                    <a href="#" class="px-3 py-1 rounded-md bg-blue-600 text-white font-medium">1</a>
-                    <a href="#" class="px-3 py-1 rounded-md text-gray-700 hover:bg-gray-100">2</a>
-                    <a href="#" class="px-3 py-1 rounded-md text-gray-700 hover:bg-gray-100">3</a>
-                    <a href="#" class="px-3 py-1 rounded-md text-gray-700 hover:bg-gray-100">4</a>
-                    <a href="#" class="px-3 py-1 rounded-md text-gray-700 hover:bg-gray-100">...</a>
-                    <a href="#" class="px-3 py-1 rounded-md text-gray-700 hover:bg-gray-100">20</a>
-                    <a href="#" class="px-3 py-1 rounded-md text-gray-700 hover:bg-gray-100">
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                </nav>
+                <nav id="pagination" class="flex items-center space-x-2"></nav>
             </div>
         </div>
     </section>
@@ -223,32 +214,33 @@
         <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
             <nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
                 <div class="px-5 py-2">
-                    <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+                    <a href="#id-inicio" class="text-base text-gray-500 hover:text-gray-900">
                         Início
                     </a>
                 </div>
                 <div class="px-5 py-2">
-                    <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+                    <a href="#id-category" class="text-base text-gray-500 hover:text-gray-900">
                         Categorias
                     </a>
                 </div>
                 <div class="px-5 py-2">
-                    <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+                    <a href="#" onclick="openAboutModal()" class="text-base text-gray-500 hover:text-gray-900">
                         Sobre
                     </a>
                 </div>
                 <div class="px-5 py-2">
-                    <a href="#" class="text-base text-gray-500 hover:text-gray-900">
-                        Contato
-                    </a>
+                    <a href="#" onclick="openContactModal()"
+                        class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Contatar</a>
+
                 </div>
                 <div class="px-5 py-2">
-                    <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+                    <a href="javascript:void(0);" onclick="abrirTermos()"
+                        class="text-base text-gray-500 hover:text-gray-900">
                         Termos
                     </a>
                 </div>
                 <div class="px-5 py-2">
-                    <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+                    <a href="#" onclick="openPrivacyModal()" class="text-base text-gray-500 hover:text-gray-900">
                         Privacidade
                     </a>
                 </div>
@@ -276,11 +268,146 @@
                 </a>
             </div>
             <p class="mt-8 text-center text-base text-gray-400">
-                &copy; 2023 ToolMaster. Todos os direitos reservados.
+                &copy; 2025 ToolMaster. Todos os direitos reservados.
             </p>
         </div>
     </footer>
 
     <script src="./src/scripts/filterTools.js"></script>
+    <script src="./src/scripts/script.js"></script>
+
+    <!-- Modal Contatar -->
+    <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full relative">
+            <button onclick="closeContactModal()" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-xl font-bold mb-4">Entre em Contato</h2>
+            <form action="https://formsubmit.co/teste@gmail.com" method="POST" class="space-y-4">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://seusite.com/obrigado.html">
+
+                <input type="text" name="nome" placeholder="Seu nome" required
+                    class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="email" name="email" placeholder="Seu e-mail" required
+                    class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <textarea name="mensagem" rows="4" placeholder="Sua mensagem" required
+                    class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                <button type="submit"
+                    class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Modal Sobre -->
+    <div id="aboutModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 max-w-3xl w-full relative">
+            <button onclick="closeAboutModal()" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-xl font-bold mb-4">Sobre o ToolMaster</h2>
+            <p class="text-sm text-gray-700 leading-relaxed">
+                O ToolMaster é um portal inovador e exclusivo que reúne uma vasta coleção de ferramentas digitais de
+                conversão, criação e produtividade, tudo acessível em um único domínio.<br><br>
+                Desenvolvido para atender às demandas modernas, nosso site oferece uma experiência fluida e integrada,
+                com soluções inteligentes que facilitam o dia a dia dos usuários.<br><br>
+                Seja para profissionais, estudantes ou entusiastas, o ToolMaster proporciona acesso rápido e eficiente a
+                recursos indispensáveis, promovendo inovação e praticidade em uma plataforma única.<br><br>
+                Nosso compromisso é fornecer ferramentas confiáveis, organizadas e atualizadas constantemente, tornando
+                o ToolMaster sua referência principal em utilidades online.
+            </p>
+        </div>
+    </div>
+
+
+    <!-- Modal de Política de Privacidade -->
+    <div id="privacyModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-6 max-w-3xl w-full relative">
+            <button onclick="closePrivacyModal()" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-xl font-bold mb-4">Política de Privacidade</h2>
+            <p class="text-sm text-gray-700 leading-relaxed">
+                Este site foi desenvolvido com fins educacionais e não coleta, armazena ou compartilha qualquer dado
+                pessoal dos usuários.<br><br>
+                Todas as ferramentas funcionam diretamente no navegador, sem necessidade de login ou envio de
+                informações sensíveis.<br><br>
+                Não utilizamos cookies, nem empregamos tecnologias de rastreamento ou monitoramento.<br><br>
+                Ao utilizar este site, você concorda com esta política. Em caso de dúvidas, recomendamos fechar a
+                página.<br><br>
+                Esta política poderá ser atualizada sem aviso prévio.
+            </p>
+        </div>
+    </div>
+
+    <!-- Modal de Termos de Uso -->
+    <div id="termos-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white max-w-xl w-full p-6 rounded-lg shadow-lg">
+            <h2 class="text-xl font-bold mb-4">Termos de Uso</h2>
+            <div class="max-h-64 overflow-y-auto text-sm text-gray-700">
+                <p class="mb-4">
+                    Este site foi desenvolvido com o propósito exclusivo de fins educacionais, demonstrando a criação de
+                    ferramentas online e conversores. Nenhuma das ferramentas aqui presentes possui garantia de
+                    precisão, continuidade, disponibilidade ou adequação a qualquer finalidade específica.
+                </p>
+                <p class="mb-4">
+                    O uso das ferramentas é de total responsabilidade do usuário. Não nos responsabilizamos por
+                    eventuais perdas, danos, decisões, prejuízos, mau uso, acessos indevidos, conteúdos processados ou
+                    quaisquer consequências legais oriundas da utilização parcial ou total das funcionalidades deste
+                    portal.
+                </p>
+                <p class="mb-4">
+                    O simples acesso ao portal implica na aceitação plena e irrestrita destes termos. Se você não
+                    concorda com qualquer condição aqui descrita, recomendamos que interrompa imediatamente a navegação.
+                </p>
+                <p class="mb-4">
+                    Reservamo-nos o direito de modificar ou remover qualquer ferramenta sem aviso prévio.
+                </p>
+            </div>
+            <div class="flex justify-end mt-4">
+                <button onclick="fecharTermos()"
+                    class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        function abrirTermos() {
+            document.getElementById("termos-modal").classList.remove("hidden")
+            document.getElementById("termos-modal").classList.add("flex")
+        }
+
+        function fecharTermos() {
+            document.getElementById("termos-modal").classList.add("hidden")
+            document.getElementById("termos-modal").classList.remove("flex")
+        }
+
+        function openPrivacyModal() {
+            document.getElementById("privacyModal").classList.remove("hidden")
+        }
+
+        function closePrivacyModal() {
+            document.getElementById("privacyModal").classList.add("hidden")
+        }
+
+        function openAboutModal() {
+            document.getElementById("aboutModal").classList.remove("hidden")
+        }
+
+        function closeAboutModal() {
+            document.getElementById("aboutModal").classList.add("hidden")
+        }
+
+        function openContactModal() {
+            document.getElementById("contactModal").classList.remove("hidden")
+        }
+        function closeContactModal() {
+            document.getElementById("contactModal").classList.add("hidden")
+        }
+
+    </script>
 </body>
+
 </html>

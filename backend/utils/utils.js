@@ -1,6 +1,6 @@
 const dados = [
     // desing
-    { category: 'design', name: 'mineca', description: 'Loren Ipsum Ipsum Ipsum oren Ipsum Ipsum Ipsum '}
+    { category: 'design', name: 'Gerador de Paleta de Cores', description: 'Cria combinações de cores harmoniosas para projetos visuais', link: './public/gerador-de-paleta-de-cores.html'}
 
     // dev
     //{ category: 'dev' },
@@ -17,3 +17,5 @@ const dados = [
 
 module.exports = dados
 // TODO colocando as categorias/ ferramentas por aqui
+
+// TODO categorias ==> design, dev, productivity, marketing, finance

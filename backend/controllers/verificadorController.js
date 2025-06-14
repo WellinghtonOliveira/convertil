@@ -11,7 +11,8 @@ function listarCategorias(req, res) {
     const categorias = dados.map(obj => obj.category)
     const nome = dados.map(obj => obj.name)
     const descricao = dados.map(obj => obj.description)
-    res.json({ categorias, nome, descricao })
+    const link = dados.map(obj => obj.link)
+    res.json({ categorias, nome, descricao, link })
 }
 
 module.exports = { verificadorValor, listarCategorias }
