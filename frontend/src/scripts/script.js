@@ -1,5 +1,5 @@
 async function carregarCategorias() {
-    const res = await fetch('https://megasitebackend.onrender.com/categorias')
+    const res = await fetch('http://localhost:3000/categorias')// TODO lembrar de colocar o link para o banckend antes de fazer o upload
     const data = await res.json()
     return data
 }
