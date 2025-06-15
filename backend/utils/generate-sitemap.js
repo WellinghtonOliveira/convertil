@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 const publicDir = path.join(__dirname, "../../frontend/public");
-const baseUrl = "https://seusite.com"; // Altere para seu domínio real
+const baseUrl = "https://convertil.com"; // Altere para seu domínio real
 
 function getToolDirectories() {
   return fs.readdirSync(publicDir).filter((file) => {

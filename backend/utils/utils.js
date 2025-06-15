@@ -20,5 +20,5 @@ module.exports = dados
 
 
 
-// TODO colocando as categorias/ferramentas por aqui
-// TODO categorias ==> design, dev, productivity, marketing, finance
+// TODO colocando as categorias/ferramentas AQUI
+//categorias ==> design, dev, productivity, marketing, finance
