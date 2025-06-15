@@ -2,37 +2,64 @@
 const fs = require("fs");
 const path = require("path");
 
-const publicDir = path.join(__dirname, "../../frontend/public");
-const baseUrl = "https://convertil.com"; // Altere para seu domínio real
+const frontendDir = path.join(__dirname, "../../frontend");
+const publicDir = path.join(frontendDir, "public");
+const baseUrl = "https://convertil.com"; // Seu domínio real
 
-function getToolDirectories() {
-  return fs.readdirSync(publicDir).filter((file) => {
-    const fullPath = path.join(publicDir, file);
-    return fs.statSync(fullPath).isDirectory();
-  });
+function getIndexPages(dir, basePath = "") {
+  const items = fs.readdirSync(dir);
+  let urls = [];
+
+  for (const item of items) {
+    const itemPath = path.join(dir, item);
+    const relativePath = path.join(basePath, item);
+
+    if (fs.statSync(itemPath).isDirectory()) {
+      const indexHtmlPath = path.join(itemPath, "index.html");
+
+      if (fs.existsSync(indexHtmlPath)) {
+        // Remove 'public' da URL final
+        const cleanPath = relativePath.replace(/\\/g, "/");
+        urls.push(`${baseUrl}/${cleanPath}/`);
+      }
+
+      // Continua a busca em subpastas
+      urls = urls.concat(getIndexPages(itemPath, path.join(basePath, item)));
+    }
+  }
+
+  return urls;
 }
 
 function generateSitemap() {
-  const tools = getToolDirectories();
+  const urls = [];
 
-  const urls = tools.map((tool) => {
+  // Página inicial
+  urls.push(`${baseUrl}/`);
+
+  // Páginas encontradas
+  const foundPages = getIndexPages(publicDir);
+  urls.push(...foundPages);
+
+  // Criar XML
+  const xmlUrls = urls.map((url) => {
     return `
   <url>
-    <loc>${baseUrl}/${tool}/</loc>
+    <loc>${url}</loc>
     <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-    <priority>0.8</priority>
+    <priority>${url === `${baseUrl}/` ? "1.0" : "0.8"}</priority>
   </url>`;
   });
 
   const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.join("\n")}
+${xmlUrls.join("\n")}
 </urlset>`;
 
-  const outputPath = path.join(publicDir, "sitemap.xml");
+  const outputPath = path.join(frontendDir, "sitemap.xml");
   fs.writeFileSync(outputPath, sitemapContent.trim());
 
   console.log("✅ sitemap.xml gerado com sucesso!");
 }
 
-module.exports = generateSitemap
+module.exports = generateSitemap;
