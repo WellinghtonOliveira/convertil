@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.7/beautify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.7/beautify-html.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.7/beautify-css.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeFormatter - Formatação Automática de Código</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563EB',
+                        secondary: '#F59E0B',
+                        light: '#F9FAFB',
+                        dark: '#1F2937',
+                        danger: '#EF4444',
+                        success: '#10B981'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .code-editor {
+            min-height: 300px;
+            font-family: 'Courier New', Courier, monospace;
+            tab-size: 4;
+        }
+
+        .syntax-highlight {
+            background-color: rgba(245, 158, 11, 0.1);
+            border-left: 3px solid #F59E0B;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            min-width: 250px;
+            padding: 12px 20px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 600;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            z-index: 9999;
+        }
+
+        .toast.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .toast.success {
+            background-color: #10b981;
+            /* verde */
+        }
+
+        .toast.warning {
+            background-color: #f59e0b;
+            /* amarelo */
+        }
+
+        .toast.error {
+            background-color: #ef4444;
+            /* vermelho */
+        }
+    </style>
+</head>
+
+<body class="bg-light text-dark">
+    <!-- Header -->
+    <header class="bg-primary text-white shadow-md">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-code text-2xl text-secondary"></i>
+                    <h1 class="text-2xl font-bold">CodeFormatter</h1>
+                </div>
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-6">
+                        <li><a href="../../index.html" class="hover:text-secondary transition">Voltar</a></li>
+                        <li><a id="open-about-modal" href="#" class="hover:text-secondary transition">Sobre</a></li>
+                    </ul>
+                </nav>
+                <button class="md:hidden text-xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-primary to-blue-700 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-4">🚀 Transforme seu código em segundos</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Formate códigos desorganizados com um clique, ganhe tempo e
+                melhore sua produtividade</p>
+
+            <div class="flex justify-center space-x-4">
+                <a href="#editor"
+                    class="bg-secondary hover:bg-yellow-600 text-dark font-bold py-3 px-6 rounded-lg transition inline-block">
+                    <i class="fas fa-magic mr-2"></i> Experimente Agora
+                </a>
+
+
+                <button id="open-doc-modal"
+                    class="border-2 border-white hover:bg-white hover:text-primary font-bold py-3 px-6 rounded-lg transition">📘
+                    Documentação</button>
+
+            </div>
+        </div>
+    </section>
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-left max-w-4xl mx-auto">
+        <div class="bg-white bg-opacity-10 p-4 rounded-lg">
+            <h3 class="text-xl font-bold mb-2"><i class="fas fa-code mr-2"></i> Multi-Linguagem</h3>
+            <p class="text-sm">Suporte para JavaScript, HTML, CSS, JSON, SQL, Java, C#, PHP e Python</p>
+        </div>
+        <div class="bg-white bg-opacity-10 p-4 rounded-lg">
+            <h3 class="text-xl font-bold mb-2"><i class="fas fa-bolt mr-2"></i> Instantâneo</h3>
+            <p class="text-sm">Formate seu código com um clique, direto no navegador, sem instalação</p>
+        </div>
+        <div class="bg-white bg-opacity-10 p-4 rounded-lg">
+            <h3 class="text-xl font-bold mb-2"><i class="fas fa-shield-alt mr-2"></i> 100% Seguro</h3>
+            <p class="text-sm">Nenhum código é enviado para servidores. Tudo acontece localmente</p>
+        </div>
+    </div>
+
+
+    <!-- Main Content -->
+    <main id="editor" class="container mx-auto px-4 py-12">
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <!-- Toolbar -->
+            <div class="bg-dark text-white p-4 flex flex-wrap justify-between items-center">
+                <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                    <div class="relative language-selector">
+                        <button class="bg-primary hover:bg-blue-700 py-2 px-4 rounded flex items-center">
+                            <i class="fas fa-code mr-2"></i>
+                            <span id="selected-language">JavaScript</span>
+                            <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                        </button>
+                        <div
+                            class="dropdown-menu hidden absolute left-0 mt-2 w-48 bg-white text-dark rounded shadow-lg z-10">
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100" data-lang="javascript">JavaScript</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100" data-lang="python">Python</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100" data-lang="java">Java</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100" data-lang="csharp">C#</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100" data-lang="php">PHP</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100" data-lang="html">HTML</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100" data-lang="css">CSS</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100" data-lang="json">JSON</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100" data-lang="sql">SQL</a>
+                        </div>
+                    </div>
+                    <button class="bg-success hover:bg-green-600 py-2 px-4 rounded flex items-center" id="format-btn">
+                        <i class="fas fa-magic mr-2"></i> Format
+                    </button>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="bg-gray-600 hover:bg-gray-700 py-2 px-4 rounded flex items-center" id="copy-btn">
+                        <i class="fas fa-copy mr-2"></i> Copy
+                    </button>
+                    <button class="bg-danger hover:bg-red-600 py-2 px-4 rounded flex items-center" id="clear-btn">
+                        <i class="fas fa-trash mr-2"></i> Clear
+                    </button>
+                </div>
+            </div>
+
+            <!-- Code Editor -->
+            <div class="p-4">
+                <textarea id="code-input"
+                    class="code-editor w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="Cole seu código aqui...">function example() {
+    // Seu código aqui
+    let x = 10;
+    if(x > 5) {
+    console.log('Hello World');
+    }
+}</textarea>
+            </div>
+
+            <!-- Formatted Code Output -->
+            <div class="p-4 border-t border-gray-200">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-lg">Resultado Formatado</h3>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-gray-500">Tamanho: <span id="char-count">0</span> caracteres</span>
+                        <span class="text-sm text-gray-500">Linhas: <span id="line-count">0</span></span>
+                    </div>
+                </div>
+                <pre id="formatted-output" class="code-editor bg-gray-50 p-4 rounded-lg overflow-auto max-h-96"></pre>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="mt-16 grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                <div class="text-primary text-3xl mb-4">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Rápido e Eficiente</h3>
+                <p class="text-gray-600">Formate seu código em milissegundos, economizando tempo valioso no
+                    desenvolvimento.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                <div class="text-secondary text-3xl mb-4">
+                    <i class="fas fa-language"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Múltiplas Linguagens</h3>
+                <p class="text-gray-600">Suporte para diversas linguagens de programação com regras específicas para
+                    cada uma.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                <div class="text-success text-3xl mb-4">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Configuração Personalizada</h3>
+                <p class="text-gray-600">Ajuste as preferências de formatação de acordo com seu estilo de codificação.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-code text-secondary mr-2"></i> CodeFormatter
+                    </h3>
+                    <p class="text-gray-400">A ferramenta definitiva para formatação automática de código em diversas
+                        linguagens de programação.</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 CodeFormatter. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="about-modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+        <div class="bg-white text-dark rounded-2xl max-w-3xl w-full p-8 relative shadow-lg">
+            <button id="close-about-modal"
+                class="absolute top-3 right-4 text-gray-500 hover:text-danger text-xl font-bold">&times;</button>
+
+            <h2 class="text-3xl font-bold text-primary mb-4">Sobre o CodeFormatter</h2>
+
+            <p class="mb-4 text-lg leading-relaxed">
+                O <strong>CodeFormatter</strong> é uma ferramenta moderna e responsiva desenvolvida para facilitar a
+                vida de desenvolvedores e estudantes. Com apenas um clique, é possível formatar códigos automaticamente
+                em diversas linguagens de programação, como <strong>JavaScript, HTML, CSS, JSON, SQL</strong> e outras.
+            </p>
+
+            <p class="mb-4 text-lg leading-relaxed">
+                Nossa missão é oferecer uma experiência simples, eficiente e compatível com todos os navegadores
+                modernos, permitindo que qualquer pessoa possa melhorar a legibilidade do seu código sem precisar
+                instalar nada.
+            </p>
+
+            <p class="mb-4 text-lg leading-relaxed">
+                Apesar de nossos esforços para oferecer o melhor desempenho, é importante ressaltar que a formatação
+                pode não refletir 100% da sintaxe exata de todas as linguagens. Isso é intencional: ao focar em leveza e
+                compatibilidade, conseguimos garantir uma ferramenta mais rápida, acessível e que funciona em
+                praticamente qualquer dispositivo.
+            </p>
+
+            <p class="text-lg leading-relaxed">
+                O <strong>CodeFormatter</strong> é ideal para quem deseja clareza, praticidade e uma interface amigável
+                na hora de escrever ou revisar código.
+            </p>
+        </div>
+    </div>
+
+
+    <!-- Modal de Documentação -->
+    <div id="doc-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-xl max-w-lg w-full p-6 relative">
+            <button id="close-doc-modal"
+                class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-2xl font-bold">&times;</button>
+            <h2 class="text-2xl font-bold text-primary mb-4">📘 Sobre o CodeFormatter</h2>
+            <p class="text-gray-700 mb-2">
+                O <strong>CodeFormatter</strong> é uma ferramenta online gratuita para formatação automática de código
+                em várias linguagens de programação. Ela foi desenvolvida para ser simples, rápida e compatível com a
+                maioria dos navegadores modernos.
+            </p>
+            <p class="text-gray-700 mb-2">
+                Atualmente, o site oferece suporte para linguagens como <strong>JavaScript, HTML, CSS, JSON, SQL, Java,
+                    C#, PHP</strong> e <strong>Python</strong>.
+            </p>
+            <p class="text-yellow-700 bg-yellow-100 p-2 rounded mb-2">
+                ⚠️ Importante: A formatação de código não é 100% precisa em todas as linguagens. Optamos por usar
+                formatadores leves para garantir velocidade e compatibilidade em todos os dispositivos e navegadores,
+                especialmente os mais simples.
+            </p>
+            <p class="text-gray-700">
+                Essa decisão evita sobrecarga no navegador e permite que mais usuários tenham uma boa experiência ao
+                utilizar a ferramenta.
+            </p>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.7/beautify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.7/beautify-html.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.7/beautify-css.min.js"></script>
+
+    <script>
+
+        // Modal Sobre
+        const aboutModal = document.getElementById('about-modal');
+        const openAboutBtn = document.getElementById('open-about-modal');
+        const closeAboutBtn = document.getElementById('close-about-modal');
+
+        openAboutBtn.addEventListener('click', () => {
+            aboutModal.classList.remove('hidden');
+        });
+
+        closeAboutBtn.addEventListener('click', () => {
+            aboutModal.classList.add('hidden');
+        });
+
+        aboutModal.addEventListener('click', (e) => {
+            if (e.target === aboutModal) {
+                aboutModal.classList.add('hidden');
+            }
+        });
+
+
+        const docModal = document.getElementById('doc-modal');
+        const openDocBtn = document.getElementById('open-doc-modal');
+        const closeDocBtn = document.getElementById('close-doc-modal');
+
+        openDocBtn.addEventListener('click', () => {
+            docModal.classList.remove('hidden');
+        });
+
+        closeDocBtn.addEventListener('click', () => {
+            docModal.classList.add('hidden');
+        });
+
+        // Fecha ao clicar fora do conteúdo
+        docModal.addEventListener('click', (e) => {
+            if (e.target === docModal) {
+                docModal.classList.add('hidden');
+            }
+        });
+
+        function showToast(message, type = 'success', duration = 3000) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast show ' + type;
+            clearTimeout(toast.timeout);
+            toast.timeout = setTimeout(() => {
+                toast.className = 'toast';
+            }, duration);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const languageSelector = document.querySelector('.language-selector');
+            const dropdownMenu = languageSelector.querySelector('.dropdown-menu');
+            const languageLinks = dropdownMenu.querySelectorAll('a');
+            const selectedLanguage = document.getElementById('selected-language');
+            const formatBtn = document.getElementById('format-btn');
+            const codeInput = document.getElementById('code-input');
+            const formattedOutput = document.getElementById('formatted-output');
+            const charCount = document.getElementById('char-count');
+            const lineCount = document.getElementById('line-count');
+            const copyBtn = document.getElementById('copy-btn');
+            const clearBtn = document.getElementById('clear-btn');
+
+            let currentLanguage = 'javascript';
+
+            // Abrir dropdown ao passar o mouse (hover)
+            languageSelector.addEventListener('mouseenter', () => {
+                // Se estiver esperando para fechar, cancela o fechamento
+                if (closeTimeout) {
+                    clearTimeout(closeTimeout);
+                    closeTimeout = null;
+                }
+                dropdownMenu.classList.remove('hidden'); // abre dropdown imediatamente
+            });
+
+            // Fechar dropdown ao tirar o mouse de cima
+            languageSelector.addEventListener('mouseleave', () => {
+                // Define timeout para fechar depois de 300ms (ajuste o tempo que quiser)
+                closeTimeout = setTimeout(() => {
+                    dropdownMenu.classList.add('hidden');
+                    closeTimeout = null;
+                }, 300);
+            });
+
+            // Selecionar linguagem ao clicar e fechar dropdown
+            languageLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    currentLanguage = this.getAttribute('data-lang');
+                    selectedLanguage.textContent = this.textContent;
+                    dropdownMenu.classList.add('hidden');
+                });
+            });
+
+            function isJava(code) {
+                // Java tem "class", tipos primitivos, métodos com parênteses e chaves
+                const patterns = [
+                    /\bclass\b/,
+                    /\b(public|private|protected|static|final|void|int|double|String|boolean)\b/,
+                    /\bSystem\.out\.println\b/,
+                    /;/ // Java usa ponto e vírgula
+                ];
+                return patterns.some(p => p.test(code));
+            }
+
+            function isCSharp(code) {
+                // C# tem namespaces, tipos, using, métodos com parênteses e chaves
+                const patterns = [
+                    /\bnamespace\b/,
+                    /\busing\b/,
+                    /\b(class|public|private|static|void|int|string|bool|double)\b/,
+                    /;/ // ponto e vírgula
+                ];
+                return patterns.some(p => p.test(code));
+            }
+
+            function isPHP(code) {
+                // PHP começa com <?php, tem $variáveis e funções
+                if (code.trim().startsWith("<?php")) return true;
+                const patterns = [
+                    /\$[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/, // variável PHP
+                    /\bfunction\b/,
+                    /;/ // ponto e vírgula
+                ];
+                return patterns.some(p => p.test(code));
+            }
+
+            function isPython(code) {
+                // Python usa def, import, : no final da linha, indentação importante
+                const patterns = [
+                    /\bdef\b/,
+                    /\bimport\b/,
+                    /:/,
+                    /print\(/,
+                    /^[ ]{4,}/m // linhas com 4 ou mais espaços no começo (indentação)
+                ];
+                return patterns.some(p => p.test(code));
+            }
+
+
+            // Botão formatar código
+            formatBtn.addEventListener('click', function () {
+                const code = codeInput.value.trim();
+                if (!code) {
+                    showToast("Por favor, insira algum código para formatar.", "warning");
+                    return;
+                }
+
+                // Validação conforme linguagem
+                let isValid = false;
+                switch (currentLanguage) {
+                    case 'javascript':
+                        isValid = isValidJavaScript(code);
+                        break;
+                    case 'html':
+                        isValid = isValidHTML(code);
+                        break;
+                    case 'css':
+                        isValid = isValidCSS(code);
+                        break;
+                    case 'json':
+                        isValid = isValidJSON(code);
+                        break;
+                    case 'sql':
+                        isValid = isValidSQL(code);
+                        break;
+                    case 'java':
+                        isValidLanguage = isJava(code);
+                        break;
+                    case 'csharp':
+                        isValidLanguage = isCSharp(code);
+                        break;
+                    case 'php':
+                        isValidLanguage = isPHP(code);
+                        break;
+                    case 'python':
+                        isValidLanguage = isPython(code);
+                        break;
+                    default:
+                        isValid = true; // para outras linguagens, deixa passar (sem validação)
+                }
+
+                if (!isValid) {
+                    showToast(`Código inválido para a linguagem "${currentLanguage}".`, "error");
+                    return;
+                }
+
+                let formatted = '';
+
+                try {
+                    switch (currentLanguage) {
+                        case 'javascript':
+                            formatted = js_beautify(code, { indent_size: 2 });
+                            break;
+                        case 'html':
+                            formatted = html_beautify(code, { indent_size: 2 });
+                            break;
+                        case 'css':
+                            formatted = css_beautify(code, { indent_size: 2 });
+                            break;
+                        case 'json':
+                            try {
+                                const jsonObj = JSON.parse(code);
+                                formatted = JSON.stringify(jsonObj, null, 2);
+                            } catch {
+                                showToast('JSON invalido!', 'error')
+                                formatted = code;
+                            }
+                            break;
+                        case 'sql':
+                            // Usa um formatador simples para SQL, pode usar biblioteca externa ou fazer básico
+                            formatted = formatSQL(code); // vou te passar a função em seguida
+                            break;
+                        case 'java':
+                        case 'csharp': // C# (use o nome do data-lang que você quiser, exemplo: csharp)
+                            // Usa js_beautify para formatação básica de Java e C#
+                            formatted = js_beautify(code, { indent_size: 2 });
+                            break;
+                        case 'php':
+                            formatted = formatPHP(code);
+                            break;
+                        case 'python':
+                            formatted = formatPython(code);
+                            break;
+                        default:
+                            showToast(`Linguagem "${currentLanguage}" não reconhecida, formatando como texto simples.`, "warning");
+                            formatted = `// Formatação para "${currentLanguage}" ainda não disponível no frontend\n\n` + code;
+                            break;
+                    }
+                    formattedOutput.textContent = formatted;
+                    charCount.textContent = formatted.length;
+                    lineCount.textContent = formatted.split('\n').length;
+
+                    showToast("Código formatado com sucesso!", "success");
+
+                } catch (error) {
+                    showToast("Erro ao formatar o código: " + error.message, "error");
+                    formattedOutput.textContent = code;
+                }
+            });
+
+            function formatPHP(code) {
+                // Quebra linhas após ;, { e }
+                let formatted = code
+                    .replace(/;/g, ';\n')
+                    .replace(/{/g, '{\n')
+                    .replace(/}/g, '\n}')
+                    .split('\n')
+                    .map(line => line.trim()) // remove espaços extras no começo e fim
+                    .join('\n');
+
+                // Indenta linhas dentro de chaves (simplificado)
+                let indentLevel = 0;
+                const lines = formatted.split('\n');
+                for (let i = 0; i < lines.length; i++) {
+                    if (lines[i].includes('}')) indentLevel--;
+                    lines[i] = '  '.repeat(Math.max(indentLevel, 0)) + lines[i];
+                    if (lines[i].includes('{')) indentLevel++;
+                }
+                return lines.join('\n');
+            }
+
+            function formatPython(code) {
+                // Basicamente remove espaços extras no começo e fim e mantém linhas
+                // Pode ser melhorado, mas assim já evita bagunça
+                return code
+                    .split('\n')
+                    .map(line => line.trimEnd()) // remove espaços no final da linha
+                    .join('\n');
+            }
+
+
+            function formatSQL(sql) {
+                // Quebra em linhas após palavras chave comuns, com identação simples
+                return sql
+                    .replace(/\b(SELECT|FROM|WHERE|GROUP BY|ORDER BY|LIMIT|INSERT INTO|VALUES|UPDATE|SET|DELETE FROM)\b/gi, '\n$1')
+                    .replace(/\n+/g, '\n')
+                    .trim();
+            }
+
+            // Botão copiar
+            copyBtn.addEventListener('click', function () {
+                if (!formattedOutput.textContent) {
+                    showToast("Não há código formatado para copiar", "warning")
+                    return;
+                }
+                navigator.clipboard.writeText(formattedOutput.textContent)
+                    .then(() => showToast('Código copiado com sucesso!'))
+                    .catch(() => showToast('Erro ao copiar código.', "error"));
+            });
+
+            // Botão limpar
+            clearBtn.addEventListener('click', function () {
+                codeInput.value = '';
+                formattedOutput.textContent = '';
+                charCount.textContent = '0';
+                lineCount.textContent = '0';
+            });
+        });
+
+        function isValidJSON(code) {
+            try {
+                JSON.parse(code);
+                return true;
+            } catch {
+                return false;
+            }
+        }
+
+        function isValidJavaScript(code) {
+            try {
+                new Function(code); // tenta compilar o código JS
+                return true;
+            } catch {
+                return false;
+            }
+        }
+
+        // para HTML e CSS, a validação é mais complexa, mas podemos fazer um teste básico
+
+        function isValidHTML(code) {
+            // Valida se contém uma tag HTML básica (exemplo simples)
+            return /<[^>]+>/.test(code);
+        }
+
+        function isValidCSS(code) {
+            // Testa se contém uma regra CSS simples
+            return /\{[^}]+\}/.test(code);
+        }
+
+        function isValidSQL(code) {
+            // Simples: verifica se contém alguma palavra-chave SQL
+            return /\b(SELECT|FROM|WHERE|INSERT|UPDATE|DELETE)\b/i.test(code);
+        }
+
+
+    </script>
+    <div id="toast" class="toast"></div>
+
+</body>
+
+</html>
