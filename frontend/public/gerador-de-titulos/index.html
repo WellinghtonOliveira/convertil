@@ -1,9 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViralTitle - Gerador de Títulos Atraentes</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Título da página com palavras-chave -->
+    <title>ViralTitle | Ferramentas Online Rápida, Útil e Inteligente</title>
+
+    <!-- Descrição clara e persuasiva -->
+    <meta name="description"
+        content="Use ferramentas online gratuitas no Convertil.com: conversores, geradores, calculadoras e muito mais. Tudo em um só lugar, rápido e sem complicações!" />
+
+    <!-- Palavras-chave relevantes -->
+    <meta name="keywords"
+        content="ferramentas online, conversor, gerador, utilitários web, ferramentas gratuitas, convertil, conversor de vídeo, formatador de código" />
+
+    <!-- Autor -->
+    <meta name="author" content="Convertil.com" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://convertil.com/" />
+
+    <!-- Open Graph (Facebook, LinkedIn, etc.) -->
+    <meta property="og:title" content="Convertil.com – Ferramentas Online Grátis e Rápidas" />
+    <meta property="og:description"
+        content="Acesse ferramentas online úteis como conversores, geradores e mais – tudo gratuito, direto no navegador." />
+    <meta property="og:image" content="https://convertil.com/og-image.jpg" />
+    <meta property="og:url" content="https://convertil.com/" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Convertil.com – Ferramentas Online Grátis e Úteis" />
+    <meta name="twitter:description" content="Mais de 200 ferramentas web gratuitas ao seu alcance!" />
+    <meta name="twitter:image" content="https://convertil.com/og-image.jpg" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="./icon.png" type="image/x-icon" />
+
+    <!-- Tailwind CSS ou outro framework -->
+    <link href="/styles.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -27,36 +64,51 @@
             font-family: 'Inter', sans-serif;
             background-color: #F9FAFB;
         }
+
         .title-card {
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
+
         .title-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
         }
+
         .pulse {
             animation: pulse 2s infinite;
         }
+
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
     </style>
 </head>
+
 <body class="min-h-screen flex flex-col">
     <!-- Header -->
     <header class="bg-dark text-light py-4 px-6 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-xl font-bold text-primary flex items-center">
+            <div class="text-xl font-bold text-primary flex items-center">
                 <i class="fas fa-video mr-2"></i>
                 ViralTitle
-            </a>
+            </div>
             <nav>
                 <ul class="flex space-x-6">
-                    <li><a href="#" class="hover:text-secondary transition"><i class="fas fa-arrow-left mr-1"></i> Voltar</a></li>
-                    <li><a href="#" class="hover:text-secondary transition"><i class="fas fa-info-circle mr-1"></i> Sobre 2025</a></li>
+                    <li><a href="../../index.html" class="hover:text-secondary transition"><i class="fas  mr-1"></i>
+                            Voltar</a></li>
+                    <li><a href="#" id="openToolModal" class="hover:text-secondary transition"><i class="fas  mr-1"></i>
+                            Sobre</a></li>
                 </ul>
             </nav>
         </div>
@@ -65,24 +117,22 @@
     <!-- Main Content -->
     <main class="flex-grow container mx-auto px-4 py-8">
         <section class="text-center mb-12">
-            <h1 class="text-4xl font-bold text-dark mb-4">Gerador de Títulos <span class="text-primary">Virais</span></h1>
+            <h1 class="text-4xl font-bold text-dark mb-4">Gerador de Títulos <span class="text-primary">Virais</span>
+            </h1>
             <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                Crie títulos irresistíveis para seus vídeos que despertam <span class="text-secondary font-medium">emoção</span> ou <span class="text-success font-medium">curiosidade</span>. Aumente seu CTR e engajamento!
+                Crie títulos irresistíveis para seus vídeos que despertam <span
+                    class="text-secondary font-medium">emoção</span> ou <span
+                    class="text-success font-medium">curiosidade</span>. Aumente seu CTR e engajamento!
             </p>
         </section>
 
         <section class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-6 mb-8">
             <div class="flex flex-col md:flex-row gap-4">
-                <input 
-                    type="text" 
-                    id="keywordInput" 
-                    placeholder="Digite sua palavra-chave (ex: marketing, fitness, tecnologia...)" 
-                    class="flex-grow px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                >
-                <button 
-                    id="generateBtn" 
-                    class="px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-opacity-90 transition flex items-center justify-center pulse"
-                >
+                <input type="text" id="keywordInput"
+                    placeholder="Digite sua palavra-chave (ex: marketing, fitness, tecnologia...)"
+                    class="flex-grow px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                <button id="generateBtn"
+                    class="px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-opacity-90 transition flex items-center justify-center pulse">
                     <i class="fas fa-magic mr-2"></i> Gerar Títulos
                 </button>
             </div>
@@ -92,13 +142,14 @@
             <h2 class="text-2xl font-semibold text-dark mb-6 flex items-center">
                 <i class="fas fa-lightbulb text-secondary mr-2"></i> Títulos Sugeridos
             </h2>
-            
+
             <div id="titlesContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <!-- Titles will be inserted here by JavaScript -->
             </div>
 
             <div class="mt-8 text-center">
-                <button id="copyAllBtn" class="px-5 py-2 bg-success text-white rounded-lg hover:bg-opacity-90 transition">
+                <button id="copyAllBtn"
+                    class="px-5 py-2 bg-success text-white rounded-lg hover:bg-opacity-90 transition">
                     <i class="fas fa-copy mr-2"></i> Copiar Todos
                 </button>
             </div>
@@ -113,8 +164,51 @@
         </div>
     </footer>
 
+    <!-- Modal -->
+    <div id="toolModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl shadow-lg max-w-xl w-full p-6 relative">
+            <button id="closeModal"
+                class="absolute top-3 right-4 text-gray-500 hover:text-black text-xl font-bold">&times;</button>
+
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Sobre esta Ferramenta</h2>
+            <p class="text-gray-700 text-base leading-relaxed">
+                Esta ferramenta foi desenvolvida para gerar títulos altamente atrativos com base em palavras-chave
+                fornecidas por você.
+                Combinando modelos emocionais e de curiosidade, ela ajuda criadores de conteúdo, profissionais de
+                marketing, blogs e influenciadores
+                a atrair mais cliques, engajamento e retenção de público. Totalmente gratuita, leve e rápida, ela é uma
+                solução eficiente para quem
+                deseja impactar seu público com criatividade e impacto emocional.
+            </p>
+
+            <div class="mt-6 text-right">
+                <button id="closeModalBottom"
+                    class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+
+        const openModalBtn = document.getElementById('openToolModal');
+        const closeModalBtns = [document.getElementById('closeModal'), document.getElementById('closeModalBottom')];
+        const modal = document.getElementById('toolModal');
+
+        openModalBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        });
+
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
             const generateBtn = document.getElementById('generateBtn');
             const keywordInput = document.getElementById('keywordInput');
             const resultsSection = document.getElementById('resultsSection');
@@ -132,7 +226,67 @@
                 "{keyword}: O Que Eles Não Te Ensinam Nas Escolas",
                 "O Poder Inacreditável de {keyword} - Testado e Comprovado",
                 "Como {keyword} Pode Te Fazer Mais Feliz em Apenas 7 Dias",
-                "A História Comovente Por Trás de {keyword} Que Vai Te Surpreender"
+                "A História Comovente Por Trás de {keyword} Que Vai Te Surpreender",
+                "O Impacto Emocional de {keyword} Que Ninguém Está Preparado",
+                "Você Vai Se Arrepender de Não Ter Tentado {keyword} Antes",
+                "{keyword} Salvou Minha Vida – Veja Como",
+                "Descubra a Jornada de Superação Através de {keyword}",
+                "{keyword}: A Transformação Que Vai Tocar o Seu Coração",
+                "Como {keyword} Me Ajudou a Vencer a Ansiedade",
+                "A Promessa de {keyword} Que Mexe Com o Coração de Todos",
+                "A Luta Contra o Impossível: {keyword} Fez Toda a Diferença",
+                "A História de Coragem e Esperança Que Nasceu de {keyword}",
+                "{keyword} Pode Ser a Última Esperança Para Muitas Pessoas",
+                "Meu Mundo Desabou... Até Descobrir {keyword}",
+                "A Solução Que Eu Nunca Imaginei: {keyword}",
+                "{keyword} Me Fez Enxergar a Vida de Outro Jeito",
+                "Não Aguentei Mais e Tentei {keyword} – Eis o Resultado",
+                "Quando Tudo Deu Errado, {keyword} Foi Minha Salvação",
+                "O Encontro Que Mudou Tudo Graças a {keyword}",
+                "Descobri {keyword} Por Acaso e Isso Salvou Meu Relacionamento",
+                "Me Senti Derrotado Até Que {keyword} Me Mostrou um Caminho",
+                "A Lição de Vida Que Aprendi Usando {keyword}",
+                "Minha Jornada de Autoconhecimento Começou com {keyword}",
+                "Chorei ao Ver o Resultado de {keyword}",
+                "Por Trás do Sorriso Está {keyword}",
+                "Você Nunca Mais Vai Ver {keyword} da Mesma Forma",
+                "{keyword} Tocou Meu Coração de um Jeito Inesperado",
+                "Foi Só Quando Perdi Tudo Que Descobri {keyword}",
+                "{keyword} Me Fez Acreditar Novamente em Mim",
+                "O Recomeço Que Eu Precisava Estava em {keyword}",
+                "Encontrei Paz Através de {keyword}",
+                "A Superação Que Ninguém Esperava – Tudo Por Causa de {keyword}",
+                "{keyword}: Um Milagre Disfarçado de Simplicidade",
+                "O Que Vivi Com {keyword} Não Dá Para Explicar – Só Sentir",
+                "{keyword} Me Fez Perceber Que Eu Estava Errado o Tempo Todo",
+                "A Melhor Decisão da Minha Vida Foi Apostar em {keyword}",
+                "A História Que Começa em Dor e Termina com {keyword}",
+                "{keyword} Me Salvou Quando Ninguém Mais Conseguiu",
+                "Você Nunca Vai Acreditar no Que {keyword} Pode Fazer",
+                "{keyword} Me Fez Chorar de Emoção – Veja Por Quê",
+                "O Que Aconteceu Quando Eu Decidi Apostar em {keyword}",
+                "{keyword} Foi o Que Mudou Minha Vida de Verdade",
+                "A História Real Por Trás de {keyword} Vai Te Tocar",
+                "Eu Duvidava de {keyword}, Até Que Vi com Meus Próprios Olhos",
+                "O Que Você Precisa Saber Sobre {keyword} Antes Que Seja Tarde",
+                "Como {keyword} Me Ajudou a Dar a Volta Por Cima",
+                "{keyword} Salvou Meu Dia de Um Jeito Inesperado",
+                "Eu Testei {keyword} e Isso Aconteceu",
+                "A Melhor Coisa Que Fiz Este Ano Foi Usar {keyword}",
+                "Por Que {keyword} É a Melhor Escolha Que Já Fiz",
+                "Se Eu Pudesse Voltar no Tempo, Usaria {keyword} Mais Cedo",
+                "O Que Descobri Depois de Usar {keyword} Por 7 Dias",
+                "{keyword} Me Deu a Força Que Eu Precisava",
+                "O Segredo da Minha Transformação Tem Nome: {keyword}",
+                "Você Vai Se Identificar Com Essa História de {keyword}",
+                "O Que Acontece Quando Você Confia em {keyword}",
+                "Meu Medo Virou Coragem Graças a {keyword}",
+                "De Cético a Fã: Minha Experiência Com {keyword}",
+                "Não Subestime o Poder de {keyword}",
+                "Usei {keyword} e Não Me Arrependo Nem Por Um Segundo",
+                "O Que Aprendi Com {keyword} Mudou Tudo",
+                "{keyword}: Um Pequeno Passo Que Fez Toda Diferença",
+                "Você Também Vai Se Surpreender Com {keyword}"
             ];
 
             const curiosityTemplates = [
@@ -145,12 +299,72 @@
                 "O Que Especialistas em {keyword} Não Querem Que Você Saiba?",
                 "A Evolução de {keyword} - Do Passado ao Futuro",
                 "Como {keyword} Está Mudando o Mundo Sem Que Você Perceba",
-                "O Experimento de {keyword} Que Deu Tudo Errado (E O Que Aprendemos)"
+                "O Experimento de {keyword} Que Deu Tudo Errado (E O Que Aprendemos)",
+                "O Que Você Não Sabia Que {keyword} é Capaz de Fazer?",
+                "Como {keyword} Influencia o Seu Cérebro Sem Você Perceber",
+                "{keyword} Pode Ser a Chave Para o Futuro? Veja o Que Descobrimos",
+                "O Que Acontece Com Seu Corpo Após 30 Dias de {keyword}?",
+                "A Verdade Científica Por Trás de {keyword}",
+                "{keyword} Funciona Mesmo ou É Apenas Um Mito?",
+                "Estudos Revelam Como {keyword} Está Transformando Indústrias",
+                "O Que Ninguém Está Te Contando Sobre {keyword}",
+                "Você Está Usando {keyword} do Jeito Errado? Descubra Aqui",
+                "Experimentei {keyword} Por Uma Semana – Eis o Que Aconteceu",
+                "O Que Você Nunca Imaginou Que {keyword} Pode Fazer",
+                "Por Que Todos Estão Falando Sobre {keyword}?",
+                "A Verdade Oculta Por Trás de {keyword}",
+                "O Que Acontece Quando Milhões Usam {keyword} ao Mesmo Tempo?",
+                "{keyword} Está Dominando a Internet – Entenda o Motivo",
+                "Você Nunca Imaginou Que {keyword} Tem Esse Efeito",
+                "Especialistas Descobrem Algo Surpreendente em {keyword}",
+                "{keyword}: Mito ou Verdade? Veja o Que a Ciência Diz",
+                "O Impacto Real de {keyword} Que Você Nunca Viu na Mídia",
+                "5 Coisas Que Você Nunca Reparou Sobre {keyword}",
+                "Você Vai Ficar Chocado com Essa Descoberta Sobre {keyword}",
+                "O Que Acontece Nos Bastidores de {keyword}?",
+                "A História Incrível de Como Criaram {keyword}",
+                "{keyword} Pode Ser Perigoso? Veja o Que Revelamos",
+                "O Que Aconteceu Quando Testamos {keyword} em 100 Pessoas",
+                "Você Está Usando {keyword} da Maneira Errada?",
+                "Como {keyword} Está Influenciando o Comportamento das Pessoas",
+                "Os Bastidores Secretos de {keyword}",
+                "O Que Ninguém Nunca Te Contou Sobre {keyword}",
+                "Você Vai Mudar de Opinião Depois de Ver Isso Sobre {keyword}",
+                "A Verdadeira Função de {keyword} Vai Te Surpreender",
+                "{keyword} Tem Um Segredo Que Está Sendo Revelado Agora",
+                "Por Que {keyword} Pode Ser a Maior Revolução do Ano?",
+                "A Nova Descoberta Que Muda Tudo o Que Sabíamos Sobre {keyword}",
+                "Este Estudo Revela o Que Acontece ao Usar {keyword} Todos os Dias",
+                "Você Sabe o Que Realmente É {keyword}?",
+                "O Que Ninguém Nunca Te Contou Sobre {keyword}",
+                "5 Coisas Que Você Está Fazendo Errado Com {keyword}",
+                "O Que Você Precisa Evitar Quando Usa {keyword}",
+                "Descubra o Verdadeiro Potencial de {keyword}",
+                "{keyword} Pode Ser Muito Mais do Que Você Imagina",
+                "Este É o Motivo Pelo Qual {keyword} Está Viralizando",
+                "Como {keyword} Está Dominando o Mundo Sem Você Notar",
+                "{keyword} Pode Ser a Resposta Que Você Procura",
+                "A Verdade Por Trás do Sucesso de {keyword}",
+                "Você Está Preparado Para o Que {keyword} Pode Causar?",
+                "Os Especialistas Estão Surpresos Com {keyword}",
+                "O Que Torna {keyword} Tão Especial?",
+                "Você Vai Querer Testar {keyword} Depois de Ver Isso",
+                "Este É o Melhor Momento Para Usar {keyword}",
+                "7 Razões Para Começar a Usar {keyword} Agora",
+                "Por Que Todo Mundo Está Falando Sobre {keyword}?",
+                "{keyword} Está Mudando a Maneira Como Enxergamos o Mundo",
+                "O Que Descobri Investigando {keyword} Por Conta Própria",
+                "Qual É o Verdadeiro Segredo Por Trás de {keyword}?",
+                "O Efeito Colateral Inesperado de {keyword}",
+                "Você Nunca Imaginou Que {keyword} Fosse Capaz Disso",
+                "{keyword} Pode Te Dar Vantagens Que Ninguém Tem",
+                "O Que Encontrei no Código de {keyword} Vai Te Surpreender",
+                "A Resposta Que Procurávamos Pode Estar em {keyword}"
             ];
 
-            generateBtn.addEventListener('click', function() {
+            generateBtn.addEventListener('click', function () {
                 const keyword = keywordInput.value.trim();
-                
+
                 if (!keyword) {
                     alert("Por favor, digite uma palavra-chave para gerar os títulos.");
                     return;
@@ -158,42 +372,42 @@
 
                 // Clear previous results
                 titlesContainer.innerHTML = '';
-                
+
                 // Generate emotional titles
                 emotionalTemplates.forEach(template => {
                     const title = template.replace('{keyword}', keyword);
                     createTitleCard(title, 'emotional');
                 });
-                
+
                 // Generate curiosity titles
                 curiosityTemplates.forEach(template => {
                     const title = template.replace('{keyword}', keyword);
                     createTitleCard(title, 'curiosity');
                 });
-                
+
                 // Show results section
                 resultsSection.classList.remove('hidden');
-                
+
                 // Scroll to results
                 resultsSection.scrollIntoView({ behavior: 'smooth' });
             });
 
             function createTitleCard(title, type) {
                 const card = document.createElement('div');
-                card.className = 'title-card bg-white p-4 rounded-lg border-l-4 ' + 
+                card.className = 'title-card bg-white p-4 rounded-lg border-l-4 ' +
                     (type === 'emotional' ? 'border-secondary' : 'border-success');
-                
+
                 const titleElement = document.createElement('h3');
                 titleElement.className = 'font-medium text-dark mb-2';
                 titleElement.textContent = title;
-                
+
                 const copyBtn = document.createElement('button');
-                copyBtn.className = 'text-sm px-3 py-1 rounded ' + 
-                    (type === 'emotional' ? 'bg-secondary hover:bg-opacity-80' : 'bg-success hover:bg-opacity-80') + 
+                copyBtn.className = 'text-sm px-3 py-1 rounded ' +
+                    (type === 'emotional' ? 'bg-secondary hover:bg-opacity-80' : 'bg-success hover:bg-opacity-80') +
                     ' text-white transition flex items-center';
                 copyBtn.innerHTML = '<i class="fas fa-copy mr-1"></i> Copiar';
-                
-                copyBtn.addEventListener('click', function() {
+
+                copyBtn.addEventListener('click', function () {
                     navigator.clipboard.writeText(title).then(() => {
                         const originalText = copyBtn.innerHTML;
                         copyBtn.innerHTML = '<i class="fas fa-check mr-1"></i> Copiado!';
@@ -202,28 +416,28 @@
                         }, 2000);
                     });
                 });
-                
+
                 const typeBadge = document.createElement('span');
-                typeBadge.className = 'text-xs px-2 py-1 rounded-full ml-2 ' + 
+                typeBadge.className = 'text-xs px-2 py-1 rounded-full ml-2 ' +
                     (type === 'emotional' ? 'bg-secondary bg-opacity-20 text-secondary' : 'bg-success bg-opacity-20 text-success');
                 typeBadge.textContent = type === 'emotional' ? 'Emocional' : 'Curiosidade';
-                
+
                 const footer = document.createElement('div');
                 footer.className = 'flex justify-between items-center mt-3';
                 footer.appendChild(copyBtn);
                 footer.appendChild(typeBadge);
-                
+
                 card.appendChild(titleElement);
                 card.appendChild(footer);
-                
+
                 titlesContainer.appendChild(card);
             }
 
-            copyAllBtn.addEventListener('click', function() {
+            copyAllBtn.addEventListener('click', function () {
                 const titles = Array.from(document.querySelectorAll('.title-card h3'))
                     .map(el => el.textContent)
                     .join('\n\n');
-                
+
                 navigator.clipboard.writeText(titles).then(() => {
                     const originalText = copyAllBtn.innerHTML;
                     copyAllBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Todos copiados!';
@@ -235,4 +449,5 @@
         });
     </script>
 </body>
+
 </html>
