@@ -1,5 +1,5 @@
 async function carregarCategorias() {
-    const res = await fetch('https://megasitebackend.onrender.com/categorias')
+    const res = await fetch('https://localhost:3000/categorias')
     const data = await res.json()
     return data
 }

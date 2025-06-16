@@ -9,7 +9,7 @@ const dados = [
     { category: 'productivity', name: 'Cronômetro Online', description: 'Marca tempo decorrido', link: './public/cronometro-online/index.html'},
 
     // marketing
-    //{ category: 'marketing' },
+    { category: 'marketing', name: 'Gerador de Títulos Atrativos', description: 'Cria títulos com apelo emocional ou de curiosidade' },
 
     // finance
     //{ category: 'finance' }

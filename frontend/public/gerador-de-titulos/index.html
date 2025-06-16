@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViralTitle - Gerador de Títulos Atraentes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563EB',
+                        secondary: '#F59E0B',
+                        light: '#F9FAFB',
+                        dark: '#1F2937',
+                        danger: '#EF4444',
+                        success: '#10B981'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9FAFB;
+        }
+        .title-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .title-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-dark text-light py-4 px-6 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-primary flex items-center">
+                <i class="fas fa-video mr-2"></i>
+                ViralTitle
+            </a>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#" class="hover:text-secondary transition"><i class="fas fa-arrow-left mr-1"></i> Voltar</a></li>
+                    <li><a href="#" class="hover:text-secondary transition"><i class="fas fa-info-circle mr-1"></i> Sobre 2025</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <section class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-dark mb-4">Gerador de Títulos <span class="text-primary">Virais</span></h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                Crie títulos irresistíveis para seus vídeos que despertam <span class="text-secondary font-medium">emoção</span> ou <span class="text-success font-medium">curiosidade</span>. Aumente seu CTR e engajamento!
+            </p>
+        </section>
+
+        <section class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-6 mb-8">
+            <div class="flex flex-col md:flex-row gap-4">
+                <input 
+                    type="text" 
+                    id="keywordInput" 
+                    placeholder="Digite sua palavra-chave (ex: marketing, fitness, tecnologia...)" 
+                    class="flex-grow px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                >
+                <button 
+                    id="generateBtn" 
+                    class="px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-opacity-90 transition flex items-center justify-center pulse"
+                >
+                    <i class="fas fa-magic mr-2"></i> Gerar Títulos
+                </button>
+            </div>
+        </section>
+
+        <section id="resultsSection" class="hidden max-w-4xl mx-auto">
+            <h2 class="text-2xl font-semibold text-dark mb-6 flex items-center">
+                <i class="fas fa-lightbulb text-secondary mr-2"></i> Títulos Sugeridos
+            </h2>
+            
+            <div id="titlesContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Titles will be inserted here by JavaScript -->
+            </div>
+
+            <div class="mt-8 text-center">
+                <button id="copyAllBtn" class="px-5 py-2 bg-success text-white rounded-lg hover:bg-opacity-90 transition">
+                    <i class="fas fa-copy mr-2"></i> Copiar Todos
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2025 ViralTitle - Todos os direitos reservados</p>
+            <p class="mt-2 text-gray-400 text-sm">Crie títulos que cativam e convertem</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateBtn = document.getElementById('generateBtn');
+            const keywordInput = document.getElementById('keywordInput');
+            const resultsSection = document.getElementById('resultsSection');
+            const titlesContainer = document.getElementById('titlesContainer');
+            const copyAllBtn = document.getElementById('copyAllBtn');
+
+            // Sample title templates
+            const emotionalTemplates = [
+                "O Segredo Chocante Sobre {keyword} Que Ninguém Te Contou",
+                "Como {keyword} Mudou Minha Vida Para Sempre",
+                "Pare de Sofrer Com {keyword} - Descubra a Solução Definitiva",
+                "A Verdade Cruel Sobre {keyword} Que Eles Não Querem Que Você Saiba",
+                "Eu Não Acreditava Em {keyword}... Até Que Isso Aconteceu",
+                "O Método Revolucionário de {keyword} Que Vai Te Impressionar",
+                "{keyword}: O Que Eles Não Te Ensinam Nas Escolas",
+                "O Poder Inacreditável de {keyword} - Testado e Comprovado",
+                "Como {keyword} Pode Te Fazer Mais Feliz em Apenas 7 Dias",
+                "A História Comovente Por Trás de {keyword} Que Vai Te Surpreender"
+            ];
+
+            const curiosityTemplates = [
+                "O Que Acontece Quando Você {keyword} Todos Os Dias?",
+                "10 Fatos Surpreendentes Sobre {keyword} Que Você Não Sabia",
+                "Por Que {keyword} é Mais Importante Do Que Você Imagina?",
+                "O Mistério Por Trás de {keyword} Finalmente Revelado",
+                "{keyword}: O Que a Ciência Descobriu Recentemente?",
+                "5 Maneiras Inusitadas de Usar {keyword} Que Vão Te Chocar",
+                "O Que Especialistas em {keyword} Não Querem Que Você Saiba?",
+                "A Evolução de {keyword} - Do Passado ao Futuro",
+                "Como {keyword} Está Mudando o Mundo Sem Que Você Perceba",
+                "O Experimento de {keyword} Que Deu Tudo Errado (E O Que Aprendemos)"
+            ];
+
+            generateBtn.addEventListener('click', function() {
+                const keyword = keywordInput.value.trim();
+                
+                if (!keyword) {
+                    alert("Por favor, digite uma palavra-chave para gerar os títulos.");
+                    return;
+                }
+
+                // Clear previous results
+                titlesContainer.innerHTML = '';
+                
+                // Generate emotional titles
+                emotionalTemplates.forEach(template => {
+                    const title = template.replace('{keyword}', keyword);
+                    createTitleCard(title, 'emotional');
+                });
+                
+                // Generate curiosity titles
+                curiosityTemplates.forEach(template => {
+                    const title = template.replace('{keyword}', keyword);
+                    createTitleCard(title, 'curiosity');
+                });
+                
+                // Show results section
+                resultsSection.classList.remove('hidden');
+                
+                // Scroll to results
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            function createTitleCard(title, type) {
+                const card = document.createElement('div');
+                card.className = 'title-card bg-white p-4 rounded-lg border-l-4 ' + 
+                    (type === 'emotional' ? 'border-secondary' : 'border-success');
+                
+                const titleElement = document.createElement('h3');
+                titleElement.className = 'font-medium text-dark mb-2';
+                titleElement.textContent = title;
+                
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'text-sm px-3 py-1 rounded ' + 
+                    (type === 'emotional' ? 'bg-secondary hover:bg-opacity-80' : 'bg-success hover:bg-opacity-80') + 
+                    ' text-white transition flex items-center';
+                copyBtn.innerHTML = '<i class="fas fa-copy mr-1"></i> Copiar';
+                
+                copyBtn.addEventListener('click', function() {
+                    navigator.clipboard.writeText(title).then(() => {
+                        const originalText = copyBtn.innerHTML;
+                        copyBtn.innerHTML = '<i class="fas fa-check mr-1"></i> Copiado!';
+                        setTimeout(() => {
+                            copyBtn.innerHTML = originalText;
+                        }, 2000);
+                    });
+                });
+                
+                const typeBadge = document.createElement('span');
+                typeBadge.className = 'text-xs px-2 py-1 rounded-full ml-2 ' + 
+                    (type === 'emotional' ? 'bg-secondary bg-opacity-20 text-secondary' : 'bg-success bg-opacity-20 text-success');
+                typeBadge.textContent = type === 'emotional' ? 'Emocional' : 'Curiosidade';
+                
+                const footer = document.createElement('div');
+                footer.className = 'flex justify-between items-center mt-3';
+                footer.appendChild(copyBtn);
+                footer.appendChild(typeBadge);
+                
+                card.appendChild(titleElement);
+                card.appendChild(footer);
+                
+                titlesContainer.appendChild(card);
+            }
+
+            copyAllBtn.addEventListener('click', function() {
+                const titles = Array.from(document.querySelectorAll('.title-card h3'))
+                    .map(el => el.textContent)
+                    .join('\n\n');
+                
+                navigator.clipboard.writeText(titles).then(() => {
+                    const originalText = copyAllBtn.innerHTML;
+                    copyAllBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Todos copiados!';
+                    setTimeout(() => {
+                        copyAllBtn.innerHTML = originalText;
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
