@@ -6,9 +6,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.7/beautify-html.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.7/beautify-css.min.js"></script>
 
+    <meta property="og:title" content="CodeFormatter - Formate Código Online" />
+    <meta property="og:description"
+        content="Ferramenta online para formatação automática de código em JavaScript, HTML e CSS." />
+    <meta property="og:url" content="https://convertil.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://convertil.com/imagem-og.png" />
+
+    <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+
+    <!-- Título SEO -->
+    <title>CodeFormatter - Formate Código em JavaScript, HTML e CSS Online</title>
+
+    <!-- Meta descrição (aparece no Google) -->
+    <meta name="description"
+        content="Formate seu código JavaScript, HTML ou CSS automaticamente com o CodeFormatter. Rápido, seguro e gratuito. Ideal para desenvolvedores que buscam produtividade.">
+
+    <!-- Palavras-chave relevantes -->
+    <meta name="keywords"
+        content="formatar código, beautify, JavaScript, HTML, CSS, formatador de código online, code formatter, js beautify">
+
+    <!-- Nome do autor/site -->
+    <meta name="author" content="CodeFormatter">
+
+    <!-- Responsivo para SEO mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Robots para indexação -->
+    <meta name="robots" content="index, follow">
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeFormatter - Formatação Automática de Código</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -85,16 +114,28 @@
                     <i class="fas fa-code text-2xl text-secondary"></i>
                     <h1 class="text-2xl font-bold">CodeFormatter</h1>
                 </div>
+
+                <!-- Menu desktop -->
                 <nav class="hidden md:block">
                     <ul class="flex space-x-6">
                         <li><a href="../../index.html" class="hover:text-secondary transition">Voltar</a></li>
                         <li><a id="open-about-modal" href="#" class="hover:text-secondary transition">Sobre</a></li>
                     </ul>
                 </nav>
-                <button class="md:hidden text-xl">
+
+                <!-- Botão hambúrguer -->
+                <button id="hamburger-btn" class="md:hidden text-xl">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
+
+            <!-- Menu mobile (inicialmente escondido) -->
+            <nav id="mobile-menu" class="md:hidden hidden mt-4">
+                <ul class="flex flex-col space-y-4">
+                    <li><a href="../../index.html" class="hover:text-secondary transition">Voltar</a></li>
+                    <li><a id="open-about-modal-mobile" href="#" class="hover:text-secondary transition">Sobre</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
@@ -318,6 +359,7 @@
         // Modal Sobre
         const aboutModal = document.getElementById('about-modal');
         const openAboutBtn = document.getElementById('open-about-modal');
+        const openAboutMobileBtn = document.getElementById('open-about-modal-mobile');
         const closeAboutBtn = document.getElementById('close-about-modal');
 
         openAboutBtn.addEventListener('click', () => {
@@ -333,6 +375,10 @@
                 aboutModal.classList.add('hidden');
             }
         });
+
+        openAboutMobileBtn.addEventListener('click', () => {
+            aboutModal.classList.remove('hidden');
+        })
 
 
         const docModal = document.getElementById('doc-modal');
@@ -648,6 +694,14 @@
             // Simples: verifica se contém alguma palavra-chave SQL
             return /\b(SELECT|FROM|WHERE|INSERT|UPDATE|DELETE)\b/i.test(code);
         }
+
+
+        const hamburgerBtn = document.getElementById("hamburger-btn")
+        const mobileMenu = document.getElementById("mobile-menu")
+
+        hamburgerBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden")
+        })
 
 
     </script>
