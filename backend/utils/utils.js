@@ -9,7 +9,7 @@ const dados = [
     { category: 'productivity', name: 'Cronômetro Online', description: 'Ideal para treinos, estudos, tarefas ou qualquer atividade, sem complicações.', link: './public/cronometro-online/index.html'},
 
     // marketing
-    //{ category: 'marketing' },
+    { category: 'marketing', name: 'Gerador de Títulos Atrativos', description: 'Crie títulos irresistíveis para seus vídeos que despertam emoção ou curiosidade.', link: './public/gerador-de-titulos/index.html' },
 
     // finance
     //{ category: 'finance' }
