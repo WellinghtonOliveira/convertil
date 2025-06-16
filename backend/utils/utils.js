@@ -6,7 +6,7 @@ const dados = [
     { category: 'dev', name: 'Formatador de Código', description: 'Organiza e melhora a legibilidade do código', link: './public/formatador-de-codigos/index.html'},
 
     // productivity
-    { category: 'productivity', name: 'Cronômetro Online', description: 'Marca tempo decorrido', link: './public/cronometro-online/index.html'},
+    { category: 'productivity', name: 'Cronômetro Online', description: 'Ideal para treinos, estudos, tarefas ou qualquer atividade, sem complicações.', link: './public/cronometro-online/index.html'},
 
     // marketing
     //{ category: 'marketing' },
