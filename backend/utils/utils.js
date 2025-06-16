@@ -12,13 +12,7 @@ const dados = [
     { category: 'marketing', name: 'Gerador de Títulos Atrativos', description: 'Crie títulos irresistíveis para seus vídeos que despertam emoção ou curiosidade.', link: './public/gerador-de-titulos/index.html' },
 
     // finance
-    //{ category: 'finance' }
+    { category: 'finance', name: 'Calculadora de Juros Compostos', description: 'Simule o crescimento do seu dinheiro com juros compostos e veja como seu capital pode evoluir ao longo do tempo. Ideal para planejar investimentos com aportes mensais e taxa fixa', link: './public/calculadora-de-juros-compostos/' },
 ]
 
 module.exports = dados
-
-
-
-
-// TODO colocando as categorias/ferramentas AQUI
-//categorias ==> design, dev, productivity, marketing, finance
