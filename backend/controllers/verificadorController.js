@@ -17,7 +17,7 @@ function listarCategorias(req, res) {
 
 function funcSubmitForm(req, res) {
     const { nome, email, mensagem } = req.body
-    console.log('Dados recebidos:', nome, email, mensagem)
+    console.log(`Dados recebidos => NOME:-- ${nome} --, EMAIL:-- ${email} --, MENSAGEM:-- ${mensagem} --`)
 
     // Aqui você pode enviar e-mail, salvar no banco, etc
     return res.status(200).json({ mensagem: 'Recebido com sucesso' })
