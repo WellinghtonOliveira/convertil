@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
+
+    <!-- SEO básico -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColorConvert | ConvertilTools - Conversor de Cores HEX, RGB e HSL</title>
+    <meta name="description"
+        content="Use o ColorConvert da ConvertilTools para converter cores com precisão entre HEX, RGB e HSL. Ferramenta online gratuita e profissional.">
+    <meta name="keywords"
+        content="conversor de cores, HEX para RGB, RGB para HSL, converter cor online, color converter, ferramenta de cores, color convert, convertil, convertiltools, design gráfico, cores web, código de cores, tabela de cores">
+    <meta name="author" content="ConvertilTools">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph (Facebook, WhatsApp etc.) -->
+    <meta property="og:title" content="ColorConvert | ConvertilTools">
+    <meta property="og:description"
+        content="Ferramenta online para converter cores entre HEX, RGB e HSL. Simples, eficaz e gratuita.">
+    <meta property="og:image" content="https://convertil.com/img/colorconvert-preview.png">
+    <!-- Atualize conforme imagem -->
+    <meta property="og:url" content="https://convertil.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ConvertilTools">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ColorConvert | ConvertilTools">
+    <meta name="twitter:description"
+        content="Converta cores com facilidade entre os formatos HEX, RGB e HSL. Gratuito e 100% online.">
+    <meta name="twitter:image" content="https://convertil.com/img/colorconvert-preview.png">
+    <!-- Atualize conforme imagem -->
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonte Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Estilos personalizados -->
+    <style>
+        :root {
+            --primary: #2563EB;
+            --secondary: #F59E0B;
+            --light: #F9FAFB;
+            --dark: #1F2937;
+            --error: #EF4444;
+            --success: #10B981;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            transition: background-color 0.3s;
+        }
+
+        .color-preview {
+            width: 100%;
+            height: 120px;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .converter-box {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .converter-box:hover {
+            transform: translateY(-5px);
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        .copy-btn {
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+
+        .tab-active {
+            border-bottom: 3px solid var(--primary);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .grid-cols2 {
+                display: flex;
+                flex-direction: column !important;
+            }
+
+            .converter-container {
+                flex-direction: column;
+                gap: 2rem;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div
+                    class="w-10 h-10 rounded-md bg-gradient-to-r from-[#2563EB] to-[#F59E0B] flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">CC</span>
+                </div>
+                <h1 class="text-2xl font-bold text-gray-800">ColorConvert</h1>
+            </div>
+            <nav class="flex space-x-4">
+                <a href="../../" class="text-gray-600 hover:text-[#2563EB] transition-colors">Voltar</a>
+                <a href="#about" class="text-gray-600 hover:text-[#2563EB] transition-colors">Sobre</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">Conversor de Cores Profissional</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Converta facilmente entre formatos de cor HEX, RGB e HSL. Obtenha
+                valores precisos para seus projetos de design.</p>
+        </div>
+
+        <!-- Color Preview -->
+        <div class="max-w-2xl mx-auto mb-12">
+            <div
+                class="color-preview bg-gradient-to-r from-[#2563EB] to-[#F59E0B] mb-4 flex items-center justify-center">
+                <span class="text-white font-bold text-xl bg-black bg-opacity-30 px-4 py-2 rounded-md"
+                    id="currentColorText">#2563EB → #F59E0B</span>
+            </div>
+        </div>
+
+        <!-- Converter Tabs -->
+        <div class="max-w-4xl mx-auto mb-8">
+            <div class="flex border-b border-gray-200">
+                <button class="px-6 py-3 text-gray-600 tab-active" onclick="switchTab('hex')">HEX</button>
+                <button class="px-6 py-3 text-gray-600" onclick="switchTab('rgb')">RGB</button>
+                <button class="px-6 py-3 text-gray-600" onclick="switchTab('hsl')">HSL</button>
+            </div>
+        </div>
+
+        <!-- Converter Boxes -->
+        <div class="converter-container flex flex-wrap justify-center gap-8 mb-16">
+            <!-- HEX Converter -->
+            <div id="hex-converter" class="converter-box w-full p-6">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">Conversor HEX</h3>
+                <div class="mb-4">
+                    <label for="hex-input" class="block text-sm font-medium text-gray-700 mb-1">Cor HEX</label>
+                    <div class="flex">
+                        <input type="text" id="hex-input" style="min-width: 100px;"
+                            class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md focus:ring-2 focus:ring-[#2563EB]"
+                            placeholder="Ex: #2563EB" maxlength="7">
+                        <button onclick="convertFromHex()"
+                            class="bg-[#2563EB] text-white px-4 py-2 rounded-r-md hover:bg-[#1D4ED8] transition-colors">Converter</button>
+                    </div>
+                    <p class="mt-1 text-xs text-gray-500">Digite um valor HEX (com #) e clique em Converter</p>
+                </div>
+                <div class="grid grid-cols2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">RGB</label>
+                        <div class="flex">
+                            <input type="text" id="hex-to-rgb"
+                                class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md" readonly>
+                            <button onclick="copyToClipboard('hex-to-rgb')"
+                                class="copy-btn bg-gray-200 text-gray-700 px-3 py-2 rounded-r-md hover:bg-gray-300">Copiar</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">HSL</label>
+                        <div class="flex">
+                            <input type="text" id="hex-to-hsl"
+                                class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md" readonly>
+                            <button onclick="copyToClipboard('hex-to-hsl')"
+                                class="copy-btn bg-gray-200 text-gray-700 px-3 py-2 rounded-r-md hover:bg-gray-300">Copiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RGB Converter -->
+            <div id="rgb-converter" class="converter-box w-full max-w-md p-6 hidden">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">Conversor RGB</h3>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Valores RGB</label>
+                    <div class="grid grid-cols-3 gap-2 mb-2">
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">R</label>
+                            <input type="number" id="rgb-r" class="w-full px-3 py-2 border border-gray-300 rounded-md"
+                                min="0" max="255" placeholder="0-255">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">G</label>
+                            <input type="number" id="rgb-g" class="w-full px-3 py-2 border border-gray-300 rounded-md"
+                                min="0" max="255" placeholder="0-255">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">B</label>
+                            <input type="number" id="rgb-b" class="w-full px-3 py-2 border border-gray-300 rounded-md"
+                                min="0" max="255" placeholder="0-255">
+                        </div>
+                    </div>
+                    <button onclick="convertFromRgb()"
+                        class="w-full bg-[#2563EB] text-white px-4 py-2 rounded-md hover:bg-[#1D4ED8] transition-colors">Converter</button>
+                </div>
+                <div class="grid grid-cols2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">HEX</label>
+                        <div class="flex">
+                            <input type="text" id="rgb-to-hex"
+                                class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md" readonly>
+                            <button onclick="copyToClipboard('rgb-to-hex')"
+                                class="copy-btn bg-gray-200 text-gray-700 px-3 py-2 rounded-r-md hover:bg-gray-300">Copiar</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">HSL</label>
+                        <div class="flex">
+                            <input type="text" id="rgb-to-hsl"
+                                class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md" readonly>
+                            <button onclick="copyToClipboard('rgb-to-hsl')"
+                                class="copy-btn bg-gray-200 text-gray-700 px-3 py-2 rounded-r-md hover:bg-gray-300">Copiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HSL Converter -->
+            <div id="hsl-converter" class="converter-box w-full max-w-md p-6 hidden">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">Conversor HSL</h3>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Valores HSL</label>
+                    <div class="grid grid-cols-3 gap-2 mb-2">
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">H</label>
+                            <input type="number" id="hsl-h" class="w-full px-3 py-2 border border-gray-300 rounded-md"
+                                min="0" max="360" placeholder="0-360">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">S</label>
+                            <input type="number" id="hsl-s" class="w-full px-3 py-2 border border-gray-300 rounded-md"
+                                min="0" max="100" placeholder="0-100%">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1">L</label>
+                            <input type="number" id="hsl-l" class="w-full px-3 py-2 border border-gray-300 rounded-md"
+                                min="0" max="100" placeholder="0-100%">
+                        </div>
+                    </div>
+                    <button onclick="convertFromHsl()"
+                        class="w-full bg-[#2563EB] text-white px-4 py-2 rounded-md hover:bg-[#1D4ED8] transition-colors">Converter</button>
+                </div>
+                <div class="grid grid-cols2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">HEX</label>
+                        <div class="flex">
+                            <input type="text" id="hsl-to-hex"
+                                class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md" readonly>
+                            <button onclick="copyToClipboard('hsl-to-hex')"
+                                class="copy-btn bg-gray-200 text-gray-700 px-3 py-2 rounded-r-md hover:bg-gray-300">Copiar</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">RGB</label>
+                        <div class="flex">
+                            <input type="text" id="hsl-to-rgb"
+                                class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md" readonly>
+                            <button onclick="copyToClipboard('hsl-to-rgb')"
+                                class="copy-btn bg-gray-200 text-gray-700 px-3 py-2 rounded-r-md hover:bg-gray-300">Copiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <section id="about" class="max-w-4xl mx-auto bg-white rounded-lg shadow-sm p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Sobre o ColorConvert</h2>
+            <div class="prose text-gray-600">
+                <p>O ColorConvert é uma ferramenta profissional para conversão entre diferentes formatos de cores,
+                    incluindo HEX, RGB e HSL. Nosso objetivo é fornecer uma solução precisa e fácil de usar para
+                    designers, desenvolvedores e qualquer pessoa que trabalhe com cores digitais.</p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2 text-gray-800">Formatos Suportados</h3>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>HEX</strong>: Código hexadecimal de 6 dígitos (ex: #2563EB)</li>
+                    <li><strong>RGB</strong>: Valores de Vermelho, Verde e Azul (ex: rgb(37, 99, 235))</li>
+                    <li><strong>HSL</strong>: Matiz, Saturação e Luminosidade (ex: hsl(224, 83%, 53%))</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2 text-gray-800">Como Usar</h3>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>Selecione o formato de origem (HEX, RGB ou HSL)</li>
+                    <li>Insira os valores da cor que deseja converter</li>
+                    <li>Clique no botão "Converter"</li>
+                    <li>Copie os resultados convertidos para outros formatos</li>
+                </ol>
+
+                <p class="mt-6">Todas as conversões são feitas localmente em seu navegador, garantindo que seus dados
+                    permaneçam privados e seguros.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#1F2937] text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 ColorConvert. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching
+        function switchTab(tab) {
+            // Hide all converters
+            document.getElementById('hex-converter').classList.add('hidden');
+            document.getElementById('rgb-converter').classList.add('hidden');
+            document.getElementById('hsl-converter').classList.add('hidden');
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.flex.border-b button');
+            tabs.forEach(t => t.classList.remove('tab-active'));
+
+            // Show selected converter and mark tab as active
+            document.getElementById(`${tab}-converter`).classList.remove('hidden');
+            document.querySelector(`.flex.border-b button[onclick="switchTab('${tab}')"]`).classList.add('tab-active');
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(id) {
+            const element = document.getElementById(id);
+            element.select();
+            document.execCommand('copy');
+
+            // Show feedback
+            const originalText = element.nextElementSibling.textContent;
+            element.nextElementSibling.textContent = 'Copiado!';
+            setTimeout(() => {
+                element.nextElementSibling.textContent = originalText;
+            }, 2000);
+        }
+
+        // HEX to RGB and HSL
+        function convertFromHex() {
+            const hexInput = document.getElementById('hex-input').value.trim();
+            const hexRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+
+            if (!hexRegex.test(hexInput)) {
+                alert('Por favor, insira um valor HEX válido (ex: #2563EB)');
+                return;
+            }
+
+            // Convert HEX to RGB
+            let r, g, b;
+            if (hexInput.length === 4) {
+                r = parseInt(hexInput[1] + hexInput[1], 16);
+                g = parseInt(hexInput[2] + hexInput[2], 16);
+                b = parseInt(hexInput[3] + hexInput[3], 16);
+            } else {
+                r = parseInt(hexInput.substring(1, 3), 16);
+                g = parseInt(hexInput.substring(3, 5), 16);
+                b = parseInt(hexInput.substring(5, 7), 16);
+            }
+
+            document.getElementById('hex-to-rgb').value = `rgb(${r}, ${g}, ${b})`;
+
+            // Convert RGB to HSL
+            const hsl = rgbToHsl(r, g, b);
+            document.getElementById('hex-to-hsl').value = `hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)`;
+
+            // Update color preview
+            updateColorPreview(hexInput);
+        }
+
+        // RGB to HEX and HSL
+        function convertFromRgb() {
+            const r = parseInt(document.getElementById('rgb-r').value);
+            const g = parseInt(document.getElementById('rgb-g').value);
+            const b = parseInt(document.getElementById('rgb-b').value);
+
+            if (isNaN(r) || isNaN(g) || isNaN(b) || r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {
+                alert('Por favor, insira valores RGB válidos (0-255)');
+                return;
+            }
+
+            // Convert RGB to HEX
+            const hex = `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
+            document.getElementById('rgb-to-hex').value = hex;
+
+            // Convert RGB to HSL
+            const hsl = rgbToHsl(r, g, b);
+            document.getElementById('rgb-to-hsl').value = `hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)`;
+
+            // Update color preview
+            updateColorPreview(hex);
+        }
+
+        // HSL to HEX and RGB
+        function convertFromHsl() {
+            const h = parseInt(document.getElementById('hsl-h').value);
+            const s = parseInt(document.getElementById('hsl-s').value);
+            const l = parseInt(document.getElementById('hsl-l').value);
+
+            if (isNaN(h) || isNaN(s) || isNaN(l) || h < 0 || h > 360 || s < 0 || s > 100 || l < 0 || l > 100) {
+                alert('Por favor, insira valores HSL válidos (H: 0-360, S/L: 0-100%)');
+                return;
+            }
+
+            // Convert HSL to RGB
+            const rgb = hslToRgb(h, s, l);
+            document.getElementById('hsl-to-rgb').value = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+
+            // Convert RGB to HEX
+            const hex = `#${((1 << 24) + (rgb.r << 16) + (rgb.g << 8) + rgb.b).toString(16).slice(1).toUpperCase()}`;
+            document.getElementById('hsl-to-hex').value = hex;
+
+            // Update color preview
+            updateColorPreview(hex);
+        }
+
+        // Helper function: RGB to HSL
+        function rgbToHsl(r, g, b) {
+            r /= 255, g /= 255, b /= 255;
+            const max = Math.max(r, g, b), min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+
+            if (max === min) {
+                h = s = 0; // achromatic
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h *= 60;
+            }
+
+            return { h: h, s: s * 100, l: l * 100 };
+        }
+
+        // Helper function: HSL to RGB
+        function hslToRgb(h, s, l) {
+            s /= 100;
+            l /= 100;
+
+            const c = (1 - Math.abs(2 * l - 1)) * s;
+            const x = c * (1 - Math.abs((h / 60) % 2 - 1));
+            const m = l - c / 2;
+            let r, g, b;
+
+            if (h >= 0 && h < 60) {
+                r = c; g = x; b = 0;
+            } else if (h >= 60 && h < 120) {
+                r = x; g = c; b = 0;
+            } else if (h >= 120 && h < 180) {
+                r = 0; g = c; b = x;
+            } else if (h >= 180 && h < 240) {
+                r = 0; g = x; b = c;
+            } else if (h >= 240 && h < 300) {
+                r = x; g = 0; b = c;
+            } else {
+                r = c; g = 0; b = x;
+            }
+
+            r = Math.round((r + m) * 255);
+            g = Math.round((g + m) * 255);
+            b = Math.round((b + m) * 255);
+
+            return { r: r, g: g, b: b };
+        }
+
+        // Update color preview
+        function updateColorPreview(color) {
+            const preview = document.querySelector('.color-preview');
+            preview.style.background = color;
+            document.getElementById('currentColorText').textContent = color;
+        }
+
+        // Initialize with default values
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('hex-input').value = '#2563EB';
+            document.getElementById('rgb-r').value = '37';
+            document.getElementById('rgb-g').value = '99';
+            document.getElementById('rgb-b').value = '235';
+            document.getElementById('hsl-h').value = '224';
+            document.getElementById('hsl-s').value = '83';
+            document.getElementById('hsl-l').value = '53';
+
+            // Convert default HEX value
+            convertFromHex();
+        });
+    </script>
+</body>
