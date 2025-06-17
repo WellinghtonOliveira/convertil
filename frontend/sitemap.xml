@@ -3,37 +3,43 @@
 
   <url>
     <loc>https://convertil.com/</loc>
-    <lastmod>2025-06-16</lastmod>
+    <lastmod>2025-06-17</lastmod>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://convertil.com/calculadora-de-juros-compostos/</loc>
-    <lastmod>2025-06-16</lastmod>
+    <lastmod>2025-06-17</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://convertil.com/conversor-de-cores/</loc>
+    <lastmod>2025-06-17</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://convertil.com/cronometro-online/</loc>
-    <lastmod>2025-06-16</lastmod>
+    <lastmod>2025-06-17</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://convertil.com/formatador-de-codigos/</loc>
-    <lastmod>2025-06-16</lastmod>
+    <lastmod>2025-06-17</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://convertil.com/gerador-de-paleta-de-cores/</loc>
-    <lastmod>2025-06-16</lastmod>
+    <lastmod>2025-06-17</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://convertil.com/gerador-de-titulos/</loc>
-    <lastmod>2025-06-16</lastmod>
+    <lastmod>2025-06-17</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>
