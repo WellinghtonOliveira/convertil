@@ -15,4 +15,9 @@ function listarCategorias(req, res) {
     res.json({ categorias, nome, descricao, link })
 }
 
+function submitForm(req, res) {
+    const { nome, email, mensagem } = req.body
+    return console.log(nome, email, mensagem)
+}
+
 module.exports = { verificadorValor, listarCategorias }

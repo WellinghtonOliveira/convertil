@@ -1,3 +1,4 @@
+const form = document.querySelector('contatarForm')
 const loading = document.querySelector('#load-inicio-chamada')
 let intervalId = null
 
@@ -19,7 +20,7 @@ function stopLoadingAnimation() {
 async function carregarCategorias() {
   startLoadingAnimation()
   try {
-    const res = await fetch('https://megasitebackend.onrender.com/categorias')
+    const res = await fetch('http://localhost:3000/teste')//fetch('https://megasitebackend.onrender.com/categorias')
     if (!res.ok) throw new Error('Erro na requisição')
     const data = await res.json()
     stopLoadingAnimation()
@@ -33,6 +34,33 @@ async function carregarCategorias() {
   }
 }
 
+form.addEventListener('submit', async function (e) {
+    e.preventDefault()
+
+    const formData = new FormData(form)
+    const dados = Object.fromEntries(FormData.entries())
+
+    try {
+        const res = await fetch('http://localhost:3000/submitForm', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dados)
+        })
+
+        if (res.ok) {
+            alert('Mensagem enviada com sucesso.')
+            form.reset()
+            closeContentModal()
+        }else {
+            alert('Erro ao enviar, tete novamente.')
+        }
+    }catch (error) {
+        console.log(error)
+        alert('Erro de rede, tente mais tarde.')
+    }
+})
 
 document.addEventListener('DOMContentLoaded', async function () {
     const container = document.getElementById('toolsContainer')
