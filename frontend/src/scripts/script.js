@@ -1,8 +1,38 @@
-async function carregarCategorias() {
-    const res = await fetch('https://megasitebackend.onrender.com/categorias')
-    const data = await res.json()
-    return data
+const loading = document.querySelector('#load-inicio-chamada')
+let intervalId = null
+
+function startLoadingAnimation() {
+  const ponto = ['.', '..', '...']
+  let i = 0
+  loading.textContent = 'Carregando'
+  intervalId = setInterval(() => {
+    loading.textContent = `Carregando${ponto[i]}`
+    i = (i + 1) % ponto.length
+  }, 500) // muda a cada 500ms
 }
+
+function stopLoadingAnimation() {
+  clearInterval(intervalId)
+  intervalId = null
+}
+
+async function carregarCategorias() {
+  startLoadingAnimation()
+  try {
+    const res = await fetch('https://megasitebackend.onrender.com/categorias')
+    if (!res.ok) throw new Error('Erro na requisição')
+    const data = await res.json()
+    stopLoadingAnimation()
+    loading.textContent = 'Todas as Ferramentas Disponíveis'
+    return data
+  } catch (error) {
+    stopLoadingAnimation()
+    loading.textContent = 'Erro ao carregar categorias'
+    console.error(error)
+    return null
+  }
+}
+
 
 document.addEventListener('DOMContentLoaded', async function () {
     const container = document.getElementById('toolsContainer')
