@@ -1,71 +1,76 @@
-const form = document.querySelector('contatarForm')
-const loading = document.querySelector('#load-inicio-chamada')
-let intervalId = null
-
-function startLoadingAnimation() {
-  const ponto = ['.', '..', '...']
-  let i = 0
-  loading.textContent = 'Carregando'
-  intervalId = setInterval(() => {
-    loading.textContent = `Carregando${ponto[i]}`
-    i = (i + 1) % ponto.length
-  }, 500) // muda a cada 500ms
-}
-
-function stopLoadingAnimation() {
-  clearInterval(intervalId)
-  intervalId = null
-}
-
-async function carregarCategorias() {
-  startLoadingAnimation()
-  try {
-    const res = await fetch('http://localhost:3000/teste')//fetch('https://megasitebackend.onrender.com/categorias')
-    if (!res.ok) throw new Error('Erro na requisição')
-    const data = await res.json()
-    stopLoadingAnimation()
-    loading.textContent = 'Todas as Ferramentas Disponíveis'
-    return data
-  } catch (error) {
-    stopLoadingAnimation()
-    loading.textContent = 'Erro ao carregar categorias'
-    console.error(error)
-    return null
-  }
-}
-
-form.addEventListener('submit', async function (e) {
-    e.preventDefault()
-
-    const formData = new FormData(form)
-    const dados = Object.fromEntries(FormData.entries())
-
-    try {
-        const res = await fetch('http://localhost:3000/submitForm', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dados)
-        })
-
-        if (res.ok) {
-            alert('Mensagem enviada com sucesso.')
-            form.reset()
-            closeContentModal()
-        }else {
-            alert('Erro ao enviar, tete novamente.')
-        }
-    }catch (error) {
-        console.log(error)
-        alert('Erro de rede, tente mais tarde.')
-    }
-})
-
 document.addEventListener('DOMContentLoaded', async function () {
+    const form = document.querySelector('#contatarForm')
+    const loading = document.querySelector('#load-inicio-chamada')
     const container = document.getElementById('toolsContainer')
     const paginationContainer = document.getElementById('pagination')
 
+    let intervalId = null
+
+    function startLoadingAnimation() {
+        const ponto = ['.', '..', '...']
+        let i = 0
+        loading.textContent = 'Carregando'
+        intervalId = setInterval(() => {
+            loading.textContent = `Carregando${ponto[i]}`
+            i = (i + 1) % ponto.length
+        }, 500)
+    }
+
+    function stopLoadingAnimation() {
+        clearInterval(intervalId)
+        intervalId = null
+    }
+
+    async function carregarCategorias() {
+        startLoadingAnimation()
+        try {
+            const res = await fetch('https://megasitebackend.onrender.com/categorias')
+            if (!res.ok) throw new Error('Erro na requisição')
+            const data = await res.json()
+            stopLoadingAnimation()
+            loading.textContent = 'Todas as Ferramentas Disponíveis'
+            return data
+        } catch (error) {
+            stopLoadingAnimation()
+            loading.textContent = 'Erro ao carregar categorias'
+            console.error(error)
+            return null
+        }
+    }
+
+    function closeContactModal() {
+        document.getElementById('contactModal').classList.add('hidden')
+    }
+
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault()
+
+        const formData = new FormData(form)
+        const dados = Object.fromEntries(formData.entries())
+
+        try {
+            const res = await fetch('https://megasitebackend.onrender.com/submitForm', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dados)
+            })
+
+            if (res.ok) {
+                alert('Mensagem enviada com sucesso.')
+                form.reset()
+                closeContactModal()
+            } else {
+                alert('Erro ao enviar, tente novamente.')
+            }
+        } catch (error) {
+            console.log(error)
+            alert('Erro de rede, tente mais tarde.')
+        }
+    })
+
+    // Parte de ferramentas e paginação
     const itemsPerPage = 30
     let currentPage = 1
 
@@ -75,6 +80,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const arrayLink = []
 
     const cat = await carregarCategorias()
+    if (!cat) return
 
     cat.categorias.forEach(cat => arraycategorias.push(cat))
     cat.nome.forEach(cat => arrayNomes.push(cat))
@@ -85,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const totalPages = Math.ceil(totalItems / itemsPerPage)
 
     function renderTools(page) {
-        container.innerHTML = '' // limpa
+        container.innerHTML = ''
 
         const start = (page - 1) * itemsPerPage
         const end = start + itemsPerPage

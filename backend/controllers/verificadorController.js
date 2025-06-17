@@ -15,9 +15,12 @@ function listarCategorias(req, res) {
     res.json({ categorias, nome, descricao, link })
 }
 
-function submitForm(req, res) {
+function funcSubmitForm(req, res) {
     const { nome, email, mensagem } = req.body
-    return console.log(nome, email, mensagem)
+    console.log('Dados recebidos:', nome, email, mensagem)
+
+    // Aqui você pode enviar e-mail, salvar no banco, etc
+    return res.status(200).json({ mensagem: 'Recebido com sucesso' })
 }
 
-module.exports = { verificadorValor, listarCategorias }
+module.exports = { verificadorValor, listarCategorias, funcSubmitForm }
