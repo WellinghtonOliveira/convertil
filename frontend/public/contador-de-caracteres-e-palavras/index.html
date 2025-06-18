@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Meta padrão -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO: título e descrição -->
+    <title>Contador de Caracteres e Palavras | TextMetrics - Convertil</title>
+    <meta name="description"
+        content="Use o TextMetrics para contar caracteres, palavras, linhas, tempo de leitura e frequência de palavras. Ferramenta online gratuita e fácil de usar.">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://convertil.com/public/contador-de-caracteres-e-palavras/index.html" />
+
+    <!-- Favicon -->
+     <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
+
+    <!-- Logo para redes sociais e buscadores -->
+    <meta property="og:image" content="https://convertil.com/assets/logo.png" />
+    <meta property="og:image:alt" content="Logo da ferramenta TextMetrics do site Convertil" />
+
+    <!-- Open Graph para redes sociais -->
+    <meta property="og:title" content="TextMetrics | Contador de Caracteres e Palavras" />
+    <meta property="og:description"
+        content="Ferramenta online para contar caracteres, palavras, linhas, tempo de leitura e mais." />
+    <meta property="og:url" content="https://convertil.com/public/sites/textmetrics.html" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="TextMetrics | Contador de Caracteres e Palavras" />
+    <meta name="twitter:description"
+        content="Conte palavras e caracteres com facilidade usando o TextMetrics da Convertil." />
+    <meta name="twitter:image" content="https://convertil.com/assets/logo.png" />
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow" />
+
+    <!-- Palavras-chave (útil apenas se for bem usado) -->
+    <meta name="keywords"
+        content="contador de caracteres, contador de palavras, análise de texto, tempo de leitura, ferramentas online, convertil" />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fontes e estilos -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9FAFB;
+            color: #1F2937;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bg-primary {
+            background-color: #2563EB;
+        }
+
+        .text-primary {
+            color: #2563EB;
+        }
+
+        .bg-secondary {
+            background-color: #F59E0B;
+        }
+
+        .text-secondary {
+            color: #F59E0B;
+        }
+
+        .bg-success {
+            background-color: #10B981;
+        }
+
+        .text-success {
+            color: #10B981;
+        }
+
+        .bg-danger {
+            background-color: #EF4444;
+        }
+
+        .text-danger {
+            color: #EF4444;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, #2563EB 0%, #F59E0B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-area {
+            min-height: 200px;
+            border: 2px solid #E5E7EB;
+            transition: all 0.3s ease;
+        }
+
+        .text-area:focus {
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .stat-card {
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: #1F2937;
+            color: #F9FAFB;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.875rem;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="logo">TextMetrics</div>
+            <nav class="flex space-x-6">
+                <a href="../../" class="text-gray-600 hover:text-primary font-medium transition-colors">Voltar</a>
+                <a href="#about" class="text-gray-600 hover:text-primary font-medium transition-colors">Sobre</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <section class="max-w-4xl mx-auto">
+            <h1 class="text-3xl font-bold text-center mb-2">Contador de Caracteres e Palavras</h1>
+            <p class="text-center text-gray-600 mb-8">Analise seu texto em tempo real e obtenha métricas detalhadas</p>
+
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <label for="text-input" class="block text-sm font-medium text-gray-700 mb-2">Digite ou cole seu texto
+                    abaixo:</label>
+                <textarea id="text-input" class="text-area w-full p-4 rounded-lg focus:outline-none"
+                    placeholder="Comece a digitar aqui..."></textarea>
+
+                <div class="flex justify-between items-center mt-4">
+                    <div class="flex space-x-2">
+                        <button id="clear-btn"
+                            class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors">
+                            Limpar
+                        </button>
+                        <button id="copy-btn"
+                            class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors">
+                            Copiar
+                        </button>
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        <span id="last-updated">Última atualização: agora</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="stat-card bg-white p-6">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-medium text-gray-700">Caracteres</h3>
+                        <div class="tooltip">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span class="tooltip-text">Total de caracteres incluindo espaços e pontuação</span>
+                        </div>
+                    </div>
+                    <p id="char-count" class="text-3xl font-bold text-primary mt-2">0</p>
+                </div>
+
+                <div class="stat-card bg-white p-6">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-medium text-gray-700">Caracteres (sem espaços)</h3>
+                        <div class="tooltip">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span class="tooltip-text">Total de caracteres excluindo espaços em branco</span>
+                        </div>
+                    </div>
+                    <p id="char-no-spaces-count" class="text-3xl font-bold text-secondary mt-2">0</p>
+                </div>
+
+                <div class="stat-card bg-white p-6">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-medium text-gray-700">Palavras</h3>
+                        <div class="tooltip">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span class="tooltip-text">Total de palavras separadas por espaços</span>
+                        </div>
+                    </div>
+                    <p id="word-count" class="text-3xl font-bold text-success mt-2">0</p>
+                </div>
+
+                <div class="stat-card bg-white p-6">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-medium text-gray-700">Linhas</h3>
+                        <div class="tooltip">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span class="tooltip-text">Total de linhas no texto (quebras de linha)</span>
+                        </div>
+                    </div>
+                    <p id="line-count" class="text-3xl font-bold text-danger mt-2">0</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-xl font-bold mb-4">Análise Avançada</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-700 mb-3">Densidade de Palavras</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span>Palavras únicas:</span>
+                                <span id="unique-words" class="font-medium">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Palavras mais frequentes:</span>
+                                <span id="frequent-words" class="font-medium">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-700 mb-3">Tempo de Leitura</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span>Leitura rápida (300 wpm):</span>
+                                <span id="reading-fast" class="font-medium">0 min</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Leitura média (200 wpm):</span>
+                                <span id="reading-medium" class="font-medium">0 min</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Leitura detalhada (100 wpm):</span>
+                                <span id="reading-slow" class="font-medium">0 min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section id="about" class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-bold mb-4">Sobre o TextMetrics</h2>
+                <p class="text-gray-700 mb-4">
+                    O TextMetrics é uma ferramenta online gratuita que permite analisar textos de forma detalhada.
+                    Nosso contador de caracteres e palavras fornece métricas precisas em tempo real para ajudar
+                    escritores, estudantes, profissionais de marketing e qualquer pessoa que trabalhe com texto.
+                </p>
+                <p class="text-gray-700">
+                    Com uma interface limpa e intuitiva, você pode acompanhar o tamanho do seu texto, densidade de
+                    palavras
+                    e até estimativas de tempo de leitura. Ideal para otimizar conteúdo para redes sociais, blogs,
+                    trabalhos
+                    acadêmicos e muito mais.
+                </p>
+            </section>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 TextMetrics. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const textInput = document.getElementById('text-input');
+            const charCount = document.getElementById('char-count');
+            const charNoSpacesCount = document.getElementById('char-no-spaces-count');
+            const wordCount = document.getElementById('word-count');
+            const lineCount = document.getElementById('line-count');
+            const uniqueWords = document.getElementById('unique-words');
+            const frequentWords = document.getElementById('frequent-words');
+            const readingFast = document.getElementById('reading-fast');
+            const readingMedium = document.getElementById('reading-medium');
+            const readingSlow = document.getElementById('reading-slow');
+            const lastUpdated = document.getElementById('last-updated');
+            const clearBtn = document.getElementById('clear-btn');
+            const copyBtn = document.getElementById('copy-btn');
+
+            function updateStats() {
+                const text = textInput.value;
+                const trimmedText = text.trim();
+
+                // Contagens básicas
+                const totalChars = text.length;
+                const totalCharsNoSpaces = text.replace(/\s/g, '').length;
+                const words = trimmedText === '' ? [] : trimmedText.split(/\s+/);
+                const totalWords = words.length;
+                const totalLines = trimmedText === '' ? 0 : text.split('\n').filter(line => line.trim() !== '').length;
+
+                charCount.textContent = totalChars;
+                charNoSpacesCount.textContent = totalCharsNoSpaces;
+                wordCount.textContent = totalWords;
+                lineCount.textContent = totalLines;
+
+                // Palavras únicas e frequência
+                const cleanWords = text.toLowerCase().match(/\b[\w']+\b/g) || [];
+                const wordFrequency = {};
+
+                cleanWords.forEach(word => {
+                    wordFrequency[word] = (wordFrequency[word] || 0) + 1;
+                });
+
+                const uniqueCount = Object.keys(wordFrequency).length;
+                uniqueWords.textContent = uniqueCount;
+
+                const sortedWords = Object.keys(wordFrequency).sort((a, b) => wordFrequency[b] - wordFrequency[a]);
+                const topWords = sortedWords.slice(0, 3).map(word => `${word} (${wordFrequency[word]})`).join(', ');
+                frequentWords.textContent = topWords || '-';
+
+                // Estimativa de tempo de leitura
+                readingFast.textContent = Math.max(1, Math.ceil(totalWords / 300)) + ' min';
+                readingMedium.textContent = Math.max(1, Math.ceil(totalWords / 200)) + ' min';
+                readingSlow.textContent = Math.max(1, Math.ceil(totalWords / 100)) + ' min';
+
+                // Última atualização
+                const now = new Date();
+                lastUpdated.textContent = `Última atualização: ${now.toLocaleTimeString()}`;
+            }
+
+            // Evento de digitação
+            textInput.addEventListener('input', updateStats);
+
+            // Botão limpar
+            clearBtn.addEventListener('click', function () {
+                textInput.value = '';
+                updateStats();
+            });
+
+            // Botão copiar com API moderna
+            copyBtn.addEventListener('click', async function () {
+                try {
+                    await navigator.clipboard.writeText(textInput.value);
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = 'Copiado!';
+                    copyBtn.classList.add('bg-success', 'text-white');
+                    copyBtn.classList.remove('bg-gray-100', 'text-gray-700');
+
+                    setTimeout(function () {
+                        copyBtn.textContent = originalText;
+                        copyBtn.classList.remove('bg-success', 'text-white');
+                        copyBtn.classList.add('bg-gray-100', 'text-gray-700');
+                    }, 2000);
+                } catch (err) {
+                    alert('Erro ao copiar: ' + err.message);
+                }
+            });
+
+            // Inicializar
+            updateStats();
+        });
+    </script>
+
+</body>
+
+</html>
