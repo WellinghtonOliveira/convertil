@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeMinify | Minificador de Código Profissional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563EB',
+                        secondary: '#F59E0B',
+                        light: '#F9FAFB',
+                        dark: '#1F2937',
+                        danger: '#EF4444',
+                        success: '#10B981'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .code-area {
+            font-family: 'Courier New', monospace;
+            tab-size: 2;
+        }
+
+        .smooth-transition {
+            transition: all 0.3s ease;
+        }
+
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body class="bg-light min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-dark text-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                </svg>
+                <h1 class="text-xl font-bold">Code<span class="text-primary">Minify</span></h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="../../" class="hover:text-primary smooth-transition">Voltar</a></li>
+                    <li><a href="#about" class="hover:text-primary smooth-transition">Sobre</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <section class="mb-12 text-center">
+            <h2 class="text-3xl font-bold text-dark mb-2">Minificador de Código Profissional</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Remova espaços, quebras de linha e comentários para otimizar seu
+                código e melhorar o desempenho.</p>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <!-- Input Area -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="bg-dark text-white px-4 py-2 flex justify-between items-center">
+                    <h3 class="font-medium">Seu Código Original</h3>
+                    <div class="mb-2">
+                        <select style="color: black; font-weight: bold;" id="language-select"
+                            class="border rounded p-1 text-sm">
+                            <option value="javascript">JavaScript</option>
+                            <option value="json">JSON</option>
+                            <option value="html">HTML</option>
+                            <option value="css">CSS</option>
+                            <option value="python">Python</option>
+                            <option value="java">Java</option>
+                            <option value="cpp">C / C++</option>
+                            <option value="php">PHP</option>
+                        </select>
+                    </div>
+                    <button id="sample-btn"
+                        class="text-xs bg-primary hover:bg-opacity-90 px-2 py-1 rounded smooth-transition">
+                        Carregar Exemplo
+                    </button>
+                </div>
+                <textarea id="input-code"
+                    class="w-full h-96 p-4 code-area bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary"
+                    placeholder="Cole seu código aqui..."></textarea>
+                <div class="bg-gray-100 px-4 py-2 flex justify-between items-center">
+                    <span class="text-xs text-gray-600" id="input-stats">0 caracteres</span>
+                    <button id="clear-input"
+                        class="text-xs bg-danger text-white hover:bg-opacity-90 px-2 py-1 rounded smooth-transition">
+                        Limpar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Output Area -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="bg-dark text-white px-4 py-2 flex justify-between items-center">
+                    <h3 class="font-medium">Código Minificado</h3>
+                    <div class="flex space-x-2">
+                        <button id="copy-btn"
+                            class="text-xs bg-success hover:bg-opacity-90 px-2 py-1 rounded smooth-transition flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                            </svg>
+                            Copiar
+                        </button>
+                        <button id="download-btn"
+                            class="text-xs bg-primary hover:bg-opacity-90 px-2 py-1 rounded smooth-transition flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Download
+                        </button>
+                    </div>
+                </div>
+                <pre id="output-code"
+                    class="w-full h-96 p-4 code-area bg-gray-50 overflow-auto whitespace-pre-wrap"></pre>
+                <div class="bg-gray-100 px-4 py-2 flex justify-between items-center">
+                    <span class="text-xs text-gray-600" id="output-stats">0 caracteres (0% redução)</span>
+                    <span class="text-xs font-medium" id="output-status">Pronto para minificar</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Options -->
+        <section class="mb-12 bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-xl font-bold text-dark mb-4">Opções de Minificação</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" id="remove-spaces" class="form-checkbox text-primary rounded" checked>
+                    <span>Remover espaços extras</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" id="remove-linebreaks" class="form-checkbox text-primary rounded" checked>
+                    <span>Remover quebras de linha</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" id="remove-comments" class="form-checkbox text-primary rounded">
+                    <span>Remover comentários</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" id="preserve-semicolons" class="form-checkbox text-primary rounded">
+                    <span>Preservar ponto-e-vírgula</span>
+                </label>
+            </div>
+            <div class="mt-6 flex justify-center">
+                <button id="minify-btn"
+                    class="bg-primary hover:bg-opacity-90 text-white font-bold py-3 px-8 rounded-full smooth-transition flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Minificar Código
+                </button>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="bg-white rounded-lg shadow-md p-6 mb-12">
+            <h3 class="text-xl font-bold text-dark mb-4">Sobre o CodeMinify</h3>
+            <div class="prose max-w-none">
+                <p class="mb-4">O CodeMinify é uma ferramenta profissional para otimização de código, projetada para
+                    desenvolvedores que buscam melhorar o desempenho de seus projetos web.</p>
+
+                <h4 class="font-bold text-lg text-dark mt-6 mb-2">Como Funciona?</h4>
+                <p class="mb-4">Nosso minificador remove caracteres desnecessários como espaços em branco, quebras de
+                    linha e comentários (opcional), reduzindo significativamente o tamanho do arquivo sem alterar a
+                    funcionalidade do código.</p>
+
+                <h4 class="font-bold text-lg text-dark mt-6 mb-2">Benefícios</h4>
+                <ul class="list-disc pl-5 mb-4 space-y-1">
+                    <li>Redução no tamanho do arquivo para carregamento mais rápido</li>
+                    <li>Otimização para melhor desempenho em produção</li>
+                    <li>Processamento local - seu código não é enviado para servidores externos</li>
+                    <li>Interface simples e intuitiva</li>
+                </ul>
+
+                <h4 class="font-bold text-lg text-dark mt-6 mb-2">Tipos de Código Suportados</h4>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">HTML</span>
+                    <span class="bg-secondary bg-opacity-10 text-secondary px-3 py-1 rounded-full text-sm">CSS</span>
+                    <span class="bg-success bg-opacity-10 text-success px-3 py-1 rounded-full text-sm">JavaScript</span>
+                    <span class="bg-primary bg-opacity-10 text-pribg-primary px-3 py-1 rounded-full text-sm">Python</span>
+                    <span class="bg-secondary bg-opacity-10 text-sebg-secondary px-3 py-1 rounded-full text-sm">PHP</span>
+                    <span class="bg-success bg-opacity-10 text-subg-success px-3 py-1 rounded-full text-sm">Java</span>
+                    <span class="bg-primary bg-opacity-10 text-prbg-primary px-3 py-1 rounded-full text-sm">C++</span>
+                    <span class="bg-secondary bg-opacity-10 text-sebg-secondary px-3 py-1 rounded-full text-sm">C</span> 
+                    <span class="bg-success bg-opacity-10 text-subg-success px-3 py-1 rounded-full text-sm">JSON</span> 
+                </div>
+
+                <p class="text-sm text-gray-600">O CodeMinify é uma ferramenta gratuita desenvolvida para a comunidade
+                    de desenvolvedores. Use com responsabilidade e sempre mantenha backups do seu código original.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 CodeMinify. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        const removeCommentsRegex = {
+            js: [new RegExp("//.*$", "gm"), new RegExp("/\\*[\\s\\S]*?\\*/", "g")],
+            css: [new RegExp("/\\*[\\s\\S]*?\\*/", "g")],
+            html: [new RegExp("<!--[\\s\\S]*?-->", "g")],
+            python: [new RegExp("#.*$", "gm")],
+            php: [
+                new RegExp("//.*$", "gm"),
+                new RegExp("/\\*[\\s\\S]*?\\*/", "g"),
+                new RegExp("#.*$", "gm")
+            ],
+            java: [new RegExp("//.*$", "gm"), new RegExp("/\\*[\\s\\S]*?\\*/", "g")],
+            cpp: [new RegExp("//.*$", "gm"), new RegExp("/\\*[\\s\\S]*?\\*/", "g")]
+        };
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const inputCode = document.getElementById('input-code');
+            const outputCode = document.getElementById('output-code');
+            const minifyBtn = document.getElementById('minify-btn');
+            const copyBtn = document.getElementById('copy-btn');
+            const downloadBtn = document.getElementById('download-btn');
+            const clearInputBtn = document.getElementById('clear-input');
+            const sampleBtn = document.getElementById('sample-btn');
+            const inputStats = document.getElementById('input-stats');
+            const outputStats = document.getElementById('output-stats');
+            const outputStatus = document.getElementById('output-status');
+            const removeSpaces = document.getElementById('remove-spaces');
+            const removeLinebreaks = document.getElementById('remove-linebreaks');
+            const removeComments = document.getElementById('remove-comments');
+
+            inputCode.addEventListener('input', updateInputStats);
+            minifyBtn.addEventListener('click', minifyCode);
+            copyBtn.addEventListener('click', copyToClipboard);
+            downloadBtn.addEventListener('click', downloadCode);
+            clearInputBtn.addEventListener('click', clearInput);
+            sampleBtn.addEventListener('click', loadSampleCode);
+
+            function updateInputStats() {
+                const text = inputCode.value;
+                const charCount = text.length;
+                const lineCount = text.split('\n').length;
+                inputStats.textContent = `${charCount} caracteres, ${lineCount} linhas`;
+            }
+
+            function minifyCode() {
+                let code = inputCode.value;
+                const lang = document.getElementById('language-select').value;
+
+                if (!code.trim()) {
+                    outputStatus.textContent = "Insira algum código para minificar";
+                    outputStatus.className = "text-xs font-medium text-danger";
+                    return;
+                }
+
+                if (removeComments.checked && removeCommentsRegex[lang]) {
+                    removeCommentsRegex[lang].forEach(r => code = code.replace(r, ''));
+                }
+
+                if (removeLinebreaks.checked) {
+                    code = code.replace(/\r?\n/g, ' ');
+                }
+
+                if (removeSpaces.checked) {
+                    code = code.replace(/\s{2,}/g, ' ');
+                }
+
+                if (['js', 'javascript', 'json', 'typescript', 'php', 'java', 'cpp'].includes(lang)) {
+                    code = code.replace(/\s*([{}();,:=+\-*/%<>])\s*/g, '$1');
+                }
+
+                if (lang === 'css') {
+                    code = code.replace(/\s*([{}:;,])\s*/g, '$1');
+                }
+
+                if (lang === 'html') {
+                    code = code.replace(/>\s+</g, '><');
+                }
+
+                outputCode.textContent = code.trim();
+                const originalLength = inputCode.value.length;
+                const minifiedLength = code.trim().length;
+                const reduction = originalLength > 0 ? Math.round(((originalLength - minifiedLength) / originalLength) * 100) : 0;
+                outputStats.textContent = `${minifiedLength} caracteres (${reduction}% de redução)`;
+                outputStatus.textContent = "Código minificado com sucesso";
+                outputStatus.className = "text-xs font-medium text-success";
+            }
+
+
+            function copyToClipboard() {
+                if (!outputCode.textContent.trim()) {
+                    outputStatus.textContent = "Nada para copiar - minifique primeiro";
+                    outputStatus.className = "text-xs font-medium text-danger";
+                    return;
+                }
+
+                navigator.clipboard.writeText(outputCode.textContent)
+                    .then(() => {
+                        outputStatus.textContent = "Copiado para a área de transferência!";
+                        outputStatus.className = "text-xs font-medium text-success";
+                    })
+                    .catch(err => {
+                        outputStatus.textContent = "Falha ao copiar";
+                        outputStatus.className = "text-xs font-medium text-danger";
+                        console.error('Erro ao copiar: ', err);
+                    });
+            }
+
+            function downloadCode() {
+                if (!outputCode.textContent.trim()) {
+                    outputStatus.textContent = "Nada para baixar - minifique primeiro";
+                    outputStatus.className = "text-xs font-medium text-danger";
+                    return;
+                }
+
+                const blob = new Blob([outputCode.textContent], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'minified-code.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                outputStatus.textContent = "Download iniciado";
+                outputStatus.className = "text-xs font-medium text-success";
+            }
+
+            function clearInput() {
+                inputCode.value = '';
+                outputCode.textContent = '';
+                inputStats.textContent = '0 caracteres';
+                outputStats.textContent = '0 caracteres (0% redução)';
+                outputStatus.textContent = 'Pronto para minificar';
+                outputStatus.className = 'text-xs font-medium';
+            }
+
+            function loadSampleCode() {
+                const sampleCode = `// Este é um exemplo de código JavaScript
+function calcular(valor, taxa) {
+    /* Aplica a taxa no valor */
+    return valor * (1 + taxa);
+}
+console.log(calcular(100, 0.15));`;
+
+                inputCode.value = sampleCode;
+                updateInputStats();
+                outputStatus.textContent = "Código de exemplo carregado";
+                outputStatus.className = "text-xs font-medium text-secondary";
+            }
+        });
+    </script>
+</body>
+
+</html>

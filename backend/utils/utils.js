@@ -5,6 +5,7 @@ const dados = [
 
     // dev
     { category: 'dev', name: 'Formatador de Código', description: 'Organiza e melhora a legibilidade do código', link: './public/formatador-de-codigos/' },
+    { category: 'dev', name: 'Minificador de Código', description: 'Remove espaços e quebras de linha para otimizar o código', link: './public/minificador-de-codigos/' },
 
     // productivity
     { category: 'productivity', name: 'Cronômetro Online', description: 'Ideal para treinos, estudos, tarefas ou qualquer atividade, sem complicações.', link: './public/cronometro-online/' },

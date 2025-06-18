@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     async function carregarCategorias() {
         startLoadingAnimation()
         try {
-            const res = await fetch('https://megasitebackend.onrender.com/categorias')
+            const res = await fetch('http://localhost:3000/categorias')// https://megasitebackend.onrender.com
             if (!res.ok) throw new Error('Erro na requisição')
             const data = await res.json()
             stopLoadingAnimation()
