@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX61BYEH4E"></script>
+    <script>
+        window.dataLayer = window.dataLayer || []
+        function gtag() { dataLayer.push(arguments) }
+        gtag('js', new Date())
+        gtag('config', 'G-RX61BYEH4E')
+    </script>
+
+    <!-- SEO básico -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotaWeb - Bloco de Notas Online | Convertil</title>
+    <meta name="description"
+        content="NotaWeb é um bloco de notas online gratuito do Convertil para você anotar e salvar ideias rapidamente. Acesse agora!">
+    <meta name="author" content="Convertil">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://convertil.com/notaweb">
+
+    <!-- Open Graph (para redes sociais) -->
+    <meta property="og:title" content="NotaWeb - Bloco de Notas Online | Convertil">
+    <meta property="og:description"
+        content="Anote ideias, listas e pensamentos rapidamente com o NotaWeb, o bloco de notas online gratuito da Convertil.">
+    <meta property="og:image" content="https://convertil.com/favicon.png">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
+
+    <!-- Tailwind CSS via CDN (uso apenas em dev) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563EB',
+                        secondary: '#F59E0B',
+                        light: '#F9FAFB',
+                        dark: '#1F2937',
+                        danger: '#EF4444',
+                        success: '#10B981'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Estilos customizados -->
+    <style>
+        .note-textarea {
+            min-height: calc(100vh - 200px);
+            resize: none;
+        }
+
+        .btn-hover-effect {
+            transition: all 0.3s ease;
+        }
+
+        .btn-hover-effect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        @media (max-width: 640px) {
+            .mobile-flex-col {
+                flex-direction: column;
+            }
+
+            .mobile-w-full {
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-light font-sans antialiased text-dark">
+    <!-- Header -->
+    <header class="bg-primary text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <h1 class="text-xl font-bold">NotaWeb</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#" id="backBtn" class="hover:text-secondary transition-colors">Voltar</a></li>
+                    <li><a href="#" id="aboutBtn" class="hover:text-secondary transition-colors">Sobre</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <!-- Toolbar -->
+            <div class="bg-gray-100 px-4 py-3 flex flex-wrap items-center justify-between mobile-flex-col">
+                <div class="flex space-x-2 mb-2 sm:mb-0 mobile-w-full">
+                    <button id="newNoteBtn"
+                        class="bg-success text-white px-4 py-2 rounded-md btn-hover-effect flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        Nova
+                    </button>
+                    <button id="saveNoteBtn"
+                        class="bg-primary text-white px-4 py-2 rounded-md btn-hover-effect flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                        </svg>
+                        Salvar
+                    </button>
+                </div>
+                <div class="flex items-center mobile-w-full">
+                    <input type="text" id="noteTitle" placeholder="Título da anotação"
+                        class="px-4 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-primary flex-grow">
+                    <button id="titleSaveBtn" class="bg-secondary text-white px-4 py-2 rounded-r-md btn-hover-effect">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Text Area -->
+            <textarea id="noteContent"
+                class="note-textarea w-full p-4 focus:outline-none focus:ring-1 focus:ring-primary"
+                placeholder="Comece a escrever sua anotação aqui..."></textarea>
+
+            <!-- Status Bar -->
+            <div class="bg-gray-100 px-4 py-2 text-sm text-gray-600 flex justify-between items-center">
+                <div>
+                    <span id="charCount">0</span> caracteres |
+                    <span id="wordCount">0</span> palavras
+                </div>
+                <div id="lastSaved" class="text-gray-500">Nunca salvo</div>
+            </div>
+        </div>
+
+        <!-- Notes List (Collapsible) -->
+        <div class="mt-6 bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-gray-100 px-4 py-3 flex justify-between items-center cursor-pointer" id="notesToggle">
+                <h2 class="font-semibold">Suas Anotações</h2>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform" id="toggleIcon"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </div>
+            <div class="hidden" id="notesList">
+                <ul class="divide-y divide-gray-200" id="savedNotes">
+                    <!-- Notes will be listed here -->
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+            <div class="bg-primary text-white px-6 py-4 rounded-t-lg flex justify-between items-center">
+                <h3 class="text-lg font-semibold">Sobre o NotaWeb</h3>
+                <button id="closeAboutModal" class="text-white hover:text-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6">
+                <p class="mb-4">NotaWeb é um bloco de notas online que permite criar, editar e salvar suas anotações
+                    diretamente no seu navegador.</p>
+                <p class="mb-4">Todas as anotações são armazenadas localmente no seu dispositivo, garantindo privacidade
+                    e segurança.</p>
+                <p class="mb-4">Recursos:</p>
+                <ul class="list-disc pl-5 mb-4 space-y-1">
+                    <li>Crie e salve múltiplas anotações</li>
+                    <li>Edição em tempo real com contagem de palavras e caracteres</li>
+                    <li>Armazenamento local (não requer login)</li>
+                    <li>Interface limpa e responsiva</li>
+                </ul>
+                <p>Use NotaWeb para anotações rápidas, listas de tarefas, rascunhos e muito mais!</p>
+            </div>
+            <div class="bg-gray-100 px-6 py-3 rounded-b-lg flex justify-end">
+                <button id="closeAboutModalBtn"
+                    class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition-colors">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 NotaWeb - Todos os direitos reservados</p>
+            <p class="text-gray-400 text-sm mt-2">Desenvolvido com ❤️ para anotações simples e eficientes</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // DOM Elements
+            const noteContent = document.getElementById('noteContent');
+            const noteTitle = document.getElementById('noteTitle');
+            const charCount = document.getElementById('charCount');
+            const wordCount = document.getElementById('wordCount');
+            const lastSaved = document.getElementById('lastSaved');
+            const newNoteBtn = document.getElementById('newNoteBtn');
+            const saveNoteBtn = document.getElementById('saveNoteBtn');
+            const titleSaveBtn = document.getElementById('titleSaveBtn');
+            const savedNotes = document.getElementById('savedNotes');
+            const notesToggle = document.getElementById('notesToggle');
+            const notesList = document.getElementById('notesList');
+            const toggleIcon = document.getElementById('toggleIcon');
+            const aboutBtn = document.getElementById('aboutBtn');
+            const aboutModal = document.getElementById('aboutModal');
+            const closeAboutModal = document.getElementById('closeAboutModal');
+            const closeAboutModalBtn = document.getElementById('closeAboutModalBtn');
+            const backBtn = document.getElementById('backBtn');
+
+            // State
+            let currentNoteId = null;
+            let notes = JSON.parse(localStorage.getItem('notes')) || [];
+
+            // Initialize
+            updateCounts();
+            renderNotesList();
+
+            // Event Listeners
+            noteContent.addEventListener('input', updateCounts);
+            newNoteBtn.addEventListener('click', createNewNote);
+            saveNoteBtn.addEventListener('click', saveNote);
+            titleSaveBtn.addEventListener('click', saveNoteTitle);
+            notesToggle.addEventListener('click', toggleNotesList);
+            aboutBtn.addEventListener('click', showAboutModal);
+            closeAboutModal.addEventListener('click', hideAboutModal);
+            closeAboutModalBtn.addEventListener('click', hideAboutModal);
+            backBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.history.back();
+            });
+
+            // Functions
+            function updateCounts() {
+                const text = noteContent.value;
+                charCount.textContent = text.length;
+                wordCount.textContent = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+            }
+
+            function createNewNote() {
+                noteContent.value = '';
+                noteTitle.value = 'Nova Anotação';
+                currentNoteId = Date.now().toString();
+                updateCounts();
+                lastSaved.textContent = 'Nova anotação criada';
+
+                // Show notification
+                showNotification('Nova anotação criada!', 'success');
+            }
+
+            function saveNote() {
+                if (!noteContent.value.trim()) {
+                    showNotification('A anotação não pode estar vazia!', 'danger');
+                    return;
+                }
+
+                const title = noteTitle.value.trim() || 'Sem Título';
+                const content = noteContent.value;
+                const now = new Date();
+                const timestamp = now.toLocaleString();
+
+                if (!currentNoteId) {
+                    currentNoteId = Date.now().toString();
+                }
+
+                const existingNoteIndex = notes.findIndex(note => note.id === currentNoteId);
+
+                const noteData = {
+                    id: currentNoteId,
+                    title: title,
+                    content: content,
+                    updatedAt: timestamp
+                };
+
+                if (existingNoteIndex !== -1) {
+                    notes[existingNoteIndex] = noteData;
+                } else {
+                    notes.push(noteData);
+                }
+
+                localStorage.setItem('notes', JSON.stringify(notes));
+                lastSaved.textContent = `Salvo em: ${timestamp}`;
+                renderNotesList();
+
+                showNotification('Anotação salva com sucesso!', 'success');
+            }
+
+            function saveNoteTitle() {
+                if (!noteTitle.value.trim()) {
+                    showNotification('O título não pode estar vazio!', 'danger');
+                    return;
+                }
+
+                if (currentNoteId) {
+                    const existingNoteIndex = notes.findIndex(note => note.id === currentNoteId);
+                    if (existingNoteIndex !== -1) {
+                        notes[existingNoteIndex].title = noteTitle.value.trim();
+                        localStorage.setItem('notes', JSON.stringify(notes));
+                        renderNotesList();
+                        showNotification('Título atualizado!', 'success');
+                    }
+                } else {
+                    showNotification('Crie ou carregue uma anotação primeiro!', 'danger');
+                }
+            }
+
+            function renderNotesList() {
+                savedNotes.innerHTML = '';
+
+                if (notes.length === 0) {
+                    const li = document.createElement('li');
+                    li.className = 'px-4 py-3 text-gray-500';
+                    li.textContent = 'Nenhuma anotação salva ainda';
+                    savedNotes.appendChild(li);
+                    return;
+                }
+
+                // Sort notes by last updated (newest first)
+                notes.sort((a, b) => {
+                    return new Date(b.updatedAt) - new Date(a.updatedAt);
+                });
+
+                notes.forEach(note => {
+                    const li = document.createElement('li');
+                    li.className = 'px-4 py-3 hover:bg-gray-50 cursor-pointer group';
+
+                    const div = document.createElement('div');
+                    div.className = 'flex justify-between items-center';
+
+                    const titleDiv = document.createElement('div');
+                    titleDiv.className = 'font-medium truncate max-w-xs';
+                    titleDiv.textContent = note.title;
+
+                    const dateDiv = document.createElement('div');
+                    dateDiv.className = 'text-sm text-gray-500';
+                    dateDiv.textContent = note.updatedAt;
+
+                    const actionsDiv = document.createElement('div');
+                    actionsDiv.className = 'flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity';
+
+                    const loadBtn = document.createElement('button');
+                    loadBtn.className = 'text-primary hover:text-primary-dark';
+                    loadBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>';
+                    loadBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        loadNote(note.id);
+                    });
+
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'text-danger hover:text-danger-dark';
+                    deleteBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>';
+                    deleteBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        deleteNote(note.id);
+                    });
+
+                    actionsDiv.appendChild(loadBtn);
+                    actionsDiv.appendChild(deleteBtn);
+
+                    div.appendChild(titleDiv);
+                    div.appendChild(dateDiv);
+                    div.appendChild(actionsDiv);
+
+                    li.appendChild(div);
+                    li.addEventListener('click', () => loadNote(note.id));
+
+                    savedNotes.appendChild(li);
+                });
+            }
+
+            function loadNote(id) {
+                const note = notes.find(note => note.id === id);
+                if (note) {
+                    currentNoteId = note.id;
+                    noteTitle.value = note.title;
+                    noteContent.value = note.content;
+                    lastSaved.textContent = `Carregado: ${note.updatedAt}`;
+                    updateCounts();
+
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                    showNotification('Anotação carregada!', 'success');
+                }
+            }
+
+            function deleteNote(id) {
+                if (confirm('Tem certeza que deseja excluir esta anotação?')) {
+                    notes = notes.filter(note => note.id !== id);
+                    localStorage.setItem('notes', JSON.stringify(notes));
+
+                    if (currentNoteId === id) {
+                        noteContent.value = '';
+                        noteTitle.value = '';
+                        currentNoteId = null;
+                        lastSaved.textContent = 'Nunca salvo';
+                        updateCounts();
+                    }
+
+                    renderNotesList();
+                    showNotification('Anotação excluída!', 'danger');
+                }
+            }
+
+            function toggleNotesList() {
+                const isHidden = notesList.classList.contains('hidden');
+
+                if (isHidden) {
+                    notesList.classList.remove('hidden');
+                    toggleIcon.classList.add('rotate-180');
+                } else {
+                    notesList.classList.add('hidden');
+                    toggleIcon.classList.remove('rotate-180');
+                }
+            }
+
+            function showAboutModal() {
+                aboutModal.classList.remove('hidden');
+            }
+
+            function hideAboutModal() {
+                aboutModal.classList.add('hidden');
+            }
+
+            function showNotification(message, type) {
+                const notification = document.createElement('div');
+                notification.className = `fixed top-4 right-4 px-6 py-3 rounded-md shadow-lg text-white bg-${type} z-50 transform transition-all duration-300 translate-x-full`;
+                notification.textContent = message;
+
+                document.body.appendChild(notification);
+
+                // Trigger reflow
+                void notification.offsetWidth;
+
+                // Slide in
+                notification.classList.remove('translate-x-full');
+                notification.classList.add('translate-x-0');
+
+                // Auto dismiss after 3 seconds
+                setTimeout(() => {
+                    notification.classList.remove('translate-x-0');
+                    notification.classList.add('translate-x-full');
+
+                    // Remove after animation
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+
+</html>
