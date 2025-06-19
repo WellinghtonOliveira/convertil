@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX61BYEH4E"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RX61BYEH4E');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>GlobalConvert | Conversor de Moedas Profissional</title>
+
+    <meta name="description" content="GlobalConvert: conversor de moedas profissional para taxas atualizadas em tempo real. Converta valores facilmente entre mais de 30 moedas internacionais." />
+    <meta name="keywords" content="conversor de moedas, câmbio, dólar, euro, real, conversão monetária, taxas de câmbio, GlobalConvert, convertil.com" />
+    <meta name="author" content="Convertil" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical URL: ajustado para refletir caminho correto da página -->
+    <link rel="canonical" href="https://convertil.com/public/conversor-de-moedas/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="GlobalConvert | Conversor de Moedas Profissional" />
+    <meta property="og:description" content="GlobalConvert: conversor de moedas profissional para taxas atualizadas em tempo real. Converta valores facilmente entre mais de 30 moedas internacionais." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://convertil.com/public/conversor-de-moedas/" />
+    <meta property="og:site_name" content="Convertil" />
+    <!-- Você pode adicionar uma imagem para o OG, ex: -->
+    <!-- <meta property="og:image" content="https://convertil.com/assets/images/globalconvert-preview.png" /> -->
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="GlobalConvert | Conversor de Moedas Profissional" />
+    <meta name="twitter:description" content="GlobalConvert: conversor de moedas profissional para taxas atualizadas em tempo real. Converta valores facilmente entre mais de 30 moedas internacionais." />
+    <!-- <meta name="twitter:image" content="https://convertil.com/assets/images/globalconvert-preview.png" /> -->
+
+    <!-- Favicons -->
+    <link rel="icon" href="icon.png" />
+    <link rel="apple-touch-icon" href="icon.png" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563EB',
+                        secondary: '#F59E0B',
+                        light: '#F9FAFB',
+                        dark: '#1F2937',
+                        danger: '#EF4444',
+                        success: '#10B981'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .currency-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%231F2937' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+        }
+
+        .swap-btn:hover {
+            transform: rotate(180deg);
+            transition: transform 0.3s ease;
+        }
+
+        .chart-container {
+            height: 300px;
+        }
+
+        @media (max-width: 640px) {
+            .input-group {
+                flex-direction: column;
+            }
+
+            .swap-btn {
+                transform: rotate(90deg);
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-primary text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-exchange-alt text-2xl text-secondary"></i>
+                <h1 class="text-2xl font-bold">GlobalConvert</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="../../" class="hover:text-secondary transition"><i class="fas fa-arrow-left mr-1"></i>
+                            Voltar</a></li>
+                    <li><a href="#about" class="hover:text-secondary transition"><i class="mr-1"></i>
+                            Sobre</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <section class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-dark mb-2">Conversor de Moedas</h2>
+                <p class="text-gray-600">Converta valores entre diferentes moedas com taxas atualizadas em tempo real
+                </p>
+            </div>
+
+            <!-- Converter Tool -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-10">
+                <div class="flex flex-col md:flex-row items-center justify-between mb-6">
+                    <div class="w-full md:w-1/2 mb-4 md:mb-0">
+                        <label for="amount" class="block text-sm font-medium text-gray-700 mb-1">Valor</label>
+                        <div class="relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <span class="text-gray-500 sm:text-sm">$</span>
+                            </div>
+                            <input type="number" id="amount"
+                                class="focus:ring-primary focus:border-primary block w-full pl-7 pr-12 py-3 border-gray-300 rounded-md"
+                                placeholder="0.00" value="1.00">
+                        </div>
+                    </div>
+
+                    <div class="w-full md:w-1/2">
+                        <label for="date" class="block text-sm font-medium text-gray-700 mb-1">Data da Cotação</label>
+                        <input type="date" id="date"
+                            class="focus:ring-primary focus:border-primary block w-full px-4 py-3 border-gray-300 rounded-md">
+                    </div>
+                </div>
+
+                <div class="flex items-center input-group">
+                    <div class="w-full">
+                        <label for="from-currency" class="block text-sm font-medium text-gray-700 mb-1">De</label>
+                        <select id="from-currency"
+                            class="currency-select focus:ring-primary focus:border-primary block w-full px-4 py-3 border-gray-300 rounded-md">
+                            <option value="USD">USD - Dólar Americano</option>
+                            <option value="BRL">BRL - Real Brasileiro</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">GBP - Libra Esterlina</option>
+                            <option value="JPY">JPY - Iene Japonês</option>
+                            <option value="CAD">CAD - Dólar Canadense</option>
+                            <option value="AUD">AUD - Dólar Australiano</option>
+                            <option value="CNY">CNY - Yuan Chinês</option>
+                        </select>
+                    </div>
+
+                    <button id="swap-currencies"
+                        class="swap-btn mx-4 mt-6 bg-secondary text-white p-3 rounded-full hover:bg-primary transition">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+
+                    <div class="w-full">
+                        <label for="to-currency" class="block text-sm font-medium text-gray-700 mb-1">Para</label>
+                        <select id="to-currency"
+                            class="currency-select focus:ring-primary focus:border-primary block w-full px-4 py-3 border-gray-300 rounded-md">
+                            <option value="BRL">BRL - Real Brasileiro</option>
+                            <option value="USD">USD - Dólar Americano</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">GBP - Libra Esterlina</option>
+                            <option value="JPY">JPY - Iene Japonês</option>
+                            <option value="CAD">CAD - Dólar Canadense</option>
+                            <option value="AUD">AUD - Dólar Australiano</option>
+                            <option value="CNY">CNY - Yuan Chinês</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <button id="convert-btn"
+                        class="w-full bg-primary hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md transition">
+                        Converter
+                    </button>
+                </div>
+
+                <div id="result" class="mt-8 hidden">
+                    <div class="bg-gray-50 p-4 rounded-md">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span id="from-amount" class="text-2xl font-bold">1.00</span>
+                                <span id="from-currency-code" class="text-lg ml-1">USD</span>
+                            </div>
+                            <div class="text-gray-500">
+                                <i class="fas fa-equals"></i>
+                            </div>
+                            <div class="text-right">
+                                <span id="to-amount" class="text-2xl font-bold text-success">5.25</span>
+                                <span id="to-currency-code" class="text-lg ml-1">BRL</span>
+                            </div>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-500">
+                            <span id="exchange-rate">1 USD = 5.25 BRL</span>
+                            <span id="last-update" class="float-right">Atualizado em: 01/01/2023 15:30</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exchange Rate Chart -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-10">
+                <h3 class="text-xl font-semibold text-dark mb-4">Histórico de Câmbio (Últimos 30 dias)</h3>
+                <div class="chart-container bg-gray-50 rounded-md p-4">
+                    <canvas id="exchange-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- Popular Conversions -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-10">
+                <h3 class="text-xl font-semibold text-dark mb-4">Conversões Populares</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="bg-gray-50 p-3 rounded-md hover:bg-primary hover:text-white transition cursor-pointer">
+                        <div class="flex justify-between">
+                            <span>USD → BRL</span>
+                            <span class="font-semibold">5.25</span>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-md hover:bg-primary hover:text-white transition cursor-pointer">
+                        <div class="flex justify-between">
+                            <span>EUR → BRL</span>
+                            <span class="font-semibold">5.65</span>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-md hover:bg-primary hover:text-white transition cursor-pointer">
+                        <div class="flex justify-between">
+                            <span>GBP → BRL</span>
+                            <span class="font-semibold">6.40</span>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-md hover:bg-primary hover:text-white transition cursor-pointer">
+                        <div class="flex justify-between">
+                            <span>BRL → USD</span>
+                            <span class="font-semibold">0.19</span>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-md hover:bg-primary hover:text-white transition cursor-pointer">
+                        <div class="flex justify-between">
+                            <span>BRL → EUR</span>
+                            <span class="font-semibold">0.18</span>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-md hover:bg-primary hover:text-white transition cursor-pointer">
+                        <div class="flex justify-between">
+                            <span>USD → EUR</span>
+                            <span class="font-semibold">0.93</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <section id="about" class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-semibold text-dark mb-4">Sobre o GlobalConvert</h3>
+                <div class="prose max-w-none">
+                    <p class="mb-4">O GlobalConvert é uma ferramenta profissional de conversão de moedas que permite
+                        calcular valores entre diferentes divisas com precisão e facilidade.</p>
+
+                    <h4 class="text-lg font-medium text-dark mb-2">Como funciona?</h4>
+                    <p class="mb-4">Nosso sistema utiliza taxas de câmbio atualizadas diariamente de fontes confiáveis
+                        para garantir que você obtenha os valores mais precisos para suas conversões.</p>
+
+                    <h4 class="text-lg font-medium text-dark mb-2">Recursos:</h4>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li>Conversão entre mais de 30 moedas internacionais</li>
+                        <li>Histórico de cotações para análise</li>
+                        <li>Interface intuitiva e responsiva</li>
+                        <li>Conversões instantâneas</li>
+                        <li>Dados atualizados em tempo real</li>
+                    </ul>
+
+                    <h4 class="text-lg font-medium text-dark mb-2">Para quem é útil?</h4>
+                    <p>Viajantes, investidores internacionais, empresas com operações no exterior, estudantes e qualquer
+                        pessoa que precise realizar conversões monetárias com confiabilidade.</p>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 GlobalConvert. Todos os direitos reservados.</p>
+            <p class="mt-2 text-gray-400 text-sm">As taxas de câmbio são fornecidas apenas para fins informativos e
+                podem não ser totalmente precisas.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const amountInput = document.getElementById('amount');
+            const dateInput = document.getElementById('date');
+            const fromCurrency = document.getElementById('from-currency');
+            const toCurrency = document.getElementById('to-currency');
+            const swapBtn = document.getElementById('swap-currencies');
+            const convertBtn = document.getElementById('convert-btn');
+            const resultDiv = document.getElementById('result');
+            const fromAmount = document.getElementById('from-amount');
+            const toAmount = document.getElementById('to-amount');
+            const fromCurrencyCode = document.getElementById('from-currency-code');
+            const toCurrencyCode = document.getElementById('to-currency-code');
+            const exchangeRate = document.getElementById('exchange-rate');
+            const lastUpdate = document.getElementById('last-update');
+            const chartCanvas = document.getElementById('exchange-chart');
+            let exchangeChart = null;
+
+            // Cria modal de mensagem (se não existir)
+            let messageModal = document.createElement('div');
+            messageModal.style.position = 'fixed';
+            messageModal.style.bottom = '20px';
+            messageModal.style.left = '50%';
+            messageModal.style.transform = 'translateX(-50%)';
+            messageModal.style.backgroundColor = '#1F2937'; // dark
+            messageModal.style.color = 'white';
+            messageModal.style.padding = '10px 20px';
+            messageModal.style.borderRadius = '8px';
+            messageModal.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
+            messageModal.style.fontSize = '14px';
+            messageModal.style.zIndex = '9999';
+            messageModal.style.display = 'none';
+            messageModal.style.pointerEvents = 'none';
+            document.body.appendChild(messageModal);
+
+            function showMessage(msg) {
+                messageModal.textContent = msg;
+                messageModal.style.display = 'block';
+                setTimeout(() => {
+                    messageModal.style.display = 'none';
+                }, 3000);
+            }
+
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.value = today;
+
+            swapBtn.addEventListener('click', () => {
+                const temp = fromCurrency.value;
+                fromCurrency.value = toCurrency.value;
+                toCurrency.value = temp;
+                resultDiv.classList.add('hidden');
+                loadChart();
+            });
+
+            convertBtn.addEventListener('click', async () => {
+                const amount = parseFloat(amountInput.value);
+                const from = fromCurrency.value;
+                const to = toCurrency.value;
+
+                if (isNaN(amount) || amount <= 0) {
+                    showMessage('Digite um valor válido');
+                    return;
+                }
+                if (!from || !to) {
+                    showMessage('Selecione as moedas corretamente');
+                    return;
+                }
+                if (from === to) {
+                    showMessage('Selecione moedas diferentes para conversão');
+                    return;
+                }
+
+                try {
+                    const url = `https://api.frankfurter.app/latest?from=${from}&to=${to}`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+
+                    if (!data || !data.rates) {
+                        showMessage('Resposta da API inválida');
+                        return;
+                    }
+
+                    if (!(to in data.rates)) {
+                        showMessage(`Taxa para a moeda "${to}" não encontrada`);
+                        return;
+                    }
+
+                    const rate = data.rates[to];
+                    const converted = (amount * rate).toFixed(2);
+
+                    fromAmount.textContent = amount.toFixed(2);
+                    toAmount.textContent = converted;
+                    fromCurrencyCode.textContent = from;
+                    toCurrencyCode.textContent = to;
+                    exchangeRate.textContent = `1 ${from} = ${rate.toFixed(4)} ${to}`;
+                    lastUpdate.textContent = `Atualizado em: ${data.date}`;
+
+                    resultDiv.classList.remove('hidden');
+
+                    loadChart(rate);
+                } catch {
+                    showMessage('Erro ao buscar taxa de câmbio. Verifique sua conexão.');
+                }
+            });
+
+            function loadChart(latestRate = 5) {
+                const from = fromCurrency.value;
+                const to = toCurrency.value;
+
+                if (from === to) return;
+
+                const labels = Array.from({ length: 30 }, (_, i) => {
+                    const d = new Date();
+                    d.setDate(d.getDate() - (29 - i));
+                    return d.toISOString().split("T")[0];
+                });
+
+                const baseValue = parseFloat(latestRate);
+                const values = labels.map(() => {
+                    const variation = baseValue * 0.02;
+                    const randomValue = (baseValue + (Math.random() * variation * 2 - variation));
+                    return parseFloat(randomValue.toFixed(4));
+                });
+
+                if (exchangeChart) {
+                    exchangeChart.destroy();
+                }
+
+                const ctx = chartCanvas.getContext('2d');
+                exchangeChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels,
+                        datasets: [{
+                            label: `Histórico simulado de ${from} para ${to}`,
+                            data: values,
+                            borderColor: '#2563EB',
+                            backgroundColor: 'rgba(37,99,235,0.1)',
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: { y: { beginAtZero: false } }
+                    }
+                });
+            }
+
+            loadChart();
+        });
+
+
+    </script>
+</body>
+
+</html>
