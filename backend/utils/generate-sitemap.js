@@ -1,10 +1,9 @@
-// backend/utils/generate-sitemap.js
 const fs = require("fs");
 const path = require("path");
 
 const frontendDir = path.join(__dirname, "../../frontend");
 const publicDir = path.join(frontendDir, "public");
-const baseUrl = "https://convertil.com"; // Seu domínio real
+const baseUrl = "https://convertil.com";
 
 function getIndexPages(dir, basePath = "") {
   const items = fs.readdirSync(dir);
@@ -18,13 +17,11 @@ function getIndexPages(dir, basePath = "") {
       const indexHtmlPath = path.join(itemPath, "index.html");
 
       if (fs.existsSync(indexHtmlPath)) {
-        // Remove 'public' da URL final
         const cleanPath = relativePath.replace(/\\/g, "/");
-        urls.push(`${baseUrl}/${cleanPath}/`);
+        urls.push(`${baseUrl}/public/${cleanPath}/`);
       }
 
-      // Continua a busca em subpastas
-      urls = urls.concat(getIndexPages(itemPath, path.join(basePath, item)));
+      urls = urls.concat(getIndexPages(itemPath, relativePath));
     }
   }
 
@@ -32,16 +29,10 @@ function getIndexPages(dir, basePath = "") {
 }
 
 function generateSitemap() {
-  const urls = [];
-
-  // Página inicial
-  urls.push(`${baseUrl}/`);
-
-  // Páginas encontradas
+  const urls = [`${baseUrl}/`];
   const foundPages = getIndexPages(publicDir);
   urls.push(...foundPages);
 
-  // Criar XML
   const xmlUrls = urls.map((url) => {
     return `
   <url>
