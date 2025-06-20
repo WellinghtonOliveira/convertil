@@ -2,6 +2,7 @@ const dados = [
     // design
     { category: 'design', name: 'Gerador de Paleta de Cores', description: 'Cria combinações de cores harmoniosas para projetos visuais', link: './public/gerador-de-paleta-de-cores/' },
     { category: 'design', name: 'Conversor de Cores HEX ⇄ RGB ⇄ HSL', description: 'Converte entre formatos de cor populares', link: './public/conversor-de-cores/' },
+    { category: 'design', name: 'Redimensionador de Imagem', description: 'Faz uma ateração limpa e proficional nas dimensões da imagem', link: './public/redimensionador-de-imagem' },
 
     // dev
     { category: 'dev', name: 'Formatador de Código', description: 'Organiza e melhora a legibilidade do código', link: './public/formatador-de-codigos/' },
