@@ -3,67 +3,73 @@
 
   <url>
     <loc>https://convertil.com/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-06-20</lastmod>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://convertil.com/public/bloco-de-notas-online/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-06-20</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://convertil.com/public/calculadora-de-juros-compostos/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-06-20</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://convertil.com/public/contador-de-caracteres-e-palavras/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-06-20</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://convertil.com/public/conversor-de-cores/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-06-20</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://convertil.com/public/conversor-de-moedas/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-06-20</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://convertil.com/public/cronometro-online/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-06-20</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://convertil.com/public/formatador-de-codigos/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-06-20</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://convertil.com/public/gerador-de-paleta-de-cores/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-06-20</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://convertil.com/public/gerador-de-titulos/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-06-20</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://convertil.com/public/minificador-de-codigos/</loc>
-    <lastmod>2025-06-19</lastmod>
+    <lastmod>2025-06-20</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://convertil.com/public/redimensionador-de-imagem/</loc>
+    <lastmod>2025-06-20</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>
