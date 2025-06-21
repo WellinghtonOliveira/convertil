@@ -1,5 +1,3 @@
-const { link } = require("../routes/verificadorRoutes")
-
 const dados = [
     // design
     { category: 'design', name: 'Gerador de Paleta de Cores', description: 'Cria combinações de cores harmoniosas para projetos visuais', link: './gerador-de-paleta-de-cores/' },
