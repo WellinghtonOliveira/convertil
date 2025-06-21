@@ -1,3 +1,5 @@
+const { link } = require("../routes/verificadorRoutes")
+
 const dados = [
     // design
     { category: 'design', name: 'Gerador de Paleta de Cores', description: 'Cria combinações de cores harmoniosas para projetos visuais', link: './gerador-de-paleta-de-cores/' },
@@ -7,6 +9,7 @@ const dados = [
     // dev
     { category: 'dev', name: 'Formatador de Código', description: 'Organiza e melhora a legibilidade do código', link: './formatador-de-codigos/' },
     { category: 'dev', name: 'Minificador de Código', description: 'Remove espaços e quebras de linha para otimizar o código', link: './minificador-de-codigos/' },
+    { category: 'dev', name: 'Validador de JSON', description: 'Ferramenta que verifica se um documento JSON está corretamente estruturado e segue a sintaxe correta do formato JSON.', link: './validador-de-json/' },
 
     // productivity
     { category: 'productivity', name: 'Cronômetro Online', description: 'Ideal para treinos, estudos, tarefas ou qualquer atividade, sem complicações.', link: './cronometro-online/' },

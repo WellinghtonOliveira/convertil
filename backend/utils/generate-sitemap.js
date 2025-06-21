@@ -17,7 +17,7 @@ function getIndexPages(dir, basePath = "") {
       const indexHtmlPath = path.join(itemPath, "index.html");
 
       if (fs.existsSync(indexHtmlPath)) {
-        const cleanPath = relativePath.replace(/\\/g, "/");
+        const cleanPath = relativePath.replace(/\\/g, "./");
         urls.push(`${baseUrl}/${cleanPath}/`);
       }
 

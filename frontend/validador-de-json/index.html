@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX61BYEH4E"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RX61BYEH4E');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Ícone da aba (favicon) -->
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon" />
+
+    <!-- Título mais claro e com foco em palavras-chave -->
+    <title>Validador de JSON Online | Convertil.com</title>
+
+    <!-- Meta descrição para SEO e para exibir nos resultados de busca -->
+    <meta name="description"
+        content="Valide seu JSON de forma rápida e prática com o validador de JSON online gratuito da Convertil.com. Simples, eficiente e direto no navegador." />
+
+    <!-- URL canônica para evitar conteúdo duplicado -->
+    <link rel="canonical" href="https://convertil.com/validador-de-json/" />
+
+    <!-- Open Graph para redes sociais -->
+    <meta property="og:title" content="Validador de JSON Online | Convertil.com" />
+    <meta property="og:description"
+        content="Valide seu JSON rapidamente e sem complicação com o validador online gratuito da Convertil.com." />
+    <meta property="og:url" content="https://convertil.com/validador-de-json/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://convertil.com/assets/logo.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Validador de JSON Online | Convertil.com" />
+    <meta name="twitter:description"
+        content="Valide seu JSON rapidamente e sem complicação com o validador online gratuito da Convertil.com." />
+    <meta name="twitter:image" content="https://convertil.com/assets/logo.png" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563EB',
+                        secondary: '#F59E0B',
+                        light: '#F9FAFB',
+                        dark: '#1F2937',
+                        error: '#EF4444',
+                        success: '#10B981'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* seu css continua igual */
+        .code-area {
+            font-family: 'Courier New', monospace;
+            tab-size: 2;
+        }
+
+        .syntax-error {
+            position: absolute;
+            background-color: rgba(239, 68, 68, 0.1);
+            border-left: 3px solid #EF4444;
+        }
+
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: #1F2937;
+            color: #F9FAFB;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .flex-col-reverse-on-mobile {
+                flex-direction: column-reverse;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="bg-light min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-dark text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <h1 class="text-xl font-bold">JSON Validator <span class="text-primary">Pro</span></h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="https://convertil.com/" class="hover:text-primary transition-colors">Voltar</a></li>
+                    <li><a href="#about" class="hover:text-primary transition-colors">Sobre</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <section class="mb-12 text-center">
+            <h2 class="text-3xl font-bold text-dark mb-2">Validador de JSON Online</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Cole seu código JSON abaixo para validar a sintaxe, formatar e
+                identificar erros instantaneamente.</p>
+        </section>
+
+        <div class="flex flex-col-reverse-on-mobile gap-8">
+            <!-- JSON Input Section -->
+            <section class="flex-1">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-dark text-white px-4 py-2 flex justify-between items-center">
+                        <h3 class="font-medium">Editor JSON</h3>
+                        <div class="flex space-x-2">
+                            <button id="format-btn"
+                                class="bg-primary hover:bg-blue-700 text-white px-3 py-1 rounded text-sm flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+                                </svg>
+                                Format
+                            </button>
+                            <button id="clear-btn"
+                                class="bg-error hover:bg-red-700 text-white px-3 py-1 rounded text-sm flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <textarea id="json-input"
+                            class="code-area w-full h-96 p-4 text-gray-800 bg-gray-50 border-none focus:ring-2 focus:ring-primary"
+                            placeholder='Cole seu JSON aqui ou comece a digitar... Exemplo: { "nome": "João", "idade": 30 }'></textarea>
+                        <div id="error-marker" class="syntax-error hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="flex-1">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden h-full">
+                    <div class="bg-dark text-white px-4 py-2">
+                        <h3 class="font-medium">Resultado da Validação</h3>
+                    </div>
+                    <div id="results-container" class="p-4 h-96 overflow-auto">
+                        <div id="initial-state"
+                            class="h-full flex flex-col items-center justify-center text-center text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4 text-secondary" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <h4 class="text-lg font-medium mb-2">Aguardando JSON para validação</h4>
+                            <p class="max-w-xs">Insira seu código JSON no editor ao lado para verificar a validade e
+                                formatar automaticamente.</p>
+                        </div>
+                        <div id="success-state"
+                            class="hidden h-full flex flex-col items-center justify-center text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4 text-success" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <h4 class="text-lg font-medium mb-2 text-success">JSON Válido!</h4>
+                            <div id="success-details" class="text-gray-600"></div>
+                            <button id="copy-json"
+                                class="mt-4 bg-success hover:bg-green-700 text-white px-4 py-2 rounded flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                </svg>
+                                Copiar JSON
+                            </button>
+                        </div>
+                        <div id="error-state" class="hidden h-full">
+                            <div class="flex items-start mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-error mr-3 mt-1" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <div>
+                                    <h4 class="text-lg font-medium text-error mb-1">JSON Inválido</h4>
+                                    <p id="error-message" class="text-gray-600"></p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded">
+                                <h5 class="font-medium text-dark mb-2">Detalhes do Erro:</h5>
+                                <ul id="error-details" class="list-disc pl-5 text-gray-600 space-y-1"></ul>
+                            </div>
+                            <div class="mt-6">
+                                <h5 class="font-medium text-dark mb-2">Dicas para corrigir:</h5>
+                                <ul class="list-disc pl-5 text-gray-600 space-y-1">
+                                    <li>Verifique se todas as aspas estão fechadas</li>
+                                    <li>Certifique-se de que todas as chaves e colchetes estão balanceados</li>
+                                    <li>As vírgulas devem separar itens, mas não devem aparecer após o último item</li>
+                                    <li>Nomes de propriedades devem estar entre aspas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Features Section -->
+        <section class="mt-16">
+            <h2 class="text-2xl font-bold text-dark mb-8 text-center">Recursos do Validador JSON</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Validação em Tempo Real</h3>
+                    <p class="text-gray-600">Verificação instantânea da sintaxe JSON enquanto você digita, destacando
+                        erros e sugerindo correções.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <div
+                        class="bg-secondary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-secondary" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Formatação Automática</h3>
+                    <p class="text-gray-600">Organize seu JSON com indentação consistente e quebras de linha para melhor
+                        legibilidade com um único clique.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <div class="bg-success bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-success" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Detecção Inteligente</h3>
+                    <p class="text-gray-600">Identifica erros comuns como vírgulas extras, aspas ausentes e estruturas
+                        malformadas com precisão.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="mt-16 bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="bg-dark text-white px-6 py-4">
+                <h2 class="text-xl font-semibold">Sobre o JSON Validator Pro</h2>
+            </div>
+            <div class="p-6">
+                <div class="prose max-w-none text-gray-700">
+                    <p>O JSON Validator Pro é uma ferramenta online projetada para desenvolvedores e profissionais de TI
+                        que trabalham com dados no formato JSON. Nosso validador oferece uma maneira rápida e confiável
+                        de verificar a integridade de seus arquivos JSON, garantindo que estejam bem formados e prontos
+                        para uso em suas aplicações.</p>
+
+                    <h3 class="text-lg font-semibold mt-6 mb-2 text-dark">Como funciona</h3>
+                    <p>Nosso validador analisa seu código JSON em busca de erros de sintaxe, estrutura e formatação. Ele
+                        utiliza o parser JSON nativo do JavaScript para garantir compatibilidade com os padrões mais
+                        recentes, enquanto fornece feedback detalhado sobre quaisquer problemas encontrados.</p>
+
+                    <h3 class="text-lg font-semibold mt-6 mb-2 text-dark">Recursos principais</h3>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>Validação em tempo real enquanto você digita</li>
+                        <li>Formatação automática com indentação personalizável</li>
+                        <li>Destaque de erros com localização precisa</li>
+                        <li>Explicações claras sobre os erros encontrados</li>
+                        <li>Dicas para correção de problemas comuns</li>
+                        <li>Interface limpa e responsiva que funciona em qualquer dispositivo</li>
+                    </ul>
+
+                    <h3 class="text-lg font-semibold mt-6 mb-2 text-dark">Segurança e privacidade</h3>
+                    <p>Toda a validação ocorre diretamente no seu navegador. Seus dados JSON nunca são enviados para
+                        nossos servidores, garantindo total privacidade e segurança para suas informações confidenciais.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary mr-2" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <span class="font-medium">JSON Validator Pro</span>
+                </div>
+                <div class="text-gray-300 text-sm">
+                    &copy; 2025 JSON Validator Pro. Todos os direitos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const jsonInput = document.getElementById('json-input');
+            const formatBtn = document.getElementById('format-btn');
+            const clearBtn = document.getElementById('clear-btn');
+            const copyJsonBtn = document.getElementById('copy-json');
+            const errorMarker = document.getElementById('error-marker');
+
+            const initialState = document.getElementById('initial-state');
+            const successState = document.getElementById('success-state');
+            const errorState = document.getElementById('error-state');
+            const errorMessage = document.getElementById('error-message');
+            const errorDetails = document.getElementById('error-details');
+            const successDetails = document.getElementById('success-details');
+
+            // Criar container do toast se não existir
+            let toastContainer = document.getElementById('toast-container');
+            if (!toastContainer) {
+                toastContainer = document.createElement('div');
+                toastContainer.id = 'toast-container';
+                toastContainer.style.position = 'fixed';
+                toastContainer.style.bottom = '20px';
+                toastContainer.style.right = '20px';
+                toastContainer.style.display = 'flex';
+                toastContainer.style.flexDirection = 'column';
+                toastContainer.style.gap = '10px';
+                toastContainer.style.zIndex = '9999';
+                document.body.appendChild(toastContainer);
+            }
+
+            function showToast(message, type = 'info') {
+                const toast = document.createElement('div');
+                toast.textContent = message;
+                toast.style.backgroundColor = type === 'erro' ? '#e74c3c' : '#3498db';
+                toast.style.color = 'white';
+                toast.style.padding = '10px 16px';
+                toast.style.borderRadius = '4px';
+                toast.style.boxShadow = '0 2px 6px rgba(0,0,0,0.2)';
+                toast.style.fontFamily = 'sans-serif';
+                toast.style.fontSize = '14px';
+                toast.style.animation = 'slidein 0.3s ease-out';
+                toastContainer.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.remove();
+                }, 3000);
+            }
+
+            // Estilos da animação slidein
+            if (!document.getElementById('toast-style')) {
+                const styleEl = document.createElement('style');
+                styleEl.id = 'toast-style';
+                styleEl.textContent = `
+            @keyframes slidein {
+                from { opacity: 0; transform: translateY(20px) }
+                to { opacity: 1; transform: translateY(0) }
+            }
+        `;
+                document.head.appendChild(styleEl);
+            }
+
+            // Validate JSON on input
+            jsonInput.addEventListener('input', function () {
+                validateJSON(this.value);
+            });
+
+            // Format JSON button
+            formatBtn.addEventListener('click', function () {
+                try {
+                    const parsedJson = JSON.parse(jsonInput.value);
+                    jsonInput.value = JSON.stringify(parsedJson, null, 2);
+                    validateJSON(jsonInput.value);
+                } catch (e) {
+                    // If JSON is invalid, just validate to show error
+                    validateJSON(jsonInput.value);
+                }
+            });
+
+            // Clear button
+            clearBtn.addEventListener('click', function () {
+                jsonInput.value = '';
+                resetUI();
+            });
+
+            // Copy JSON button
+            copyJsonBtn.addEventListener('click', function () {
+                if (!navigator.clipboard) {
+                    showToast('Seu navegador não suporta copiar para a área de transferência', 'erro');
+                    return;
+                }
+
+                navigator.clipboard.writeText(jsonInput.value).then(function () {
+                    const originalText = copyJsonBtn.innerHTML;
+                    copyJsonBtn.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Copiado!
+            `;
+                    setTimeout(function () {
+                        copyJsonBtn.innerHTML = originalText;
+                    }, 2000);
+                    showToast('JSON copiado com sucesso!', 'info');
+                });
+            });
+
+            // Validate JSON function
+            function validateJSON(jsonString) {
+                if (!jsonString.trim()) {
+                    resetUI();
+                    return;
+                }
+
+                try {
+                    const parsedJson = JSON.parse(jsonString);
+
+                    // Calculate stats
+                    const jsonStats = analyzeJSON(parsedJson);
+
+                    // Show success state
+                    showSuccessState(jsonStats);
+
+                    // Hide error marker
+                    errorMarker.classList.add('hidden');
+
+                } catch (e) {
+                    showErrorState(e);
+                    highlightError(e, jsonString);
+                }
+            }
+
+            // Analyze JSON for stats
+            function analyzeJSON(parsedJson) {
+                let stats = {
+                    type: Array.isArray(parsedJson) ? 'Array' : 'Object',
+                    size: JSON.stringify(parsedJson).length,
+                    itemCount: 0,
+                    depth: 1
+                };
+
+                if (Array.isArray(parsedJson)) {
+                    stats.itemCount = parsedJson.length;
+                    stats.depth = getDepth(parsedJson);
+                } else if (typeof parsedJson === 'object' && parsedJson !== null) {
+                    stats.itemCount = Object.keys(parsedJson).length;
+                    stats.depth = getDepth(parsedJson);
+                }
+
+                return stats;
+            }
+
+            // Calculate depth of JSON structure
+            function getDepth(obj) {
+                let depth = 1;
+
+                if (typeof obj !== 'object' || obj === null) {
+                    return 0;
+                }
+
+                for (let key in obj) {
+                    if (obj.hasOwnProperty(key)) {
+                        const currentDepth = getDepth(obj[key]) + 1;
+                        if (currentDepth > depth) {
+                            depth = currentDepth;
+                        }
+                    }
+                }
+
+                return depth;
+            }
+
+            // Show success state
+            function showSuccessState(stats) {
+                initialState.classList.add('hidden');
+                errorState.classList.add('hidden');
+                successState.classList.remove('hidden');
+
+                let typeText = '';
+                if (stats.type === 'Array') {
+                    typeText = `Um array com ${stats.itemCount} ${stats.itemCount === 1 ? 'item' : 'itens'}`;
+                } else {
+                    typeText = `Um objeto com ${stats.itemCount} ${stats.itemCount === 1 ? 'propriedade' : 'propriedades'}`;
+                }
+
+                successDetails.innerHTML = `
+            <p class="mb-2">${typeText}</p>
+            <p class="text-sm">Profundidade: ${stats.depth} nível${stats.depth === 1 ? '' : 's'} | Tamanho: ${formatBytes(stats.size)}</p>
+        `;
+            }
+
+            // Format bytes
+            function formatBytes(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+
+            // Show error state
+            function showErrorState(error) {
+                initialState.classList.add('hidden');
+                successState.classList.add('hidden');
+                errorState.classList.remove('hidden');
+
+                errorMessage.textContent = error.message;
+                errorDetails.innerHTML = '';
+
+                if (error.message.includes('Unexpected token')) {
+                    errorDetails.innerHTML += `<li>Token inesperado encontrado na estrutura</li>`;
+                }
+                if (error.message.includes('Unexpected end of JSON input')) {
+                    errorDetails.innerHTML += `<li>O JSON parece estar incompleto</li>`;
+                }
+                if (error.message.includes('property name must be a string')) {
+                    errorDetails.innerHTML += `<li>Nomes de propriedades devem estar entre aspas</li>`;
+                }
+
+                errorDetails.innerHTML += `<li>Verifique se todas as chaves {}, colchetes [] e aspas estão balanceados</li>`;
+
+                showToast('Erro ao validar o JSON. Veja os detalhes.', 'erro');
+            }
+
+            // Highlight error in the editor
+            function highlightError(error, jsonString) {
+                try {
+                    if (!error.message.includes('position')) return;
+
+                    const positionMatch = error.message.match(/position (\d+)/);
+                    if (!positionMatch) return;
+
+                    const errorPos = parseInt(positionMatch[1]);
+
+                    const lines = jsonString.substr(0, errorPos).split('\n');
+                    const lineNumber = lines.length;
+                    const columnNumber = lines[lines.length - 1].length + 1;
+
+                    const lineHeight = 24; // Approximate line height in pixels
+                    const charWidth = 8.5; // Approximate character width in pixels
+
+                    const top = (lineNumber - 1) * lineHeight + 16;
+                    const left = (columnNumber - 1) * charWidth + 16;
+
+                    errorMarker.style.top = `${top}px`;
+                    errorMarker.style.left = `${left}px`;
+                    errorMarker.style.width = `${charWidth * 2}px`;
+                    errorMarker.style.height = `${lineHeight}px`;
+                    errorMarker.classList.remove('hidden');
+                } catch { }
+            }
+
+            // Reset UI to initial state
+            function resetUI() {
+                initialState.classList.remove('hidden');
+                successState.classList.add('hidden');
+                errorState.classList.add('hidden');
+                errorMarker.classList.add('hidden');
+            }
+
+            // Example JSON for first-time users
+            if (!localStorage.getItem('firstVisit')) {
+                jsonInput.value = `{
+  "nome": "João Silva",
+  "idade": 30,
+  "casado": true,
+  "endereco": {
+    "rua": "Av. Paulista",
+    "numero": 1000,
+    "cidade": "São Paulo"
+  },
+  "telefones": [
+    "11-98765-4321",
+    "11-1234-5678"
+  ]
+}`;
+                localStorage.setItem('firstVisit', 'true');
+                validateJSON(jsonInput.value);
+            }
+        });
+
+    </script>
+</body>
+
+</html>
