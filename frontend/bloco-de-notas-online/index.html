@@ -18,7 +18,7 @@
         content="NotaWeb é um bloco de notas online gratuito do Convertil para você anotar e salvar ideias rapidamente. Acesse agora!">
     <meta name="author" content="Convertil">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://convertil.com/public/bloco-de-notas-online/index.html">
+    <link rel="canonical" href="https://convertil.com/bloco-de-notas-online/index.html">
 
     <!-- Open Graph (para redes sociais) -->
     <meta property="og:title" content="NotaWeb - Bloco de Notas Online | Convertil">
@@ -91,7 +91,7 @@
             </div>
             <nav>
                 <ul class="flex space-x-6">
-                    <li><a href="#" id="backBtn" class="hover:text-secondary transition-colors">Voltar</a></li>
+                    <li><a href="https://convertil.com/" class="hover:text-secondary transition-colors">Voltar</a></li>
                     <li><a href="#" id="aboutBtn" class="hover:text-secondary transition-colors">Sobre</a></li>
                 </ul>
             </nav>
@@ -229,7 +229,6 @@
             const aboutModal = document.getElementById('aboutModal');
             const closeAboutModal = document.getElementById('closeAboutModal');
             const closeAboutModalBtn = document.getElementById('closeAboutModalBtn');
-            const backBtn = document.getElementById('backBtn');
 
             // State
             let currentNoteId = null;
@@ -248,10 +247,7 @@
             aboutBtn.addEventListener('click', showAboutModal);
             closeAboutModal.addEventListener('click', hideAboutModal);
             closeAboutModalBtn.addEventListener('click', hideAboutModal);
-            backBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                window.history.back();
-            });
+            
 
             // Functions
             function updateCounts() {
