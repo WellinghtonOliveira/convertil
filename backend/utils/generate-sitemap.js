@@ -18,7 +18,7 @@ function getIndexPages(dir, basePath = "") {
 
       if (fs.existsSync(indexHtmlPath)) {
         const cleanPath = relativePath.replace(/\\/g, "/");
-        urls.push(`${baseUrl}/public/${cleanPath}/`);
+        urls.push(`${baseUrl}/${cleanPath}/`);
       }
 
       urls = urls.concat(getIndexPages(itemPath, relativePath));

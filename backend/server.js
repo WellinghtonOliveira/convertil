@@ -5,7 +5,7 @@ const verificadorRoutes = require('./routes/verificadorRoutes')
 const generateSitemap = require('./utils/generate-sitemap')// chama o sitemap
 generateSitemap()
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8080
 
 const app = express()
 app.use(cors())
