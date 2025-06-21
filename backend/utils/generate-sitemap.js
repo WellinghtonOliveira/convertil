@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const frontendDir = path.join(__dirname, "../../frontend");
-const publicDir = path.join(frontendDir, "public");
+const publicDir = path.join(frontendDir, "/");
 const baseUrl = "https://convertil.com";
 
 function getIndexPages(dir, basePath = "") {
