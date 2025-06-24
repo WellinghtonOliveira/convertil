@@ -300,46 +300,47 @@
             button.textContent = 'Analisando...';
             button.disabled = true;
 
-            const apiKey = 'AIzaSyCbvmTrUDfRe0k-77dYp8SkzH7uILSXNJ0';
-            const apiEndpoint = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
-            const url = new URL(apiEndpoint);
+            const apiKey = 'AIzaSyA0EqtqtjlUng3Yt_cWNlfWhDxJP_QkvoQ';
+            const url = new URL('https://www.googleapis.com/pagespeedonline/v5/runPagespeed');
             url.searchParams.set('url', targetUrl);
-            url.searchParams.set('category', 'SEO');
-            url.searchParams.append('category', 'performance');
             url.searchParams.set('key', apiKey);
+            url.searchParams.append('category', 'performance');
+            url.searchParams.append('category', 'seo');
 
             try {
                 const response = await fetch(url);
                 if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+
                 const json = await response.json();
-
+                
                 const audits = json.lighthouseResult?.audits ?? {};
-                const seo = json.lighthouseResult?.categories?.seo?.score ?? null;
+                const categories = json.lighthouseResult?.categories ?? {};
+                
+                // Pontuação SEO (0-1 convertido para 0-100)
+                const rawScore = categories.seo?.score;
+                seoScore.textContent = typeof rawScore === 'number' ? Math.round(rawScore * 100) : 'Indisponível';
+                
+                // Título (audit correto: document-title)
+                const titleAudit = audits['document-title'];
+                const title = titleAudit?.displayValue?.trim();
+                console.log(titleAudit);
+                console.log(title);
+                seoTitle.textContent = title || (titleAudit?.score === 0 ? 'Não encontrado' : 'Indisponível');
 
-                // Fallbacks inteligentes para título e descrição
-                const titleRaw = audits['title']?.title ?? "";
-                const descriptionRaw = audits['meta-description']?.title ?? "";
+                // Meta descrição
+                const descriptionAudit = audits['meta-description'];
+                const description = descriptionAudit?.displayValue?.trim();
+                seoDescription.textContent = description || (descriptionAudit?.score === 0 ? 'Não encontrada' : 'Indisponível');
 
-                const title = audits['title']?.displayValue || (
-                    titleRaw.toLowerCase().includes('não possui') ? "Não encontrado" : "Possui título"
-                );
-
-                const description = audits['meta-description']?.displayValue || (
-                    descriptionRaw.toLowerCase().includes('não possui') ? "Não encontrada" : "Possui meta descrição"
-                );
-
-                seoScore.textContent = seo ? Math.round(seo * 100) : "Indisponível";
-                seoTitle.textContent = title;
-                seoDescription.textContent = description;
-
-                // Performance
-                fcp.textContent = audits['first-contentful-paint']?.displayValue || "N/A";
-                speedIndex.textContent = audits['speed-index']?.displayValue || "N/A";
-                tti.textContent = audits['interactive']?.displayValue || "N/A";
+                // Performance (First Contentful Paint, Speed Index, Time to Interactive)
+                const safeValue = v => typeof v === 'string' && v.trim() !== '' ? v : 'Indisponível';
+                fcp.textContent = safeValue(audits['first-contentful-paint']?.displayValue);
+                speedIndex.textContent = safeValue(audits['speed-index']?.displayValue);
+                tti.textContent = safeValue(audits['interactive']?.displayValue);
 
                 resultBox.classList.remove('hidden');
-            } catch (error) {
-                console.error('Erro ao buscar dados da API:', error);
+            } catch (err) {
+                console.error('Erro ao buscar dados:', err);
                 seoScore.textContent = "Erro";
                 seoTitle.textContent = "Erro ao obter título";
                 seoDescription.textContent = "Erro ao obter descrição";
@@ -353,6 +354,8 @@
             button.disabled = false;
         });
     </script>
+
+
 
 </body>
 
