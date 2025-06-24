@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Analyzer Pro | Ferramenta Avançada de Análise SEO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563EB',
+                        secondary: '#F59E0B',
+                        light: '#F9FAFB',
+                        dark: '#1F2937',
+                        danger: '#EF4444',
+                        success: '#10B981'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563EB 0%, #10B981 100%);
+        }
+
+        .seo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .analyze-btn {
+            transition: all 0.3s ease;
+        }
+
+        .analyze-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(37, 99, 235, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light font-sans antialiased">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">SA</span>
+                </div>
+                <h1 class="text-xl font-bold text-dark">SEO Analyzer Pro</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#" class="text-dark hover:text-primary font-medium transition-colors">Voltar</a>
+                <a href="#about" class="text-dark hover:text-primary font-medium transition-colors">Sobre</a>
+            </nav>
+            <button class="md:hidden text-dark">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">Analise e Otimize seu SEO em Segundos</h2>
+                <p class="text-lg md:text-xl mb-8">Nossa ferramenta avançada analisa seu site e fornece recomendações
+                    personalizadas para melhorar seu ranking nos mecanismos de busca.</p>
+                <div class="bg-white rounded-lg p-1 max-w-2xl mx-auto flex">
+                    <input type="text" placeholder="Insira a URL do seu site..."
+                        class="flex-grow px-4 py-3 rounded-l focus:outline-none text-dark">
+                    <button
+                        class="bg-primary text-white px-6 py-3 rounded-r font-semibold analyze-btn">Analisar</button>
+
+                </div>
+
+
+                <div id="seo-result"
+                    class="mt-6 hidden bg-white p-4 rounded-lg shadow text-dark text-left max-w-2xl mx-auto space-y-2">
+                    <h3 class="text-xl font-semibold mb-2">Resultado da Análise:</h3>
+                    <p><strong>Pontuação SEO:</strong> <span id="seo-score"></span>/100</p>
+                    <p><strong>Título:</strong> <span id="seo-title"></span></p>
+                    <p><strong>Meta Descrição:</strong> <span id="seo-description"></span></p>
+                    <hr class="my-4">
+                    <h3 class="text-lg font-semibold">Performance</h3>
+                    <p><strong>First Contentful Paint:</strong> <span id="fcp"></span></p>
+                    <p><strong>Speed Index:</strong> <span id="speed-index"></span></p>
+                    <p><strong>Time to Interactive:</strong> <span id="tti"></span></p>
+                </div>
+
+
+
+                <p class="mt-4 text-sm opacity-80">Exemplo: https://seusite.com</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-dark mb-12">Recursos Poderosos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-light rounded-xl p-6 seo-card transition-all duration-300">
+                    <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-dark mb-3">Análise Completa</h3>
+                    <p class="text-gray-600">Obtenha uma análise detalhada de todos os aspectos SEO do seu site, desde
+                        tags meta até velocidade de carregamento.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-light rounded-xl p-6 seo-card transition-all duration-300">
+                    <div
+                        class="w-12 h-12 rounded-full bg-secondary bg-opacity-10 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-secondary" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-dark mb-3">Recomendações Personalizadas</h3>
+                    <p class="text-gray-600">Receba sugestões específicas para melhorar seu SEO baseadas nas melhores
+                        práticas do mercado.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-light rounded-xl p-6 seo-card transition-all duration-300">
+                    <div class="w-12 h-12 rounded-full bg-success bg-opacity-10 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-success" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-dark mb-3">Relatórios Detalhados</h3>
+                    <p class="text-gray-600">Gere relatórios completos que você pode compartilhar com sua equipe ou
+                        clientes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-dark mb-12">Como Funciona</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center mb-12">
+                    <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
+                        <div
+                            class="w-20 h-20 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold">
+                            1</div>
+                    </div>
+                    <div class="md:w-2/3">
+                        <h3 class="text-xl font-semibold text-dark mb-3">Insira sua URL</h3>
+                        <p class="text-gray-600">Digite o endereço do site que deseja analisar. Nosso sistema irá
+                            escanear todas as páginas e identificar oportunidades de melhoria.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center mb-12">
+                    <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center order-1 md:order-none">
+                        <div
+                            class="w-20 h-20 rounded-full bg-secondary text-white flex items-center justify-center text-2xl font-bold">
+                            2</div>
+                    </div>
+                    <div class="md:w-2/3 order-0 md:order-none">
+                        <h3 class="text-xl font-semibold text-dark mb-3">Análise Automática</h3>
+                        <p class="text-gray-600">Nosso algoritmo avançado verifica mais de 200 fatores de SEO em tempo
+                            real, incluindo desempenho, conteúdo, links e estrutura técnica.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
+                        <div
+                            class="w-20 h-20 rounded-full bg-success text-white flex items-center justify-center text-2xl font-bold">
+                            3</div>
+                    </div>
+                    <div class="md:w-2/3">
+                        <h3 class="text-xl font-semibold text-dark mb-3">Receba Seu Relatório</h3>
+                        <p class="text-gray-600">Obtenha um relatório completo com pontuação SEO, problemas
+                            identificados e recomendações acionáveis para melhorar seu ranking.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Pronto para Impulsionar seu SEO?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Comece agora e descubra como melhorar a visibilidade do seu site
+                nos mecanismos de busca.</p>
+            <button
+                class="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg analyze-btn pulse-animation">Analisar
+                Meu Site Gratuitamente</button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-center text-dark mb-12">Sobre o SEO Analyzer Pro</h2>
+                <div class="prose max-w-none text-gray-600">
+                    <p>O SEO Analyzer Pro é uma ferramenta avançada desenvolvida para ajudar profissionais de marketing
+                        digital, desenvolvedores web e proprietários de sites a otimizar sua presença online.</p>
+
+                    <p>Nossa missão é democratizar o acesso a ferramentas profissionais de análise SEO, fornecendo
+                        insights valiosos que antes estavam disponíveis apenas em soluções empresariais caras.</p>
+
+                    <h3 class="text-xl font-semibold text-dark mt-8">Como Analisamos Seu Site</h3>
+                    <p>Utilizamos algoritmos sofisticados que avaliam:</p>
+                    <ul>
+                        <li>Fatores técnicos (velocidade, mobile-friendliness, indexabilidade)</li>
+                        <li>Otimização de conteúdo (palavras-chave, meta tags, estrutura de cabeçalhos)</li>
+                        <li>Autoridade do site (backlinks, menções)</li>
+                        <li>Experiência do usuário (design, navegação, engajamento)</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-dark mt-8">Nossa Equipe</h3>
+                    <p>Somos um grupo de especialistas em SEO, desenvolvedores web e cientistas de dados apaixonados por
+                        ajudar empresas a serem encontradas online.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">SA</span>
+                        </div>
+                        <span class="font-bold">SEO Analyzer Pro</span>
+                    </div>
+                </div>
+                <div class="text-sm text-gray-400">
+                    &copy; 2025 SEO Analyzer Pro. Todos os direitos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.analyze-btn').addEventListener('click', async function () {
+            const urlInput = document.querySelector('input[type="text"]');
+            const resultBox = document.getElementById('seo-result');
+            const seoScore = document.getElementById('seo-score');
+            const seoTitle = document.getElementById('seo-title');
+            const seoDescription = document.getElementById('seo-description');
+            const fcp = document.getElementById('fcp');
+            const speedIndex = document.getElementById('speed-index');
+            const tti = document.getElementById('tti');
+            const button = this;
+
+            const targetUrl = urlInput.value.trim();
+            if (!targetUrl || !targetUrl.startsWith('http')) {
+                urlInput.classList.add("border", "border-red-500");
+                return;
+            } else {
+                urlInput.classList.remove("border", "border-red-500");
+            }
+
+            button.textContent = 'Analisando...';
+            button.disabled = true;
+
+            const apiKey = 'AIzaSyCbvmTrUDfRe0k-77dYp8SkzH7uILSXNJ0';
+            const apiEndpoint = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
+            const url = new URL(apiEndpoint);
+            url.searchParams.set('url', targetUrl);
+            url.searchParams.set('category', 'SEO');
+            url.searchParams.append('category', 'performance');
+            url.searchParams.set('key', apiKey);
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+                const json = await response.json();
+
+                const audits = json.lighthouseResult?.audits ?? {};
+                const seo = json.lighthouseResult?.categories?.seo?.score ?? null;
+
+                // Fallbacks inteligentes para título e descrição
+                const titleRaw = audits['title']?.title ?? "";
+                const descriptionRaw = audits['meta-description']?.title ?? "";
+
+                const title = audits['title']?.displayValue || (
+                    titleRaw.toLowerCase().includes('não possui') ? "Não encontrado" : "Possui título"
+                );
+
+                const description = audits['meta-description']?.displayValue || (
+                    descriptionRaw.toLowerCase().includes('não possui') ? "Não encontrada" : "Possui meta descrição"
+                );
+
+                seoScore.textContent = seo ? Math.round(seo * 100) : "Indisponível";
+                seoTitle.textContent = title;
+                seoDescription.textContent = description;
+
+                // Performance
+                fcp.textContent = audits['first-contentful-paint']?.displayValue || "N/A";
+                speedIndex.textContent = audits['speed-index']?.displayValue || "N/A";
+                tti.textContent = audits['interactive']?.displayValue || "N/A";
+
+                resultBox.classList.remove('hidden');
+            } catch (error) {
+                console.error('Erro ao buscar dados da API:', error);
+                seoScore.textContent = "Erro";
+                seoTitle.textContent = "Erro ao obter título";
+                seoDescription.textContent = "Erro ao obter descrição";
+                fcp.textContent = "Erro";
+                speedIndex.textContent = "Erro";
+                tti.textContent = "Erro";
+                resultBox.classList.remove('hidden');
+            }
+
+            button.textContent = 'Analisar';
+            button.disabled = false;
+        });
+    </script>
+
+</body>
+
+</html>
