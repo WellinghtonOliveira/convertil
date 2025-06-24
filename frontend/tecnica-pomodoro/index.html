@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX61BYEH4E"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RX61BYEH4E');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Técnica Pomodoro – Aumente seu foco | Convertil</title>
+
+    <!-- Meta tags SEO -->
+    <meta name="description"
+        content="Aprenda como usar a Técnica Pomodoro para melhorar sua produtividade com períodos de foco e pausas. Ideal para estudos e trabalho.">
+    <meta name="keywords" content="Técnica Pomodoro, produtividade, foco, tempo, estudo, trabalho, método Pomodoro">
+    <meta name="author" content="Convertil.com">
+
+    <!-- Meta Open Graph (Facebook e redes sociais) -->
+    <meta property="og:title" content="Técnica Pomodoro – Aumente seu foco | Convertil">
+    <meta property="og:description"
+        content="Melhore sua concentração usando a Técnica Pomodoro. 25 minutos de foco, 5 minutos de pausa. Simples e eficaz.">
+    <meta property="og:image" content="https://convertil.com/assets/logo.png">
+    <meta property="og:url" content="https://convertil.com/tecnica-pomodoro/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Técnica Pomodoro – Aumente seu foco | Convertil">
+    <meta name="twitter:description"
+        content="Use a Técnica Pomodoro para focar mais e render melhor nos estudos ou no trabalho.">
+    <meta name="twitter:image" content="https://convertil.com/assets/logo.png">
+
+    <!-- Favicon e fontes -->
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        .focus-bg {
+            background-color: #2563EB;
+        }
+
+        .short-break-bg {
+            background-color: #10B981;
+        }
+
+        .long-break-bg {
+            background-color: #F59E0B;
+        }
+
+        .pause-bg {
+            background-color: #EF4444;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
+                    <span class="text-white font-bold">FF</span>
+                </div>
+                <h1 class="text-xl font-bold text-gray-800">FocusFlow</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="https://convertil.com/" class="text-gray-600 hover:text-blue-600 transition">Voltar</a>
+                    </li>
+                    <li><a href="#about" class="text-gray-600 hover:text-blue-600 transition">Sobre</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <div class="container mx-auto px-4 py-12">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Técnica Pomodoro</h2>
+                <p class="text-gray-600">Aumente sua produtividade trabalhando em intervalos cronometrados. 25 minutos
+                    de foco, seguidos de 5 minutos de pausa.</p>
+            </div>
+
+            <!-- Timer Section -->
+            <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden mb-12">
+                <div class="p-8">
+                    <!-- Timer Mode Selector -->
+                    <div class="flex justify-center space-x-4 mb-8">
+                        <button id="focus-btn"
+                            class="px-4 py-2 rounded-lg bg-blue-600 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            Foco
+                        </button>
+                        <button id="short-break-btn"
+                            class="px-4 py-2 rounded-lg bg-green-500 text-white font-medium focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                            Pausa Curta
+                        </button>
+                        <button id="long-break-btn"
+                            class="px-4 py-2 rounded-lg bg-yellow-500 text-white font-medium focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
+                            Pausa Longa
+                        </button>
+                    </div>
+
+                    <!-- Circular Timer -->
+                    <div class="relative w-64 h-64 mx-auto mb-8">
+                        <svg class="w-full h-full" viewBox="0 0 100 100">
+                            <circle class="text-gray-200" stroke-width="8" stroke="currentColor" fill="transparent"
+                                r="40" cx="50" cy="50" />
+                            <circle id="progress-ring" class="progress-ring__circle text-blue-600" stroke-width="8"
+                                stroke-linecap="round" stroke="currentColor" fill="transparent" r="40" cx="50"
+                                cy="50" />
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center flex-col">
+                            <span id="time-display" class="text-4xl font-bold text-gray-800">25:00</span>
+                            <span id="timer-state" class="text-gray-500 uppercase text-sm mt-2">Pronto</span>
+                        </div>
+                    </div>
+
+                    <!-- Timer Controls -->
+                    <div class="flex justify-center space-x-4">
+                        <button id="start-btn"
+                            class="px-6 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">
+                            Iniciar
+                        </button>
+                        <button id="pause-btn"
+                            class="px-6 py-3 rounded-lg bg-gray-200 text-gray-800 font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition hidden">
+                            Pausar
+                        </button>
+                        <button id="reset-btn"
+                            class="px-6 py-3 rounded-lg bg-gray-200 text-gray-800 font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition">
+                            Reiniciar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pomodoro Counter -->
+            <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden mb-12">
+                <div class="p-6">
+                    <h3 class="text-lg font-medium text-gray-800 mb-4">Sessões Concluídas</h3>
+                    <div class="flex items-center justify-center space-x-2">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                            <span id="pomodoro-count" class="text-blue-600 font-medium">0</span>
+                        </div>
+                        <span class="text-gray-600">/</span>
+                        <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+                            <span class="text-gray-600 font-medium">4</span>
+                        </div>
+                        <span class="text-gray-600 ml-2">Pomodoros</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <section id="about" class="max-w-3xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Sobre a Técnica Pomodoro</h2>
+                    <div class="space-y-4 text-gray-600">
+                        <p>A Técnica Pomodoro é um método de gerenciamento de tempo desenvolvido por Francesco Cirillo
+                            no final dos anos 1980. A técnica usa um cronômetro para dividir o trabalho em intervalos,
+                            tradicionalmente de 25 minutos de duração, separados por breves pausas.</p>
+
+                        <h3 class="text-lg font-medium text-gray-800 mt-6">Como funciona:</h3>
+                        <ol class="list-decimal pl-5 space-y-2">
+                            <li>Escolha uma tarefa para realizar</li>
+                            <li>Ajuste o timer para 25 minutos (um Pomodoro)</li>
+                            <li>Trabalhe na tarefa até o timer tocar</li>
+                            <li>Faça uma pausa curta (5 minutos)</li>
+                            <li>A cada 4 Pomodoros, faça uma pausa mais longa (15-30 minutos)</li>
+                        </ol>
+
+                        <h3 class="text-lg font-medium text-gray-800 mt-6">Benefícios:</h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Aumento da produtividade e foco</li>
+                            <li>Melhor gestão do tempo</li>
+                            <li>Redução da fadiga mental</li>
+                            <li>Maior conscientização sobre o uso do tempo</li>
+                            <li>Alívio da ansiedade relacionada ao tempo</li>
+                        </ul>
+
+                        <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                            <h4 class="font-medium text-blue-800 mb-2">Dica profissional:</h4>
+                            <p class="text-blue-700">Use as pausas para se alongar, beber água ou simplesmente descansar
+                                os olhos. Evite verificar e-mails ou redes sociais durante as pausas para manter sua
+                                mente fresca.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 FocusFlow - Técnica Pomodoro. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <style>
+    @keyframes blinkRed {
+        0%, 100% { background-color: #EF4444; }
+        50% { background-color: #ffffff; }
+    }
+
+    @keyframes blinkGreen {
+        0%, 100% { background-color: #10B981; }
+        50% { background-color: #ffffff; }
+    }
+
+    .blinking-red {
+        animation: blinkRed 0.5s ease-in-out 3;
+    }
+
+    .blinking-green {
+        animation: blinkGreen 0.5s ease-in-out 3;
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let timer
+    let totalSeconds = .1 * 60 // Tempo inicial para teste 25 mnt
+    let remainingSeconds = totalSeconds
+    let isRunning = false
+    let currentMode = 'focus'
+    let pomodoroCount = 0
+
+    const timeDisplay = document.getElementById('time-display')
+    const timerState = document.getElementById('timer-state')
+    const progressRing = document.getElementById('progress-ring')
+    const startBtn = document.getElementById('start-btn')
+    const pauseBtn = document.getElementById('pause-btn')
+    const resetBtn = document.getElementById('reset-btn')
+    const focusBtn = document.getElementById('focus-btn')
+    const shortBreakBtn = document.getElementById('short-break-btn')
+    const longBreakBtn = document.getElementById('long-break-btn')
+    const pomodoroCountElement = document.getElementById('pomodoro-count')
+
+    const radius = progressRing.r.baseVal.value
+    const circumference = 2 * Math.PI * radius
+    progressRing.style.strokeDasharray = circumference
+    progressRing.style.strokeDashoffset = circumference
+
+    function updateDisplay() {
+        const minutes = Math.floor(remainingSeconds / 60)
+        const seconds = remainingSeconds % 60
+        timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+        const progress = circumference - (remainingSeconds / totalSeconds) * circumference
+        progressRing.style.strokeDashoffset = progress
+    }
+
+    function startTimer() {
+        if (!isRunning) {
+            isRunning = true
+            startBtn.classList.add('hidden')
+            pauseBtn.classList.remove('hidden')
+            timerState.textContent = currentMode === 'focus' ? 'Focando' : 'Em pausa'
+
+            timer = setInterval(() => {
+                remainingSeconds--
+                updateDisplay()
+
+                if (remainingSeconds <= 0) {
+                    clearInterval(timer)
+                    isRunning = false
+                    timerState.textContent = 'Concluído'
+
+                    if (currentMode === 'focus') {
+                        document.body.classList.add('blinking-red')
+                        pomodoroCount++
+                        pomodoroCountElement.textContent = pomodoroCount
+
+                        setTimeout(() => {
+                            document.body.classList.remove('blinking-red')
+                            setMode('shortBreak')
+                            startTimer()
+                        }, 1500)
+
+                    } else if (currentMode === 'shortBreak' || currentMode === 'longBreak') {
+                        document.body.classList.add('blinking-green')
+
+                        setTimeout(() => {
+                            document.body.classList.remove('blinking-green')
+                            setMode('focus')
+                            startTimer()
+                        }, 1500)
+                    }
+                }
+            }, 1000)
+        }
+    }
+
+    function pauseTimer() {
+        clearInterval(timer)
+        isRunning = false
+        startBtn.classList.remove('hidden')
+        pauseBtn.classList.add('hidden')
+        timerState.textContent = 'Pausado'
+    }
+
+    function resetTimer() {
+        clearInterval(timer)
+        isRunning = false
+        remainingSeconds = totalSeconds
+        updateDisplay()
+        startBtn.classList.remove('hidden')
+        pauseBtn.classList.add('hidden')
+        timerState.textContent = 'Pronto'
+        document.body.classList.remove('blinking-red', 'blinking-green')
+    }
+
+    function setMode(mode) {
+        currentMode = mode
+        if (isRunning) pauseTimer()
+
+        document.body.classList.remove('focus-bg', 'short-break-bg', 'long-break-bg', 'blinking-red', 'blinking-green')
+
+        switch (mode) {
+            case 'focus':
+                totalSeconds = 25 * 60
+                document.body.classList.add('focus-bg')
+                break
+            case 'shortBreak':
+                totalSeconds = 5 * 60
+                document.body.classList.add('short-break-bg')
+                break
+            case 'longBreak':
+                totalSeconds = 15 * 60
+                document.body.classList.add('long-break-bg')
+                break
+        }
+
+        remainingSeconds = totalSeconds
+        updateDisplay()
+    }
+
+    startBtn.addEventListener('click', startTimer)
+    pauseBtn.addEventListener('click', pauseTimer)
+    resetBtn.addEventListener('click', resetTimer)
+    focusBtn.addEventListener('click', () => setMode('focus'))
+    shortBreakBtn.addEventListener('click', () => setMode('shortBreak'))
+    longBreakBtn.addEventListener('click', () => setMode('longBreak'))
+
+    updateDisplay()
+})
+</script>
+
+</body>
+
+</html>
