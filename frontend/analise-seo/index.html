@@ -1,10 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 
 <head>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX61BYEH4E"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RX61BYEH4E');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEO Analyzer Pro | Ferramenta Avançada de Análise SEO</title>
+
+    <!-- Título SEO (máx. ~60 caracteres) -->
+    <title>Analisador SEO Avançado | Convertil.com</title>
+
+    <!-- Meta Description (máx. ~155 caracteres) -->
+    <meta name="description"
+        content="Use o Analisador SEO da Convertil.com para verificar desempenho, palavras-chave, título, descrição e outros fatores importantes de SEO.">
+
+    <!-- Canonical para evitar conteúdo duplicado -->
+    <link rel="canonical" href="https://convertil.com/analise-seo/">
+
+    <!-- Favicon -->
+    <link rel="icon" href="./favicon.png" type="image/png">
+
+    <!-- Open Graph (para Facebook, LinkedIn etc) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://convertil.com/analise-seo/">
+    <meta property="og:title" content="Analisador SEO Avançado | Convertil.com">
+    <meta property="og:description"
+        content="Ferramenta gratuita de análise SEO para melhorar o posicionamento do seu site nos mecanismos de busca.">
+    <meta property="og:image" content="https://convertil.com/assets/logo.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Analisador SEO Avançado | Convertil.com">
+    <meta name="twitter:description"
+        content="Ferramenta gratuita de análise SEO para melhorar o posicionamento do seu site nos mecanismos de busca.">
+    <meta name="twitter:image" content="https://convertil.com/assets/logo.png">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -22,6 +62,8 @@
             }
         }
     </script>
+
+    <!-- CSS interno (mantenha organizado e evite excesso no head) -->
     <style>
         @media (max-width: 380px) {
             #container-analise {
@@ -79,7 +121,8 @@
 
             <!-- Menu desktop -->
             <nav class="hidden md:flex space-x-6">
-                <a href="https://convertil.com/" class="text-dark hover:text-primary font-medium transition-colors">Voltar</a>
+                <a href="https://convertil.com/"
+                    class="text-dark hover:text-primary font-medium transition-colors">Voltar</a>
                 <a href="#about" class="text-dark hover:text-primary font-medium transition-colors">Sobre</a>
             </nav>
 
@@ -337,7 +380,7 @@
             button.textContent = 'Analisando...';
 
             try {
-                const res = await fetch(`https://megasitebackend.onrender.com/get-metadata?url=${encodeURIComponent(targetUrl)}`); // TODO lembrar de mudar a requisição
+                const res = await fetch(`https://megasitebackend.onrender.com/get-metadata?url=${encodeURIComponent(targetUrl)}`);
                 const data = await res.json();
                 const audits = data.audits || {};
                 const categories = data.categories || {};

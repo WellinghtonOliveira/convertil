@@ -17,6 +17,7 @@ const dados = [
     // marketing
     { category: 'marketing', name: 'Gerador de Títulos Atrativos', description: 'Crie títulos irresistíveis para seus vídeos que despertam emoção ou curiosidade.', link: './gerador-de-titulos/' },
     { category: 'marketing', name: 'Contador de Caracteres e Palavras', description: 'Conta elementos de um texto: palavras, letras, espaços e linhas usadas.', link: './contador-de-caracteres-e-palavras/' },
+    { category: 'marketing', name: 'Análise SEO', description: 'Conjunto de práticas que visam melhorar a visibilidade de um site nos resultados de pesquisa orgânica dos motores de busca.', link: './analise-seo/' },
 
 
     // finance
