@@ -23,6 +23,12 @@
         }
     </script>
     <style>
+        @media (max-width: 380px) {
+            #container-analise {
+                flex-direction: column;
+            }
+        }
+
         .gradient-bg {
             background: linear-gradient(135deg, #2563EB 0%, #10B981 100%);
         }
@@ -62,7 +68,7 @@
 
 <body class="bg-light font-sans antialiased">
     <!-- Header -->
-    <header class="bg-white shadow-sm">
+    <header class="bg-white shadow-sm relative">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
@@ -70,18 +76,30 @@
                 </div>
                 <h1 class="text-xl font-bold text-dark">SEO Analyzer Pro</h1>
             </div>
+
+            <!-- Menu desktop -->
             <nav class="hidden md:flex space-x-6">
-                <a href="#" class="text-dark hover:text-primary font-medium transition-colors">Voltar</a>
+                <a href="https://convertil.com/" class="text-dark hover:text-primary font-medium transition-colors">Voltar</a>
                 <a href="#about" class="text-dark hover:text-primary font-medium transition-colors">Sobre</a>
             </nav>
-            <button class="md:hidden text-dark">
+
+            <!-- Botão hamburguer -->
+            <button id="hamburguer-btn" class="md:hidden text-dark z-50">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
         </div>
+
+        <!-- Menu mobile (escondido inicialmente) -->
+        <nav id="mobile-menu"
+            class="absolute top-full left-0 w-full bg-white shadow-md px-4 py-4 space-y-2 hidden md:hidden z-40">
+            <a href="#" class="block text-dark hover:text-primary font-medium transition-colors">Voltar</a>
+            <a href="#about" class="block text-dark hover:text-primary font-medium transition-colors">Sobre</a>
+        </nav>
     </header>
+
 
     <!-- Hero Section -->
     <section class="gradient-bg text-white py-16 md:py-24">
@@ -90,10 +108,10 @@
                 <h2 class="text-3xl md:text-5xl font-bold mb-6">Analise e Otimize seu SEO em Segundos</h2>
                 <p class="text-lg md:text-xl mb-8">Nossa ferramenta avançada analisa seu site e fornece recomendações
                     personalizadas para melhorar seu ranking nos mecanismos de busca.</p>
-                <div class="bg-white rounded-lg p-1 max-w-2xl mx-auto flex">
+                <div id="container-analise" class="bg-white rounded-lg p-1 max-w-2xl mx-auto flex">
                     <input type="text" placeholder="Insira a URL do seu site..."
                         class="flex-grow px-4 py-3 rounded-l focus:outline-none text-dark">
-                    <button
+                    <button id="analisar"
                         class="bg-primary text-white px-6 py-3 rounded-r font-semibold analyze-btn">Analisar</button>
 
                 </div>
@@ -107,10 +125,30 @@
                     <p><strong>Meta Descrição:</strong> <span id="seo-description"></span></p>
                     <hr class="my-4">
                     <h3 class="text-lg font-semibold">Performance</h3>
+                    <p><strong>Largest Contentful Paint:</strong> <span id="lcp"></span></p>
+                    <p><strong>Total Blocking Time:</strong> <span id="tbt"></span></p>
+                    <p><strong>Cumulative Layout Shift:</strong> <span id="cls"></span></p>
+                    <p><strong>Viewport configurado:</strong> <span id="viewport"></span></p>
+                    <p><strong>Links descritivos:</strong> <span id="link-text"></span></p>
+                    <p><strong>Imagens com ALT:</strong> <span id="image-alt"></span></p>
                     <p><strong>First Contentful Paint:</strong> <span id="fcp"></span></p>
                     <p><strong>Speed Index:</strong> <span id="speed-index"></span></p>
                     <p><strong>Time to Interactive:</strong> <span id="tti"></span></p>
                 </div>
+
+                <div id="checklist-box" class="hidden">
+                    <hr class="my-4">
+                    <h3 class="text-lg font-semibold">Checklist Visual de SEO</h3>
+                    <ul id="seo-checklist" class="space-y-2 text-sm max-w-2xl mx-auto"></ul>
+                </div>
+
+                <hr class="my-4 hidden" id="checklist-divider">
+
+                <div id="tips-box" class="hidden">
+                    <h3 class="text-lg font-semibold">Recomendações de SEO</h3>
+                    <ul id="seo-tips" class="space-y-3 text-sm text-gray-800 max-w-2xl mx-auto"></ul>
+                </div>
+
 
 
 
@@ -189,17 +227,19 @@
                 </div>
 
                 <div class="flex flex-col md:flex-row items-center mb-12">
-                    <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center order-1 md:order-none">
+                    <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
                         <div
                             class="w-20 h-20 rounded-full bg-secondary text-white flex items-center justify-center text-2xl font-bold">
-                            2</div>
+                            2
+                        </div>
                     </div>
-                    <div class="md:w-2/3 order-0 md:order-none">
+                    <div class="md:w-2/3">
                         <h3 class="text-xl font-semibold text-dark mb-3">Análise Automática</h3>
                         <p class="text-gray-600">Nosso algoritmo avançado verifica mais de 200 fatores de SEO em tempo
                             real, incluindo desempenho, conteúdo, links e estrutura técnica.</p>
                     </div>
                 </div>
+
 
                 <div class="flex flex-col md:flex-row items-center">
                     <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
@@ -223,7 +263,7 @@
             <h2 class="text-3xl font-bold mb-6">Pronto para Impulsionar seu SEO?</h2>
             <p class="text-xl mb-8 max-w-2xl mx-auto">Comece agora e descubra como melhorar a visibilidade do seu site
                 nos mecanismos de busca.</p>
-            <button
+            <button id="anl-grat"
                 class="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg analyze-btn pulse-animation">Analisar
                 Meu Site Gratuitamente</button>
         </div>
@@ -276,7 +316,6 @@
             </div>
         </div>
     </footer>
-
     <script>
         document.querySelector('.analyze-btn').addEventListener('click', async function () {
             const urlInput = document.querySelector('input[type="text"]');
@@ -284,78 +323,130 @@
             const seoScore = document.getElementById('seo-score');
             const seoTitle = document.getElementById('seo-title');
             const seoDescription = document.getElementById('seo-description');
-            const fcp = document.getElementById('fcp');
-            const speedIndex = document.getElementById('speed-index');
-            const tti = document.getElementById('tti');
+            const tipsList = document.getElementById('seo-tips');
+            const checklist = document.getElementById('seo-checklist');
             const button = this;
-
             const targetUrl = urlInput.value.trim();
+
             if (!targetUrl || !targetUrl.startsWith('http')) {
-                urlInput.classList.add("border", "border-red-500");
+                alert("URL inválida");
                 return;
-            } else {
-                urlInput.classList.remove("border", "border-red-500");
             }
 
-            button.textContent = 'Analisando...';
             button.disabled = true;
-
-            const apiKey = 'AIzaSyA0EqtqtjlUng3Yt_cWNlfWhDxJP_QkvoQ';
-            const url = new URL('https://www.googleapis.com/pagespeedonline/v5/runPagespeed');
-            url.searchParams.set('url', targetUrl);
-            url.searchParams.set('key', apiKey);
-            url.searchParams.append('category', 'performance');
-            url.searchParams.append('category', 'seo');
+            button.textContent = 'Analisando...';
 
             try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
-
-                const json = await response.json();
-                
-                const audits = json.lighthouseResult?.audits ?? {};
-                const categories = json.lighthouseResult?.categories ?? {};
-                
-                // Pontuação SEO (0-1 convertido para 0-100)
-                const rawScore = categories.seo?.score;
-                seoScore.textContent = typeof rawScore === 'number' ? Math.round(rawScore * 100) : 'Indisponível';
-                
-                // Título (audit correto: document-title)
-                const titleAudit = audits['document-title'];
-                const title = titleAudit?.displayValue?.trim();
-                console.log(titleAudit);
-                console.log(title);
-                seoTitle.textContent = title || (titleAudit?.score === 0 ? 'Não encontrado' : 'Indisponível');
-
-                // Meta descrição
-                const descriptionAudit = audits['meta-description'];
-                const description = descriptionAudit?.displayValue?.trim();
-                seoDescription.textContent = description || (descriptionAudit?.score === 0 ? 'Não encontrada' : 'Indisponível');
-
-                // Performance (First Contentful Paint, Speed Index, Time to Interactive)
+                const res = await fetch(`https://megasitebackend.onrender.com/get-metadata?url=${encodeURIComponent(targetUrl)}`); // TODO lembrar de mudar a requisição
+                const data = await res.json();
+                const audits = data.audits || {};
+                const categories = data.categories || {};
                 const safeValue = v => typeof v === 'string' && v.trim() !== '' ? v : 'Indisponível';
-                fcp.textContent = safeValue(audits['first-contentful-paint']?.displayValue);
-                speedIndex.textContent = safeValue(audits['speed-index']?.displayValue);
-                tti.textContent = safeValue(audits['interactive']?.displayValue);
+
+                // Preenche título, descrição e pontuação
+                seoTitle.textContent = data.title || 'Indisponível';
+                seoDescription.textContent = data.description || 'Indisponível';
+                seoScore.textContent = Math.round((categories.seo?.score || 0) * 100);
+
+                // Preenche campos de performance
+                document.getElementById('checklist-box').classList.remove('hidden');
+                document.getElementById('tips-box').classList.remove('hidden');
+                document.getElementById('checklist-divider').classList.remove('hidden');
+                document.getElementById('fcp').textContent = safeValue(audits['first-contentful-paint']?.displayValue);
+                document.getElementById('speed-index').textContent = safeValue(audits['speed-index']?.displayValue);
+                document.getElementById('tti').textContent = safeValue(audits['interactive']?.displayValue);
+                document.getElementById('lcp').textContent = safeValue(audits['largest-contentful-paint']?.displayValue);
+                document.getElementById('tbt').textContent = safeValue(audits['total-blocking-time']?.displayValue);
+                document.getElementById('cls').textContent = safeValue(audits['cumulative-layout-shift']?.displayValue);
+
+                // Preenche campos binários de SEO
+                document.getElementById('viewport').textContent = audits['viewport']?.score === 1 ? 'Sim' : 'Não configurado';
+                document.getElementById('link-text').textContent = audits['link-text']?.score === 1 ? 'Adequado' : 'Melhorar links';
+                document.getElementById('image-alt').textContent = audits['image-alt']?.score === 1 ? 'OK' : 'Faltando ALT em imagens';
+
+                // Limpa listas
+                tipsList.innerHTML = '';
+                checklist.innerHTML = '';
+
+                const seoAuditKeys = [
+                    'viewport', 'document-title', 'meta-description', 'http-status-code',
+                    'is-crawlable', 'robots-txt', 'image-alt', 'link-text',
+                    'plugins', 'hreflang', 'canonical', 'font-size',
+                    'crawlable-anchors', 'tap-targets'
+                ];
+
+                // Checklist visual
+                seoAuditKeys.forEach(key => {
+                    const audit = audits[key];
+                    if (!audit) return;
+
+                    const score = audit.score;
+                    const passed = score === 1;
+                    const failed = score === 0;
+
+                    const li = document.createElement('li');
+                    li.className = 'flex items-start gap-2';
+
+                    const icon = document.createElement('span');
+                    icon.textContent = passed ? '✅' : failed ? '❌' : '⚠️';
+                    icon.className = passed ? 'text-green-600 text-lg' : failed ? 'text-red-600 text-lg' : 'text-yellow-500 text-lg';
+
+                    const text = document.createElement('div');
+                    text.innerHTML = `<strong>${audit.title || key}</strong><br><span class="text-gray-600">${audit.explanation || audit.displayValue || ''}</span>`;
+
+                    li.appendChild(icon);
+                    li.appendChild(text);
+                    checklist.appendChild(li);
+                });
+
+                // Recomendações de SEO (somente os que não passaram)
+                seoAuditKeys.forEach(key => {
+                    const audit = audits[key];
+                    if (!audit || audit.score === 1) return;
+
+                    const li = document.createElement('li');
+                    li.className = 'flex items-start gap-2 bg-yellow-50 border border-yellow-200 p-3 rounded-md shadow-sm';
+
+                    li.innerHTML = `
+                    <span class="text-yellow-600 text-xl mt-0.5">⚠️</span>
+                    <div>
+                        <strong class="text-yellow-800">${audit.title || key}</strong><br>
+                        <span class="text-gray-700">${audit.explanation || audit.displayValue || 'Revisar item'}</span>
+                    </div>
+                `;
+
+                    tipsList.appendChild(li);
+                });
 
                 resultBox.classList.remove('hidden');
-            } catch (err) {
-                console.error('Erro ao buscar dados:', err);
-                seoScore.textContent = "Erro";
-                seoTitle.textContent = "Erro ao obter título";
-                seoDescription.textContent = "Erro ao obter descrição";
-                fcp.textContent = "Erro";
-                speedIndex.textContent = "Erro";
-                tti.textContent = "Erro";
-                resultBox.classList.remove('hidden');
+            } catch (e) {
+                console.error(e);
+                alert("Erro ao buscar dados");
             }
 
-            button.textContent = 'Analisar';
             button.disabled = false;
+            button.textContent = 'Analisar';
+        });
+
+        document.querySelector("#anl-grat").addEventListener("click", () => {
+            const target = document.querySelector("#analisar")
+            const offset = -250 // negativo = sobe 100px a mais (ajuste como quiser)
+
+            const topPosition = target.getBoundingClientRect().top + window.pageYOffset + offset
+
+            window.scrollTo({
+                top: topPosition,
+                behavior: "smooth"
+            })
+        })
+
+        const btn = document.getElementById('hamburguer-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
         });
     </script>
-
-
 
 </body>
 
