@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Porcentagens | Ferramenta Profissional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563EB 0%, #10B981 100%);
+        }
+
+        .calculator-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .input-focus:focus {
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .tab-active {
+            border-bottom: 3px solid #2563EB;
+            color: #2563EB;
+            font-weight: 600;
+        }
+
+        @media (max-width: 480px) {
+            .div-select {
+                flex-direction: column !important;
+            }
+
+            .div-select button {
+                margin: 0 10px 0 10px !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="gradient-bg text-white">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-percentage text-2xl"></i>
+                    <h1 class="text-2xl font-bold">Calculadora<span class="font-light">Porcentagem</span></h1>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="https://convertil.com/" class="hover:text-yellow-200 transition duration-300 flex items-center">
+                        <i class="fas fa-arrow-left mr-2"></i> Voltar
+                    </a>
+                    <a href="#about" class="hover:text-yellow-200 transition duration-300 flex items-center">
+                        <i class="fas mr-2"></i> Sobre
+                    </a>
+                </nav>
+                <button class="md:hidden text-2xl" id="mobile-menu-button">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="hidden md:hidden bg-white shadow-lg" id="mobile-menu">
+        <div class="container mx-auto px-4 py-3">
+            <a href="#" class="block py-2 text-gray-700 hover:text-blue-600">
+                <i class="fas fa-arrow-left mr-2"></i> Voltar
+            </a>
+            <a href="#about" class="block py-2 text-gray-700 hover:text-blue-600">
+                <i class="fas fa-info-circle mr-2"></i> Sobre
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 md:py-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3">Calculadora de Porcentagens</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Ferramenta profissional para cálculos percentuais precisos.
+                    Resolva problemas matemáticos com facilidade.</p>
+            </div>
+
+            <!-- Calculator Tabs -->
+            <div class="bg-white rounded-lg shadow-md calculator-shadow overflow-hidden mb-8">
+                <div class="flex border-b div-select">
+                    <button class="tab-button py-4 px-6 text-center flex-1 font-medium text-gray-500" data-tab="basic">
+                        Básico
+                    </button>
+                    <button class="tab-button py-4 px-6 text-center flex-1 font-medium text-gray-500"
+                        data-tab="increase">
+                        Aumento
+                    </button>
+                    <button class="tab-button py-4 px-6 text-center flex-1 font-medium text-gray-500"
+                        data-tab="discount">
+                        Desconto
+                    </button>
+                    <button class="tab-button py-4 px-6 text-center flex-1 font-medium text-gray-500"
+                        data-tab="difference">
+                        Diferença
+                    </button>
+                </div>
+
+                <!-- Basic Calculator -->
+                <div class="tab-content p-6" id="basic-tab">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Calcular porcentagem de um valor</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="basic-value" class="block text-sm font-medium text-gray-700 mb-1">Valor</label>
+                            <div class="relative">
+                                <input type="number" id="basic-value"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 input-focus focus:outline-none"
+                                    placeholder="Ex: 100">
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <span class="text-gray-500">R$</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="basic-percentage"
+                                class="block text-sm font-medium text-gray-700 mb-1">Porcentagem</label>
+                            <div class="relative">
+                                <input type="number" id="basic-percentage"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 input-focus focus:outline-none"
+                                    placeholder="Ex: 15">
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <span class="text-gray-500">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="calculateBasic()"
+                        class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-300">
+                        Calcular
+                    </button>
+                    <div id="basic-result" class="mt-6 p-4 bg-gray-50 rounded-lg hidden">
+                        <h4 class="font-medium text-gray-800 mb-2">Resultado:</h4>
+                        <p class="text-lg"><span id="basic-result-value" class="font-bold text-blue-600">0</span> é
+                            <span id="basic-result-percentage" class="font-bold text-blue-600">0</span>% de <span
+                                id="basic-result-total" class="font-bold text-blue-600">0</span></p>
+                    </div>
+                </div>
+
+                <!-- Increase Calculator -->
+                <div class="tab-content hidden p-6" id="increase-tab">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Calcular aumento percentual</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="increase-value" class="block text-sm font-medium text-gray-700 mb-1">Valor
+                                original</label>
+                            <div class="relative">
+                                <input type="number" id="increase-value"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 input-focus focus:outline-none"
+                                    placeholder="Ex: 100">
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <span class="text-gray-500">R$</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="increase-percentage"
+                                class="block text-sm font-medium text-gray-700 mb-1">Porcentagem de aumento</label>
+                            <div class="relative">
+                                <input type="number" id="increase-percentage"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 input-focus focus:outline-none"
+                                    placeholder="Ex: 10">
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <span class="text-gray-500">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="calculateIncrease()"
+                        class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-300">
+                        Calcular
+                    </button>
+                    <div id="increase-result" class="mt-6 p-4 bg-gray-50 rounded-lg hidden">
+                        <h4 class="font-medium text-gray-800 mb-2">Resultado:</h4>
+                        <p class="text-lg">Aumentando <span id="increase-result-value"
+                                class="font-bold text-blue-600">0</span> em <span id="increase-result-percentage"
+                                class="font-bold text-blue-600">0</span>% você terá <span id="increase-result-total"
+                                class="font-bold text-green-600">0</span></p>
+                        <p class="text-sm text-gray-600 mt-1">Valor do aumento: <span id="increase-amount"
+                                class="font-medium">0</span></p>
+                    </div>
+                </div>
+
+                <!-- Discount Calculator -->
+                <div class="tab-content hidden p-6" id="discount-tab">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Calcular desconto percentual</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="discount-value" class="block text-sm font-medium text-gray-700 mb-1">Valor
+                                original</label>
+                            <div class="relative">
+                                <input type="number" id="discount-value"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 input-focus focus:outline-none"
+                                    placeholder="Ex: 100">
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <span class="text-gray-500">R$</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="discount-percentage"
+                                class="block text-sm font-medium text-gray-700 mb-1">Porcentagem de desconto</label>
+                            <div class="relative">
+                                <input type="number" id="discount-percentage"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 input-focus focus:outline-none"
+                                    placeholder="Ex: 15">
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <span class="text-gray-500">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="calculateDiscount()"
+                        class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-300">
+                        Calcular
+                    </button>
+                    <div id="discount-result" class="mt-6 p-4 bg-gray-50 rounded-lg hidden">
+                        <h4 class="font-medium text-gray-800 mb-2">Resultado:</h4>
+                        <p class="text-lg">Descontando <span id="discount-result-value"
+                                class="font-bold text-blue-600">0</span> em <span id="discount-result-percentage"
+                                class="font-bold text-blue-600">0</span>% você pagará <span id="discount-result-total"
+                                class="font-bold text-green-600">0</span></p>
+                        <p class="text-sm text-gray-600 mt-1">Valor economizado: <span id="discount-amount"
+                                class="font-medium">0</span></p>
+                    </div>
+                </div>
+
+                <!-- Difference Calculator -->
+                <div class="tab-content hidden p-6" id="difference-tab">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Calcular diferença percentual</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="difference-value1" class="block text-sm font-medium text-gray-700 mb-1">Valor
+                                inicial</label>
+                            <div class="relative">
+                                <input type="number" id="difference-value1"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 input-focus focus:outline-none"
+                                    placeholder="Ex: 100">
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <span class="text-gray-500">R$</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="difference-value2" class="block text-sm font-medium text-gray-700 mb-1">Valor
+                                final</label>
+                            <div class="relative">
+                                <input type="number" id="difference-value2"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 input-focus focus:outline-none"
+                                    placeholder="Ex: 120">
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <span class="text-gray-500">R$</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="calculateDifference()"
+                        class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-300">
+                        Calcular
+                    </button>
+                    <div id="difference-result" class="mt-6 p-4 bg-gray-50 rounded-lg hidden">
+                        <h4 class="font-medium text-gray-800 mb-2">Resultado:</h4>
+                        <p class="text-lg">A diferença entre <span id="difference-result-value1"
+                                class="font-bold text-blue-600">0</span> e <span id="difference-result-value2"
+                                class="font-bold text-blue-600">0</span> é de <span id="difference-result-percentage"
+                                class="font-bold text-blue-600">0</span>%</p>
+                        <p class="text-sm text-gray-600 mt-1">Variação absoluta: <span id="difference-amount"
+                                class="font-medium">0</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div id="about" class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Sobre a Calculadora de Porcentagens</h3>
+                <div class="prose max-w-none text-gray-700">
+                    <p>Nossa calculadora de porcentagens é uma ferramenta profissional desenvolvida para ajudar você a
+                        resolver problemas matemáticos envolvendo porcentagens de forma rápida e precisa.</p>
+
+                    <h4 class="text-lg font-medium mt-4 text-gray-800">Recursos disponíveis:</h4>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Cálculo básico:</strong> Encontre qual porcentagem um valor representa de outro.
+                        </li>
+                        <li><strong>Cálculo de aumento:</strong> Calcule o valor final após um aumento percentual.</li>
+                        <li><strong>Cálculo de desconto:</strong> Determine o valor final após aplicar um desconto
+                            percentual.</li>
+                        <li><strong>Diferença percentual:</strong> Calcule a variação percentual entre dois valores.
+                        </li>
+                    </ul>
+
+                    <h4 class="text-lg font-medium mt-4 text-gray-800">Como usar:</h4>
+                    <ol class="list-decimal pl-5 space-y-2">
+                        <li>Selecione o tipo de cálculo que deseja realizar</li>
+                        <li>Preencha os campos com os valores solicitados</li>
+                        <li>Clique no botão "Calcular"</li>
+                        <li>Veja o resultado detalhado na seção abaixo</li>
+                    </ol>
+
+                    <p class="mt-4">Esta ferramenta é ideal para cálculos financeiros, análises de dados, planejamento
+                        de orçamentos e qualquer situação que envolva porcentagens no dia a dia profissional ou pessoal.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Tips Section -->
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 rounded-r-lg">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-lightbulb text-yellow-400 text-xl"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-yellow-800">Dicas para cálculos percentuais</h3>
+                        <div class="mt-2 text-sm text-yellow-700">
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Para calcular 10% de um valor, basta dividi-lo por 10</li>
+                                <li>Para aumentar um valor em 15%, multiplique por 1.15</li>
+                                <li>Para descontar 20% de um valor, multiplique por 0.80</li>
+                                <li>A diferença percentual entre A e B é calculada por: ((B - A) / A) × 100</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-percentage text-xl"></i>
+                        <h2 class="text-xl font-bold">Calculadora<span class="font-light">Porcentagem</span></h2>
+                    </div>
+                    <p class="text-gray-400 mt-2">Ferramenta profissional para cálculos percentuais</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-gray-400">© 2025 Calculadora de Porcentagens. Todos os direitos reservados.</p>
+                    <p class="text-gray-500 text-sm mt-1">Desenvolvido com precisão para seus cálculos matemáticos.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function () {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('tab-active');
+                    btn.classList.add('text-gray-500');
+                });
+
+                // Add active class to clicked button
+                button.classList.add('tab-active');
+                button.classList.remove('text-gray-500');
+
+                // Hide all tab contents
+                tabContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+
+                // Show the selected tab content
+                const tabId = button.getAttribute('data-tab') + '-tab';
+                document.getElementById(tabId).classList.remove('hidden');
+            });
+        });
+
+        // Set first tab as active by default
+        tabButtons[0].classList.add('tab-active');
+        tabButtons[0].classList.remove('text-gray-500');
+
+        // Calculation functions
+        function calculateBasic() {
+            const value = parseFloat(document.getElementById('basic-value').value);
+            const percentage = parseFloat(document.getElementById('basic-percentage').value);
+
+            if (isNaN(value) || isNaN(percentage)) {
+                alert('Por favor, preencha ambos os campos com valores numéricos.');
+                return;
+            }
+
+            const result = (value * percentage) / 100;
+
+            document.getElementById('basic-result-value').textContent = result.toFixed(2);
+            document.getElementById('basic-result-percentage').textContent = percentage;
+            document.getElementById('basic-result-total').textContent = value;
+            document.getElementById('basic-result').classList.remove('hidden');
+        }
+
+        function calculateIncrease() {
+            const value = parseFloat(document.getElementById('increase-value').value);
+            const percentage = parseFloat(document.getElementById('increase-percentage').value);
+
+            if (isNaN(value) || isNaN(percentage)) {
+                alert('Por favor, preencha ambos os campos com valores numéricos.');
+                return;
+            }
+
+            const increaseAmount = (value * percentage) / 100;
+            const total = value + increaseAmount;
+
+            document.getElementById('increase-result-value').textContent = value.toFixed(2);
+            document.getElementById('increase-result-percentage').textContent = percentage;
+            document.getElementById('increase-result-total').textContent = total.toFixed(2);
+            document.getElementById('increase-amount').textContent = increaseAmount.toFixed(2);
+            document.getElementById('increase-result').classList.remove('hidden');
+        }
+
+        function calculateDiscount() {
+            const value = parseFloat(document.getElementById('discount-value').value);
+            const percentage = parseFloat(document.getElementById('discount-percentage').value);
+
+            if (isNaN(value) || isNaN(percentage)) {
+                alert('Por favor, preencha ambos os campos com valores numéricos.');
+                return;
+            }
+
+            const discountAmount = (value * percentage) / 100;
+            const total = value - discountAmount;
+
+            document.getElementById('discount-result-value').textContent = value.toFixed(2);
+            document.getElementById('discount-result-percentage').textContent = percentage;
+            document.getElementById('discount-result-total').textContent = total.toFixed(2);
+            document.getElementById('discount-amount').textContent = discountAmount.toFixed(2);
+            document.getElementById('discount-result').classList.remove('hidden');
+        }
+
+        function calculateDifference() {
+            const value1 = parseFloat(document.getElementById('difference-value1').value);
+            const value2 = parseFloat(document.getElementById('difference-value2').value);
+
+            if (isNaN(value1) || isNaN(value2)) {
+                alert('Por favor, preencha ambos os campos com valores numéricos.');
+                return;
+            }
+
+            const difference = value2 - value1;
+            const percentage = (difference / value1) * 100;
+
+            document.getElementById('difference-result-value1').textContent = value1.toFixed(2);
+            document.getElementById('difference-result-value2').textContent = value2.toFixed(2);
+            document.getElementById('difference-result-percentage').textContent = percentage.toFixed(2);
+            document.getElementById('difference-amount').textContent = difference.toFixed(2);
+            document.getElementById('difference-result').classList.remove('hidden');
+        }
+    </script>
+</body>
+
+</html>
