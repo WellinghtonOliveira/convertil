@@ -1,6 +1,14 @@
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args))
 const dados = require('../utils/utils')
 const cheerio = require('cheerio')
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args))
+
+let contReq = 0
+
+function getVida(req, res) {
+    console.clear()
+    console.log(`Servidor Vivo req #${contReq++}`)
+    res.json({})
+}
 
 function verificadorValor(req, res) {
     const valorBuscado = parseInt(req.params.valor)
@@ -66,4 +74,4 @@ async function getMetadata(req, res) {
     }
 }
 
-module.exports = { verificadorValor, listarCategorias, funcSubmitForm, getMetadata }
+module.exports = { verificadorValor, listarCategorias, funcSubmitForm, getMetadata, getVida }
