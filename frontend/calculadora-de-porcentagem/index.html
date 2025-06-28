@@ -2,12 +2,75 @@
 <html lang="pt-BR">
 
 <head>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX61BYEH4E"></script>
+    <script>
+        window.dataLayer = window.dataLayer || []
+        function gtag() { dataLayer.push(arguments) }
+        gtag('js', new Date())
+        gtag('config', 'G-RX61BYEH4E')
+    </script>
+
+    <!-- SEO essencial -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Porcentagens | Ferramenta Profissional</title>
+    <title>Calculadora de Porcentagem Online Grátis | Convertil</title>
+    <meta name="description"
+        content="Calcule porcentagens com rapidez e precisão. Ferramenta 100% gratuita para calcular descontos, aumentos, proporções e muito mais.">
+    <meta name="keywords"
+        content="calculadora de porcentagem, porcentagem online, calcular desconto, aumento percentual, ferramenta de porcentagem, convertil">
+    <meta name="author" content="Convertil.com">
+    <link rel="canonical" href="https://convertil.com/calculadora-de-porcentagem" />
+    <link rel="icon" href="./favicon.png" type="image/png">
+
+    <!-- Open Graph (para Facebook, LinkedIn, etc) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Calculadora de Porcentagem Online Grátis | Convertil" />
+    <meta property="og:description"
+        content="Calcule porcentagens com rapidez e precisão. Ferramenta 100% gratuita para calcular descontos, aumentos e proporções." />
+    <meta property="og:url" content="https://convertil.com/calculadora-de-porcentagem" />
+    <meta property="og:image" content="https://convertil.com/assets/logo.png" />
+    <meta property="og:site_name" content="Convertil" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Calculadora de Porcentagem Online Grátis | Convertil" />
+    <meta name="twitter:description"
+        content="Faça cálculos de porcentagem online de forma simples, rápida e gratuita com o Convertil." />
+    <meta name="twitter:image" content="https://convertil.com/assets/logo.png" />
+    <meta name="twitter:site" content="@convertil" />
+
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+
+    <!-- Font Awesome (com segurança) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Calculadora de Porcentagem",
+    "url": "https://convertil.com/calculadora-de-porcentagem",
+    "description": "Ferramenta online gratuita para calcular porcentagens com precisão. Ideal para descontos, aumentos e muito mais.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Convertil",
+      "url": "https://convertil.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://convertil.com/assets/logo.png"
+      }
+    }
+  }
+  </script>
+
+    <!-- Estilos personalizados -->
     <style>
         .gradient-bg {
             background: linear-gradient(135deg, #2563EB 0%, #10B981 100%);
@@ -50,7 +113,8 @@
                     <h1 class="text-2xl font-bold">Calculadora<span class="font-light">Porcentagem</span></h1>
                 </div>
                 <nav class="hidden md:flex space-x-6">
-                    <a href="https://convertil.com/" class="hover:text-yellow-200 transition duration-300 flex items-center">
+                    <a href="https://convertil.com/"
+                        class="hover:text-yellow-200 transition duration-300 flex items-center">
                         <i class="fas fa-arrow-left mr-2"></i> Voltar
                     </a>
                     <a href="#about" class="hover:text-yellow-200 transition duration-300 flex items-center">
@@ -141,7 +205,8 @@
                         <h4 class="font-medium text-gray-800 mb-2">Resultado:</h4>
                         <p class="text-lg"><span id="basic-result-value" class="font-bold text-blue-600">0</span> é
                             <span id="basic-result-percentage" class="font-bold text-blue-600">0</span>% de <span
-                                id="basic-result-total" class="font-bold text-blue-600">0</span></p>
+                                id="basic-result-total" class="font-bold text-blue-600">0</span>
+                        </p>
                     </div>
                 </div>
 
@@ -351,6 +416,15 @@
         </div>
     </footer>
 
+
+    <!-- Caixa de mensagem personalizada -->
+    <div id="mensagem-alerta"
+        class="fixed top-5 right-5 bg-red-500 text-white px-4 py-3 rounded shadow-lg hidden z-50 transition-all duration-300">
+        <span id="mensagem-texto"></span>
+        <button onclick="fecharMensagem()" class="ml-4 font-bold">×</button>
+    </div>
+
+
     <script>
         // Mobile menu toggle
         document.getElementById('mobile-menu-button').addEventListener('click', function () {
@@ -389,13 +463,31 @@
         tabButtons[0].classList.add('tab-active');
         tabButtons[0].classList.remove('text-gray-500');
 
+        // Caixa de mensagem
+        function mostrarMensagem(texto) {
+            const caixa = document.getElementById('mensagem-alerta');
+            const span = document.getElementById('mensagem-texto');
+
+            span.textContent = texto;
+            caixa.classList.remove('hidden');
+
+            // Ocultar automaticamente após 4 segundos
+            setTimeout(() => {
+                caixa.classList.add('hidden');
+            }, 4000);
+        }
+
+        function fecharMensagem() {
+            document.getElementById('mensagem-alerta').classList.add('hidden');
+        }
+
         // Calculation functions
         function calculateBasic() {
             const value = parseFloat(document.getElementById('basic-value').value);
             const percentage = parseFloat(document.getElementById('basic-percentage').value);
 
             if (isNaN(value) || isNaN(percentage)) {
-                alert('Por favor, preencha ambos os campos com valores numéricos.');
+                mostrarMensagem('Por favor, preencha ambos os campos com valores numéricos.');
                 return;
             }
 
@@ -412,7 +504,7 @@
             const percentage = parseFloat(document.getElementById('increase-percentage').value);
 
             if (isNaN(value) || isNaN(percentage)) {
-                alert('Por favor, preencha ambos os campos com valores numéricos.');
+                mostrarMensagem('Por favor, preencha ambos os campos com valores numéricos.');
                 return;
             }
 
@@ -431,7 +523,7 @@
             const percentage = parseFloat(document.getElementById('discount-percentage').value);
 
             if (isNaN(value) || isNaN(percentage)) {
-                alert('Por favor, preencha ambos os campos com valores numéricos.');
+                mostrarMensagem('Por favor, preencha ambos os campos com valores numéricos.');
                 return;
             }
 
@@ -450,7 +542,7 @@
             const value2 = parseFloat(document.getElementById('difference-value2').value);
 
             if (isNaN(value1) || isNaN(value2)) {
-                alert('Por favor, preencha ambos os campos com valores numéricos.');
+                mostrarMensagem('Por favor, preencha ambos os campos com valores numéricos.');
                 return;
             }
 
@@ -464,6 +556,7 @@
             document.getElementById('difference-result').classList.remove('hidden');
         }
     </script>
+
 </body>
 
 </html>
