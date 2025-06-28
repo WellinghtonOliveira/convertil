@@ -5,9 +5,7 @@ const cheerio = require('cheerio')
 let contReq = 0
 
 function getVida(req, res) {
-    console.clear()
     console.log(`Servidor Vivo req #${contReq++}`)
-    res.json({})
 }
 
 function verificadorValor(req, res) {
