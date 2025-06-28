@@ -6,6 +6,7 @@ let contReq = 0
 
 function getVida(req, res) {
     console.log(`Servidor Vivo req #${contReq++}`)
+    res.json({})
 }
 
 function verificadorValor(req, res) {
