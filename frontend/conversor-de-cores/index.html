@@ -120,16 +120,46 @@
                 align-items: stretch;
             }
         }
+
+        @media (max-width: 400px) {
+            .correc {
+                flex-direction: column !important;
+                margin: 10px  0 !important;
+            }
+
+            .correc, input, button {
+                border-radius: 3px !important;
+                margin: 3px !important;
+                width: 100% !important;
+            }
+        }
+
+        @media (max-width: 280px) {
+            .tema-correc {
+                flex-direction: column !important;
+                justify-content: center !important;
+            }
+
+            .tema-correc button {
+                margin: 0 auto !important;
+                width: 150px !important;
+                min-width: none !important;
+            }
+
+            .tema-hidden {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 
 <body class="min-h-screen flex flex-col">
     <!-- Header -->
     <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="correc container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <div
-                    class="w-10 h-10 rounded-md bg-gradient-to-r from-[#2563EB] to-[#F59E0B] flex items-center justify-center">
+                    class="tema-hidden w-10 h-10 rounded-md bg-gradient-to-r from-[#2563EB] to-[#F59E0B] flex items-center justify-center">
                     <span class="text-white font-bold text-xl">CC</span>
                 </div>
                 <h1 class="text-2xl font-bold text-gray-800">ColorConvert</h1>
@@ -160,7 +190,7 @@
 
         <!-- Converter Tabs -->
         <div class="max-w-4xl mx-auto mb-8">
-            <div class="flex border-b border-gray-200">
+            <div class="tema-correc flex border-b border-gray-200">
                 <button class="px-6 py-3 text-gray-600 tab-active" onclick="switchTab('hex')">HEX</button>
                 <button class="px-6 py-3 text-gray-600" onclick="switchTab('rgb')">RGB</button>
                 <button class="px-6 py-3 text-gray-600" onclick="switchTab('hsl')">HSL</button>
@@ -174,7 +204,7 @@
                 <h3 class="text-xl font-semibold mb-4 text-gray-800">Conversor HEX</h3>
                 <div class="mb-4">
                     <label for="hex-input" class="block text-sm font-medium text-gray-700 mb-1">Cor HEX</label>
-                    <div class="flex">
+                    <div class="correc flex">
                         <input type="text" id="hex-input" style="min-width: 100px;"
                             class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md focus:ring-2 focus:ring-[#2563EB]"
                             placeholder="Ex: #2563EB" maxlength="7">
@@ -186,7 +216,7 @@
                 <div class="grid grid-cols2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">RGB</label>
-                        <div class="flex">
+                        <div class="correc flex">
                             <input type="text" id="hex-to-rgb"
                                 class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md" readonly>
                             <button onclick="copyToClipboard('hex-to-rgb')"
@@ -195,7 +225,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">HSL</label>
-                        <div class="flex">
+                        <div class="correc flex">
                             <input type="text" id="hex-to-hsl"
                                 class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md" readonly>
                             <button onclick="copyToClipboard('hex-to-hsl')"
@@ -233,7 +263,7 @@
                 <div class="grid grid-cols2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">HEX</label>
-                        <div class="flex">
+                        <div class="correc flex">
                             <input type="text" id="rgb-to-hex"
                                 class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md" readonly>
                             <button onclick="copyToClipboard('rgb-to-hex')"
@@ -242,7 +272,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">HSL</label>
-                        <div class="flex">
+                        <div class="correc flex">
                             <input type="text" id="rgb-to-hsl"
                                 class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md" readonly>
                             <button onclick="copyToClipboard('rgb-to-hsl')"
@@ -280,7 +310,7 @@
                 <div class="grid grid-cols2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">HEX</label>
-                        <div class="flex">
+                        <div class="correc flex">
                             <input type="text" id="hsl-to-hex"
                                 class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md" readonly>
                             <button onclick="copyToClipboard('hsl-to-hex')"
@@ -289,7 +319,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">RGB</label>
-                        <div class="flex">
+                        <div class="correc flex">
                             <input type="text" id="hsl-to-rgb"
                                 class="flex-grow px-4 py-2 border border-gray-300 rounded-l-md" readonly>
                             <button onclick="copyToClipboard('hsl-to-rgb')"
