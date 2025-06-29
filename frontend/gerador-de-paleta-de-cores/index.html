@@ -110,6 +110,45 @@
                 transform: translateY(-10px);
             }
         }
+
+        @media (max-width: 540px) {
+            .titulo-paleta {
+                flex-direction: column !important;
+            }
+            .titulo-paleta h3 {
+                margin: 5px 0 15px 0 !important;
+            }
+        }
+
+        @media (max-width: 300px) {
+            .direcao {
+                flex-direction: column !important;
+            }
+
+            .direcao button {
+                margin: 10px 0;
+            }
+
+            .logo-tam, i, h1, h1 > span {
+                font-size: 20px !important;
+            }
+        }
+
+        @media (max-width: 370px) {
+            .opt {
+                grid-template-columns: auto !important;
+            }
+        }
+
+        @media (max-width: 270px) {
+            .btn-con {
+                flex-direction: column !important;
+            }
+
+            .btn-con button {
+                margin: 10px 0 !important;
+            }
+        }
     </style>
 </head>
 
@@ -117,8 +156,8 @@
     <!-- Header -->
     <header class="bg-dark text-white py-6 shadow-lg">
         <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-2">
+            <div class="direcao flex justify-between items-center">
+                <div class="logo-tam flex items-center space-x-2">
                     <i class="fas fa-palette text-3xl text-primary"></i>
                     <h1 class="text-2xl font-bold">Harmony<span class="text-primary">Palette</span></h1>
                 </div>
@@ -166,9 +205,9 @@
     <main class="container mx-auto px-4 py-12">
         <!-- Color Palette Display -->
         <div class="bg-white rounded-xl shadow-lg p-6 mb-12">
-            <div class="flex justify-between items-center mb-6">
+            <div class="titulo-paleta flex justify-between items-center mb-6">
                 <h3 class="text-2xl font-bold text-dark">Sua Paleta de Cores</h3>
-                <div class="flex space-x-3">
+                <div class="btn-con flex space-x-3">
                     <button id="save-btn"
                         class="bg-primary hover:bg-opacity-90 text-white py-2 px-4 rounded-lg flex items-center space-x-2 transition">
                         <i class="fas fa-save"></i>
@@ -264,7 +303,7 @@
         <div class="bg-white rounded-xl shadow-lg p-6 mb-12">
             <h3 class="text-2xl font-bold text-dark mb-6">Opções de Harmonia</h3>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div class="opt grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                 <button class="harmony-btn bg-primary text-white py-3 px-4 rounded-lg font-medium transition"
                     data-type="analogous">
                     Análoga
