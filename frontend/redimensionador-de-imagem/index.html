@@ -21,7 +21,7 @@
     <link rel="canonical" href="https://convertil.com/redimensionador-de-imagem/">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="./favicon.png" type="image/png">
 
     <!-- Open Graph (Facebook, LinkedIn, etc) -->
     <meta property="og:title" content="Redimensionador de Imagem Online - convertil.com">
@@ -189,6 +189,7 @@
         }
 
         .controls {
+            width: 100%;
             display: flex;
             flex-wrap: wrap;
             gap: 1.5rem;
@@ -236,6 +237,7 @@
         }
 
         .preview-container {
+            width: 100%;
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
@@ -478,6 +480,30 @@
                 min-width: 50px;
                 height: auto;
                 margin: auto;
+            }
+        }
+
+        @media (max-width: 280px) {
+            .hero h1 {
+                word-wrap: break-word;
+            }
+
+            .controls input, select {
+                width: 100% !important;
+            }
+
+            .control-group {
+                width: 100% !important;
+                min-width: 100% !important;
+            }
+        
+            .image-box {
+                width: 100% !important;
+            }
+
+            .action-buttons button {
+                width: 100% !important;
+                font-size: small;
             }
         }
     </style>
