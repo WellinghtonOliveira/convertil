@@ -3,12 +3,13 @@ const dados = [
     { category: 'design', name: 'Gerador de Paleta de Cores', description: 'Cria combinações de cores harmoniosas para projetos visuais', link: './gerador-de-paleta-de-cores/' },
     { category: 'design', name: 'Conversor de Cores HEX ⇄ RGB ⇄ HSL', description: 'Converte entre formatos de cor populares', link: './conversor-de-cores/' },
     { category: 'design', name: 'Redimensionador de Imagem', description: 'Faz uma ateração limpa e proficional nas dimensões da imagem', link: './redimensionador-de-imagem' },
-
+    
     // dev
     { category: 'dev', name: 'Formatador de Código', description: 'Organiza e melhora a legibilidade do código', link: './formatador-de-codigos/' },
     { category: 'dev', name: 'Minificador de Código', description: 'Remove espaços e quebras de linha para otimizar o código', link: './minificador-de-codigos/' },
     { category: 'dev', name: 'Validador de JSON', description: 'Ferramenta que verifica se um documento JSON está corretamente estruturado e segue a sintaxe correta do formato JSON.', link: './validador-de-json/' },
-
+    { category: 'dev', name: 'Gerador de HASH', description: 'Uma função hash é um algoritmo que recebe dados de entrada e gera um "hash", uma sequência de caracteres de comprimento fixo. ', link: './gerador-de-hash/' },
+    
     // productivity
     { category: 'productivity', name: 'Cronômetro Online', description: 'Ideal para treinos, estudos, tarefas ou qualquer atividade, sem complicações.', link: './cronometro-online/' },
     { category: 'productivity', name: 'Bloco de Notas Online', description: 'Bloco de notas online: simples, rápido e prático. Faça anotações rápidas e salve sem complicação', link: './bloco-de-notas-online/' },

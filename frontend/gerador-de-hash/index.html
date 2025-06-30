@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX61BYEH4E"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RX61BYEH4E');
+    </script>
+
+    <!-- SEO Básico -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Hash Online Seguro | MD5, SHA256 - Convertil</title>
+    <meta name="description"
+        content="Gere hashes online de forma segura com suporte a MD5, SHA-256. Ideal para segurança, verificação e autenticação de dados. Gratuito, rápido e confiável.">
+    <meta name="keywords"
+        content="gerador de hash, hash online, gerar hash md5, gerar hash sha256, sha512, md5 online, segurança digital, criptografia online, Convertil">
+    <meta name="author" content="Convertil.com">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="pt-BR">
+    <meta name="theme-color" content="#10B981">
+
+    <!-- Open Graph (Facebook, LinkedIn etc) -->
+    <meta property="og:title" content="Gerador de Hash Online | MD5, SHA256, SHA512 - Convertil">
+    <meta property="og:description"
+        content="Ferramenta online gratuita para gerar hashes seguros com os principais algoritmos de criptografia.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://convertil.com/gerador-de-hash">
+    <meta property="og:image" content="https://convertil.com/assets/logo.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Gerador de Hash Online | MD5, SHA256, SHA512 - Convertil">
+    <meta name="twitter:description"
+        content="Gere hashes criptográficos de forma fácil e segura com suporte a vários algoritmos.">
+    <meta name="twitter:image" content="https://convertil.com/assets/logo.png">
+    <meta name="twitter:site" content="@convertil">
+
+    <!-- Ícone e Favicon -->
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+
+    <!-- Scripts e Estilos Originais -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+    <style>
+        .toast {
+            animation: fadeInOut 4s ease-in-out forwards;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            10% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            90% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563EB 0%, #10B981 100%);
+        }
+
+        .hash-input:focus {
+            outline: 2px solid #F59E0B;
+        }
+
+        .copy-btn:hover {
+            background-color: #2563EB;
+            color: white;
+        }
+
+        .tab-active {
+            border-bottom: 3px solid #F59E0B;
+            color: #1F2937;
+            font-weight: 600;
+        }
+
+        .hash-result {
+            word-break: break-all;
+        }
+
+        @media (max-width: 300px) {
+
+            .voltar-flex,
+            .btn-flex {
+                display: flex !important;
+                flex-direction: column !important;
+            }
+
+            .voltar-flex nav {
+                margin: 20px 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="voltar-flex container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+                </svg>
+                <h1 class="text-xl font-bold">SecureHash</h1>
+            </div>
+            <nav class="flex space-x-4">
+                <a href="https://convertil.com/" class="hover:text-yellow-300 transition duration-300">Voltar</a>
+                <a href="#about" class="hover:text-yellow-300 transition duration-300">Sobre</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">Gerador de Hash Seguro</h2>
+            <p class="text-gray-600">Gere hashes MD5 e SHA256 de forma rápida e segura diretamente no seu navegador</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex border-b border-gray-200 mb-6">
+            <button id="md5-tab" class="tab-active px-4 py-2 text-sm font-medium">MD5</button>
+            <button id="sha256-tab"
+                class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700">SHA-256</button>
+        </div>
+
+        <!-- Input Section -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="mb-4">
+                <label for="input-text" class="block text-sm font-medium text-gray-700 mb-2">Digite o texto para gerar o
+                    hash:</label>
+                <textarea id="input-text" rows="4"
+                    class="hash-input w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                    placeholder="Digite ou cole seu texto aqui..."></textarea>
+            </div>
+            <div class="btn-flex flex justify-between items-center">
+                <button id="generate-btn"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-md transition duration-300">
+                    Gerar Hash
+                </button>
+                <button id="clear-btn"
+                    class="text-gray-600 hover:text-red-500 font-medium py-2 px-4 rounded-md transition duration-300">
+                    Limpar
+                </button>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+        <div id="result-section" class="bg-white rounded-lg shadow-md p-6 hidden">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-medium text-gray-800">Resultado do Hash</h3>
+                <button id="copy-btn"
+                    class="copy-btn text-blue-600 hover:bg-blue-100 font-medium py-1 px-3 rounded-md transition duration-300 border border-blue-600">
+                    Copiar
+                </button>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-md">
+                <p id="hash-result" class="hash-result text-gray-800 font-mono"></p>
+            </div>
+            <div class="mt-4 flex items-center text-sm text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span id="hash-type">MD5</span> | Tamanho: <span id="hash-length">0</span> caracteres
+            </div>
+        </div>
+
+        <!-- Information Section -->
+        <div id="about" class="bg-white rounded-lg shadow-md p-6 mt-10">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Sobre o Gerador de Hash</h3>
+            <div class="space-y-4 text-gray-700">
+                <p>O SecureHash Generator é uma ferramenta online que permite criar hashes criptográficos de textos ou
+                    strings de caracteres usando os algoritmos MD5 e SHA-256.</p>
+
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-yellow-700">
+                                <strong>Atenção:</strong> O MD5 é considerado inseguro para muitas aplicações
+                                criptográficas devido a vulnerabilidades conhecidas. Recomendamos o uso de SHA-256 para
+                                maior segurança.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="font-bold text-gray-800 mt-6">O que é um Hash Criptográfico?</h4>
+                <p>Um hash criptográfico é uma função matemática que transforma qualquer bloco de dados em uma string de
+                    tamanho fixo. As principais propriedades são:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>Determinístico:</strong> A mesma entrada sempre produz o mesmo hash</li>
+                    <li><strong>Irreversível:</strong> Não é possível reconstruir os dados originais a partir do hash
+                    </li>
+                    <li><strong>Resistente a colisões:</strong> Dificuldade em encontrar duas entradas diferentes que
+                        produzam o mesmo hash</li>
+                </ul>
+
+                <h4 class="font-bold text-gray-800 mt-6">Aplicações Comuns</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-50 p-4 rounded-md">
+                        <h5 class="font-medium text-blue-600 mb-2">Verificação de Integridade</h5>
+                        <p class="text-sm">Verificar se arquivos foram alterados durante transferência comparando
+                            hashes.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-md">
+                        <h5 class="font-medium text-blue-600 mb-2">Armazenamento de Senhas</h5>
+                        <p class="text-sm">Sistemas armazenam hashes de senhas em vez do texto original para maior
+                            segurança.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-md">
+                        <h5 class="font-medium text-blue-600 mb-2">Assinaturas Digitais</h5>
+                        <p class="text-sm">Usado em processos de autenticação e verificação de autenticidade.</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-md">
+                        <h5 class="font-medium text-blue-600 mb-2">Blockchain</h5>
+                        <p class="text-sm">Fundamental para a estrutura de blocos em tecnologias de ledger distribuído.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2025 SecureHash Generator. Todos os direitos reservados.</p>
+            <p class="text-gray-400 text-sm mt-2">Este site opera totalmente no seu navegador - seus dados nunca são
+                enviados para nossos servidores.</p>
+        </div>
+    </footer>
+
+    <div id="toast-container" class="fixed bottom-4 right-4 space-y-2 z-50"></div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const inputText = document.getElementById('input-text');
+            const generateBtn = document.getElementById('generate-btn');
+            const clearBtn = document.getElementById('clear-btn');
+            const copyBtn = document.getElementById('copy-btn');
+            const resultSection = document.getElementById('result-section');
+            const hashResult = document.getElementById('hash-result');
+            const hashType = document.getElementById('hash-type');
+            const hashLength = document.getElementById('hash-length');
+            const md5Tab = document.getElementById('md5-tab');
+            const sha256Tab = document.getElementById('sha256-tab');
+            const toastContainer = document.getElementById('toast-container');
+
+            let currentAlgorithm = 'md5';
+
+            function showToast(message, type = 'info') {
+                const toast = document.createElement('div');
+                toast.className = `toast px-4 py-2 rounded shadow text-white text-sm ${type === 'success' ? 'bg-green-600' :
+                    type === 'error' ? 'bg-red-600' :
+                        'bg-blue-600'
+                    }`;
+                toast.textContent = message;
+                toastContainer.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.remove();
+                }, 4000);
+            }
+
+            // Tab switching
+            md5Tab.addEventListener('click', function () {
+                currentAlgorithm = 'md5';
+                md5Tab.classList.add('tab-active');
+                md5Tab.classList.remove('text-gray-500');
+                sha256Tab.classList.remove('tab-active');
+                sha256Tab.classList.add('text-gray-500');
+                if (!resultSection.classList.contains('hidden')) {
+                    generateHash();
+                }
+            });
+
+            sha256Tab.addEventListener('click', function () {
+                currentAlgorithm = 'sha256';
+                sha256Tab.classList.add('tab-active');
+                sha256Tab.classList.remove('text-gray-500');
+                md5Tab.classList.remove('tab-active');
+                md5Tab.classList.add('text-gray-500');
+                if (!resultSection.classList.contains('hidden')) {
+                    generateHash();
+                }
+            });
+
+            // Generate hash
+            generateBtn.addEventListener('click', generateHash);
+
+            function generateHash() {
+                const text = inputText.value.trim();
+                if (text === '') {
+                    showToast('Por favor, digite algum texto para gerar o hash.', 'error');
+                    return;
+                }
+
+                let hash;
+                if (currentAlgorithm === 'md5') {
+                    hash = CryptoJS.MD5(text).toString();
+                    hashType.textContent = 'MD5';
+                } else {
+                    hash = CryptoJS.SHA256(text).toString();
+                    hashType.textContent = 'SHA-256';
+                }
+
+                hashResult.textContent = hash;
+                hashLength.textContent = hash.length;
+                resultSection.classList.remove('hidden');
+
+                // Scroll to result
+                resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+
+            // Clear input
+            clearBtn.addEventListener('click', function () {
+                inputText.value = '';
+                resultSection.classList.add('hidden');
+                inputText.focus();
+            });
+
+            // Copy to clipboard
+            copyBtn.addEventListener('click', function () {
+                navigator.clipboard.writeText(hashResult.textContent).then(function () {
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = 'Copiado!';
+                    copyBtn.classList.remove('text-blue-600', 'border-blue-600');
+                    copyBtn.classList.add('text-green-600', 'border-green-600');
+                    showToast('Hash copiado com sucesso!', 'success');
+
+                    setTimeout(function () {
+                        copyBtn.textContent = originalText;
+                        copyBtn.classList.remove('text-green-600', 'border-green-600');
+                        copyBtn.classList.add('text-blue-600', 'border-blue-600');
+                    }, 2000);
+                }, function () {
+                    showToast('Falha ao copiar o hash. Por favor, tente novamente.', 'error');
+                });
+            });
+
+            // Allow Enter key to generate hash
+            inputText.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' && e.ctrlKey) {
+                    generateHash();
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
