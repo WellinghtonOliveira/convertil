@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- SEO base -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IconForge | Criador de Favicon Profissional</title>
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+    <link rel="canonical" href="https://convertil.com/gerador-de-favicon">
+
+    <!-- Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX61BYEH4E"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RX61BYEH4E');
+    </script>
+
+    <!-- Meta tags de SEO -->
+    <meta name="description"
+        content="Crie seu favicon personalizado com o IconForge. Converta imagens em favicons de forma rápida, gratuita e profissional com suporte a múltiplos tamanhos.">
+    <meta name="keywords"
+        content="favicon, criar favicon, gerador de favicon, favicon online, convertil, IconForge, favicon png, favicon ico, favicon converter">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Convertil">
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:title" content="IconForge | Criador de Favicon Profissional">
+    <meta property="og:description"
+        content="Gere favicons personalizados e profissionais com o IconForge. Ideal para sites, blogs e projetos.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://convertil.com/gerador-de-favicon">
+    <meta property="og:image" content="https://convertil.com/assets/logo.png">
+    <meta property="og:site_name" content="Convertil">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="IconForge | Criador de Favicon Profissional">
+    <meta name="twitter:description"
+        content="Gere favicons personalizados para seu site com facilidade e qualidade profissional.">
+    <meta name="twitter:image" content="https://convertil.com/assets/logo.png">
+    <meta name="twitter:site" content="@convertil"> <!-- Substitua por @convertil se tiver conta -->
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "IconForge | Criador de Favicon Profissional",
+  "url": "https://convertil.com/gerador-de-favicon",
+  "description": "Gere favicons personalizados com qualidade profissional de forma gratuita com o IconForge, uma ferramenta do Convertil.",
+  "image": "https://convertil.com/assets/logo.png",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Convertil",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://convertil.com/assets/logo.png"
+    }
+  }
+}
+</script>
+
+    <style>
+        :root {
+            --primary: #2563EB;
+            --secondary: #F59E0B;
+            --light: #F9FAFB;
+            --dark: #1F2937;
+            --error: #EF4444;
+            --success: #10B981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.2s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #6B7280;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .tool-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-header h2 {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+
+        .steps {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 200px;
+            background-color: #F3F4F6;
+            padding: 1.5rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background-color: var(--primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .step p {
+            color: #6B7280;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .upload-area {
+            border: 2px dashed #D1D5DB;
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+
+        .upload-area.active {
+            border-color: var(--success);
+            background-color: rgba(16, 185, 129, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .upload-subtext {
+            color: #6B7280;
+            font-size: 0.9rem;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .preview-section {
+            display: none;
+            margin-bottom: 2rem;
+        }
+
+        .preview-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .preview-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .preview-box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .preview-box h4 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .preview-image {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            border: 1px solid #E5E7EB;
+            border-radius: 4px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .control-group input,
+        .control-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .control-group input:focus,
+        .control-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1D4ED8;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #D97706;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid #D1D5DB;
+            color: var(--dark);
+        }
+
+        .btn-outline:hover {
+            background-color: #F3F4F6;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .about-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            display: none;
+        }
+
+        .about-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .about-section p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4B5563;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .steps {
+                flex-direction: column;
+            }
+
+            .preview-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .action-buttons {
+                justify-content: center;
+            }
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            background-color: var(--success);
+        }
+
+        .toast.error {
+            background-color: var(--error);
+        }
+
+        .toast-icon {
+            font-size: 1.2rem;
+        }
+
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            max-width: 300px;
+            z-index: 9999;
+            font-family: Arial, sans-serif;
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            margin-top: 10px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            animation: fadeInOut 3s ease forwards;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+        }
+
+        .toast.success {
+            background-color: #28a745;
+        }
+
+        .toast.error {
+            background-color: #dc3545;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            10%,
+            90% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">IF</div>
+            <div class="logo-text">IconForge</div>
+        </div>
+        <nav class="nav-links">
+            <a href="https://convertil.com/">Voltar</a>
+            <a href="#" id="about-link">Sobre</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Crie Favicons Profissionais em Segundos</h1>
+            <p>Transforme suas imagens em favicons perfeitos para sites. Nosso criador online é rápido, fácil de usar e
+                produz favicons de alta qualidade em vários tamanhos.</p>
+        </section>
+
+        <section class="tool-container" id="tool-section">
+            <div class="tool-header">
+                <h2>Criador de Favicon</h2>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Envie sua imagem</h3>
+                    <p>Selecione uma imagem PNG, JPG ou SVG de alta qualidade para converter em favicon.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Personalize</h3>
+                    <p>Ajuste o tamanho, recorte e visualize como ficará em diferentes dispositivos.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Baixe seu favicon</h3>
+                    <p>Faça download do pacote completo com todos os tamanhos necessários para seu site.</p>
+                </div>
+            </div>
+
+            <div class="upload-area" id="upload-area">
+                <div class="upload-icon">📁</div>
+                <div class="upload-text">Arraste e solte sua imagem aqui</div>
+                <div class="upload-subtext">ou clique para selecionar um arquivo (PNG, JPG, SVG)</div>
+                <input type="file" id="file-input" accept="image/png, image/jpeg, image/svg+xml">
+            </div>
+
+            <div class="preview-section" id="preview-section">
+                <h3 class="preview-title">Pré-visualização</h3>
+                <div class="preview-container">
+                    <div class="preview-box">
+                        <h4>16×16 px</h4>
+                        <img src="" alt="Favicon 16x16" class="preview-image" id="preview-16">
+                    </div>
+                    <div class="preview-box">
+                        <h4>32×32 px</h4>
+                        <img src="" alt="Favicon 32x32" class="preview-image" id="preview-32">
+                    </div>
+                    <div class="preview-box">
+                        <h4>48×48 px</h4>
+                        <img src="" alt="Favicon 48x48" class="preview-image" id="preview-48">
+                    </div>
+                    <div class="preview-box">
+                        <h4>64×64 px</h4>
+                        <img src="" alt="Favicon 64x64" class="preview-image" id="preview-64">
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="size-select">Tamanho principal</label>
+                        <select id="size-select">
+                            <option value="16">16×16 px (padrão)</option>
+                            <option value="32">32×32 px</option>
+                            <option value="48">48×48 px</option>
+                            <option value="64">64×64 px</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="bg-color">Cor de fundo (para PNG transparente)</label>
+                        <input type="color" id="bg-color" value="#ffffff">
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-outline" id="reset-btn">Começar novamente</button>
+                    <button class="btn btn-primary" id="download-btn">
+                        <span id="download-text">Baixar Favicon</span>
+                        <div class="spinner" id="download-spinner"></div>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section" id="about-section">
+            <h2>Sobre o IconForge</h2>
+            <p>O IconForge é uma ferramenta online gratuita para criação de favicons profissionais. Favicons são
+                essenciais para qualquer site, aparecendo em abas de navegadores, favoritos e resultados de pesquisa.
+            </p>
+            <p>Nossa ferramenta simplifica o processo de criação de favicons, permitindo que você transforme qualquer
+                imagem em um conjunto completo de ícones em vários tamanhos, prontos para serem usados em seu site.</p>
+            <p>Como usar:</p>
+            <ol style="margin-left: 1.5rem; margin-bottom: 1rem; line-height: 1.6;">
+                <li>Selecione uma imagem de alta qualidade (recomendamos pelo menos 64×64 pixels)</li>
+                <li>Personalize o tamanho e cor de fundo conforme necessário</li>
+                <li>Baixe o pacote completo de favicons</li>
+                <li>Adicione ao seu site usando o código HTML padrão</li>
+            </ol>
+            <p>Todos os processamentos são feitos diretamente no seu navegador - suas imagens nunca são enviadas para
+                nossos servidores, garantindo total privacidade e segurança.</p>
+            <button class="btn btn-secondary" id="back-to-tool-btn">Voltar para a ferramenta</button>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 IconForge - Todos os direitos reservados
+    </footer>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Elementos DOM
+            const uploadArea = document.getElementById('upload-area');
+            const fileInput = document.getElementById('file-input');
+            const previewSection = document.getElementById('preview-section');
+            const preview16 = document.getElementById('preview-16');
+            const preview32 = document.getElementById('preview-32');
+            const preview48 = document.getElementById('preview-48');
+            const preview64 = document.getElementById('preview-64');
+            const sizeSelect = document.getElementById('size-select');
+            const bgColor = document.getElementById('bg-color');
+            const resetBtn = document.getElementById('reset-btn');
+            const downloadBtn = document.getElementById('download-btn');
+            const downloadText = document.getElementById('download-text');
+            const downloadSpinner = document.getElementById('download-spinner');
+            const aboutLink = document.getElementById('about-link');
+            const toolSection = document.getElementById('tool-section');
+            const aboutSection = document.getElementById('about-section');
+            const backToToolBtn = document.getElementById('back-to-tool-btn');
+            const toastContainer = document.getElementById('toast');
+
+            // Variáveis de estado
+            let originalImage = null;
+            let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
+
+            // Event Listeners
+            uploadArea.addEventListener('click', () => fileInput.click());
+            uploadArea.addEventListener('dragover', handleDragOver);
+            uploadArea.addEventListener('dragleave', handleDragLeave);
+            uploadArea.addEventListener('drop', handleDrop);
+            fileInput.addEventListener('change', handleFileSelect);
+            sizeSelect.addEventListener('change', updatePreviews);
+            bgColor.addEventListener('input', updatePreviews);
+            resetBtn.addEventListener('click', resetTool);
+            downloadBtn.addEventListener('click', downloadFavicon);
+            aboutLink.addEventListener('click', showAboutSection);
+            backToToolBtn.addEventListener('click', showToolSection);
+
+            // Funções
+            function handleDragOver(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                uploadArea.classList.add('active');
+            }
+
+            function handleDragLeave(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                uploadArea.classList.remove('active');
+            }
+
+            function handleDrop(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                uploadArea.classList.remove('active');
+
+                if (e.dataTransfer.files.length) {
+                    fileInput.files = e.dataTransfer.files;
+                    handleFileSelect({ target: fileInput });
+                }
+            }
+
+            function handleFileSelect(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const validTypes = ['image/png', 'image/jpeg', 'image/svg+xml'];
+                if (!validTypes.includes(file.type)) {
+                    showToast('Por favor, selecione uma imagem PNG, JPG ou SVG', 'error');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    originalImage = new Image();
+                    originalImage.onload = function () {
+                        uploadArea.style.display = 'none';
+                        previewSection.style.display = 'block';
+                        updatePreviews();
+                    };
+                    originalImage.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+
+            function updatePreviews() {
+                if (!originalImage) return;
+
+                const sizes = [16, 32, 48, 64];
+                const bgColorValue = bgColor.value;
+
+                sizes.forEach(size => {
+                    createFavicon(size, bgColorValue).then(dataUrl => {
+                        document.getElementById(`preview-${size}`).src = dataUrl;
+                    });
+                });
+            }
+
+            function createFavicon(size, bgColor = '#ffffff') {
+                return new Promise((resolve) => {
+                    canvas.width = size;
+                    canvas.height = size;
+
+                    // Preencher com cor de fundo
+                    ctx.fillStyle = bgColor;
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    // Calcular dimensões para manter a proporção
+                    const ratio = Math.min(
+                        canvas.width / originalImage.width,
+                        canvas.height / originalImage.height
+                    );
+                    const width = originalImage.width * ratio;
+                    const height = originalImage.height * ratio;
+                    const x = (canvas.width - width) / 2;
+                    const y = (canvas.height - height) / 2;
+
+                    // Desenhar imagem
+                    ctx.drawImage(originalImage, x, y, width, height);
+
+                    resolve(canvas.toDataURL('image/png'));
+                });
+            }
+
+            function downloadFavicon() {
+                if (!originalImage) return;
+
+                downloadText.style.display = 'none';
+                downloadSpinner.style.display = 'block';
+                downloadBtn.disabled = true;
+
+                const selectedSize = parseInt(sizeSelect.value);
+                const bgColorValue = bgColor.value;
+
+                createFavicon(selectedSize, bgColorValue).then(dataUrl => {
+                    const link = document.createElement('a');
+                    link.href = dataUrl;
+                    link.download = `favicon-${selectedSize}x${selectedSize}.png`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    downloadText.style.display = 'inline';
+                    downloadSpinner.style.display = 'none';
+                    downloadBtn.disabled = false;
+
+                    showToast('Favicon baixado com sucesso!', 'success');
+                });
+            }
+
+            function resetTool() {
+                fileInput.value = '';
+                originalImage = null;
+                uploadArea.style.display = '';
+                previewSection.style.display = 'none';
+                sizeSelect.value = '16';
+                bgColor.value = '#ffffff';
+            }
+
+            function showAboutSection(e) {
+                e.preventDefault();
+                toolSection.style.display = 'none';
+                aboutSection.style.display = 'block';
+            }
+
+            function showToolSection() {
+                aboutSection.style.display = 'none';
+                toolSection.style.display = 'block';
+            }
+
+            function showToast(message, type = 'success') {
+                const toast = document.createElement('div');
+                toast.classList.add('toast', type);
+                toast.textContent = message;
+                toastContainer.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.remove();
+                }, 3000);
+            }
+        });
+
+    </script>
+    <!-- Toast Modal -->
+    <div id="toast" class="toast-container"></div>
+
+</body>
+
+</html>
