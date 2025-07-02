@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX61BYEH4E"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RX61BYEH4E');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>HashTrack - Analisador de Hashtags</title>
+    <meta name="description"
+        content="Analise a popularidade, engajamento e tendências de qualquer hashtag com HashTrack. Ferramenta online rápida e fácil para monitorar hashtags no Instagram, Twitter e mais." />
+    <meta name="keywords"
+        content="analisador de hashtags, hashtag popularidade, hashtag análise, monitoramento de hashtags, hashtags Instagram, hashtags Twitter, HashTrack" />
+    <meta name="author" content="Convertil" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Portuguese" />
+    <meta http-equiv="Content-Language" content="pt-BR" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./favicon.png" type="image/png" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://convertil.com/analisador-de-hashtags" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="HashTrack - Analisador de Hashtags" />
+    <meta property="og:description"
+        content="Analise a popularidade, engajamento e tendências de qualquer hashtag com HashTrack. Ferramenta online rápida e fácil para monitorar hashtags no Instagram, Twitter e mais." />
+    <meta property="og:url" content="https://convertil.com/analisador-de-hashtags" />
+    <meta property="og:site_name" content="Convertil" />
+    <meta property="og:image" content="https://convertil.com/assets/logo.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="HashTrack - Analisador de Hashtags" />
+    <meta name="twitter:description"
+        content="Analise a popularidade, engajamento e tendências de qualquer hashtag com HashTrack. Ferramenta online rápida e fácil para monitorar hashtags no Instagram, Twitter e mais." />
+    <meta name="twitter:image" content="https://convertil.com/assets/logo.png" />
+    <meta name="twitter:site" content="@Convertil" />
+    <meta name="twitter:creator" content="@Convertil" />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "HashTrack - Analisador de Hashtags",
+    "url": "https://convertil.com/analisador-de-hashtags",
+    "description": "Analise a popularidade, engajamento e tendências de qualquer hashtag com HashTrack. Ferramenta online rápida e fácil para monitorar hashtags no Instagram, Twitter e mais.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Convertil",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://convertil.com/assets/logo.png"
+      }
+    }
+  }
+  </script>
+    <style>
+        :root {
+            --primary: #2563EB;
+            --secondary: #F59E0B;
+            --light: #F9FAFB;
+            --dark: #1F2937;
+            --danger: #EF4444;
+            --success: #10B981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #6B7280;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .analyzer-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .input-group button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .input-group button:hover {
+            background-color: #1D4ED8;
+        }
+
+        .hashtag-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hashtag-example {
+            background-color: #EFF6FF;
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .hashtag-example:hover {
+            background-color: #DBEAFE;
+        }
+
+        .results-container {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-header h2 {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+
+        .clear-btn {
+            background-color: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .clear-btn:hover {
+            background-color: #DC2626;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 0.9rem;
+            color: #6B7280;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card p {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .popularity-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .popularity-card h3 {
+            font-size: 1.25rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .popularity-meter {
+            height: 12px;
+            background-color: #E5E7EB;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .popularity-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 6px;
+            width: 0;
+            transition: width 1s ease-out;
+        }
+
+        .popularity-labels {
+            display: flex;
+            justify-content: space-between;
+            color: #6B7280;
+            font-size: 0.9rem;
+        }
+
+        .related-tags {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .related-tags h3 {
+            font-size: 1.25rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .tag-item {
+            background-color: #EFF6FF;
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tag-item .tag-count {
+            background-color: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transform: translateY(150%);
+            transition: transform 0.3s ease-out;
+            z-index: 1000;
+            max-width: 350px;
+        }
+
+        .modal.show {
+            transform: translateY(0);
+        }
+
+        .modal-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .modal-icon.success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .modal-icon.error {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .modal-icon.warning {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .modal-content h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            color: var(--dark);
+        }
+
+        .modal-content p {
+            font-size: 0.9rem;
+            color: #6B7280;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #9CA3AF;
+            cursor: pointer;
+            font-size: 1.25rem;
+            margin-left: auto;
+            padding: 0 0.5rem;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            color: #D1D5DB;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            .input-group button {
+                width: 100%;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal {
+                max-width: calc(100% - 40px);
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            header,
+            main {
+                padding: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .analyzer-container {
+                padding: 1.5rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">HT</div>
+                <div class="logo-text">HashTrack</div>
+            </div>
+            <nav class="nav-links">
+                <a href="https://convertil.com/">Voltar</a>
+                <a href="#about">Sobre</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Analisador de Hashtags Profissional</h1>
+            <p>Descubra o desempenho, popularidade e relacionamento entre hashtags para otimizar sua estratégia em redes
+                sociais. Obtenha insights valiosos em segundos.</p>
+        </section>
+
+        <section class="analyzer-container">
+            <div class="input-group">
+                <input type="text" id="hashtag-input" placeholder="Digite uma hashtag (ex: #marketingdigital)"
+                    autocomplete="off">
+                <button id="analyze-btn">Analisar</button>
+            </div>
+
+            <div class="hashtag-examples">
+                <div class="hashtag-example">#marketingdigital</div>
+                <div class="hashtag-example">#empreendedorismo</div>
+                <div class="hashtag-example">#tecnologia</div>
+                <div class="hashtag-example">#design</div>
+                <div class="hashtag-example">#saude</div>
+            </div>
+
+            <div class="results-container" id="results-container">
+                <div class="results-header">
+                    <h2>Resultados da Análise</h2>
+                    <button class="clear-btn" id="clear-btn">Limpar</button>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Popularidade</h3>
+                        <p id="popularity-score">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Média Diária</h3>
+                        <p id="daily-usage">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Crescimento</h3>
+                        <p id="growth-rate">0%</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Engajamento</h3>
+                        <p id="engagement-rate">0%</p>
+                    </div>
+                </div>
+
+                <div class="popularity-card">
+                    <h3>Nível de Popularidade</h3>
+                    <div class="popularity-meter">
+                        <div class="popularity-fill" id="popularity-fill"></div>
+                    </div>
+                    <div class="popularity-labels">
+                        <span>Baixa</span>
+                        <span>Média</span>
+                        <span>Alta</span>
+                        <span>Viral</span>
+                    </div>
+                </div>
+
+                <div class="related-tags">
+                    <h3>Hashtags Relacionadas</h3>
+                    <div class="tags-list" id="related-tags">
+                        <!-- Tags will be added here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="analyzer-container">
+            <h2>Sobre o HashTrack</h2>
+            <p style="margin-bottom: 1rem;">O HashTrack é uma ferramenta profissional de análise de hashtags
+                desenvolvida para marketers, gestores de mídia social e criadores de conteúdo. Nossa plataforma oferece
+                insights detalhados sobre o desempenho de hashtags em diversas redes sociais.</p>
+
+            <h3 style="margin-bottom: 0.5rem;">Como Funciona</h3>
+            <p>Nosso algoritmo avançado analisa milhões de postagens para fornecer dados precisos sobre popularidade,
+                taxa de crescimento, engajamento e relacionamento entre hashtags. Basta inserir uma hashtag e obter
+                instantaneamente um relatório completo.</p>
+
+            <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Benefícios</h3>
+            <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                <li style="margin-bottom: 0.5rem;">Identifique hashtags populares e em crescimento</li>
+                <li style="margin-bottom: 0.5rem;">Descubra relacionamentos entre hashtags para expandir seu alcance
+                </li>
+                <li style="margin-bottom: 0.5rem;">Monitore o desempenho de suas hashtags ao longo do tempo</li>
+                <li>Compare diferentes hashtags para otimizar sua estratégia</li>
+            </ul>
+        </section>
+    </main>
+
+    <div class="modal" id="notification-modal">
+        <div class="modal-icon success" id="modal-icon">
+            ✓
+        </div>
+        <div class="modal-content">
+            <h4 id="modal-title">Sucesso</h4>
+            <p id="modal-message">Hashtag analisada com sucesso!</p>
+        </div>
+        <button class="close-modal" id="close-modal">&times;</button>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p class="copyright">© 2025 HashTrack. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // DOM Elements
+            const hashtagInput = document.getElementById('hashtag-input');
+            const analyzeBtn = document.getElementById('analyze-btn');
+            const resultsContainer = document.getElementById('results-container');
+            const clearBtn = document.getElementById('clear-btn');
+            const exampleTags = document.querySelectorAll('.hashtag-example');
+            const modal = document.getElementById('notification-modal');
+            const closeModal = document.getElementById('close-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalMessage = document.getElementById('modal-message');
+            const modalIcon = document.getElementById('modal-icon');
+
+            // Example tags click handler
+            exampleTags.forEach(tag => {
+                tag.addEventListener('click', function () {
+                    hashtagInput.value = this.textContent;
+                });
+            });
+
+            // Analyze button click handler
+            analyzeBtn.addEventListener('click', function () {
+                const hashtag = hashtagInput.value.trim();
+
+                if (!hashtag) {
+                    showModal('Erro', 'Por favor, insira uma hashtag para analisar.', 'error');
+                    return;
+                }
+
+                // Validate hashtag format
+                if (!hashtag.startsWith('#')) {
+                    showModal('Formato Inválido', 'Uma hashtag deve começar com #.', 'error');
+                    return;
+                }
+
+                if (hashtag.length < 2) {
+                    showModal('Formato Inválido', 'A hashtag deve conter pelo menos um caractere após o #.', 'error');
+                    return;
+                }
+
+                // Simulate analysis (in a real app, this would be an API call)
+                simulateAnalysis(hashtag);
+            });
+
+            // Clear button click handler
+            clearBtn.addEventListener('click', function () {
+                hashtagInput.value = '';
+                resultsContainer.style.display = 'none';
+                showModal('Limpo', 'Os resultados foram limpos. Você pode analisar uma nova hashtag.', 'success');
+            });
+
+            // Close modal button
+            closeModal.addEventListener('click', function () {
+                modal.classList.remove('show');
+            });
+
+            // Function to show modal
+            function showModal(title, message, type) {
+                modalTitle.textContent = title;
+                modalMessage.textContent = message;
+
+                // Set icon and color based on type
+                modalIcon.className = 'modal-icon';
+                modalIcon.classList.add(type);
+
+                if (type === 'success') {
+                    modalIcon.textContent = '✓';
+                } else if (type === 'error') {
+                    modalIcon.textContent = '✕';
+                } else if (type === 'warning') {
+                    modalIcon.textContent = '!';
+                }
+
+                modal.classList.add('show');
+
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    modal.classList.remove('show');
+                }, 5000);
+            }
+
+            // Function to simulate analysis
+            // Função de análise com dados reais da RiteTag
+            async function simulateAnalysis(hashtag) {
+                analyzeBtn.disabled = true;
+                analyzeBtn.textContent = 'Analisando...';
+
+                const tag = hashtag.replace('#', '').toLowerCase();
+
+                try {
+                    const response = await fetch(`https://megasitebackend.onrender.com/analyze?tag=${encodeURIComponent(tag)}`);
+                    if (!response.ok) throw new Error('Erro ao buscar dados');
+
+                    const json = await response.json();
+
+                    // Aqui pegamos o array dentro de json.data
+                    const data = json.data;
+
+                    if (data && data.length > 0) {
+                        const result = data[0]; // primeiro objeto com dados reais
+
+                        document.getElementById('popularity-score').textContent = Math.min(Math.floor(result.exposure / 10), 100);
+                        document.getElementById('daily-usage').textContent = result.tweets.toLocaleString();
+                        document.getElementById('growth-rate').textContent = result.retweets.toFixed(1) + '%';
+                        document.getElementById('engagement-rate').textContent = '—'; // Não tem favorites aqui
+
+                        const popularityFill = document.getElementById('popularity-fill');
+                        popularityFill.style.width = Math.min(Math.floor(result.exposure / 10), 100) + '%';
+
+                        // Você pode adaptar ou criar suas próprias hashtags relacionadas,
+                        // aqui vou usar só a própria hashtag para exemplo
+                        const relatedTagsContainer = document.getElementById('related-tags');
+                        relatedTagsContainer.innerHTML = '';
+                        const tagElement = document.createElement('div');
+                        tagElement.className = 'tag-item';
+                        tagElement.innerHTML = `#${result.tag} <span class="tag-count">${result.tweets.toLocaleString()} tweets</span>`;
+                        relatedTagsContainer.appendChild(tagElement);
+
+                        resultsContainer.style.display = 'block';
+                        showModal('Análise Completa', `A hashtag ${hashtag} foi analisada com sucesso.`, 'success');
+                    } else {
+                        showModal('Sem dados', 'Nenhuma informação encontrada para essa hashtag.', 'warning');
+                    }
+                } catch (error) {
+                    console.error(error);
+                    showModal('Erro', 'Erro ao analisar a hashtag.', 'error');
+                } finally {
+                    analyzeBtn.disabled = false;
+                    analyzeBtn.textContent = 'Analisar';
+                }
+            }
+
+
+
+
+            // Function to generate related tags
+            function generateRelatedTags(mainTag) {
+                const baseTag = mainTag.replace('#', '').toLowerCase();
+                const related = [];
+                const variations = [
+                    `${baseTag}brasil`, `${baseTag}br`, `${baseTag}2025`,
+                    `digital${baseTag}`, `love${baseTag}`, `${baseTag}life`,
+                    `${baseTag}day`, `${baseTag}time`, `${baseTag}oficial`
+                ];
+
+                for (let i = 0; i < 8; i++) {
+                    const tagName = variations[i] || `${baseTag}${Math.floor(Math.random() * 1000)}`;
+                    related.push({
+                        name: `#${tagName}`,
+                        count: Math.floor(Math.random() * 50000) + 1000
+                    });
+                }
+
+                // Sort by count (descending)
+                return related.sort((a, b) => b.count - a.count);
+            }
+
+            // Allow pressing Enter in the input field
+            hashtagInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    analyzeBtn.click();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

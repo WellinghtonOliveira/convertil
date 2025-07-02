@@ -1,4 +1,4 @@
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args))
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args))
 const dados = require('../utils/utils')
 const cheerio = require('cheerio')
 
@@ -73,4 +73,23 @@ async function getMetadata(req, res) {
     }
 }
 
-module.exports = { verificadorValor, listarCategorias, funcSubmitForm, getMetadata, getVida }
+async function apiAnalyze(req, res) {
+    const API_KEY = '14299872be3fd205be014943456b6a8f3e8739341144';
+    const { tag } = req.query;
+
+    if (!tag) {
+        return res.status(400).json({ error: 'A hashtag é obrigatória.' });
+    }
+
+    try {
+        const apiUrl = `https://api.ritekit.com/v1/stats/hashtag-suggestions?text=${encodeURIComponent(tag)}&client_id=${API_KEY}`;
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        res.json(data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Erro ao buscar dados da API RiteTag' });
+    }
+}
+
+module.exports = { verificadorValor, listarCategorias, funcSubmitForm, getMetadata, getVida, apiAnalyze }
