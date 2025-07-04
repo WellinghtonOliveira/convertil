@@ -15,6 +15,7 @@ const dados = [
     { category: 'productivity', name: 'Cronômetro Online', description: 'Ideal para treinos, estudos, tarefas ou qualquer atividade, sem complicações.', link: './cronometro-online/' },
     { category: 'productivity', name: 'Bloco de Notas Online', description: 'Bloco de notas online: simples, rápido e prático. Faça anotações rápidas e salve sem complicação', link: './bloco-de-notas-online/' },
     { category: 'productivity', name: 'Técnica Pomodoro', description: 'A técnica Pomodoro consiste em focar por 25 minutos em uma tarefa e depois fazer uma pausa curta de 5 minutos.', link: './tecnica-pomodoro/' },
+    { category: 'productivity', name: 'Gerador de QR code', description: ' Nunca foi tão fácil criar QR codes para imagens e vídeos. Crie QR codes grátis agora mesmo', link: './gerador-qr-code/' },
 
     // marketing
     { category: 'marketing', name: 'Gerador de Títulos Atrativos', description: 'Crie títulos irresistíveis para seus vídeos que despertam emoção ou curiosidade.', link: './gerador-de-titulos/' },
