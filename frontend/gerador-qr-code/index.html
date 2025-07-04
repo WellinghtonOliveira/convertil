@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QRGen Pro - Gerador de QR Code Avançado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563EB',
+                        secondary: '#F59E0B',
+                        light: '#F9FAFB',
+                        dark: '#1F2937',
+                        danger: '#EF4444',
+                        success: '#10B981',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563EB 0%, #10B981 100%);
+        }
+
+        .qr-code-container {
+            transition: all 0.3s ease;
+        }
+
+        .qr-code-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal {
+            transition: all 0.3s ease;
+            transform: translateY(100%);
+        }
+
+        .modal.active {
+            transform: translateY(0);
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-light min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                <h1 class="text-2xl font-bold">QRGen Pro</h1>
+            </div>
+            <nav class="flex space-x-6">
+                <a href="#" class="hover:text-secondary transition-colors duration-300 font-medium"
+                    id="back-link">Voltar</a>
+                <a href="#" class="hover:text-secondary transition-colors duration-300 font-medium"
+                    id="about-link">Sobre</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <section class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-dark mb-4">Gerador de QR Code Profissional</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                Crie QR codes personalizados em segundos para URLs, textos, contatos, Wi-Fi e muito mais.
+                Nossa ferramenta avançada oferece controle total sobre o design e funcionalidade.
+            </p>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Generator Form -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <h3 class="text-2xl font-semibold text-dark mb-6">Configurações do QR Code</h3>
+
+                <div class="space-y-6">
+                    <div>
+                        <label for="qr-content" class="block text-sm font-medium text-gray-700 mb-1">Conteúdo</label>
+                        <textarea id="qr-content" rows="3"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                            placeholder="Digite o texto, URL ou dados para o QR Code"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="qr-type" class="block text-sm font-medium text-gray-700 mb-1">Tipo de QR
+                            Code</label>
+                        <select id="qr-type"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option value="url">URL/Link</option>
+                            <option value="text">Texto</option>
+                            <option value="wifi">Wi-Fi</option>
+                            <option value="contact">Contato (vCard)</option>
+                            <option value="sms">SMS</option>
+                            <option value="email">E-mail</option>
+                        </select>
+                    </div>
+
+                    <!-- Dynamic fields based on QR type -->
+                    <div id="dynamic-fields" class="space-y-4 hidden">
+                        <!-- WiFi Fields -->
+                        <div id="wifi-fields" class="hidden">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label for="wifi-ssid" class="block text-sm font-medium text-gray-700 mb-1">Nome da
+                                        Rede (SSID)</label>
+                                    <input type="text" id="wifi-ssid"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <div>
+                                    <label for="wifi-password"
+                                        class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+                                    <input type="text" id="wifi-password"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <label for="wifi-encryption" class="block text-sm font-medium text-gray-700 mb-1">Tipo
+                                    de Criptografia</label>
+                                <select id="wifi-encryption"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                                    <option value="WPA">WPA/WPA2</option>
+                                    <option value="WEP">WEP</option>
+                                    <option value="">Nenhuma</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Contact Fields -->
+                        <div id="contact-fields" class="hidden">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label for="contact-name"
+                                        class="block text-sm font-medium text-gray-700 mb-1">Nome</label>
+                                    <input type="text" id="contact-name"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <div>
+                                    <label for="contact-phone"
+                                        class="block text-sm font-medium text-gray-700 mb-1">Telefone</label>
+                                    <input type="tel" id="contact-phone"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <label for="contact-email"
+                                    class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+                                <input type="email" id="contact-email"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                            </div>
+                        </div>
+
+                        <!-- SMS Fields -->
+                        <div id="sms-fields" class="hidden">
+                            <div>
+                                <label for="sms-number" class="block text-sm font-medium text-gray-700 mb-1">Número de
+                                    Telefone</label>
+                                <input type="tel" id="sms-number"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                            </div>
+                            <div class="mt-2">
+                                <label for="sms-message"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Mensagem</label>
+                                <textarea id="sms-message" rows="2"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Email Fields -->
+                        <div id="email-fields" class="hidden">
+                            <div>
+                                <label for="email-address" class="block text-sm font-medium text-gray-700 mb-1">Endereço
+                                    de E-mail</label>
+                                <input type="email" id="email-address"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                            </div>
+                            <div class="mt-2">
+                                <label for="email-subject"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Assunto</label>
+                                <input type="text" id="email-subject"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                            </div>
+                            <div class="mt-2">
+                                <label for="email-body" class="block text-sm font-medium text-gray-700 mb-1">Corpo do
+                                    E-mail</label>
+                                <textarea id="email-body" rows="2"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="qr-color" class="block text-sm font-medium text-gray-700 mb-1">Cor do QR
+                                Code</label>
+                            <input type="color" id="qr-color" value="#000000" class="w-full h-10 cursor-pointer">
+                        </div>
+                        <div>
+                            <label for="qr-bgcolor" class="block text-sm font-medium text-gray-700 mb-1">Cor de
+                                Fundo</label>
+                            <input type="color" id="qr-bgcolor" value="#ffffff" class="w-full h-10 cursor-pointer">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="qr-size" class="block text-sm font-medium text-gray-700 mb-1">Tamanho
+                                (px)</label>
+                            <input type="range" id="qr-size" min="100" max="1000" value="300" class="w-full">
+                            <div class="text-center mt-1 text-sm text-gray-600"><span id="size-value">300</span>px</div>
+                        </div>
+                        <div>
+                            <label for="qr-margin" class="block text-sm font-medium text-gray-700 mb-1">Margem
+                                (px)</label>
+                            <input type="range" id="qr-margin" min="0" max="50" value="10" class="w-full">
+                            <div class="text-center mt-1 text-sm text-gray-600"><span id="margin-value">10</span>px
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="qr-correction" class="block text-sm font-medium text-gray-700 mb-1">Correção de
+                            Erros</label>
+                        <select id="qr-correction"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option value="L">Baixa (7%)</option>
+                            <option value="M">Média (15%)</option>
+                            <option value="Q">Alta (25%)</option>
+                            <option value="H">Máxima (30%)</option>
+                        </select>
+                        <p class="text-xs text-gray-500 mt-1">Níveis mais altos permitem que o QR Code seja lido mesmo
+                            se estiver danificado.</p>
+                    </div>
+
+                    <div class="flex items-center">
+                        <input type="checkbox" id="qr-logo"
+                            class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
+                        <label for="qr-logo" class="ml-2 block text-sm text-gray-700">Adicionar logo ao centro</label>
+                    </div>
+
+                    <div id="logo-upload-container" class="hidden">
+                        <label for="qr-logo-file" class="block text-sm font-medium text-gray-700 mb-1">Logo
+                            (PNG/JPG)</label>
+                        <input type="file" id="qr-logo-file" accept="image/png, image/jpeg"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                        <div class="grid grid-cols-2 gap-4 mt-2">
+                            <div>
+                                <label for="logo-size" class="block text-sm font-medium text-gray-700 mb-1">Tamanho do
+                                    Logo (%)</label>
+                                <input type="range" id="logo-size" min="5" max="30" value="15" class="w-full">
+                                <div class="text-center mt-1 text-sm text-gray-600"><span
+                                        id="logo-size-value">15</span>%</div>
+                            </div>
+                            <div>
+                                <label for="logo-border" class="block text-sm font-medium text-gray-700 mb-1">Borda do
+                                    Logo (px)</label>
+                                <input type="range" id="logo-border" min="0" max="10" value="2" class="w-full">
+                                <div class="text-center mt-1 text-sm text-gray-600"><span
+                                        id="logo-border-value">2</span>px</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="generate-btn"
+                        class="w-full bg-primary hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md transition-colors duration-300 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        Gerar QR Code
+                    </button>
+                </div>
+            </div>
+
+            <!-- QR Code Preview -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <h3 class="text-2xl font-semibold text-dark mb-6">Visualização do QR Code</h3>
+
+                <div class="flex flex-col items-center justify-center">
+                    <div id="qr-placeholder"
+                        class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center w-full max-w-xs">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        <p class="mt-2 text-gray-500">Seu QR Code aparecerá aqui</p>
+                    </div>
+
+                    <div id="qr-result" class="hidden qr-code-container">
+                        <div class="relative">
+                            <canvas id="qr-canvas" class="mx-auto border border-gray-200 rounded-lg"></canvas>
+                            <div id="qr-logo-preview"
+                                class="absolute inset-0 flex items-center justify-center pointer-events-none hidden">
+                                <img id="logo-preview-img" class="rounded-full border-2 border-white"
+                                    style="width: 15%;">
+                            </div>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <p class="text-sm text-gray-600 mb-2">Escaneie este QR Code com seu dispositivo móvel</p>
+                            <div class="flex space-x-2 justify-center">
+                                <button id="download-png"
+                                    class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300">
+                                    PNG
+                                </button>
+                                <button id="download-svg"
+                                    class="bg-secondary hover:bg-yellow-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300">
+                                    SVG
+                                </button>
+                                <button id="download-jpg"
+                                    class="bg-success hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300">
+                                    JPG
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QR Code Details -->
+                <div class="mt-8">
+                    <h4 class="text-lg font-semibold text-dark mb-3">Informações Técnicas</h4>
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <p class="text-gray-500">Tipo:</p>
+                                <p id="info-type" class="font-medium">-</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">Tamanho:</p>
+                                <p id="info-size" class="font-medium">-</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">Correção de Erros:</p>
+                                <p id="info-correction" class="font-medium">-</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">Versão:</p>
+                                <p id="info-version" class="font-medium">-</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">Número de Módulos:</p>
+                                <p id="info-modules" class="font-medium">-</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500">Capacidade:</p>
+                                <p id="info-capacity" class="font-medium">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QR Code Usage Tips -->
+        <section class="mt-16 bg-white rounded-xl shadow-md p-6">
+            <h3 class="text-2xl font-semibold text-dark mb-6">Melhores Práticas para QR Codes</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-primary rounded-full p-2 mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <h4 class="font-medium text-dark">Tamanho Adequado</h4>
+                    </div>
+                    <p class="text-sm text-gray-600">QR Codes devem ter pelo menos 2x2cm para escaneamento fácil. Para
+                        uso em materiais impressos, recomenda-se pelo menos 3x3cm.</p>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-primary rounded-full p-2 mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <h4 class="font-medium text-dark">Contraste Adequado</h4>
+                    </div>
+                    <p class="text-sm text-gray-600">Garanta alto contraste entre o QR Code e o fundo. Cores escuras
+                        sobre fundo claro funcionam melhor. Evite gradientes ou padrões complexos.</p>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-primary rounded-full p-2 mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h4 class="font-medium text-dark">Teste Antes de Usar</h4>
+                    </div>
+                    <p class="text-sm text-gray-600">Sempre teste seu QR Code com vários dispositivos e aplicativos
+                        antes de distribuí-lo. Verifique se o conteúdo está correto e acessível.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- QR Code Types Explanation -->
+        <section class="mt-16 bg-white rounded-xl shadow-md p-6">
+            <h3 class="text-2xl font-semibold text-dark mb-6">Tipos de QR Code e Suas Aplicações</h3>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Tipo</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Descrição</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Uso Recomendado</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Capacidade Máxima</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-dark">URL/Link</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Redireciona para um site ou página web</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Marketing digital, campanhas, links para
+                                produtos</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">~4.296 caracteres</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-dark">Texto</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Exibe texto simples quando escaneado</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Mensagens, instruções, informações estáticas
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">~4.296 caracteres</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-dark">Wi-Fi</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Conecta automaticamente a uma rede Wi-Fi</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Redes domésticas, estabelecimentos comerciais
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">SSID + senha</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-dark">Contato (vCard)</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Adiciona um contato à agenda do telefone</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Cartões de visita, assinaturas de e-mail</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">~4.296 caracteres</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-dark">SMS</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Prepara uma mensagem SMS para envio</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Campanhas de SMS, suporte rápido</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Número + mensagem</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-dark">E-mail</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Prepara um e-mail para envio</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Contato rápido, suporte ao cliente</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">Endereço + assunto + corpo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    <span class="text-xl font-bold">QRGen Pro</span>
+                </div>
+                <div class="text-sm text-gray-400">
+                    &copy; 2025 QRGen Pro. Todos os direitos reservados.
+                </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-gray-700 text-center text-sm text-gray-400">
+                <p>QRGen Pro é uma ferramenta avançada para geração de QR Codes com recursos profissionais e
+                    personalização completa.</p>
+                <p class="mt-2">Os QR Codes gerados são de uso livre para fins comerciais e pessoais.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Modal -->
+    <div id="notification-modal"
+        class="fixed bottom-4 right-4 w-80 bg-white rounded-lg shadow-xl p-4 border-l-4 border-primary transform transition-transform duration-300 ease-in-out translate-y-full">
+        <div class="flex items-start">
+            <div id="modal-icon" class="mr-3 mt-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <div class="flex-1">
+                <h4 id="modal-title" class="font-medium text-dark">Notificação</h4>
+                <p id="modal-message" class="text-sm text-gray-600 mt-1">Mensagem de notificação aqui.</p>
+            </div>
+            <button id="modal-close" class="text-gray-400 hover:text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="about-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-start">
+                    <h3 class="text-2xl font-bold text-dark">Sobre o QRGen Pro</h3>
+                    <button id="about-close" class="text-gray-400 hover:text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="mt-6 space-y-4 text-gray-700">
+                    <p>O QRGen Pro é uma ferramenta profissional para geração de QR Codes com recursos avançados de
+                        personalização e controle técnico.</p>
+
+                    <h4 class="font-semibold text-dark mt-4">Recursos Principais:</h4>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Geração de múltiplos tipos de QR Code (URL, texto, Wi-Fi, contato, SMS, e-mail)</li>
+                        <li>Personalização completa de cores, tamanho e margens</li>
+                        <li>Opção para adicionar logo ao centro do QR Code</li>
+                        <li>Controle sobre a correção de erros (de 7% a 30%)</li>
+                        <li>Download em múltiplos formatos (PNG, JPG, SVG)</li>
+                        <li>Informações técnicas detalhadas sobre o QR Code gerado</li>
+                    </ul>
+
+                    <h4 class="font-semibold text-dark mt-4">Como Funciona:</h4>
+                    <p>Os QR Codes (Quick Response Codes) são códigos de barras bidimensionais que podem armazenar
+                        informações em um pequeno espaço. Eles foram criados em 1994 pela empresa japonesa Denso Wave e
+                        desde então se tornaram um padrão global.</p>
+
+                    <h4 class="font-semibold text-dark mt-4">Tecnologia Utilizada:</h4>
+                    <p>Nosso gerador utiliza algoritmos otimizados para criar QR Codes eficientes que seguem os padrões
+                        ISO/IEC 18004. A correção de erros permite que o código seja lido mesmo quando parcialmente
+                        danificado.</p>
+
+                    <h4 class="font-semibold text-dark mt-4">Privacidade e Segurança:</h4>
+                    <p>Todos os QR Codes são gerados localmente em seu navegador. Nenhum dado é enviado para nossos
+                        servidores, garantindo total privacidade e segurança de suas informações.</p>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-gray-200">
+                    <p class="text-sm text-gray-500">Versão 2.1.0 - Atualizado em 2025</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const qrType = document.getElementById("qr-type");
+            const qrContent = document.getElementById("qr-content");
+            const qrColor = document.getElementById("qr-color");
+            const qrBgColor = document.getElementById("qr-bgcolor");
+            const qrSize = document.getElementById("qr-size");
+            const qrLogo = document.getElementById("qr-logo");
+            const logoFile = document.getElementById("qr-logo-file");
+            const logoSize = document.getElementById("logo-size");
+            const logoBorder = document.getElementById("logo-border");
+
+            const wifiFields = document.getElementById("wifi-fields");
+            const contactFields = document.getElementById("contact-fields");
+            const smsFields = document.getElementById("sms-fields");
+            const emailFields = document.getElementById("email-fields");
+
+            const generateBtn = document.getElementById("generate-btn");
+            const downloadPng = document.getElementById("download-png");
+            const downloadSvg = document.getElementById("download-svg");
+            const downloadJpg = document.getElementById("download-jpg");
+
+            const qrCanvas = document.getElementById("qr-canvas");
+            const qrPlaceholder = document.getElementById("qr-placeholder");
+            const qrResult = document.getElementById("qr-result");
+
+            const qrLogoPreview = document.getElementById("qr-logo-preview");
+            const logoPreviewImg = document.getElementById("logo-preview-img");
+
+            let qrCode;
+
+            function toggleFields() {
+                wifiFields.classList.add("hidden");
+                contactFields.classList.add("hidden");
+                smsFields.classList.add("hidden");
+                emailFields.classList.add("hidden");
+
+                if (qrType.value === "wifi") wifiFields.classList.remove("hidden");
+                if (qrType.value === "contact") contactFields.classList.remove("hidden");
+                if (qrType.value === "sms") smsFields.classList.remove("hidden");
+                if (qrType.value === "email") emailFields.classList.remove("hidden");
+            }
+
+            qrType.addEventListener("change", toggleFields);
+            toggleFields();
+
+            function getQRCodeData() {
+                const type = qrType.value;
+                let data = qrContent.value.trim();
+
+                if (type === "url" && !data.startsWith("http")) {
+                    data = "https://" + data;
+                } else if (type === "wifi") {
+                    const ssid = document.getElementById("wifi-ssid").value.trim();
+                    const password = document.getElementById("wifi-password").value.trim();
+                    const encryption = document.getElementById("wifi-encryption").value;
+                    if (!ssid) return null;
+                    data = `WIFI:T:${encryption};S:${ssid};P:${password};;`;
+                } else if (type === "contact") {
+                    const name = document.getElementById("contact-name").value.trim();
+                    const phone = document.getElementById("contact-phone").value.trim();
+                    const email = document.getElementById("contact-email").value.trim();
+                    if (!name) return null;
+                    data = `BEGIN:VCARD\nVERSION:3.0\nFN:${name}\nTEL:${phone}\nEMAIL:${email}\nEND:VCARD`;
+                } else if (type === "sms") {
+                    const number = document.getElementById("sms-number").value.trim();
+                    const message = document.getElementById("sms-message").value.trim();
+                    if (!number) return null;
+                    data = `SMSTO:${number}:${message}`;
+                } else if (type === "email") {
+                    const address = document.getElementById("email-address").value.trim();
+                    const subject = document.getElementById("email-subject").value.trim();
+                    const body = document.getElementById("email-body").value.trim();
+                    if (!address) return null;
+                    data = `MATMSG:TO:${address};SUB:${subject};BODY:${body};;`;
+                }
+
+                return data;
+            }
+
+            function generateQRCode() {
+                const data = getQRCodeData();
+                if (!data) return alert("Preencha os dados necessários");
+
+                const size = parseInt(qrSize.value);
+                const color = qrColor.value;
+                const bgColor = qrBgColor.value;
+
+                const imageSettings = {};
+
+                if (qrLogo.checked && logoFile.files.length > 0) {
+                    const file = logoFile.files[0];
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        imageSettings.image = reader.result;
+                        logoPreviewImg.src = reader.result;
+                        qrLogoPreview.classList.remove("hidden");
+                        buildQRCode(data, imageSettings);
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    qrLogoPreview.classList.add("hidden");
+                    buildQRCode(data);
+                }
+            }
+
+            function buildQRCode(data, imageSettings = {}) {
+                if (qrCode) qrCanvas.innerHTML = "";
+
+                qrCode = new QRCodeStyling({
+                    width: parseInt(qrSize.value),
+                    height: parseInt(qrSize.value),
+                    data: data,
+                    image: imageSettings.image || '',
+                    dotsOptions: {
+                        color: qrColor.value,
+                        type: "rounded",
+                    },
+                    backgroundOptions: {
+                        color: qrBgColor.value,
+                    },
+                    imageOptions: {
+                        crossOrigin: "anonymous",
+                        margin: parseInt(logoBorder.value),
+                        imageSize: parseInt(logoSize.value) / 100,
+                    },
+                });
+
+                qrCode.append(qrCanvas);
+                qrPlaceholder.classList.add("hidden");
+                qrResult.classList.remove("hidden");
+            }
+
+            function downloadQRCode(format) {
+                if (!qrCode) return alert("Gere o QR Code primeiro");
+                qrCode.download({ name: "qrcode", extension: format });
+            }
+
+            generateBtn.addEventListener("click", generateQRCode);
+            downloadPng.addEventListener("click", () => downloadQRCode("png"));
+            downloadJpg.addEventListener("click", () => downloadQRCode("jpg"));
+            downloadSvg.addEventListener("click", () => downloadQRCode("svg"));
+        });
+    </script>
+</body>
+
+</html>
