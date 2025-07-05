@@ -2,9 +2,69 @@
 <html lang="pt-BR">
 
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX61BYEH4E"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RX61BYEH4E');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QRGen Pro - Gerador de Códigos QR Avançado</title>
+
+    <!-- Título SEO -->
+    <title>QRGen Pro - Gerador de Códigos QR Avançado | Convertil</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./favicon.png" type="image/png">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Gere códigos QR personalizados com rapidez e facilidade. O QRGen Pro é a ferramenta gratuita e avançada do Convertil para criar QR Codes dinâmicos e estáticos.">
+    <meta name="keywords"
+        content="gerador de QR Code, QR code grátis, criar QR code, QR personalizado, QR Code estático, QR Code dinâmico, gerar QR code online">
+    <meta name="author" content="Convertil">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="pt-BR">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://convertil.com/gerador-de-qr-code/">
+
+    <!-- Open Graph (para redes sociais) -->
+    <meta property="og:title" content="QRGen Pro - Gerador de Códigos QR Avançado | Convertil">
+    <meta property="og:description"
+        content="Gere códigos QR personalizados com rapidez e facilidade. O QRGen Pro é a ferramenta gratuita e avançada do Convertil para criar QR Codes dinâmicos e estáticos.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://convertil.com/gerador-de-qr-code/">
+    <meta property="og:image" content="https://convertil.com/assets/logo.png">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="QRGen Pro - Gerador de Códigos QR Avançado | Convertil">
+    <meta name="twitter:description"
+        content="Ferramenta gratuita e profissional para gerar QR Codes personalizados online.">
+    <meta name="twitter:image" content="https://convertil.com/assets/logo.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "QRGen Pro",
+  "url": "https://convertil.com/gerador-de-qr-code/",
+  "image": "https://convertil.com/assets/logo.png",
+  "description": "Gere códigos QR personalizados com rapidez e facilidade. O QRGen Pro é a ferramenta gratuita e avançada do Convertil para criar QR Codes dinâmicos e estáticos.",
+  "applicationCategory": "Utility",
+  "operatingSystem": "All",
+  "author": {
+    "@type": "Organization",
+    "name": "Convertil",
+    "url": "https://convertil.com"
+  }
+}
+</script>
+
+    <!-- Tailwind (mantido) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -22,6 +82,7 @@
             }
         }
     </script>
+
     <style>
         .gradient-bg {
             background: linear-gradient(135deg, #2563EB 0%, #10B981 100%);
@@ -64,6 +125,16 @@
         .pulse {
             animation: pulse 2s infinite;
         }
+
+        @media (max-width: 370px) {
+            .styles-370 {
+                flex-direction: column;
+            }
+
+            .styles-370 nav {
+                margin: 15px !important;
+            }
+        }
     </style>
 </head>
 
@@ -71,7 +142,7 @@
     <!-- Header -->
     <header class="gradient-bg text-white shadow-lg">
         <div class="container mx-auto px-4 py-6">
-            <div class="flex justify-between items-center">
+            <div class="styles-370 flex justify-between items-center">
                 <div class="flex items-center space-x-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -82,7 +153,8 @@
                 </div>
                 <nav>
                     <ul class="flex space-x-6">
-                        <li><a href="#" class="hover:text-secondary transition-colors duration-300">Voltar</a></li>
+                        <li><a href="https://convertil.com/"
+                                class="hover:text-secondary transition-colors duration-300">Voltar</a></li>
                         <li><a href="#about" class="hover:text-secondary transition-colors duration-300">Sobre</a></li>
                     </ul>
                 </nav>
@@ -125,7 +197,7 @@
                             <label for="url" class="block text-sm font-medium text-gray-700 mb-2">URL</label>
                             <input type="url" id="url"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-                                placeholder="https://exemplo.com" required>
+                                placeholder="https://exemplo.com">
                         </div>
 
                         <div id="textField" class="hidden">
@@ -192,21 +264,21 @@
                                 <div>
                                     <label for="phone"
                                         class="block text-sm font-medium text-gray-700 mb-2">Telefone</label>
-                                    <input type="tel" id="phone"
+                                    <input type="tel" id="phone" autocomplete="phone"
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
                                         placeholder="(11) 99999-9999">
                                 </div>
                                 <div>
                                     <label for="email"
                                         class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
-                                    <input type="email" id="email"
+                                    <input type="email" id="email" autocomplete="email"
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
                                         placeholder="joao@exemplo.com">
                                 </div>
                                 <div class="md:col-span-2">
                                     <label for="address"
                                         class="block text-sm font-medium text-gray-700 mb-2">Endereço</label>
-                                    <input type="text" id="address"
+                                    <input type="text" id="address" autocomplete="address"
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
                                         placeholder="Rua Exemplo, 123">
                                 </div>
@@ -538,204 +610,204 @@
     <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
 
     <script>
-    // DOM Elements
-    const qrForm = document.getElementById('qrForm');
-    const qrType = document.getElementById('qrType');
-    const contentFields = document.getElementById('contentFields');
-    const qrPreview = document.getElementById('qrPreview');
-    const downloadSection = document.getElementById('downloadSection');
-    const downloadBtn = document.getElementById('downloadBtn');
-    const shareBtn = document.getElementById('shareBtn');
-    const qrSize = document.getElementById('qrSize');
-    const sizeValue = document.getElementById('sizeValue');
-    const qrMargin = document.getElementById('qrMargin');
-    const marginValue = document.getElementById('marginValue');
-    const notification = document.getElementById('notification');
-    const notificationTitle = document.getElementById('notificationTitle');
-    const notificationMessage = document.getElementById('notificationMessage');
-    const notificationIcon = document.getElementById('notificationIcon');
-    const closeNotification = document.getElementById('closeNotification');
+        // DOM Elements
+        const qrForm = document.getElementById('qrForm');
+        const qrType = document.getElementById('qrType');
+        const contentFields = document.getElementById('contentFields');
+        const qrPreview = document.getElementById('qrPreview');
+        const downloadSection = document.getElementById('downloadSection');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const shareBtn = document.getElementById('shareBtn');
+        const qrSize = document.getElementById('qrSize');
+        const sizeValue = document.getElementById('sizeValue');
+        const qrMargin = document.getElementById('qrMargin');
+        const marginValue = document.getElementById('marginValue');
+        const notification = document.getElementById('notification');
+        const notificationTitle = document.getElementById('notificationTitle');
+        const notificationMessage = document.getElementById('notificationMessage');
+        const notificationIcon = document.getElementById('notificationIcon');
+        const closeNotification = document.getElementById('closeNotification');
 
-    let currentQRCode = null;
+        let currentQRCode = null;
 
-    // Mostrar/esconder campos baseados no tipo
-    qrType.addEventListener('change', function () {
-        document.querySelectorAll('#contentFields > div').forEach(field => {
-            field.classList.add('hidden');
-        });
-        const selectedField = document.getElementById(`${this.value}Field`);
-        if (selectedField) {
-            selectedField.classList.remove('hidden');
-        }
-    });
-
-    // Atualizar valores dos sliders
-    qrSize.addEventListener('input', () => sizeValue.textContent = qrSize.value);
-    qrMargin.addEventListener('input', () => marginValue.textContent = qrMargin.value);
-
-    // Fechar notificação
-    closeNotification.addEventListener('click', () => {
-        notification.classList.remove('show');
-    });
-
-    function showNotification(type, title, message) {
-        notificationTitle.textContent = title;
-        notificationMessage.textContent = message;
-
-        let iconHtml = '', iconColor = '';
-        switch (type) {
-            case 'success':
-                iconColor = 'text-success';
-                iconHtml = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />';
-                break;
-            case 'error':
-                iconColor = 'text-danger';
-                iconHtml = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
-                break;
-            case 'info':
-                iconColor = 'text-primary';
-                iconHtml = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />';
-                break;
-            case 'warning':
-                iconColor = 'text-secondary';
-                iconHtml = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />';
-                break;
-        }
-
-        notificationIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ${iconColor}" fill="none" viewBox="0 0 24 24" stroke="currentColor">${iconHtml}</svg>`;
-        notification.classList.add('show');
-        setTimeout(() => notification.classList.remove('show'), 5000);
-    }
-
-    // Gerar QR Code
-    qrForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const type = qrType.value;
-        const color = document.getElementById('qrColor').value;
-        const bgColor = document.getElementById('bgColor').value;
-        const size = parseInt(qrSize.value);
-        const margin = parseInt(qrMargin.value);
-        const errorCorrection = document.getElementById('errorCorrection').value;
-        const format = document.getElementById('qrFormat').value;
-
-        let content = '';
-
-        switch (type) {
-            case 'url':
-                content = document.getElementById('url').value;
-                if (!content.startsWith('http')) content = 'http://' + content;
-                break;
-            case 'text':
-                content = document.getElementById('text').value;
-                break;
-            case 'wifi':
-                const ssid = document.getElementById('ssid').value;
-                const password = document.getElementById('password').value;
-                const encryption = document.getElementById('encryption').value;
-                const hidden = document.getElementById('hidden').value === 'true';
-                content = `WIFI:T:${encryption};S:${ssid};P:${password};${hidden ? 'H:true;' : ''};`;
-                break;
-            case 'contact':
-                const firstName = document.getElementById('firstName').value;
-                const lastName = document.getElementById('lastName').value;
-                const phone = document.getElementById('phone').value;
-                const email = document.getElementById('email').value;
-                const address = document.getElementById('address').value;
-                content = `BEGIN:VCARD\nVERSION:3.0\nN:${lastName};${firstName}\nFN:${firstName} ${lastName}\nTEL:${phone}\nEMAIL:${email}\nADR:${address}\nEND:VCARD`;
-                break;
-            case 'email':
-                const emailTo = document.getElementById('emailTo').value;
-                const emailSubject = document.getElementById('emailSubject').value;
-                const emailBody = document.getElementById('emailBody').value;
-                content = `MATMSG:TO:${emailTo};SUB:${emailSubject};BODY:${emailBody};;`;
-                break;
-            case 'sms':
-                const smsNumber = document.getElementById('smsNumber').value;
-                const smsMessage = document.getElementById('smsMessage').value;
-                content = `SMSTO:${smsNumber}:${smsMessage}`;
-                break;
-            case 'phone':
-                const phoneNumber = document.getElementById('phoneNumber').value.replace(/\D/g, '');
-                content = `TEL:${phoneNumber}`;
-                break;
-        }
-
-        if (!content.trim()) {
-            showNotification('error', 'Erro', 'Por favor, preencha os dados do QR code');
-            return;
-        }
-
-        qrPreview.innerHTML = '';
-
-        const qrCode = new QRCodeStyling({
-            width: size,
-            height: size,
-            type: format, // png, jpeg, svg, webp
-            data: content,
-            margin: margin,
-            qrOptions: {
-                errorCorrectionLevel: errorCorrection
-            },
-            dotsOptions: {
-                color: color,
-                type: 'square'
-            },
-            backgroundOptions: {
-                color: bgColor
+        // Mostrar/esconder campos baseados no tipo
+        qrType.addEventListener('change', function () {
+            document.querySelectorAll('#contentFields > div').forEach(field => {
+                field.classList.add('hidden');
+            });
+            const selectedField = document.getElementById(`${this.value}Field`);
+            if (selectedField) {
+                selectedField.classList.remove('hidden');
             }
         });
 
-        qrCode.append(qrPreview);
-        currentQRCode = qrCode;
+        // Atualizar valores dos sliders
+        qrSize.addEventListener('input', () => sizeValue.textContent = qrSize.value);
+        qrMargin.addEventListener('input', () => marginValue.textContent = qrMargin.value);
 
-        downloadSection.classList.remove('hidden');
-        showNotification('success', 'Sucesso', 'QR code gerado com sucesso!');
-    });
-
-    // Download
-    downloadBtn.onclick = function () {
-        const format = document.getElementById('qrFormat').value;
-        if (!currentQRCode) return;
-        currentQRCode.download({
-            name: "qr-code",
-            extension: format
+        // Fechar notificação
+        closeNotification.addEventListener('click', () => {
+            notification.classList.remove('show');
         });
-        showNotification('info', 'Download', 'QR code baixado com sucesso!');
-    };
 
-    // Compartilhar
-    shareBtn.onclick = function () {
-        const format = document.getElementById('qrFormat').value;
-        if (!currentQRCode) return;
+        function showNotification(type, title, message) {
+            notificationTitle.textContent = title;
+            notificationMessage.textContent = message;
 
-        currentQRCode.getRawData(format).then(blob => {
-            const file = new File([blob], `qr-code.${format}`, { type: `image/${format}` });
-
-            if (navigator.share) {
-                navigator.share({
-                    title: 'QR Code',
-                    text: 'Confira este QR Code que eu gerei!',
-                    files: [file]
-                }).then(() => {
-                    showNotification('success', 'Compartilhado', 'QR code compartilhado com sucesso!');
-                }).catch(() => {
-                    showNotification('info', 'Cancelado', 'Compartilhamento cancelado');
-                });
-            } else {
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = `qr-code.${format}`;
-                link.click();
-
-                showNotification('info', 'Download', 'QR code foi baixado (fallback de compartilhamento).');
+            let iconHtml = '', iconColor = '';
+            switch (type) {
+                case 'success':
+                    iconColor = 'text-success';
+                    iconHtml = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />';
+                    break;
+                case 'error':
+                    iconColor = 'text-danger';
+                    iconHtml = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+                    break;
+                case 'info':
+                    iconColor = 'text-primary';
+                    iconHtml = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />';
+                    break;
+                case 'warning':
+                    iconColor = 'text-secondary';
+                    iconHtml = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />';
+                    break;
             }
-        });
-    };
 
-    // Inicializa com campo URL visível
-    document.getElementById('urlField').classList.remove('hidden');
-</script>
+            notificationIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ${iconColor}" fill="none" viewBox="0 0 24 24" stroke="currentColor">${iconHtml}</svg>`;
+            notification.classList.add('show');
+            setTimeout(() => notification.classList.remove('show'), 5000);
+        }
+
+        // Gerar QR Code
+        qrForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const type = qrType.value;
+            const color = document.getElementById('qrColor').value;
+            const bgColor = document.getElementById('bgColor').value;
+            const size = parseInt(qrSize.value);
+            const margin = parseInt(qrMargin.value);
+            const errorCorrection = document.getElementById('errorCorrection').value;
+            const format = document.getElementById('qrFormat').value;
+
+            let content = '';
+
+            switch (type) {
+                case 'url':
+                    content = document.getElementById('url').value;
+                    if (!content.startsWith('http')) content = 'http://' + content;
+                    break;
+                case 'text':
+                    content = document.getElementById('text').value;
+                    break;
+                case 'wifi':
+                    const ssid = document.getElementById('ssid').value;
+                    const password = document.getElementById('password').value;
+                    const encryption = document.getElementById('encryption').value;
+                    const hidden = document.getElementById('hidden').value === 'true';
+                    content = `WIFI:T:${encryption};S:${ssid};P:${password};${hidden ? 'H:true;' : ''};`;
+                    break;
+                case 'contact':
+                    const firstName = document.getElementById('firstName').value;
+                    const lastName = document.getElementById('lastName').value;
+                    const phone = document.getElementById('phone').value;
+                    const email = document.getElementById('email').value;
+                    const address = document.getElementById('address').value;
+                    content = `BEGIN:VCARD\nVERSION:3.0\nN:${lastName};${firstName}\nFN:${firstName} ${lastName}\nTEL:${phone}\nEMAIL:${email}\nADR:${address}\nEND:VCARD`;
+                    break;
+                case 'email':
+                    const emailTo = document.getElementById('emailTo').value;
+                    const emailSubject = document.getElementById('emailSubject').value;
+                    const emailBody = document.getElementById('emailBody').value;
+                    content = `MATMSG:TO:${emailTo};SUB:${emailSubject};BODY:${emailBody};;`;
+                    break;
+                case 'sms':
+                    const smsNumber = document.getElementById('smsNumber').value;
+                    const smsMessage = document.getElementById('smsMessage').value;
+                    content = `SMSTO:${smsNumber}:${smsMessage}`;
+                    break;
+                case 'phone':
+                    const phoneNumber = document.getElementById('phoneNumber').value.replace(/\D/g, '');
+                    content = `TEL:${phoneNumber}`;
+                    break;
+            }
+
+            if (!content.trim()) {
+                showNotification('error', 'Erro', 'Por favor, preencha os dados do QR code');
+                return;
+            }
+
+            qrPreview.innerHTML = '';
+
+            const qrCode = new QRCodeStyling({
+                width: size,
+                height: size,
+                type: format, // png, jpeg, svg, webp
+                data: content,
+                margin: margin,
+                qrOptions: {
+                    errorCorrectionLevel: errorCorrection
+                },
+                dotsOptions: {
+                    color: color,
+                    type: 'square'
+                },
+                backgroundOptions: {
+                    color: bgColor
+                }
+            });
+
+            qrCode.append(qrPreview);
+            currentQRCode = qrCode;
+
+            downloadSection.classList.remove('hidden');
+            showNotification('success', 'Sucesso', 'QR code gerado com sucesso!');
+        });
+
+        // Download
+        downloadBtn.onclick = function () {
+            const format = document.getElementById('qrFormat').value;
+            if (!currentQRCode) return;
+            currentQRCode.download({
+                name: "qr-code",
+                extension: format
+            });
+            showNotification('info', 'Download', 'QR code baixado com sucesso!');
+        };
+
+        // Compartilhar
+        shareBtn.onclick = function () {
+            const format = document.getElementById('qrFormat').value;
+            if (!currentQRCode) return;
+
+            currentQRCode.getRawData(format).then(blob => {
+                const file = new File([blob], `qr-code.${format}`, { type: `image/${format}` });
+
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'QR Code',
+                        text: 'Confira este QR Code que eu gerei!',
+                        files: [file]
+                    }).then(() => {
+                        showNotification('success', 'Compartilhado', 'QR code compartilhado com sucesso!');
+                    }).catch(() => {
+                        showNotification('info', 'Cancelado', 'Compartilhamento cancelado');
+                    });
+                } else {
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = `qr-code.${format}`;
+                    link.click();
+
+                    showNotification('info', 'Download', 'QR code foi baixado (fallback de compartilhamento).');
+                }
+            });
+        };
+
+        // Inicializa com campo URL visível
+        document.getElementById('urlField').classList.remove('hidden');
+    </script>
 
 </body>
 
