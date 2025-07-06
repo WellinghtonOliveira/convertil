@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX61BYEH4E"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RX61BYEH4E');
+    </script>
+
+    <!-- SEO PROFISSIONAL OTIMIZADO -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
+    <title>Simulador de Parcelamento Online | Calcule Parcelas de Empréstimos e Compras</title>
+
+    <!-- Descrição clara e objetiva -->
+    <meta name="description"
+        content="Simule online o parcelamento de financiamentos, empréstimos ou compras. Compare sistemas como Juros Simples, Compostos, Tabela Price e SAC. Fácil, rápido e gratuito.">
+
+    <!-- Palavras-chave relevantes -->
+    <meta name="keywords"
+        content="simulador de parcelamento, calculadora de parcelas, financiamento, empréstimo, tabela price, SAC, juros compostos, juros simples, convertil">
+
+    <!-- SEO técnico -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://convertil.com/simulador-de-parcelas">
+
+    <!-- Autor e idioma -->
+    <meta name="author" content="Convertil">
+    <meta name="language" content="pt-BR">
+    <meta name="theme-color" content="#2563EB">
+
+    <!-- Performance -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Open Graph para redes sociais -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:url" content="https://convertil.com/simulador-de-parcelas">
+    <meta property="og:site_name" content="Convertil">
+    <meta property="og:title" content="Simulador de Parcelamento Online | Calcule Parcelas de Empréstimos e Compras">
+    <meta property="og:description"
+        content="Calcule suas parcelas com base em juros reais. Ferramenta gratuita para financiamentos, compras a prazo e mais.">
+    <meta property="og:image" content="https://convertil.com/assets/logo.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Simulador de Parcelamento Online | Calcule Parcelas de Empréstimos e Compras">
+    <meta name="twitter:description"
+        content="Compare juros simples, compostos, SAC e Price. Resultado completo com valor da parcela, juros e saldo.">
+    <meta name="twitter:image" content="https://convertil.com/assets/logo.png">
+    <meta name="twitter:site" content="@convertil">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563EB 0%, #10B981 100%);
+        }
+
+        .input-focus:focus {
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+            border-color: #2563EB;
+        }
+
+        .modal-slide-up {
+            animation: slideUp 0.3s ease-out forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .print-h {
+                display: none;
+            }
+
+            #results-section,
+            #results-section * {
+                visibility: visible;
+            }
+
+            #results-section {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+
+            #new-simulation-btn,
+            #print-btn {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .div-flex {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .div-flex nav {
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 270px) {
+            .logo {
+                display: none;
+            }
+
+            .h1-fl,
+            span {
+                word-break: break-all !important;
+            }
+
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans text-gray-800">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="div-flex container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 logo" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h1 class="h1-fl text-xl font-bold">Simulador<span class="text-amber-300">Parcelas</span></h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="https://convertil.com/" class="hover:text-amber-300 transition duration-300">Voltar</a>
+                    </li>
+                    <li><a href="#" class="hover:text-amber-300 transition duration-300" id="about-link">Sobre</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 style="word-break: break-all;" class="text-3xl font-bold text-gray-800 mb-4">Simulador de
+                    Parcelamento Inteligente</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Calcule o valor das parcelas de seu financiamento, empréstimo
+                    ou compra a prazo de forma rápida e precisa. Nosso simulador considera taxas reais do mercado para
+                    oferecer resultados confiáveis.</p>
+            </div>
+
+            <!-- Calculator Section -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                <div class="gradient-bg px-6 py-4">
+                    <h3 class="text-xl font-semibold text-white">Preencha os dados para simulação</h3>
+                </div>
+                <div class="p-6">
+                    <form id="calculator-form">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="amount" class="block text-sm font-medium text-gray-700 mb-1">Valor total
+                                    (R$)</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500">R$</span>
+                                    </div>
+                                    <input type="number" id="amount"
+                                        class="pl-10 input-focus block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border"
+                                        placeholder="10.000,00" required>
+                                </div>
+                                <p class="mt-1 text-xs text-gray-500">Valor total que deseja parcelar</p>
+                            </div>
+
+                            <div>
+                                <label for="installments" class="block text-sm font-medium text-gray-700 mb-1">Número de
+                                    parcelas</label>
+                                <input type="number" id="installments" min="1" max="360"
+                                    class="input-focus block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border"
+                                    placeholder="12" required>
+                                <p class="mt-1 text-xs text-gray-500">Máximo de 360 parcelas (30 anos)</p>
+                            </div>
+
+                            <div>
+                                <label for="interest-rate" class="block text-sm font-medium text-gray-700 mb-1">Taxa de
+                                    juros (% ao mês)</label>
+                                <div class="relative">
+                                    <input type="number" id="interest-rate" step="0.01"
+                                        class="input-focus block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border"
+                                        placeholder="1,5" required>
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500">%</span>
+                                    </div>
+                                </div>
+                                <p class="mt-1 text-xs text-gray-500">Taxa mensal de juros aplicada</p>
+                            </div>
+
+                            <div>
+                                <label for="interest-type" class="block text-sm font-medium text-gray-700 mb-1">Tipo de
+                                    taxa</label>
+                                <select id="interest-type"
+                                    class="input-focus block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border">
+                                    <option value="compound">Juros compostos</option>
+                                    <option value="simple">Juros simples</option>
+                                    <option value="price">Tabela Price</option>
+                                    <option value="sac">Sistema SAC</option>
+                                </select>
+                                <div class="mt-1 flex items-center">
+                                    <span class="tooltip relative inline-block">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500"
+                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        <span
+                                            class="tooltip-text invisible opacity-0 bg-gray-800 text-white text-xs rounded py-1 px-2 absolute z-10 -mt-8 -ml-16 w-32 transition-all duration-300">Saiba
+                                            mais sobre os tipos de taxas</span>
+                                    </span>
+                                    <span class="ml-1 text-xs text-gray-500">Diferentes métodos de cálculo</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center">
+                            <button type="submit"
+                                class="gradient-bg hover:opacity-90 text-white font-medium py-2 px-6 rounded-md shadow-md transition duration-300 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                </svg>
+                                Calcular Parcelas
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Results Section (Initially Hidden) -->
+            <div id="results-section" class="hidden bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                <div class="gradient-bg px-6 py-4">
+                    <h3 class="text-xl font-semibold text-white">Resultado da Simulação</h3>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-sm font-medium text-gray-500 mb-1">Valor da Parcela</h4>
+                            <p id="installment-value" class="text-2xl font-bold text-blue-600">R$ 0,00</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-sm font-medium text-gray-500 mb-1">Total com Juros</h4>
+                            <p id="total-with-interest" class="text-2xl font-bold text-green-600">R$ 0,00</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-sm font-medium text-gray-500 mb-1">Total de Juros</h4>
+                            <p id="total-interest" class="text-2xl font-bold text-red-600">R$ 0,00</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="text-lg font-medium text-gray-800 mb-3">Detalhamento das Parcelas</h4>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Parcela</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Valor</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Juros</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Saldo Devedor</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="installments-table" class="bg-white divide-y divide-gray-200">
+                                    <!-- Will be filled by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="print-h bg-amber-50 border-l-4 border-amber-400 p-4 mb-6">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-400"
+                                    viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <h4 class="text-sm font-medium text-amber-800">Dicas importantes</h4>
+                                <div id="financial-tips" class="mt-2 text-sm text-amber-700">
+                                    <p>• Compare sempre as taxas de diferentes instituições financeiras.</p>
+                                    <p>• Verifique se há taxas adicionais não incluídas no cálculo.</p>
+                                    <p>• Considere seu orçamento antes de assumir compromissos financeiros.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <button id="print-btn" class="flex items-center text-blue-600 hover:text-blue-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                            </svg>
+                            Imprimir
+                        </button>
+                        <button id="new-simulation-btn"
+                            class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-md transition duration-300">
+                            Nova Simulação
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Information Section -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                <div class="gradient-bg px-6 py-4">
+                    <h3 class="text-xl font-semibold text-white">Informações sobre Parcelamento</h3>
+                </div>
+                <div class="p-6">
+                    <div class="prose max-w-none">
+                        <h4 class="text-lg font-medium text-gray-800 mb-3">Como funciona o cálculo de parcelas?</h4>
+                        <p class="text-gray-600 mb-4">O cálculo de parcelas considera o valor principal, o número de
+                            parcelas e a taxa de juros aplicada. Dependendo do sistema de amortização escolhido, o
+                            cálculo pode variar significativamente:</p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h5 class="font-medium text-blue-600 mb-2">Tabela Price</h5>
+                                <p class="text-gray-600 text-sm">Também conhecida como Sistema Francês de Amortização,
+                                    onde as parcelas são fixas durante todo o período. Os juros são calculados sobre o
+                                    saldo devedor, e a amortização aumenta com o tempo.</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h5 class="font-medium text-green-600 mb-2">Sistema SAC</h5>
+                                <p class="text-gray-600 text-sm">Sistema de Amortização Constante, onde o valor
+                                    principal é dividido igualmente entre as parcelas. Os juros são calculados sobre o
+                                    saldo devedor, resultando em parcelas decrescentes.</p>
+                            </div>
+                        </div>
+
+                        <h4 class="text-lg font-medium text-gray-800 mb-3">O que considerar ao parcelar?</h4>
+                        <ul class="list-disc pl-5 text-gray-600 mb-4 space-y-2">
+                            <li><strong>Taxa de juros:</strong> Compare entre diferentes instituições financeiras.</li>
+                            <li><strong>CET (Custo Efetivo Total):</strong> Inclui todos os encargos e tarifas
+                                envolvidas na operação.</li>
+                            <li><strong>Prazo:</strong> Prazos maiores resultam em parcelas menores, mas pagamento de
+                                mais juros.</li>
+                            <li><strong>Orçamento:</strong> Certifique-se que as parcelas cabem em seu orçamento mensal.
+                            </li>
+                        </ul>
+
+                        <div class="bg-blue-50 border-l-4 border-blue-400 p-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400"
+                                        viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-medium text-blue-800">Importante</h4>
+                                    <div class="mt-2 text-sm text-blue-700">
+                                        <p>Este simulador fornece uma estimativa baseada nos dados informados. Para
+                                            valores exatos, consulte a instituição financeira de sua escolha, pois podem
+                                            haver taxas adicionais não consideradas aqui.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-400" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="text-xl font-bold">Simulador<span class="text-amber-300">Parcelas</span></span>
+                    </div>
+                    <p class="mt-2 text-sm text-gray-400">Ferramenta profissional para cálculo de parcelamentos</p>
+                </div>
+                <div class="text-sm text-gray-400">
+                    <p>&copy; 2025 SimuladorParcelas. Todos os direitos reservados.</p>
+                    <p class="mt-1">Desenvolvido para auxiliar em decisões financeiras conscientes.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 z-50 flex items-end justify-center px-4 pb-4 pointer-events-none">
+        <div id="modal-content"
+            class="max-w-md w-full bg-white rounded-t-lg shadow-xl pointer-events-auto hidden modal-slide-up">
+            <div class="p-4">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <svg id="modal-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <!-- Icon will be set by JavaScript -->
+                        </svg>
+                    </div>
+                    <div class="ml-3 w-0 flex-1 pt-0.5">
+                        <h3 id="modal-title" class="text-lg font-medium text-gray-900"></h3>
+                        <p id="modal-message" class="mt-1 text-sm text-gray-500"></p>
+                    </div>
+                    <div class="ml-4 flex-shrink-0 flex">
+                        <button id="close-modal"
+                            class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none">
+                            <span class="sr-only">Fechar</span>
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Elements
+            const form = document.getElementById('calculator-form');
+            const resultsSection = document.getElementById('results-section');
+            const newSimulationBtn = document.getElementById('new-simulation-btn');
+            const printBtn = document.getElementById('print-btn');
+            const aboutLink = document.getElementById('about-link');
+            const modal = document.getElementById('modal-content');
+            const closeModal = document.getElementById('close-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalMessage = document.getElementById('modal-message');
+            const modalIcon = document.getElementById('modal-icon');
+
+            // Show modal function
+            function showModal(type, title, message) {
+                // Set icon based on type
+                let iconPath = '';
+                let iconColor = '';
+
+                switch (type) {
+                    case 'success':
+                        iconPath = 'M5 13l4 4L19 7';
+                        iconColor = 'text-green-500';
+                        break;
+                    case 'error':
+                        iconPath = 'M6 18L18 6M6 6l12 12';
+                        iconColor = 'text-red-500';
+                        break;
+                    case 'info':
+                        iconPath = 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z';
+                        iconColor = 'text-blue-500';
+                        break;
+                    case 'warning':
+                        iconPath = 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z';
+                        iconColor = 'text-amber-500';
+                        break;
+                }
+
+                modalIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${iconPath}" />`;
+                modalIcon.classList.add(iconColor);
+
+                // Remove any other color classes
+                ['text-green-500', 'text-red-500', 'text-blue-500', 'text-amber-500'].forEach(cls => {
+                    if (cls !== iconColor) modalIcon.classList.remove(cls);
+                });
+
+                modalTitle.textContent = title;
+                modalMessage.textContent = message;
+                modal.classList.remove('hidden');
+
+                // Auto close after 5 seconds
+                setTimeout(() => {
+                    if (!modal.classList.contains('hidden')) {
+                        modal.classList.add('hidden');
+                    }
+                }, 5000);
+            }
+
+            // Close modal
+            closeModal.addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+
+            // About link
+            aboutLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showModal('info', 'Sobre o Simulador', 'Esta ferramenta foi desenvolvida para ajudar você a calcular parcelamentos de forma precisa e transparente. Utilize os campos acima para realizar sua simulação.');
+            });
+
+            // New simulation button
+            newSimulationBtn.addEventListener('click', () => {
+                resultsSection.classList.add('hidden');
+                form.reset();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Print button
+            printBtn.addEventListener('click', () => {
+                showModal('info', 'Imprimir', 'Preparando para imprimir os resultados da simulação...');
+                // In a real application, this would open the print dialog
+                window.print();
+            });
+
+            // Form submission
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Get form values
+                const amount = parseFloat(document.getElementById('amount').value);
+                const installments = parseInt(document.getElementById('installments').value);
+                const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100;
+                const interestType = document.getElementById('interest-type').value;
+
+                // Validate inputs
+                if (isNaN(amount) || isNaN(installments) || isNaN(interestRate)) {
+                    showModal('error', 'Erro', 'Por favor, preencha todos os campos corretamente.');
+                    return;
+                }
+
+                if (amount <= 0 || installments <= 0 || interestRate <= 0) {
+                    showModal('error', 'Erro', 'Todos os valores devem ser maiores que zero.');
+                    return;
+                }
+
+                if (installments > 360) {
+                    showModal('error', 'Erro', 'O número máximo de parcelas é 360.');
+                    return;
+                }
+
+                // Calculate based on interest type
+                let installmentValue, totalWithInterest, totalInterest;
+                let installmentsData = [];
+
+                switch (interestType) {
+                    case 'compound':
+                    case 'price':
+                        // Price table (compound interest with fixed installments)
+                        const monthlyRate = interestRate;
+                        installmentValue = amount * (monthlyRate * Math.pow(1 + monthlyRate, installments)) / (Math.pow(1 + monthlyRate, installments) - 1);
+                        totalWithInterest = installmentValue * installments;
+                        totalInterest = totalWithInterest - amount;
+
+                        // Generate installments table
+                        let balance = amount;
+                        for (let i = 1; i <= installments; i++) {
+                            const interest = balance * monthlyRate;
+                            const amortization = installmentValue - interest;
+                            balance -= amortization;
+
+                            // Fix floating point precision issues
+                            if (i === installments) {
+                                balance = 0;
+                            }
+
+                            installmentsData.push({
+                                number: i,
+                                value: installmentValue,
+                                interest: interest,
+                                balance: balance > 0 ? balance : 0
+                            });
+                        }
+                        break;
+
+                    case 'simple':
+                        // Simple interest
+                        totalInterest = amount * interestRate * installments;
+                        totalWithInterest = amount + totalInterest;
+                        installmentValue = totalWithInterest / installments;
+
+                        // Generate installments table
+                        for (let i = 1; i <= installments; i++) {
+                            installmentsData.push({
+                                number: i,
+                                value: installmentValue,
+                                interest: amount * interestRate,
+                                balance: i === installments ? 0 : amount - (amount / installments * i)
+                            });
+                        }
+                        break;
+
+                    case 'sac':
+                        // SAC system (constant amortization)
+                        const amortization = amount / installments;
+                        totalInterest = 0;
+
+                        // Generate installments table
+                        let sacBalance = amount;
+                        for (let i = 1; i <= installments; i++) {
+                            const interest = sacBalance * interestRate;
+                            const installment = amortization + interest;
+                            sacBalance -= amortization;
+                            totalInterest += interest;
+
+                            // Fix floating point precision issues
+                            if (i === installments) {
+                                sacBalance = 0;
+                            }
+
+                            installmentsData.push({
+                                number: i,
+                                value: installment,
+                                interest: interest,
+                                balance: sacBalance > 0 ? sacBalance : 0
+                            });
+                        }
+                        totalWithInterest = amount + totalInterest;
+                        break;
+                }
+
+                // Format currency
+                function formatCurrency(value) {
+                    if (typeof value !== 'number' || isNaN(value)) return 'R$ 0,00';
+                    return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                }
+
+                // Display results
+                document.getElementById('installment-value').textContent = formatCurrency(installmentValue);
+                document.getElementById('total-with-interest').textContent = formatCurrency(totalWithInterest);
+                document.getElementById('total-interest').textContent = formatCurrency(totalInterest);
+
+                // Fill installments table
+                const tableBody = document.getElementById('installments-table');
+                tableBody.innerHTML = '';
+
+                installmentsData.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.number}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${formatCurrency(item.value)}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${formatCurrency(item.interest)}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${formatCurrency(item.balance)}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+                // Show results section
+                resultsSection.classList.remove('hidden');
+                window.scrollTo({ top: resultsSection.offsetTop, behavior: 'smooth' });
+
+                // Show success message
+                showModal('success', 'Simulação concluída', 'Os resultados do seu parcelamento foram calculados com sucesso!');
+            });
+        });
+    </script>
+</body>
+
+</html>

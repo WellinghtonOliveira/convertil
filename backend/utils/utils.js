@@ -28,6 +28,7 @@ const dados = [
     { category: 'finance', name: 'Calculadora de Juros Compostos', description: 'Simule o crescimento do seu dinheiro com juros compostos e veja como seu capital pode evoluir ao longo do tempo. Ideal para planejar investimentos com aportes mensais e taxa fixa', link: './calculadora-de-juros-compostos/' },
     { category: 'finance', name: 'Conversor de Moedas', description: 'Converte valores entre diferentes moedasConverta valores entre diferentes moedas do mundo com precisão e rapidez. Ferramenta online gratuita para conversão de câmbio.', link: './conversor-de-moedas/' },
     { category: 'finance', name: 'Calculadora de porcentagens', description: 'Faça cálculos de porcentagem com facilidade usando nossa calculadora online. Descubra valores percentuais com rapidez e precisão!', link: './calculadora-de-porcentagem/' },
+    { category: 'finance', name: 'Simulador de parcelas', description: 'Simule Uma Carta de Crédito — Faça sua simulação gratuitamente e descubra o plano que cabe no seu bolso.', link: './simulador-de-parcelas/' },
 ]
 
 module.exports = dados
