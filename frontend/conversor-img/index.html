@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVGtoPNG | Conversor Profissional de SVG para PNG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9FAFB;
+            color: #1F2937;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563EB 0%, #10B981 100%);
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .dropzone {
+            border: 2px dashed #2563EB;
+            transition: all 0.3s;
+        }
+        
+        .dropzone.active {
+            border-color: #10B981;
+            background-color: rgba(16, 185, 129, 0.05);
+        }
+        
+        .tooltip {
+            position: relative;
+        }
+        
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: #1F2937;
+            color: #F9FAFB;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                </svg>
+                <h1 class="text-xl font-bold">SVGtoPNG</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#" class="hover:text-yellow-200 transition" id="back-link">Voltar</a></li>
+                    <li><a href="#" class="hover:text-yellow-200 transition" id="about-link">Sobre</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <section class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Conversor de SVG para PNG</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                Converta seus arquivos SVG para PNG com alta qualidade e controle total sobre as configurações de saída. 
+                Nosso conversor mantém a nitidez e qualidade de seus gráficos vetoriais.
+            </p>
+        </section>
+
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden max-w-4xl mx-auto">
+            <!-- Converter Section -->
+            <section class="p-6 md:p-8">
+                <div class="dropzone rounded-lg p-8 text-center cursor-pointer mb-6" id="dropzone">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-blue-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Arraste e solte seu arquivo SVG aqui</h3>
+                    <p class="text-gray-500 mb-4">Ou clique para selecionar</p>
+                    <input type="file" id="fileInput" accept=".svg" class="hidden">
+                    <button id="selectFileBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition">
+                        Selecionar Arquivo
+                    </button>
+                </div>
+
+                <!-- File Info -->
+                <div id="fileInfo" class="hidden bg-gray-50 p-4 rounded-lg mb-6">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            <span id="fileName" class="font-medium text-gray-800 truncate max-w-xs"></span>
+                        </div>
+                        <button id="removeFileBtn" class="text-red-500 hover:text-red-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Conversion Options -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Opções de Conversão</h3>
+                    
+                    <div class="options-grid grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Width -->
+                        <div>
+                            <label for="width" class="block text-sm font-medium text-gray-700 mb-1 flex items-center">
+                                Largura (px)
+                                <span class="tooltip ml-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span class="tooltip-text">Define a largura da imagem PNG resultante. Deixe em branco para manter a proporção original.</span>
+                                </span>
+                            </label>
+                            <input type="number" id="width" min="1" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <!-- Height -->
+                        <div>
+                            <label for="height" class="block text-sm font-medium text-gray-700 mb-1 flex items-center">
+                                Altura (px)
+                                <span class="tooltip ml-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span class="tooltip-text">Define a altura da imagem PNG resultante. Deixe em branco para manter a proporção original.</span>
+                                </span>
+                            </label>
+                            <input type="number" id="height" min="1" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <!-- Background Color -->
+                        <div>
+                            <label for="bgColor" class="block text-sm font-medium text-gray-700 mb-1 flex items-center">
+                                Cor de Fundo
+                                <span class="tooltip ml-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span class="tooltip-text">Define a cor de fundo para SVGs transparentes. Use "transparent" para manter a transparência.</span>
+                                </span>
+                            </label>
+                            <div class="flex items-center">
+                                <input type="text" id="bgColor" value="transparent" class="w-full px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <input type="color" id="bgColorPicker" class="h-10 w-10 border border-gray-300 rounded-r-md cursor-pointer">
+                            </div>
+                        </div>
+                        
+                        <!-- Quality -->
+                        <div>
+                            <label for="quality" class="block text-sm font-medium text-gray-700 mb-1 flex items-center">
+                                Qualidade (1-10)
+                                <span class="tooltip ml-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span class="tooltip-text">Controla a qualidade de compressão do PNG. 1 = baixa qualidade (mais compressão), 10 = alta qualidade (menos compressão).</span>
+                                </span>
+                            </label>
+                            <input type="range" id="quality" min="1" max="10" value="8" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>1</span>
+                                <span>5</span>
+                                <span>10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Convert Button -->
+                <div class="text-center">
+                    <button id="convertBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        Converter para PNG
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Preview Section -->
+        <section id="previewSection" class="hidden mt-12 bg-white rounded-xl shadow-lg overflow-hidden max-w-4xl mx-auto">
+            <div class="p-6 md:p-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6">Pré-visualização do Resultado</h3>
+                
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="flex-1">
+                        <h4 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Original (SVG)</h4>
+                        <div class="border border-gray-200 rounded-lg p-4 flex items-center justify-center bg-gray-50" style="min-height: 200px;">
+                            <div id="svgPreview" class="max-w-full max-h-64"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1">
+                        <h4 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Convertido (PNG)</h4>
+                        <div class="border border-gray-200 rounded-lg p-4 flex items-center justify-center bg-gray-50" style="min-height: 200px;">
+                            <img id="pngPreview" class="max-w-full max-h-64 hidden">
+                            <div id="noPreview" class="text-gray-400">Nenhuma pré-visualização disponível</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 text-center">
+                    <a id="downloadBtn" class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        Baixar PNG
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Information Section -->
+        <section class="mt-16 max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Por que converter SVG para PNG?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 p-2 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800">Compatibilidade Universal</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        Enquanto SVGs são ótimos para a web, alguns sistemas e aplicativos ainda não suportam totalmente esse formato. 
+                        PNG é amplamente suportado em todos os dispositivos e plataformas, garantindo que sua imagem seja exibida corretamente em qualquer lugar.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-yellow-100 p-2 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800">Qualidade Preservada</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        Nossa conversão mantém a nitidez e detalhes do seu SVG original, mesmo quando redimensionado. 
+                        Diferente de outros formatos como JPG, PNG suporta transparência e não introduz artefatos de compressão que prejudicam a qualidade.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-2 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800">Segurança Aprimorada</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        Arquivos SVG podem conter scripts maliciosos embutidos. Converter para PNG elimina qualquer código potencialmente perigoso, 
+                        tornando seguro compartilhar suas imagens sem preocupações com segurança.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 p-2 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800">Otimização para Apresentações</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        PNGs são ideais para incorporar em apresentações de PowerPoint, documentos Word ou PDFs. 
+                        Eles mantêm a qualidade independente do zoom e são mais estáveis do que SVGs nestes ambientes.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="mt-16 max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Como funciona nossa conversão?</h2>
+            
+            <div class="bg-white p-6 rounded-lg shadow">
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Processo Técnico</h3>
+                        <p class="text-gray-600 mb-4">
+                            Nosso conversor utiliza técnicas avançadas de renderização para transformar seus gráficos vetoriais (SVG) 
+                            em imagens rasterizadas (PNG) com a mais alta fidelidade possível.
+                        </p>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Renderização em alta resolução para manter detalhes nítidos</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Preservação de transparência quando necessário</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Compressão inteligente para equilibrar qualidade e tamanho de arquivo</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Melhores Práticas</h3>
+                        <p class="text-gray-600 mb-4">
+                            Para obter os melhores resultados em suas conversões, recomendamos:
+                        </p>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Defina dimensões específicas se precisar de um tamanho exato</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Use "transparent" como cor de fundo para logos e ícones</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Experimente diferentes níveis de qualidade para encontrar o equilíbrio ideal</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-gray-800">Sobre o SVGtoPNG</h3>
+                    <button id="closeAboutModal" class="text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="prose prose-blue max-w-none">
+                    <p class="text-gray-700">
+                        O SVGtoPNG é um conversor profissional de imagens vetoriais (SVG) para o formato rasterizado PNG, 
+                        desenvolvido para designers, desenvolvedores e profissionais que precisam de alta qualidade em suas conversões.
+                    </p>
+                    
+                    <h4 class="text-lg font-semibold text-gray-800 mt-4">Recursos Principais</h4>
+                    <ul class="text-gray-700">
+                        <li>Conversão de alta fidelidade mantendo a qualidade original</li>
+                        <li>Controle total sobre dimensões e qualidade de saída</li>
+                        <li>Preservação de transparência quando necessário</li>
+                        <li>Processamento totalmente no navegador - seus arquivos nunca são enviados para nossos servidores</li>
+                        <li>Interface intuitiva e fácil de usar</li>
+                    </ul>
+                    
+                    <h4 class="text-lg font-semibold text-gray-800 mt-4">Casos de Uso</h4>
+                    <p class="text-gray-700">
+                        Nosso conversor é ideal para:
+                    </p>
+                    <ul class="text-gray-700">
+                        <li>Designers que precisam preparar assets para clientes</li>
+                        <li>Desenvolvedores que necessitam de imagens compatíveis com todos os navegadores</li>
+                        <li>Profissionais de marketing criando materiais para impressão</li>
+                        <li>Qualquer pessoa que precise compartilhar gráficos vetoriais em plataformas que não suportam SVG</li>
+                    </ul>
+                    
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <p class="text-sm text-gray-500">
+                            SVGtoPNG é uma ferramenta gratuita desenvolvida para a comunidade. 
+                            Não coletamos ou armazenamos seus arquivos - todo o processamento ocorre localmente em seu navegador.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification hidden" id="notification">
+        <div class="bg-gray-800 text-white px-4 py-3 rounded-lg shadow-lg flex items-start">
+            <div class="flex-shrink-0">
+                <svg id="notificationIcon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <div class="ml-3">
+                <p id="notificationMessage" class="text-sm"></p>
+            </div>
+            <button id="closeNotification" class="ml-4 text-gray-300 hover:text-white">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="font-semibold">SVGtoPNG</span>
+                </div>
+                <div class="text-sm">
+                    &copy; 2025 SVGtoPNG. Todos os direitos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const dropzone = document.getElementById('dropzone');
+            const fileInput = document.getElementById('fileInput');
+            const selectFileBtn = document.getElementById('selectFileBtn');
+            const fileInfo = document.getElementById('fileInfo');
+            const fileName = document.getElementById('fileName');
+            const removeFileBtn = document.getElementById('removeFileBtn');
+            const convertBtn = document.getElementById('convertBtn');
+            const previewSection = document.getElementById('previewSection');
+            const svgPreview = document.getElementById('svgPreview');
+            const pngPreview = document.getElementById('pngPreview');
+            const noPreview = document.getElementById('noPreview');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notificationMessage');
+            const notificationIcon = document.getElementById('notificationIcon');
+            const closeNotification = document.getElementById('closeNotification');
+            const aboutLink = document.getElementById('about-link');
+            const backLink = document.getElementById('back-link');
+            const aboutModal = document.getElementById('aboutModal');
+            const closeAboutModal = document.getElementById('closeAboutModal');
+            const bgColor = document.getElementById('bgColor');
+            const bgColorPicker = document.getElementById('bgColorPicker');
+            
+            let currentFile = null;
+            let convertedBlob = null;
+            
+            // Event Listeners
+            selectFileBtn.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', handleFileSelect);
+            dropzone.addEventListener('dragover', handleDragOver);
+            dropzone.addEventListener('dragleave', handleDragLeave);
+            dropzone.addEventListener('drop', handleDrop);
+            removeFileBtn.addEventListener('click', removeFile);
+            convertBtn.addEventListener('click', convertToPng);
+            downloadBtn.addEventListener('click', downloadPng);
+            closeNotification.addEventListener('click', hideNotification);
+            aboutLink.addEventListener('click', showAboutModal);
+            backLink.addEventListener('click', goBack);
+            closeAboutModal.addEventListener('click', hideAboutModal);
+            bgColorPicker.addEventListener('input', updateBgColor);
+            
+            // Color picker sync
+            function updateBgColor() {
+                bgColor.value = bgColorPicker.value;
+            }
+            
+            bgColor.addEventListener('input', function() {
+                if (this.value.match(/^#[0-9A-F]{6}$/i)) {
+                    bgColorPicker.value = this.value;
+                }
+            });
+            
+            // File handling
+            function handleFileSelect(e) {
+                const file = e.target.files[0] || (e.dataTransfer && e.dataTransfer.files[0]);
+                if (!file) return;
+                
+                if (!file.name.endsWith('.svg')) {
+                    showNotification('Por favor, selecione um arquivo SVG', 'error');
+                    return;
+                }
+                
+                processFile(file);
+            }
+            
+            function handleDragOver(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                dropzone.classList.add('active');
+            }
+            
+            function handleDragLeave(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                dropzone.classList.remove('active');
+            }
+            
+            function handleDrop(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                dropzone.classList.remove('active');
+                handleFileSelect(e);
+            }
+            
+            function processFile(file) {
+                currentFile = file;
+                fileName.textContent = file.name;
+                fileInfo.classList.remove('hidden');
+                convertBtn.disabled = false;
+                
+                // Show SVG preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    svgPreview.innerHTML = e.target.result;
+                };
+                reader.readAsText(file);
+                
+                showNotification('Arquivo SVG carregado com sucesso', 'success');
+            }
+            
+            function removeFile() {
+                currentFile = null;
+                fileInput.value = '';
+                fileInfo.classList.add('hidden');
+                convertBtn.disabled = true;
+                previewSection.classList.add('hidden');
+                svgPreview.innerHTML = '';
+                pngPreview.classList.add('hidden');
+                noPreview.classList.remove('hidden');
+            }
+            
+            // Conversion
+            function convertToPng() {
+                if (!currentFile) return;
+                
+                showNotification('Convertendo arquivo...', 'info');
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const svgData = e.target.result;
+                    
+                    // Get conversion options
+                    const width = document.getElementById('width').value || null;
+                    const height = document.getElementById('height').value || null;
+                    const bgColorValue = bgColor.value === 'transparent' ? 'transparent' : bgColor.value;
+                    const quality = document.getElementById('quality').value / 10; // Scale to 0.1-1.0
+                    
+                    // Create canvas
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    
+                    // Create image from SVG
+                    const img = new Image();
+                    img.onload = function() {
+                        // Set canvas dimensions
+                        if (width && height) {
+                            canvas.width = parseInt(width);
+                            canvas.height = parseInt(height);
+                        } else if (width) {
+                            canvas.width = parseInt(width);
+                            canvas.height = (img.height / img.width) * canvas.width;
+                        } else if (height) {
+                            canvas.height = parseInt(height);
+                            canvas.width = (img.width / img.height) * canvas.height;
+                        } else {
+                            canvas.width = img.width;
+                            canvas.height = img.height;
+                        }
+                        
+                        // Fill background if not transparent
+                        if (bgColorValue !== 'transparent') {
+                            ctx.fillStyle = bgColorValue;
+                            ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        }
+                        
+                        // Draw SVG onto canvas
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        
+                        // Convert to PNG
+                        canvas.toBlob(function(blob) {
+                            convertedBlob = blob;
+                            
+                            // Show PNG preview
+                            const url = URL.createObjectURL(blob);
+                            pngPreview.src = url;
+                            pngPreview.classList.remove('hidden');
+                            noPreview.classList.add('hidden');
+                            
+                            // Show preview section
+                            previewSection.classList.remove('hidden');
+                            
+                            showNotification('Conversão concluída com sucesso', 'success');
+                        }, 'image/png', quality);
+                    };
+                    
+                    img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+                };
+                
+                reader.readAsText(currentFile);
+            }
+            
+            function downloadPng() {
+                if (!convertedBlob) return;
+                
+                const url = URL.createObjectURL(convertedBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = currentFile.name.replace('.svg', '.png') || 'converted.png';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                showNotification('Download iniciado', 'success');
+            }
+            
+            // Notification system
+            function showNotification(message, type) {
+                notificationMessage.textContent = message;
+                
+                // Set icon and color based on type
+                switch(type) {
+                    case 'success':
+                        notificationIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />';
+                        notification.classList.remove('bg-red-500', 'bg-blue-500');
+                        notification.classList.add('bg-green-500');
+                        break;
+                    case 'error':
+                        notificationIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />';
+                        notification.classList.remove('bg-green-500', 'bg-blue-500');
+                        notification.classList.add('bg-red-500');
+                        break;
+                    case 'info':
+                        notificationIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />';
+                        notification.classList.remove('bg-green-500', 'bg-red-500');
+                        notification.classList.add('bg-blue-500');
+                        break;
+                }
+                
+                notification.classList.add('show');
+                
+                // Auto-hide after 5 seconds
+                setTimeout(hideNotification, 5000);
+            }
+            
+            function hideNotification() {
+                notification.classList.remove('show');
+            }
+            
+            // Modal and navigation
+            function showAboutModal(e) {
+                e.preventDefault();
+                aboutModal.classList.remove('hidden');
+            }
+            
+            function hideAboutModal() {
+                aboutModal.classList.add('hidden');
+            }
+            
+            function goBack(e) {
+                e.preventDefault();
+                showNotification('Voltando para a página anterior...', 'info');
+                // In a real app, this would navigate back
+                // For demo, we'll just show a notification
+            }
+            
+            // Close modal when clicking outside
+            aboutModal.addEventListener('click', function(e) {
+                if (e.target === aboutModal) {
+                    hideAboutModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
