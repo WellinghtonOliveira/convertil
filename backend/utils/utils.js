@@ -4,6 +4,7 @@ const dados = [
     { category: 'design', name: 'Conversor de Cores HEX ⇄ RGB ⇄ HSL', description: 'Converte entre formatos de cor populares', link: './conversor-de-cores/' },
     { category: 'design', name: 'Redimensionador de Imagem', description: 'Faz uma ateração limpa e proficional nas dimensões da imagem', link: './redimensionador-de-imagem' },
     { category: 'design', name: 'Gerador de favicon', description: 'Crie um favicon para seu site - é rápido e fácil! envie sua própria imagem (SVG, JPG e PNG).', link: './criador-de-favicon/' },
+    { category: 'design', name: 'Conversor de SVG para PNG', description: 'A melhor forma de converter arquivos PNG pra SVG em segundos. 100% grátis, seguro e fácil de usar!', link: '/conversor-img/' },
     
     // dev
     { category: 'dev', name: 'Formatador de Código', description: 'Organiza e melhora a legibilidade do código', link: './formatador-de-codigos/' },
