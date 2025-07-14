@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX61BYEH4E"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RX61BYEH4E');
+    </script>
+
+    <!-- SEO PROFISSIONAL PARA A PÁGINA: Conversor de JSON para CSV -->
+    <title>Conversor de JSON para CSV Online | Convertil</title>
+    <meta name="description"
+        content="Converta arquivos JSON para CSV de forma fácil, rápida e gratuita com nosso conversor online. 100% seguro e direto do navegador.">
+
+    <!-- Palavras-chave relevantes -->
+    <meta name="keywords"
+        content="converter JSON para CSV, conversor JSON CSV, JSON para CSV online, ferramenta JSON para CSV, exportar JSON para CSV">
+
+    <!-- Meta adicionais -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Convertil">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="icon" href="./favicon.png" type="image/png">
+
+    <!-- Open Graph (Facebook, LinkedIn, etc) -->
+    <meta property="og:title" content="Conversor de JSON para CSV Online | Convertil">
+    <meta property="og:description"
+        content="Ferramenta online gratuita para converter arquivos JSON em CSV com rapidez e segurança.">
+    <meta property="og:image" content="https://convertil.com/assets/logo.png">
+    <meta property="og:url" content="https://convertil.com/conversor-de-json-csv">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Convertil">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Conversor de JSON para CSV Online | Convertil">
+    <meta name="twitter:description"
+        content="Converta arquivos JSON em CSV com facilidade usando nossa ferramenta online gratuita.">
+    <meta name="twitter:image" content="https://convertil.com/assets/logo.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://convertil.com/conversor-de-json-csv/index.html" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles */
+        .code-block {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .editor-container {
+            height: 300px;
+            overflow: auto;
+            border: 1px solid #e5e7eb;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2563EB;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1d4ed8;
+        }
+
+        @media (max-width: 540px) {
+            pre {
+                white-space: pre-wrap;
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
+        }
+
+        @media (max-width: 330px) {
+            .flex-cont {
+                flex-direction: column;
+            }
+
+            .flex-cont nav {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="flex-cont container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <h1 class="text-xl font-bold text-gray-800">JSON ⇄ CSV Converter</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="https://convertil.com/"
+                            class="text-blue-600 hover:text-blue-800 font-medium">Voltar</a></li>
+                    <li><a href="#about" class="text-blue-600 hover:text-blue-800 font-medium">Sobre</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <section class="mb-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Conversor Profissional JSON ⇄ CSV</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                Converta facilmente entre formatos JSON e CSV com nossa ferramenta online. Ideal para desenvolvedores,
+                analistas de dados e profissionais de TI.
+            </p>
+        </section>
+
+        <!-- Converter Tool -->
+        <section class="mb-16 bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="p-6 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-800">Conversor</h3>
+                <p class="text-gray-600">Selecione o tipo de conversão e cole ou digite seus dados abaixo</p>
+            </div>
+
+            <div class="p-6">
+                <div class="flex flex-wrap gap-4 mb-6">
+                    <div class="flex-1 min-w-[200px]">
+                        <label for="conversionType" class="block text-sm font-medium text-gray-700 mb-1">Tipo de
+                            Conversão</label>
+                        <select id="conversionType"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            <option value="jsonToCsv">JSON para CSV</option>
+                            <option value="csvToJson">CSV para JSON</option>
+                        </select>
+                    </div>
+
+                    <div class="flex-1 min-w-[200px]">
+                        <label for="delimiter" class="block text-sm font-medium text-gray-700 mb-1">Delimitador
+                            (CSV)</label>
+                        <select id="delimiter"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            <option value=",">Vírgula (,)</option>
+                            <option value=";">Ponto e vírgula (;)</option>
+                            <option value="\t">Tabulação (\t)</option>
+                            <option value="|">Pipe (|)</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-end">
+                        <button id="convertBtn"
+                            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            Converter
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label for="clearInput" class="block text-sm font-medium text-gray-700">Entrada</label>
+                            <button id="clearInput" class="text-sm text-red-600 hover:text-red-800">Limpar</button>
+                        </div>
+                        <div class="editor-container bg-gray-50 rounded-md p-4">
+                            <textarea id="inputData"
+                                class="w-full h-full bg-transparent resize-none focus:outline-none code-block"
+                                placeholder="Cole seu JSON ou CSV aqui..."></textarea>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label for="copyOutput" class="block text-sm font-medium text-gray-700">Saída</label>
+                            <button id="copyOutput" class="text-sm text-green-600 hover:text-green-800">Copiar</button>
+                        </div>
+                        <div class="editor-container bg-gray-50 rounded-md p-4">
+                            <textarea id="outputData"
+                                class="w-full h-full bg-transparent resize-none focus:outline-none code-block"
+                                placeholder="Resultado da conversão aparecerá aqui..." readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tutorial Section -->
+        <section class="mb-16">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-6">Como usar o conversor</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h4 class="text-lg font-medium text-gray-800 mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        JSON para CSV
+                    </h4>
+                    <ol class="list-decimal pl-5 space-y-2 text-gray-600">
+                        <li>Selecione "JSON para CSV" no menu suspenso</li>
+                        <li>Cole ou digite seu JSON no campo de entrada</li>
+                        <li>Escolha o delimitador desejado (padrão: vírgula)</li>
+                        <li>Clique no botão "Converter"</li>
+                        <li>Copie o resultado CSV ou limpe para uma nova conversão</li>
+                    </ol>
+                    <div class="mt-4 p-3 bg-gray-50 rounded code-block text-sm">
+                        <p class="font-medium mb-1">Exemplo de JSON:</p>
+                        <pre>[
+  {"nome": "João", "idade": 30, "cidade": "São Paulo"},
+  {"nome": "Maria", "idade": 25, "cidade": "Rio de Janeiro"}
+]</pre>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h4 class="text-lg font-medium text-gray-800 mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        CSV para JSON
+                    </h4>
+                    <ol class="list-decimal pl-5 space-y-2 text-gray-600">
+                        <li>Selecione "CSV para JSON" no menu suspenso</li>
+                        <li>Cole ou digite seu CSV no campo de entrada</li>
+                        <li>Escolha o delimitador usado no CSV</li>
+                        <li>Clique no botão "Converter"</li>
+                        <li>Copie o resultado JSON formatado</li>
+                    </ol>
+                    <div class="mt-4 p-3 bg-gray-50 rounded code-block text-sm">
+                        <p class="font-medium mb-1">Exemplo de CSV:</p>
+                        <pre>nome,idade,cidade
+João,30,São Paulo
+Maria,25,Rio de Janeiro</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="mb-16 bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Sobre o Conversor JSON ⇄ CSV</h3>
+
+            <div class="prose max-w-none text-gray-600">
+                <p>Nosso conversor JSON ⇄ CSV é uma ferramenta profissional desenvolvida para facilitar a transformação
+                    de dados entre esses dois formatos amplamente utilizados.</p>
+
+                <h4 class="text-lg font-medium text-gray-800 mt-4">O que é JSON?</h4>
+                <p>JSON (JavaScript Object Notation) é um formato leve de troca de dados que é fácil para humanos lerem
+                    e escreverem, e para máquinas parsearem e gerarem. É amplamente utilizado em APIs web e
+                    configurações de aplicativos.</p>
+
+                <h4 class="text-lg font-medium text-gray-800 mt-4">O que é CSV?</h4>
+                <p>CSV (Comma-Separated Values) é um formato de arquivo simples que armazena dados tabulares (números e
+                    texto) em formato de texto plano. Cada linha do arquivo representa um registro e os valores são
+                    separados por delimitadores (normalmente vírgulas).</p>
+
+                <h4 class="text-lg font-medium text-gray-800 mt-4">Casos de Uso Comuns</h4>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Migração de dados entre sistemas</li>
+                    <li>Processamento de dados para análise</li>
+                    <li>Preparação de dados para visualização</li>
+                    <li>Conversão de saídas de API para planilhas</li>
+                    <li>Integração entre diferentes plataformas</li>
+                </ul>
+
+                <h4 class="text-lg font-medium text-gray-800 mt-4">Recursos Avançados</h4>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Suporte a múltiplos delimitadores (vírgula, ponto-e-vírgula, tabulação, pipe)</li>
+                    <li>Validação básica de sintaxe durante a conversão</li>
+                    <li>Formatação automática do JSON de saída</li>
+                    <li>Interface limpa e responsiva para todos os dispositivos</li>
+                    <li>Processamento totalmente no cliente (seus dados nunca saem do seu navegador)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <section class="mb-16">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-6">Dicas Técnicas</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                    <h4 class="text-lg font-medium text-blue-800 mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Validação de Dados
+                    </h4>
+                    <p class="text-blue-700">Certifique-se de que seu JSON esteja bem formado antes da conversão. JSONs
+                        inválidos podem causar erros na conversão para CSV.</p>
+                </div>
+
+                <div class="bg-amber-50 p-6 rounded-lg border border-amber-100">
+                    <h4 class="text-lg font-medium text-amber-800 mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-600 mr-2" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Delimitadores
+                    </h4>
+                    <p class="text-amber-700">Ao converter CSV para JSON, escolha o delimitador correto usado no arquivo
+                        original para garantir uma conversão precisa.</p>
+                </div>
+
+                <div class="bg-green-50 p-6 rounded-lg border border-green-100">
+                    <h4 class="text-lg font-medium text-green-800 mb-3 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600 mr-2" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Dados Aninhados
+                    </h4>
+                    <p class="text-green-700">JSONs com estruturas aninhadas complexas podem resultar em CSVs com
+                        colunas adicionais ou precisar de transformação adicional.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span class="text-xl font-bold">JSON ⇄ CSV Converter</span>
+                    </div>
+                    <p class="text-gray-400 mt-2">Ferramenta profissional para conversão de dados</p>
+                </div>
+
+                <div class="text-gray-400 text-sm">
+                    <p>&copy; 2025 JSON ⇄ CSV Converter. Todos os direitos reservados.</p>
+                    <p class="mt-1">Desenvolvido para profissionais que precisam de soluções rápidas e confiáveis.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Modal -->
+    <div id="notification" class="notification hidden">
+        <div class="px-6 py-4 rounded-lg shadow-lg bg-white border-l-4 border-green-500">
+            <div class="flex items-center">
+                <svg id="notificationIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-2"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span id="notificationMessage" class="text-gray-800">Operação concluída com sucesso!</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // DOM Elements
+            const convertBtn = document.getElementById('convertBtn');
+            const clearInput = document.getElementById('clearInput');
+            const copyOutput = document.getElementById('copyOutput');
+            const inputData = document.getElementById('inputData');
+            const outputData = document.getElementById('outputData');
+            const conversionType = document.getElementById('conversionType');
+            const delimiter = document.getElementById('delimiter');
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notificationMessage');
+            const notificationIcon = document.getElementById('notificationIcon');
+
+            // Show notification function
+            function showNotification(message, isSuccess = true) {
+                notificationMessage.textContent = message;
+
+                if (isSuccess) {
+                    notification.querySelector('.border-l-4').classList.remove('border-red-500', 'border-blue-500');
+                    notification.querySelector('.border-l-4').classList.add('border-green-500');
+                    notificationIcon.classList.remove('text-red-500', 'text-blue-500');
+                    notificationIcon.classList.add('text-green-500');
+                    notificationIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />';
+                } else {
+                    notification.querySelector('.border-l-4').classList.remove('border-green-500', 'border-blue-500');
+                    notification.querySelector('.border-l-4').classList.add('border-red-500');
+                    notificationIcon.classList.remove('text-green-500', 'text-blue-500');
+                    notificationIcon.classList.add('text-red-500');
+                    notificationIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />';
+                }
+
+                notification.classList.remove('hidden');
+                notification.classList.add('show');
+
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    notification.classList.add('hidden');
+                }, 3000);
+            }
+
+            // Clear input function
+            clearInput.addEventListener('click', function () {
+                inputData.value = '';
+                inputData.focus();
+                showNotification('Campo de entrada limpo com sucesso.');
+            });
+
+            // Copy output function
+            copyOutput.addEventListener('click', function () {
+                if (outputData.value.trim() === '') {
+                    showNotification('Nada para copiar - o campo de saída está vazio.', false);
+                    return;
+                }
+
+                outputData.select();
+                document.execCommand('copy');
+                showNotification('Resultado copiado para a área de transferência!');
+            });
+
+            // Conversion functions
+            function jsonToCsv(json, delimiter = ',') {
+                try {
+                    // Parse JSON
+                    const data = JSON.parse(json);
+
+                    if (!Array.isArray(data)) {
+                        throw new Error('O JSON deve ser um array de objetos');
+                    }
+
+                    if (data.length === 0) {
+                        return '';
+                    }
+
+                    // Get headers
+                    const headers = Object.keys(data[0]);
+
+                    // Process data
+                    const rows = data.map(obj => {
+                        return headers.map(header => {
+                            let value = obj[header];
+
+                            // Handle nested objects
+                            if (typeof value === 'object' && value !== null) {
+                                value = JSON.stringify(value);
+                            }
+
+                            // Escape values that contain delimiters or newlines
+                            if (typeof value === 'string' && (value.includes(delimiter) || value.includes('\n') || value.includes('"'))) {
+                                value = `"${value.replace(/"/g, '""')}"`;
+                            }
+
+                            return value === undefined ? '' : value;
+                        });
+                    });
+
+                    // Combine headers and rows
+                    return [headers.join(delimiter), ...rows.map(row => row.join(delimiter))].join('\n');
+                } catch (error) {
+                    throw new Error(`Erro ao converter JSON para CSV: ${error.message}`);
+                }
+            }
+
+            function csvToJson(csv, delimiter = ',') {
+                try {
+                    const lines = csv.split('\n').filter(line => line.trim() !== '');
+
+                    if (lines.length < 1) {
+                        throw new Error('O CSV deve conter pelo menos uma linha');
+                    }
+
+                    const headers = lines[0].split(delimiter);
+                    const result = [];
+
+                    for (let i = 1; i < lines.length; i++) {
+                        const currentLine = lines[i];
+                        const obj = {};
+                        let currentValue = '';
+                        let insideQuotes = false;
+                        let values = [];
+                        let j = 0;
+
+                        // Parse CSV line manually to handle quoted values with delimiters
+                        for (let k = 0; k < currentLine.length; k++) {
+                            const char = currentLine[k];
+
+                            if (char === '"') {
+                                insideQuotes = !insideQuotes;
+                            } else if (char === delimiter && !insideQuotes) {
+                                // Remove surrounding quotes and unescape inner quotes
+                                if (currentValue.startsWith('"') && currentValue.endsWith('"')) {
+                                    currentValue = currentValue.substring(1, currentValue.length - 1).replace(/""/g, '"');
+                                }
+                                values.push(currentValue);
+                                currentValue = '';
+                            } else {
+                                currentValue += char;
+                            }
+                        }
+
+                        // Add the last value
+                        if (currentValue.startsWith('"') && currentValue.endsWith('"')) {
+                            currentValue = currentValue.substring(1, currentValue.length - 1).replace(/""/g, '"');
+                        }
+                        values.push(currentValue);
+
+                        // Handle case where line ends with delimiter
+                        if (currentLine.endsWith(delimiter)) {
+                            values.push('');
+                        }
+
+                        // Assign values to headers
+                        for (let h = 0; h < headers.length; h++) {
+                            if (h < values.length) {
+                                // Try to parse numbers and booleans
+                                let value = values[h];
+
+                                // Check if value is a number
+                                if (!isNaN(value) && value.trim() !== '') {
+                                    value = Number(value);
+                                }
+                                // Check for boolean values
+                                else if (value.toLowerCase() === 'true') {
+                                    value = true;
+                                } else if (value.toLowerCase() === 'false') {
+                                    value = false;
+                                }
+                                // Check for JSON strings
+                                else if ((value.startsWith('{') && value.endsWith('}')) || (value.startsWith('[') && value.endsWith(']'))) {
+                                    try {
+                                        value = JSON.parse(value);
+                                    } catch (e) {
+                                        // Leave as string if not valid JSON
+                                    }
+                                }
+
+                                obj[headers[h]] = value;
+                            } else {
+                                obj[headers[h]] = '';
+                            }
+                        }
+
+                        result.push(obj);
+                    }
+
+                    return JSON.stringify(result, null, 2);
+                } catch (error) {
+                    throw new Error(`Erro ao converter CSV para JSON: ${error.message}`);
+                }
+            }
+
+            // Convert button click handler
+            convertBtn.addEventListener('click', function () {
+                try {
+                    const input = inputData.value.trim();
+
+                    if (input === '') {
+                        showNotification('Por favor, insira dados para converter.', false);
+                        return;
+                    }
+
+                    let result;
+                    const selectedDelimiter = delimiter.value;
+
+                    if (conversionType.value === 'jsonToCsv') {
+                        result = jsonToCsv(input, selectedDelimiter);
+                        showNotification('JSON convertido para CSV com sucesso!');
+                    } else {
+                        result = csvToJson(input, selectedDelimiter);
+                        showNotification('CSV convertido para JSON com sucesso!');
+                    }
+
+                    outputData.value = result;
+                } catch (error) {
+                    showNotification(error.message, false);
+                    console.error(error);
+                }
+            });
+
+            // Example data buttons
+            document.querySelectorAll('[data-example]').forEach(button => {
+                button.addEventListener('click', function () {
+                    const exampleType = this.getAttribute('data-example');
+
+                    if (exampleType === 'json') {
+                        inputData.value = `[
+  {"nome": "João", "idade": 30, "cidade": "São Paulo", "ativo": true},
+  {"nome": "Maria", "idade": 25, "cidade": "Rio de Janeiro", "ativo": false},
+  {"nome": "Carlos", "idade": 35, "cidade": "Belo Horizonte", "ativo": true}
+]`;
+                        conversionType.value = 'jsonToCsv';
+                        showNotification('Exemplo de JSON carregado. Pronto para converter para CSV!');
+                    } else {
+                        inputData.value = `nome;idade;cidade;ativo
+João;30;São Paulo;true
+Maria;25;Rio de Janeiro;false
+Carlos;35;Belo Horizonte;true`;
+                        conversionType.value = 'csvToJson';
+                        delimiter.value = ';';
+                        showNotification('Exemplo de CSV carregado. Pronto para converter para JSON!');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
