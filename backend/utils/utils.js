@@ -12,6 +12,7 @@ const dados = [
     { category: 'dev', name: 'Validador de JSON', description: 'Ferramenta que verifica se um documento JSON está corretamente estruturado e segue a sintaxe correta do formato JSON.', link: './validador-de-json/' },
     { category: 'dev', name: 'Gerador de HASH', description: 'Uma função hash é um algoritmo que recebe dados de entrada e gera um "hash", uma sequência de caracteres de comprimento fixo. ', link: './gerador-de-hash/' },
     { category: 'dev', name: 'Conversor de JSON ⇄ CSV', description: ' Carregue um JSON e obtenha um CSV de todas as entradas (faça o download ou copie para a área de transferência) algumas alterações usando esta ferramenta gratuita', link: './conversor-de-json-csv/' },
+    { category: 'dev', name: 'Conversor de áudio (MP3 → WAV)', description: 'A melhor forma de converter arquivos MP3 pra WAV em segundos. 100% grátis, seguro e fácil de usar', link: './conversor-de-audio/' },
     
     // productivity
     { category: 'productivity', name: 'Cronômetro Online', description: 'Ideal para treinos, estudos, tarefas ou qualquer atividade, sem complicações.', link: './cronometro-online/' },

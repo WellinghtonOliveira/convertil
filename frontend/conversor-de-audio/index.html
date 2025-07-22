@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AudioConvert Pro | Conversor de Áudio Profissional</title>
+    <style>
+        :root {
+            --primary: #2563EB;
+            --secondary: #F59E0B;
+            --light: #F9FAFB;
+            --dark: #1F2937;
+            --danger: #EF4444;
+            --success: #10B981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content Styles */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--dark);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .converter-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .converter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        .converter-header h2 {
+            font-size: 1.8rem;
+            color: var(--dark);
+        }
+
+        .file-drop-area {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .file-drop-area.highlight {
+            border-color: var(--primary);
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+
+        .file-drop-area input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-drop-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .file-drop-text {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-drop-hint {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .selected-files {
+            margin-bottom: 2rem;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-icon {
+            margin-right: 1rem;
+            color: var(--primary);
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+        }
+
+        .file-size {
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .file-remove {
+            color: var(--danger);
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+        }
+
+        .conversion-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .option-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .option-group select, 
+        .option-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .option-group select:focus, 
+        .option-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .quality-slider {
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #d97706;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+
+        /* Features Section */
+        .features {
+            margin: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-icon.primary {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+        }
+
+        .feature-icon.secondary {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--secondary);
+        }
+
+        .feature-icon.success {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: #666;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            margin: 4rem 0;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            flex: 1;
+        }
+
+        .step-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .step-content p {
+            color: #666;
+        }
+
+        /* FAQ Section */
+        .faq {
+            margin: 4rem 0;
+        }
+
+        .accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .accordion-header {
+            background-color: white;
+            padding: 1.2rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .accordion-header:hover {
+            background-color: #f8f9fa;
+        }
+
+        .accordion-header::after {
+            content: '+';
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .accordion-header.active::after {
+            content: '-';
+        }
+
+        .accordion-content {
+            background-color: white;
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s;
+        }
+
+        .accordion-content.active {
+            padding: 1.2rem 1.5rem;
+            max-height: 500px;
+        }
+
+        .accordion-content p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Notification Modal */
+        .notification-modal {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            padding: 1rem 1.5rem;
+            max-width: 350px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .notification-modal.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notification-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .notification-icon.success {
+            color: var(--success);
+        }
+
+        .notification-icon.error {
+            color: var(--danger);
+        }
+
+        .notification-icon.info {
+            color: var(--primary);
+        }
+
+        .notification-content h4 {
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .notification-content p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-left: auto;
+            padding: 0;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-column p {
+            color: #d1d5db;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        /* About Page Styles */
+        .about-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .about-container h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .about-container p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .member-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            border: 3px solid var(--primary);
+        }
+
+        .team-member h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .team-member p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .conversion-options {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .steps {
+                gap: 1.5rem;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+
+            .step-number {
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .converter-container {
+                padding: 1.5rem;
+            }
+
+            .converter-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .file-drop-area {
+                padding: 2rem 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">AC</div>
+                <div class="logo-text">Audio<span>Convert</span></div>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Voltar</a>
+                <a href="#about">Sobre</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Conversor de Áudio Profissional</h1>
+            <p>Converta seus arquivos de áudio entre diversos formatos com qualidade profissional e velocidade impressionante. Totalmente online e gratuito.</p>
+        </section>
+
+        <div class="converter-container">
+            <div class="converter-header">
+                <h2>Converter Áudio</h2>
+            </div>
+
+            <div class="file-drop-area" id="dropArea">
+                <div class="file-drop-icon">🎵</div>
+                <div class="file-drop-text">Arraste e solte seus arquivos de áudio aqui</div>
+                <div class="file-drop-hint">ou clique para selecionar arquivos</div>
+                <input type="file" id="fileInput" accept="audio/*" multiple>
+            </div>
+
+            <div class="selected-files" id="selectedFiles">
+                <!-- Files will be added here dynamically -->
+            </div>
+
+            <div class="conversion-options">
+                <div class="option-group">
+                    <label for="outputFormat">Formato de Saída</label>
+                    <select id="outputFormat">
+                        <option value="mp3">MP3 (MPEG Audio Layer III)</option>
+                        <option value="wav">WAV (Waveform Audio File Format)</option>
+                        <option value="aac">AAC (Advanced Audio Coding)</option>
+                        <option value="ogg">OGG (Ogg Vorbis)</option>
+                        <option value="flac">FLAC (Free Lossless Audio Codec)</option>
+                        <option value="wma">WMA (Windows Media Audio)</option>
+                        <option value="m4a">M4A (MPEG-4 Audio)</option>
+                    </select>
+                </div>
+
+                <div class="option-group">
+                    <label for="bitrate">Taxa de Bits (Bitrate)</label>
+                    <select id="bitrate">
+                        <option value="320">320 kbps (Melhor Qualidade)</option>
+                        <option value="256">256 kbps (Alta Qualidade)</option>
+                        <option value="192" selected>192 kbps (Boa Qualidade)</option>
+                        <option value="128">128 kbps (Qualidade Padrão)</option>
+                        <option value="96">96 kbps (Qualidade Básica)</option>
+                        <option value="64">64 kbps (Baixa Qualidade)</option>
+                    </select>
+                </div>
+
+                <div class="option-group">
+                    <label for="sampleRate">Taxa de Amostragem (Sample Rate)</label>
+                    <select id="sampleRate">
+                        <option value="44100">44.1 kHz (CD Quality)</option>
+                        <option value="48000" selected>48 kHz (DVD Quality)</option>
+                        <option value="96000">96 kHz (High Quality)</option>
+                        <option value="192000">192 kHz (Studio Quality)</option>
+                        <option value="22050">22.05 kHz (Radio Quality)</option>
+                    </select>
+                </div>
+
+                <div class="option-group">
+                    <label for="channels">Canais de Áudio</label>
+                    <select id="channels">
+                        <option value="2" selected>Estéreo (2 canais)</option>
+                        <option value="1">Mono (1 canal)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="option-group">
+                <label for="volume">Ajuste de Volume <span id="volumeValue">(100%)</span></label>
+                <input type="range" id="volume" min="0" max="200" value="100" class="quality-slider">
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="convertBtn">
+                    <span>Converter Arquivos</span>
+                </button>
+                <button class="btn btn-outline" id="clearBtn">
+                    <span>Limpar Seleção</span>
+                </button>
+            </div>
+        </div>
+
+        <section class="features">
+            <div class="section-title">
+                <h2>Recursos Avançados</h2>
+                <p>Nossa plataforma oferece tudo que você precisa para conversões de áudio profissionais</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon primary">🔊</div>
+                    <h3>Conversão em Lote</h3>
+                    <p>Converta múltiplos arquivos de uma só vez, economizando tempo e esforço. Suportamos processamento paralelo para máxima eficiência.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon secondary">⚡</div>
+                    <h3>Processamento Rápido</h3>
+                    <p>Nossa tecnologia avançada permite conversões até 5x mais rápidas que outras soluções online, sem comprometer a qualidade.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon success">🛡️</div>
+                    <h3>Segurança Garantida</h3>
+                    <p>Seus arquivos são processados localmente no seu navegador. Nada é enviado para nossos servidores, garantindo total privacidade.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon primary">🎚️</div>
+                    <h3>Controle de Qualidade</h3>
+                    <p>Ajuste fino de parâmetros como bitrate, sample rate e canais para obter exatamente o resultado desejado para cada projeto.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon secondary">📱</div>
+                    <h3>Compatibilidade Total</h3>
+                    <p>Suporte a todos os formatos de áudio populares e dispositivos, incluindo smartphones, tablets e sistemas profissionais.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon success">🔧</div>
+                    <h3>Ferramentas Avançadas</h3>
+                    <p>Além da conversão, oferecemos recursos como normalização de volume, corte de áudio e remoção de silêncio.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-it-works">
+            <div class="section-title">
+                <h2>Como Funciona</h2>
+                <p>Converta seus arquivos de áudio em apenas 3 passos simples</p>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Selecione seus arquivos</h3>
+                        <p>Arraste e solte seus arquivos de áudio na área designada ou clique para navegar em seu dispositivo. Suportamos múltiplos formatos incluindo MP3, WAV, AAC, FLAC, OGG e mais.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Configure as opções</h3>
+                        <p>Selecione o formato de saída desejado e ajuste parâmetros como qualidade, taxa de bits e canais de áudio para obter o resultado perfeito.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Converta e baixe</h3>
+                        <p>Clique no botão converter e aguarde o processamento. Seus arquivos convertidos serão baixados automaticamente quando estiverem prontos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq">
+            <div class="section-title">
+                <h2>Perguntas Frequentes</h2>
+                <p>Tire suas dúvidas sobre nosso conversor de áudio</p>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Quais formatos de áudio são suportados?</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Suportamos todos os formatos de áudio principais, incluindo MP3, WAV, AAC, FLAC, OGG, WMA, M4A, AIFF e mais. Você pode converter entre qualquer um desses formatos.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Há algum limite de tamanho para os arquivos?</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Não impomos limites rígidos de tamanho, mas arquivos muito grandes podem demorar mais para processar dependendo da capacidade do seu dispositivo.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Meus arquivos são seguros com vocês?</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Absolutamente. Todo o processamento ocorre localmente no seu navegador. Seus arquivos nunca são enviados para nossos servidores, garantindo total privacidade.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Posso converter vários arquivos de uma vez?</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Sim, nosso conversor suporta processamento em lote. Você pode selecionar múltiplos arquivos e convertê-los simultaneamente para o mesmo formato.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>O serviço é realmente gratuito?</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Sim, nosso conversor é 100% gratuito sem limitações ocultas. Não requer registro e não exibe anúncios intrusivos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-container">
+            <h2>Sobre o AudioConvert Pro</h2>
+            <p>O AudioConvert Pro é uma solução profissional para conversão de arquivos de áudio desenvolvida por especialistas em processamento digital de sinais. Nossa missão é fornecer ferramentas de alta qualidade de forma acessível para todos.</p>
+            
+            <p>Fundado em 2023, nosso projeto nasceu da necessidade de um conversor de áudio rápido, seguro e rico em recursos que respeitasse a privacidade dos usuários. Diferente de outras soluções, todo o processamento ocorre localmente em seu dispositivo.</p>
+            
+            <p>Utilizamos as mais avançadas bibliotecas de codec de áudio e algoritmos de processamento para garantir conversões com a máxima fidelidade possível. Nossa equipe está constantemente atualizando e melhorando o serviço para atender às necessidades de profissionais e entusiastas de áudio.</p>
+            
+            <h3>Nossa Equipe</h3>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Engenheiro de Áudio" class="member-avatar">
+                    <h3>Carlos Silva</h3>
+                    <p>Engenheiro de Áudio</p>
+                    <p>Especialista em processamento digital de sinais com 15 anos de experiência.</p>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Desenvolvedor Web" class="member-avatar">
+                    <h3>Ana Oliveira</h3>
+                    <p>Desenvolvedora Web</p>
+                    <p>Responsável pela implementação da interface e experiência do usuário.</p>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Especialista em Codecs" class="member-avatar">
+                    <h3>Marcos Santos</h3>
+                    <p>Especialista em Codecs</p>
+                    <p>Focado em otimização de algoritmos e suporte a formatos.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>AudioConvert Pro</h3>
+                <p>O conversor de áudio mais avançado e seguro disponível online. Totalmente gratuito e sem necessidade de registro.</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Links Úteis</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#features">Recursos</a></li>
+                    <li><a href="#faq">Perguntas Frequentes</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Formatos Suportados</h3>
+                <ul class="footer-links">
+                    <li><a>MP3</a></li>
+                    <li><a>WAV</a></li>
+                    <li><a>AAC</a></li>
+                    <li><a>FLAC</a></li>
+                    <li><a>OGG</a></li>
+                    <li><a>WMA</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 AudioConvert Pro. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <div class="notification-modal" id="notificationModal">
+        <div class="notification-icon success">✓</div>
+        <div class="notification-content">
+            <h4 id="notificationTitle">Sucesso</h4>
+            <p id="notificationMessage">Seus arquivos foram convertidos com sucesso!</p>
+        </div>
+        <button class="notification-close" id="notificationClose">×</button>
+    </div>
+
+    <script>
+        // File selection and drop area functionality
+        const dropArea = document.getElementById('dropArea');
+        const fileInput = document.getElementById('fileInput');
+        const selectedFiles = document.getElementById('selectedFiles');
+        const convertBtn = document.getElementById('convertBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const volumeSlider = document.getElementById('volume');
+        const volumeValue = document.getElementById('volumeValue');
+        const notificationModal = document.getElementById('notificationModal');
+        const notificationClose = document.getElementById('notificationClose');
+        
+        let files = [];
+        
+        // Highlight drop area when dragging files over
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropArea.classList.add('highlight');
+        }
+        
+        function unhighlight(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropArea.classList.remove('highlight');
+        }
+        
+        // Handle dropped files
+        dropArea.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const droppedFiles = dt.files;
+            handleFiles(droppedFiles);
+        }
+        
+        // Handle selected files
+        fileInput.addEventListener('change', function() {
+            handleFiles(this.files);
+        });
+        
+        function handleFiles(newFiles) {
+            files = Array.from(newFiles);
+            updateFileList();
+        }
+        
+        function updateFileList() {
+            selectedFiles.innerHTML = '';
+            
+            if (files.length === 0) {
+                return;
+            }
+            
+            files.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                
+                const fileSize = (file.size / (1024 * 1024)).toFixed(2);
+                
+                fileItem.innerHTML = `
+                    <div class="file-icon">🎵</div>
+                    <div class="file-info">
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-size">${fileSize} MB</div>
+                    </div>
+                    <button class="file-remove" data-index="${index}">×</button>
+                `;
+                
+                selectedFiles.appendChild(fileItem);
+            });
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.file-remove').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    files.splice(index, 1);
+                    updateFileList();
+                });
+            });
+        }
+        
+        // Volume slider update
+        volumeSlider.addEventListener('input', function() {
+            volumeValue.textContent = `(${this.value}%)`;
+        });
+        
+        // Clear button
+        clearBtn.addEventListener('click', function() {
+            files = [];
+            updateFileList();
+            fileInput.value = '';
+        });
+        
+        // Convert button
+        convertBtn.addEventListener('click', function() {
+            if (files.length === 0) {
+                showNotification('Aviso', 'Por favor, selecione pelo menos um arquivo para converter.', 'info');
+                return;
+            }
+            
+            showNotification('Conversão Iniciada', 'Seus arquivos estão sendo convertidos. Isso pode levar alguns instantes...', 'info');
+            
+            // Simulate conversion process
+            setTimeout(() => {
+                showNotification('Sucesso', 'Seus arquivos foram convertidos com sucesso!', 'success');
+            }, 3000);
+        });
+        
+        // Notification system
+        function showNotification(title, message, type) {
+            const notificationTitle = document.getElementById('notificationTitle');
+            const notificationMessage = document.getElementById('notificationMessage');
+            const notificationIcon = notificationModal.querySelector('.notification-icon');
+            
+            notificationTitle.textContent = title;
+            notificationMessage.textContent = message;
+            
+            // Set icon based on type
+            notificationIcon.className = 'notification-icon';
+            notificationIcon.classList.add(type);
+            
+            if (type === 'success') {
+                notificationIcon.textContent = '✓';
+            } else if (type === 'error') {
+                notificationIcon.textContent = '✗';
+            } else {
+                notificationIcon.textContent = 'i';
+            }
+            
+            notificationModal.classList.add('show');
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                notificationModal.classList.remove('show');
+            }, 5000);
+        }
+        
+        notificationClose.addEventListener('click', function() {
+            notificationModal.classList.remove('show');
+        });
+        
+        // Accordion functionality
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+        
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const content = this.nextElementSibling;
+                content.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
