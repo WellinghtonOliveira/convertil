@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AudioConvert Pro | Conversor de Áudio Profissional</title>
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.15/dist/ffmpeg.min.js"></script>
+
+
+
     <style>
         :root {
             --primary: #2563EB;
@@ -253,7 +258,7 @@
             font-weight: 500;
         }
 
-        .option-group select, 
+        .option-group select,
         .option-group input {
             width: 100%;
             padding: 0.8rem;
@@ -263,7 +268,7 @@
             transition: border-color 0.3s;
         }
 
-        .option-group select:focus, 
+        .option-group select:focus,
         .option-group input:focus {
             outline: none;
             border-color: var(--primary);
@@ -759,6 +764,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="header-container">
@@ -776,7 +782,8 @@
     <main>
         <section class="hero">
             <h1>Conversor de Áudio Profissional</h1>
-            <p>Converta seus arquivos de áudio entre diversos formatos com qualidade profissional e velocidade impressionante. Totalmente online e gratuito.</p>
+            <p>Converta seus arquivos de áudio entre diversos formatos com qualidade profissional e velocidade
+                impressionante. Totalmente online e gratuito.</p>
         </section>
 
         <div class="converter-container">
@@ -804,7 +811,6 @@
                         <option value="aac">AAC (Advanced Audio Coding)</option>
                         <option value="ogg">OGG (Ogg Vorbis)</option>
                         <option value="flac">FLAC (Free Lossless Audio Codec)</option>
-                        <option value="wma">WMA (Windows Media Audio)</option>
                         <option value="m4a">M4A (MPEG-4 Audio)</option>
                     </select>
                 </div>
@@ -866,37 +872,43 @@
                 <div class="feature-card">
                     <div class="feature-icon primary">🔊</div>
                     <h3>Conversão em Lote</h3>
-                    <p>Converta múltiplos arquivos de uma só vez, economizando tempo e esforço. Suportamos processamento paralelo para máxima eficiência.</p>
+                    <p>Converta múltiplos arquivos de uma só vez, economizando tempo e esforço. Suportamos processamento
+                        paralelo para máxima eficiência.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon secondary">⚡</div>
                     <h3>Processamento Rápido</h3>
-                    <p>Nossa tecnologia avançada permite conversões até 5x mais rápidas que outras soluções online, sem comprometer a qualidade.</p>
+                    <p>Nossa tecnologia avançada permite conversões até 5x mais rápidas que outras soluções online, sem
+                        comprometer a qualidade.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon success">🛡️</div>
                     <h3>Segurança Garantida</h3>
-                    <p>Seus arquivos são processados localmente no seu navegador. Nada é enviado para nossos servidores, garantindo total privacidade.</p>
+                    <p>Seus arquivos são processados localmente no seu navegador. Nada é enviado para nossos servidores,
+                        garantindo total privacidade.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon primary">🎚️</div>
                     <h3>Controle de Qualidade</h3>
-                    <p>Ajuste fino de parâmetros como bitrate, sample rate e canais para obter exatamente o resultado desejado para cada projeto.</p>
+                    <p>Ajuste fino de parâmetros como bitrate, sample rate e canais para obter exatamente o resultado
+                        desejado para cada projeto.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon secondary">📱</div>
                     <h3>Compatibilidade Total</h3>
-                    <p>Suporte a todos os formatos de áudio populares e dispositivos, incluindo smartphones, tablets e sistemas profissionais.</p>
+                    <p>Suporte a todos os formatos de áudio populares e dispositivos, incluindo smartphones, tablets e
+                        sistemas profissionais.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon success">🔧</div>
                     <h3>Ferramentas Avançadas</h3>
-                    <p>Além da conversão, oferecemos recursos como normalização de volume, corte de áudio e remoção de silêncio.</p>
+                    <p>Além da conversão, oferecemos recursos como normalização de volume, corte de áudio e remoção de
+                        silêncio.</p>
                 </div>
             </div>
         </section>
@@ -912,7 +924,8 @@
                     <div class="step-number">1</div>
                     <div class="step-content">
                         <h3>Selecione seus arquivos</h3>
-                        <p>Arraste e solte seus arquivos de áudio na área designada ou clique para navegar em seu dispositivo. Suportamos múltiplos formatos incluindo MP3, WAV, AAC, FLAC, OGG e mais.</p>
+                        <p>Arraste e solte seus arquivos de áudio na área designada ou clique para navegar em seu
+                            dispositivo. Suportamos múltiplos formatos incluindo MP3, WAV, AAC, FLAC, OGG e mais.</p>
                     </div>
                 </div>
 
@@ -920,7 +933,8 @@
                     <div class="step-number">2</div>
                     <div class="step-content">
                         <h3>Configure as opções</h3>
-                        <p>Selecione o formato de saída desejado e ajuste parâmetros como qualidade, taxa de bits e canais de áudio para obter o resultado perfeito.</p>
+                        <p>Selecione o formato de saída desejado e ajuste parâmetros como qualidade, taxa de bits e
+                            canais de áudio para obter o resultado perfeito.</p>
                     </div>
                 </div>
 
@@ -928,7 +942,8 @@
                     <div class="step-number">3</div>
                     <div class="step-content">
                         <h3>Converta e baixe</h3>
-                        <p>Clique no botão converter e aguarde o processamento. Seus arquivos convertidos serão baixados automaticamente quando estiverem prontos.</p>
+                        <p>Clique no botão converter e aguarde o processamento. Seus arquivos convertidos serão baixados
+                            automaticamente quando estiverem prontos.</p>
                     </div>
                 </div>
             </div>
@@ -946,7 +961,8 @@
                         <span>Quais formatos de áudio são suportados?</span>
                     </div>
                     <div class="accordion-content">
-                        <p>Suportamos todos os formatos de áudio principais, incluindo MP3, WAV, AAC, FLAC, OGG, WMA, M4A, AIFF e mais. Você pode converter entre qualquer um desses formatos.</p>
+                        <p>Suportamos todos os formatos de áudio principais, incluindo MP3, WAV, AAC, FLAC, OGG, WMA,
+                            M4A, AIFF e mais. Você pode converter entre qualquer um desses formatos.</p>
                     </div>
                 </div>
 
@@ -955,7 +971,8 @@
                         <span>Há algum limite de tamanho para os arquivos?</span>
                     </div>
                     <div class="accordion-content">
-                        <p>Não impomos limites rígidos de tamanho, mas arquivos muito grandes podem demorar mais para processar dependendo da capacidade do seu dispositivo.</p>
+                        <p>Não impomos limites rígidos de tamanho, mas arquivos muito grandes podem demorar mais para
+                            processar dependendo da capacidade do seu dispositivo.</p>
                     </div>
                 </div>
 
@@ -964,7 +981,8 @@
                         <span>Meus arquivos são seguros com vocês?</span>
                     </div>
                     <div class="accordion-content">
-                        <p>Absolutamente. Todo o processamento ocorre localmente no seu navegador. Seus arquivos nunca são enviados para nossos servidores, garantindo total privacidade.</p>
+                        <p>Absolutamente. Todo o processamento ocorre localmente no seu navegador. Seus arquivos nunca
+                            são enviados para nossos servidores, garantindo total privacidade.</p>
                     </div>
                 </div>
 
@@ -973,7 +991,8 @@
                         <span>Posso converter vários arquivos de uma vez?</span>
                     </div>
                     <div class="accordion-content">
-                        <p>Sim, nosso conversor suporta processamento em lote. Você pode selecionar múltiplos arquivos e convertê-los simultaneamente para o mesmo formato.</p>
+                        <p>Sim, nosso conversor suporta processamento em lote. Você pode selecionar múltiplos arquivos e
+                            convertê-los simultaneamente para o mesmo formato.</p>
                     </div>
                 </div>
 
@@ -982,7 +1001,8 @@
                         <span>O serviço é realmente gratuito?</span>
                     </div>
                     <div class="accordion-content">
-                        <p>Sim, nosso conversor é 100% gratuito sem limitações ocultas. Não requer registro e não exibe anúncios intrusivos.</p>
+                        <p>Sim, nosso conversor é 100% gratuito sem limitações ocultas. Não requer registro e não exibe
+                            anúncios intrusivos.</p>
                     </div>
                 </div>
             </div>
@@ -990,14 +1010,20 @@
 
         <section id="about" class="about-container">
             <h2>Sobre o AudioConvert Pro</h2>
-            <p>O AudioConvert Pro é uma solução profissional para conversão de arquivos de áudio desenvolvida por especialistas em processamento digital de sinais. Nossa missão é fornecer ferramentas de alta qualidade de forma acessível para todos.</p>
-            
-            <p>Fundado em 2023, nosso projeto nasceu da necessidade de um conversor de áudio rápido, seguro e rico em recursos que respeitasse a privacidade dos usuários. Diferente de outras soluções, todo o processamento ocorre localmente em seu dispositivo.</p>
-            
-            <p>Utilizamos as mais avançadas bibliotecas de codec de áudio e algoritmos de processamento para garantir conversões com a máxima fidelidade possível. Nossa equipe está constantemente atualizando e melhorando o serviço para atender às necessidades de profissionais e entusiastas de áudio.</p>
-            
+            <p>O AudioConvert Pro é uma solução profissional para conversão de arquivos de áudio desenvolvida por
+                especialistas em processamento digital de sinais. Nossa missão é fornecer ferramentas de alta qualidade
+                de forma acessível para todos.</p>
+
+            <p>Fundado em 2023, nosso projeto nasceu da necessidade de um conversor de áudio rápido, seguro e rico em
+                recursos que respeitasse a privacidade dos usuários. Diferente de outras soluções, todo o processamento
+                ocorre localmente em seu dispositivo.</p>
+
+            <p>Utilizamos as mais avançadas bibliotecas de codec de áudio e algoritmos de processamento para garantir
+                conversões com a máxima fidelidade possível. Nossa equipe está constantemente atualizando e melhorando o
+                serviço para atender às necessidades de profissionais e entusiastas de áudio.</p>
+
             <h3>Nossa Equipe</h3>
-            
+
             <div class="team-grid">
                 <div class="team-member">
                     <img src="https://via.placeholder.com/150" alt="Engenheiro de Áudio" class="member-avatar">
@@ -1005,14 +1031,14 @@
                     <p>Engenheiro de Áudio</p>
                     <p>Especialista em processamento digital de sinais com 15 anos de experiência.</p>
                 </div>
-                
+
                 <div class="team-member">
                     <img src="https://via.placeholder.com/150" alt="Desenvolvedor Web" class="member-avatar">
                     <h3>Ana Oliveira</h3>
                     <p>Desenvolvedora Web</p>
                     <p>Responsável pela implementação da interface e experiência do usuário.</p>
                 </div>
-                
+
                 <div class="team-member">
                     <img src="https://via.placeholder.com/150" alt="Especialista em Codecs" class="member-avatar">
                     <h3>Marcos Santos</h3>
@@ -1027,9 +1053,10 @@
         <div class="footer-container">
             <div class="footer-column">
                 <h3>AudioConvert Pro</h3>
-                <p>O conversor de áudio mais avançado e seguro disponível online. Totalmente gratuito e sem necessidade de registro.</p>
+                <p>O conversor de áudio mais avançado e seguro disponível online. Totalmente gratuito e sem necessidade
+                    de registro.</p>
             </div>
-            
+
             <div class="footer-column">
                 <h3>Links Úteis</h3>
                 <ul class="footer-links">
@@ -1039,7 +1066,7 @@
                     <li><a href="#faq">Perguntas Frequentes</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-column">
                 <h3>Formatos Suportados</h3>
                 <ul class="footer-links">
@@ -1052,7 +1079,7 @@
                 </ul>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <p>&copy; 2025 AudioConvert Pro. Todos os direitos reservados.</p>
         </div>
@@ -1068,6 +1095,18 @@
     </div>
 
     <script>
+
+        const { createFFmpeg, fetchFile } = FFmpeg;
+        const ffmpeg = createFFmpeg({ log: true });
+
+        async function loadFFmpeg() {
+            if (!ffmpeg.isLoaded()) {
+                await ffmpeg.load();
+            }
+        }
+
+
+
         // File selection and drop area functionality
         const dropArea = document.getElementById('dropArea');
         const fileInput = document.getElementById('fileInput');
@@ -1078,62 +1117,62 @@
         const volumeValue = document.getElementById('volumeValue');
         const notificationModal = document.getElementById('notificationModal');
         const notificationClose = document.getElementById('notificationClose');
-        
+
         let files = [];
-        
+
         // Highlight drop area when dragging files over
         ['dragenter', 'dragover'].forEach(eventName => {
             dropArea.addEventListener(eventName, highlight, false);
         });
-        
+
         ['dragleave', 'drop'].forEach(eventName => {
             dropArea.addEventListener(eventName, unhighlight, false);
         });
-        
+
         function highlight(e) {
             e.preventDefault();
             e.stopPropagation();
             dropArea.classList.add('highlight');
         }
-        
+
         function unhighlight(e) {
             e.preventDefault();
             e.stopPropagation();
             dropArea.classList.remove('highlight');
         }
-        
+
         // Handle dropped files
         dropArea.addEventListener('drop', handleDrop, false);
-        
+
         function handleDrop(e) {
             const dt = e.dataTransfer;
             const droppedFiles = dt.files;
             handleFiles(droppedFiles);
         }
-        
+
         // Handle selected files
-        fileInput.addEventListener('change', function() {
+        fileInput.addEventListener('change', function () {
             handleFiles(this.files);
         });
-        
+
         function handleFiles(newFiles) {
             files = Array.from(newFiles);
             updateFileList();
         }
-        
+
         function updateFileList() {
             selectedFiles.innerHTML = '';
-            
+
             if (files.length === 0) {
                 return;
             }
-            
+
             files.forEach((file, index) => {
                 const fileItem = document.createElement('div');
                 fileItem.className = 'file-item';
-                
+
                 const fileSize = (file.size / (1024 * 1024)).toFixed(2);
-                
+
                 fileItem.innerHTML = `
                     <div class="file-icon">🎵</div>
                     <div class="file-info">
@@ -1142,60 +1181,117 @@
                     </div>
                     <button class="file-remove" data-index="${index}">×</button>
                 `;
-                
+
                 selectedFiles.appendChild(fileItem);
             });
-            
+
             // Add event listeners to remove buttons
             document.querySelectorAll('.file-remove').forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const index = parseInt(this.getAttribute('data-index'));
                     files.splice(index, 1);
                     updateFileList();
                 });
             });
         }
-        
+
         // Volume slider update
-        volumeSlider.addEventListener('input', function() {
+        volumeSlider.addEventListener('input', function () {
             volumeValue.textContent = `(${this.value}%)`;
         });
-        
+
         // Clear button
-        clearBtn.addEventListener('click', function() {
+        clearBtn.addEventListener('click', function () {
             files = [];
             updateFileList();
             fileInput.value = '';
         });
-        
+
         // Convert button
-        convertBtn.addEventListener('click', function() {
+        convertBtn.addEventListener('click', async function () {
             if (files.length === 0) {
                 showNotification('Aviso', 'Por favor, selecione pelo menos um arquivo para converter.', 'info');
                 return;
             }
-            
-            showNotification('Conversão Iniciada', 'Seus arquivos estão sendo convertidos. Isso pode levar alguns instantes...', 'info');
-            
-            // Simulate conversion process
-            setTimeout(() => {
-                showNotification('Sucesso', 'Seus arquivos foram convertidos com sucesso!', 'success');
-            }, 3000);
+
+            const outputFormat = document.getElementById('outputFormat').value;
+            const bitrate = document.getElementById('bitrate').value;
+            const sampleRate = document.getElementById('sampleRate').value;
+            const channels = document.getElementById('channels').value;
+            const volume = volumeSlider.value;
+
+            // Bloquear WMA (não suportado)
+            if (outputFormat === 'wma') {
+                showNotification('Erro', 'WMA não é suportado no navegador.', 'error');
+                return;
+            }
+
+            showNotification('Preparando conversão', 'Carregando mecanismo de conversão...', 'info');
+            await loadFFmpeg();
+
+            for (const file of files) {
+                const inputName = file.name;
+                const baseName = inputName.replace(/\.[^/.]+$/, '');
+                const outputName = `${baseName}.${outputFormat}`;
+
+                // Define codec correto para formatos específicos
+                let codecArgs = [];
+                if (outputFormat === 'mp3') codecArgs = ['-c:a', 'libmp3lame'];
+                else if (outputFormat === 'ogg') codecArgs = ['-c:a', 'libvorbis'];
+                else if (outputFormat === 'aac' || outputFormat === 'm4a') codecArgs = ['-c:a', 'aac'];
+                else if (outputFormat === 'flac') codecArgs = ['-c:a', 'flac'];
+
+                // Grava o arquivo no FS virtual do ffmpeg
+                ffmpeg.FS('writeFile', inputName, await fetchFile(file));
+
+                showNotification('Convertendo...', `${inputName} → ${outputName}`, 'info');
+
+                const ffmpegArgs = [
+                    '-i', inputName,
+                    '-ab', `${bitrate}k`,
+                    '-ar', sampleRate,
+                    '-ac', channels,
+                    '-filter:a', `volume=${volume / 100}`,
+                    ...codecArgs,
+                    outputName
+                ];
+
+                try {
+                    await ffmpeg.run(...ffmpegArgs);
+
+                    const data = ffmpeg.FS('readFile', outputName);
+                    const blob = new Blob([data.buffer], { type: 'audio/' + outputFormat });
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = outputName;
+                    link.click();
+
+                    // Limpar o FS do ffmpeg
+                    ffmpeg.FS('unlink', inputName);
+                    ffmpeg.FS('unlink', outputName);
+                } catch (error) {
+                    showNotification('Erro na conversão', `Falha ao converter ${inputName}.`, 'error');
+                    console.error(error);
+                }
+            }
+
+            showNotification('Sucesso', 'Todos os arquivos foram convertidos e baixados.', 'success');
         });
-        
+
+
         // Notification system
         function showNotification(title, message, type) {
             const notificationTitle = document.getElementById('notificationTitle');
             const notificationMessage = document.getElementById('notificationMessage');
             const notificationIcon = notificationModal.querySelector('.notification-icon');
-            
+
             notificationTitle.textContent = title;
             notificationMessage.textContent = message;
-            
+
             // Set icon based on type
             notificationIcon.className = 'notification-icon';
             notificationIcon.classList.add(type);
-            
+
             if (type === 'success') {
                 notificationIcon.textContent = '✓';
             } else if (type === 'error') {
@@ -1203,24 +1299,24 @@
             } else {
                 notificationIcon.textContent = 'i';
             }
-            
+
             notificationModal.classList.add('show');
-            
+
             // Auto-hide after 5 seconds
             setTimeout(() => {
                 notificationModal.classList.remove('show');
             }, 5000);
         }
-        
-        notificationClose.addEventListener('click', function() {
+
+        notificationClose.addEventListener('click', function () {
             notificationModal.classList.remove('show');
         });
-        
+
         // Accordion functionality
         const accordionHeaders = document.querySelectorAll('.accordion-header');
-        
+
         accordionHeaders.forEach(header => {
-            header.addEventListener('click', function() {
+            header.addEventListener('click', function () {
                 this.classList.toggle('active');
                 const content = this.nextElementSibling;
                 content.classList.toggle('active');
@@ -1228,4 +1324,5 @@
         });
     </script>
 </body>
+
 </html>
