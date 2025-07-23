@@ -5,10 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AudioConvert Pro | Conversor de Áudio Profissional</title>
-    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.15/dist/ffmpeg.min.js"></script>
-
-
-
     <style>
         :root {
             --primary: #2563EB;
@@ -1021,30 +1017,6 @@
             <p>Utilizamos as mais avançadas bibliotecas de codec de áudio e algoritmos de processamento para garantir
                 conversões com a máxima fidelidade possível. Nossa equipe está constantemente atualizando e melhorando o
                 serviço para atender às necessidades de profissionais e entusiastas de áudio.</p>
-
-            <h3>Nossa Equipe</h3>
-
-            <div class="team-grid">
-                <div class="team-member">
-                    <img src="https://via.placeholder.com/150" alt="Engenheiro de Áudio" class="member-avatar">
-                    <h3>Carlos Silva</h3>
-                    <p>Engenheiro de Áudio</p>
-                    <p>Especialista em processamento digital de sinais com 15 anos de experiência.</p>
-                </div>
-
-                <div class="team-member">
-                    <img src="https://via.placeholder.com/150" alt="Desenvolvedor Web" class="member-avatar">
-                    <h3>Ana Oliveira</h3>
-                    <p>Desenvolvedora Web</p>
-                    <p>Responsável pela implementação da interface e experiência do usuário.</p>
-                </div>
-
-                <div class="team-member">
-                    <img src="https://via.placeholder.com/150" alt="Especialista em Codecs" class="member-avatar">
-                    <h3>Marcos Santos</h3>
-                    <p>Especialista em Codecs</p>
-                    <p>Focado em otimização de algoritmos e suporte a formatos.</p>
-                </div>
             </div>
         </section>
     </main>
@@ -1094,235 +1066,185 @@
         <button class="notification-close" id="notificationClose">×</button>
     </div>
 
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
     <script>
-
         const { createFFmpeg, fetchFile } = FFmpeg;
         const ffmpeg = createFFmpeg({ log: true });
 
         async function loadFFmpeg() {
-            if (!ffmpeg.isLoaded()) {
-                await ffmpeg.load();
-            }
+            if (!ffmpeg.isLoaded()) await ffmpeg.load();
         }
 
+        window.addEventListener('DOMContentLoaded', () => {
+            const dropArea = document.getElementById('dropArea');
+            const fileInput = document.getElementById('fileInput');
+            const selectedFiles = document.getElementById('selectedFiles');
+            const convertBtn = document.getElementById('convertBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const volumeSlider = document.getElementById('volume');
+            const volumeValue = document.getElementById('volumeValue');
+            const notificationModal = document.getElementById('notificationModal');
+            const notificationClose = document.getElementById('notificationClose');
 
+            let files = [];
 
-        // File selection and drop area functionality
-        const dropArea = document.getElementById('dropArea');
-        const fileInput = document.getElementById('fileInput');
-        const selectedFiles = document.getElementById('selectedFiles');
-        const convertBtn = document.getElementById('convertBtn');
-        const clearBtn = document.getElementById('clearBtn');
-        const volumeSlider = document.getElementById('volume');
-        const volumeValue = document.getElementById('volumeValue');
-        const notificationModal = document.getElementById('notificationModal');
-        const notificationClose = document.getElementById('notificationClose');
-
-        let files = [];
-
-        // Highlight drop area when dragging files over
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropArea.addEventListener(eventName, highlight, false);
-        });
-
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropArea.addEventListener(eventName, unhighlight, false);
-        });
-
-        function highlight(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            dropArea.classList.add('highlight');
-        }
-
-        function unhighlight(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            dropArea.classList.remove('highlight');
-        }
-
-        // Handle dropped files
-        dropArea.addEventListener('drop', handleDrop, false);
-
-        function handleDrop(e) {
-            const dt = e.dataTransfer;
-            const droppedFiles = dt.files;
-            handleFiles(droppedFiles);
-        }
-
-        // Handle selected files
-        fileInput.addEventListener('change', function () {
-            handleFiles(this.files);
-        });
-
-        function handleFiles(newFiles) {
-            files = Array.from(newFiles);
-            updateFileList();
-        }
-
-        function updateFileList() {
-            selectedFiles.innerHTML = '';
-
-            if (files.length === 0) {
-                return;
-            }
-
-            files.forEach((file, index) => {
-                const fileItem = document.createElement('div');
-                fileItem.className = 'file-item';
-
-                const fileSize = (file.size / (1024 * 1024)).toFixed(2);
-
-                fileItem.innerHTML = `
-                    <div class="file-icon">🎵</div>
-                    <div class="file-info">
-                        <div class="file-name">${file.name}</div>
-                        <div class="file-size">${fileSize} MB</div>
-                    </div>
-                    <button class="file-remove" data-index="${index}">×</button>
-                `;
-
-                selectedFiles.appendChild(fileItem);
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropArea.addEventListener(eventName, e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropArea.classList.add('highlight');
+                }, false);
             });
 
-            // Add event listeners to remove buttons
-            document.querySelectorAll('.file-remove').forEach(button => {
-                button.addEventListener('click', function () {
-                    const index = parseInt(this.getAttribute('data-index'));
-                    files.splice(index, 1);
-                    updateFileList();
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropArea.classList.remove('highlight');
+                }, false);
+            });
+
+            dropArea.addEventListener('drop', e => {
+                const dt = e.dataTransfer;
+                const droppedFiles = dt.files;
+                handleFiles(droppedFiles);
+            }, false);
+
+            fileInput.addEventListener('change', function () {
+                handleFiles(this.files);
+            });
+
+            function handleFiles(newFiles) {
+                files = Array.from(newFiles);
+                updateFileList();
+            }
+
+            function updateFileList() {
+                selectedFiles.innerHTML = '';
+
+                if (files.length === 0) return;
+
+                files.forEach((file, index) => {
+                    const fileSize = (file.size / (1024 * 1024)).toFixed(2);
+                    const fileItem = document.createElement('div');
+                    fileItem.className = 'file-item';
+                    fileItem.innerHTML = `
+          <div class="file-icon">🎵</div>
+          <div class="file-info">
+            <div class="file-name">${file.name}</div>
+            <div class="file-size">${fileSize} MB</div>
+          </div>
+          <button class="file-remove" data-index="${index}">×</button>
+        `;
+                    selectedFiles.appendChild(fileItem);
                 });
+
+                document.querySelectorAll('.file-remove').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        files.splice(index, 1);
+                        updateFileList();
+                    });
+                });
+            }
+
+            volumeSlider.addEventListener('input', function () {
+                volumeValue.textContent = `(${this.value}%)`;
             });
-        }
 
-        // Volume slider update
-        volumeSlider.addEventListener('input', function () {
-            volumeValue.textContent = `(${this.value}%)`;
-        });
+            clearBtn.addEventListener('click', () => {
+                files = [];
+                updateFileList();
+                fileInput.value = '';
+            });
 
-        // Clear button
-        clearBtn.addEventListener('click', function () {
-            files = [];
-            updateFileList();
-            fileInput.value = '';
-        });
-
-        // Convert button
-        convertBtn.addEventListener('click', async function () {
-            if (files.length === 0) {
-                showNotification('Aviso', 'Por favor, selecione pelo menos um arquivo para converter.', 'info');
-                return;
-            }
-
-            const outputFormat = document.getElementById('outputFormat').value;
-            const bitrate = document.getElementById('bitrate').value;
-            const sampleRate = document.getElementById('sampleRate').value;
-            const channels = document.getElementById('channels').value;
-            const volume = volumeSlider.value;
-
-            // Bloquear WMA (não suportado)
-            if (outputFormat === 'wma') {
-                showNotification('Erro', 'WMA não é suportado no navegador.', 'error');
-                return;
-            }
-
-            showNotification('Preparando conversão', 'Carregando mecanismo de conversão...', 'info');
-            await loadFFmpeg();
-
-            for (const file of files) {
-                const inputName = file.name;
-                const baseName = inputName.replace(/\.[^/.]+$/, '');
-                const outputName = `${baseName}.${outputFormat}`;
-
-                // Define codec correto para formatos específicos
-                let codecArgs = [];
-                if (outputFormat === 'mp3') codecArgs = ['-c:a', 'libmp3lame'];
-                else if (outputFormat === 'ogg') codecArgs = ['-c:a', 'libvorbis'];
-                else if (outputFormat === 'aac' || outputFormat === 'm4a') codecArgs = ['-c:a', 'aac'];
-                else if (outputFormat === 'flac') codecArgs = ['-c:a', 'flac'];
-
-                // Grava o arquivo no FS virtual do ffmpeg
-                ffmpeg.FS('writeFile', inputName, await fetchFile(file));
-
-                showNotification('Convertendo...', `${inputName} → ${outputName}`, 'info');
-
-                const ffmpegArgs = [
-                    '-i', inputName,
-                    '-ab', `${bitrate}k`,
-                    '-ar', sampleRate,
-                    '-ac', channels,
-                    '-filter:a', `volume=${volume / 100}`,
-                    ...codecArgs,
-                    outputName
-                ];
-
-                try {
-                    await ffmpeg.run(...ffmpegArgs);
-
-                    const data = ffmpeg.FS('readFile', outputName);
-                    const blob = new Blob([data.buffer], { type: 'audio/' + outputFormat });
-                    const link = document.createElement('a');
-                    link.href = URL.createObjectURL(blob);
-                    link.download = outputName;
-                    link.click();
-
-                    // Limpar o FS do ffmpeg
-                    ffmpeg.FS('unlink', inputName);
-                    ffmpeg.FS('unlink', outputName);
-                } catch (error) {
-                    showNotification('Erro na conversão', `Falha ao converter ${inputName}.`, 'error');
-                    console.error(error);
+            convertBtn.addEventListener('click', async () => {
+                if (files.length === 0) {
+                    showNotification('Aviso', 'Por favor, selecione pelo menos um arquivo para converter.', 'info');
+                    return;
                 }
+
+                const outputFormat = document.getElementById('outputFormat').value;
+                const bitrate = document.getElementById('bitrate').value;
+                const sampleRate = document.getElementById('sampleRate').value;
+                const channels = document.getElementById('channels').value;
+                const volume = volumeSlider.value;
+
+                if (outputFormat === 'wma') {
+                    showNotification('Erro', 'WMA não é suportado no navegador.', 'error');
+                    return;
+                }
+
+                showNotification('Preparando conversão', 'Carregando mecanismo de conversão...', 'info');
+                await loadFFmpeg();
+
+                for (const file of files) {
+                    const inputName = file.name;
+                    const baseName = inputName.replace(/\.[^/.]+$/, '');
+                    const outputName = `${baseName}.${outputFormat}`;
+
+                    let codecArgs = [];
+                    if (outputFormat === 'mp3') codecArgs = ['-c:a', 'libmp3lame'];
+                    else if (outputFormat === 'ogg') codecArgs = ['-c:a', 'libvorbis'];
+                    else if (outputFormat === 'aac' || outputFormat === 'm4a') codecArgs = ['-c:a', 'aac'];
+                    else if (outputFormat === 'flac') codecArgs = ['-c:a', 'flac'];
+
+                    ffmpeg.FS('writeFile', inputName, await fetchFile(file));
+
+                    showNotification('Convertendo...', `${inputName} → ${outputName}`, 'info');
+
+                    const ffmpegArgs = [
+                        '-i', inputName,
+                        '-ab', `${bitrate}k`,
+                        '-ar', sampleRate,
+                        '-ac', channels,
+                        '-filter:a', `volume=${volume / 100}`,
+                        ...codecArgs,
+                        outputName
+                    ];
+
+                    try {
+                        await ffmpeg.run(...ffmpegArgs);
+                        const data = ffmpeg.FS('readFile', outputName);
+                        const blob = new Blob([data.buffer], { type: 'audio/' + outputFormat });
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = outputName;
+                        link.click();
+                        ffmpeg.FS('unlink', inputName);
+                        ffmpeg.FS('unlink', outputName);
+                    } catch (error) {
+                        showNotification('Erro na conversão', `Falha ao converter ${inputName}.`, 'error');
+                        console.error(error);
+                    }
+                }
+
+                showNotification('Sucesso', 'Todos os arquivos foram convertidos e baixados.', 'success');
+            });
+
+            function showNotification(title, message, type) {
+                const notificationTitle = document.getElementById('notificationTitle');
+                const notificationMessage = document.getElementById('notificationMessage');
+                const notificationIcon = notificationModal.querySelector('.notification-icon');
+
+                notificationTitle.textContent = title;
+                notificationMessage.textContent = message;
+                notificationIcon.className = 'notification-icon';
+                notificationIcon.classList.add(type);
+                notificationIcon.textContent = type === 'success' ? '✓' : type === 'error' ? '✗' : 'i';
+                notificationModal.classList.add('show');
+
+                setTimeout(() => {
+                    notificationModal.classList.remove('show');
+                }, 5000);
             }
 
-            showNotification('Sucesso', 'Todos os arquivos foram convertidos e baixados.', 'success');
-        });
-
-
-        // Notification system
-        function showNotification(title, message, type) {
-            const notificationTitle = document.getElementById('notificationTitle');
-            const notificationMessage = document.getElementById('notificationMessage');
-            const notificationIcon = notificationModal.querySelector('.notification-icon');
-
-            notificationTitle.textContent = title;
-            notificationMessage.textContent = message;
-
-            // Set icon based on type
-            notificationIcon.className = 'notification-icon';
-            notificationIcon.classList.add(type);
-
-            if (type === 'success') {
-                notificationIcon.textContent = '✓';
-            } else if (type === 'error') {
-                notificationIcon.textContent = '✗';
-            } else {
-                notificationIcon.textContent = 'i';
-            }
-
-            notificationModal.classList.add('show');
-
-            // Auto-hide after 5 seconds
-            setTimeout(() => {
+            notificationClose.addEventListener('click', () => {
                 notificationModal.classList.remove('show');
-            }, 5000);
-        }
-
-        notificationClose.addEventListener('click', function () {
-            notificationModal.classList.remove('show');
-        });
-
-        // Accordion functionality
-        const accordionHeaders = document.querySelectorAll('.accordion-header');
-
-        accordionHeaders.forEach(header => {
-            header.addEventListener('click', function () {
-                this.classList.toggle('active');
-                const content = this.nextElementSibling;
-                content.classList.toggle('active');
             });
         });
     </script>
+
 </body>
 
 </html>
