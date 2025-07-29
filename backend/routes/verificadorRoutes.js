@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const { verificadorValor, listarCategorias, funcSubmitForm, getMetadata, getVida, apiAnalyze } = require('../controllers/verificadorController')
+const { listarCategorias, funcSubmitForm, getMetadata, getVida, apiAnalyze } = require('../controllers/verificadorController')
 
-router.get('/buscar/:valor', verificadorValor)
 router.get('/categorias', listarCategorias)
 router.get('/get-metadata', getMetadata)
 router.get('/ping', getVida)
