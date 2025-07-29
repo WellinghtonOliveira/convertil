@@ -19,6 +19,8 @@ app.use('/conversor-de-audio', express.static(path.join(__dirname, 'frontend/con
 app.get('/conversor-de-audio/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend/conversor-de-audio', 'index.html'))
 })
+
+
 app.use('/', verificadorRoutes)
 
 app.listen(PORT, () => {
