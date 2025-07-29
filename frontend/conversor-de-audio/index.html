@@ -1170,11 +1170,6 @@
                 const channels = document.getElementById('channels').value;
                 const volume = volumeSlider.value;
 
-                if (outputFormat === 'wma') {
-                    showNotification('Erro', 'WMA não é suportado no navegador.', 'error');
-                    return;
-                }
-
                 showNotification('Preparando conversão', 'Carregando mecanismo de conversão...', 'info');
                 await loadFFmpeg();
 
