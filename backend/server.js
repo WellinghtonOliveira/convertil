@@ -1,8 +1,8 @@
 const express = require('express')
 const cors = require('cors')
 const verificadorRoutes = require('./routes/verificadorRoutes')
-
-const generateSitemap = require('./utils/generate-sitemap')// chama o sitemap
+const path = require('path')
+const generateSitemap = require('./utils/generate-sitemap')
 generateSitemap()
 
 const PORT = process.env.PORT || 8080
