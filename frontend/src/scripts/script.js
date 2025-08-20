@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     async function carregarCategorias() {
         startLoadingAnimation()
         try {
-            const res = await fetch('https://megasitebackend.onrender.com/categorias')
+            const res = await fetch('https://megasitebackend-4il9.onrender.com/categorias')
             if (!res.ok) throw new Error('Erro na requisição')
             const data = await res.json()
             stopLoadingAnimation()
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const dados = Object.fromEntries(formData.entries())
 
         try {
-            const res = await fetch('https://megasitebackend.onrender.com/submitForm', {
+            const res = await fetch('https://megasitebackend-4il9.onrender.com/submitForm', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
