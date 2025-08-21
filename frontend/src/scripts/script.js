@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             return data
         } catch (error) {
             stopLoadingAnimation()
-            loading.textContent = 'Erro ao carregar categorias'
+            loading.textContent = 'Passando por reformas'
             console.error(error)
             return null
         }
