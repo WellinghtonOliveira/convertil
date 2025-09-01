@@ -11,12 +11,13 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+/*
 app.use('/conversor-de-audio', (req, res, next) => {
     res.setHeader('Cross-Origin-Opener-Policy', 'same-origin')
     res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp')
     next()
 }, express.static(path.join(__dirname, 'frontend/conversor-de-audio')))
-
+*/
 app.use('/', verificadorRoutes)
 
 app.listen(PORT, () => {
