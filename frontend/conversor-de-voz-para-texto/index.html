@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+    <!-- Meta Básicas -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título SEO Otimizado -->
+    <title>Conversor de Voz para Texto Online – Rápido, Preciso e Gratuito | Convertil</title>
+
+    <!-- Meta Description com CTA e keywords -->
+    <meta name="description"
+        content="Converta sua voz em texto em segundos com nosso conversor de voz para texto online. Ferramenta gratuita, precisa e fácil de usar. Experimente agora!">
+
+    <!-- Palavras-chave avançadas (sem exagero) -->
+    <meta name="keywords"
+        content="conversor de voz para texto, transcrição de áudio, voz para texto online, converter áudio em texto, Convertil, transcrição automática">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://convertil.com/conversor-de-voz-para-texto/index.html">
+
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Conversor de Voz para Texto Online – Rápido, Preciso e Gratuito | Convertil">
+    <meta property="og:description"
+        content="Transforme sua voz em texto de forma rápida, gratuita e precisa. Use o conversor de voz para texto da Convertil agora!">
+    <meta property="og:url" content="https://convertil.com/conversor-de-voz-para-texto">
+    <meta property="og:image" content="https://convertil.com/assets/logo.png">
+    <meta property="og:site_name" content="Convertil">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Conversor de Voz para Texto Online – Rápido, Preciso e Gratuito | Convertil">
+    <meta name="twitter:description"
+        content="Transforme sua voz em texto rapidamente com o conversor online da Convertil. Grátis e fácil de usar!">
+    <meta name="twitter:image" content="https://convertil.com/assets/logo.png">
+    <meta name="twitter:site" content="@Convertil">
+
+    <!-- Robots avançado -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+    <!-- Idioma -->
+    <meta name="language" content="pt-BR">
+
+    <!-- Schema.org JSON-LD Avançado com WebPage + Organization + Breadcrumb -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Conversor de Voz para Texto Online – Convertil",
+    "url": "https://convertil.com/conversor-de-voz-para-texto",
+    "description": "Converta sua voz em texto rapidamente com nosso conversor de voz para texto online. Gratuito, preciso e fácil de usar.",
+    "inLanguage": "pt-BR",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Convertil",
+      "url": "https://convertil.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://convertil.com/assets/logo.png"
+      }
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://convertil.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Conversor de Voz para Texto",
+          "item": "https://convertil.com/conversor-de-voz-para-texto"
+        }
+      ]
+    }
+  }
+  </script>
+
+    <style>
+        :root {
+            --primary: #2563EB;
+            --secondary: #F59E0B;
+            --light: #F9FAFB;
+            --dark: #1F2937;
+            --danger: #EF4444;
+            --success: #10B981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 60px 0;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 30px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--dark);
+            max-width: 700px;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .converter-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+
+        .converter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .converter-title {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1D4ED8;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #D97706;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #DC2626;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #059669;
+        }
+
+        .btn-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .converter-body {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-section,
+        .output-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .section-label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .audio-visualizer {
+            width: 100%;
+            height: 100px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .visualizer-bars {
+            display: flex;
+            align-items: flex-end;
+            height: 100%;
+            gap: 2px;
+            padding: 10px;
+        }
+
+        .visualizer-bar {
+            background-color: var(--primary);
+            width: 8px;
+            border-radius: 4px;
+            transition: height 0.1s;
+        }
+
+        .recording-indicator {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        .recording-dot {
+            width: 10px;
+            height: 10px;
+            background-color: var(--danger);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            resize: vertical;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+
+        .language-selector {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            background-color: white;
+            font-size: 16px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-size: 24px;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .feature-description {
+            color: var(--dark);
+            opacity: 0.8;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background-color: white;
+            padding: 60px 0;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            gap: 20px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 60px 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 15px 20px;
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .faq-question:hover {
+            background-color: #f9f9f9;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            background-color: white;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 15px 20px;
+            max-height: 500px;
+        }
+
+        .faq-toggle {
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .footer-logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .footer-about {
+            max-width: 500px;
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copyright {
+            opacity: 0.7;
+        }
+
+        /* Notification Modal */
+        .notification-modal {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 15px 20px;
+            max-width: 350px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+            z-index: 1000;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .notification-modal.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notification-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .notification-icon.success {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .notification-icon.error {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+
+        .notification-icon.info {
+            background-color: rgba(37, 99, 235, 0.2);
+            color: var(--primary);
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .notification-message {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .converter-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .btn {
+                flex: 1;
+                justify-content: center;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+
+            .step-number {
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">VT</div>
+                    <div class="logo-text">VoxText</div>
+                </div>
+                <nav class="nav-links">
+                    <a href="#conversor">Voltar</a>
+                    <a href="#sobre">Sobre</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div>
+                    <h1 class="hero-title">Transforme sua voz em texto com precisão</h1>
+                    <p class="hero-subtitle">O VoxText é a solução perfeita para converter suas gravações de voz em
+                        texto escrito de forma rápida, precisa e eficiente. Ideal para estudantes, profissionais e
+                        qualquer pessoa que precise transcrever áudio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h2 class="section-title">Conversor de Voz para Texto</h2>
+
+            <div class="converter-container" id="conversor">
+                <div class="converter-header">
+                    <h3 class="converter-title">Transcreva sua voz agora</h3>
+                    <div class="controls">
+                        <button id="startBtn" class="btn btn-primary">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 1C10.3431 1 9 2.34315 9 4V12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12V4C15 2.34315 13.6569 1 12 1Z"
+                                    fill="currentColor" />
+                                <path
+                                    d="M18 12C18 15.3137 15.3137 18 12 18C8.68629 18 6 15.3137 6 12H4C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12H18Z"
+                                    fill="currentColor" />
+                            </svg>
+                            Iniciar
+                        </button>
+                        <button id="stopBtn" class="btn btn-danger" disabled>
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" />
+                                <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" />
+                            </svg>
+                            Parar
+                        </button>
+                        <button id="copyBtn" class="btn btn-secondary">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8 5C8 3.89543 8.89543 3 10 3H16C17.1046 3 18 3.89543 18 5V9C18 10.1046 17.1046 11 16 11H10C8.89543 11 8 10.1046 8 9V5Z"
+                                    fill="currentColor" />
+                                <path
+                                    d="M6 7C4.89543 7 4 7.89543 4 9V15C4 16.1046 4.89543 17 6 17H12C13.1046 17 14 16.1046 14 15V9C14 7.89543 13.1046 7 12 7H6Z"
+                                    fill="currentColor" />
+                            </svg>
+                            Copiar
+                        </button>
+                        <button id="clearBtn" class="btn btn-danger">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 19C6 20.1046 6.89543 21 8 21H16C17.1046 21 18 20.1046 18 19V7H6V19Z"
+                                    fill="currentColor" />
+                                <path
+                                    d="M15 4V3C15 2.44772 14.5523 2 14 2H10C9.44772 2 9 2.44772 9 3V4H5C4.44772 4 4 4.44772 4 5C4 5.55228 4.44772 6 5 6H19C19.5523 6 20 5.55228 20 5C20 4.44772 19.5523 4 19 4H15Z"
+                                    fill="currentColor" />
+                            </svg>
+                            Limpar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="converter-body">
+                    <div class="input-section">
+                        <div class="audio-visualizer">
+                            <div class="visualizer-bars" id="visualizer">
+                                <!-- Bars will be added by JavaScript -->
+                            </div>
+                            <div class="recording-indicator" id="recordingIndicator" style="display: none;">
+                                <div class="recording-dot"></div>
+                                <span>Gravando...</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="language" class="section-label">Idioma:</label>
+                            <select id="language" class="language-selector">
+                                <option value="pt-BR">Português (Brasil)</option>
+                                <option value="en-US">Inglês (EUA)</option>
+                                <option value="es-ES">Espanhol (Espanha)</option>
+                                <option value="fr-FR">Francês (França)</option>
+                                <option value="de-DE">Alemão (Alemanha)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="output-section">
+                        <label for="outputText" class="section-label">Texto transcrito:</label>
+                        <textarea id="outputText" class="textarea" placeholder="O texto transcrito aparecerá aqui..."
+                            readonly></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Recursos Avançados</h2>
+
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M9 9H9.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M15 9H15.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Precisão Impressionante</h3>
+                    <p class="feature-description">Nosso algoritmo de reconhecimento de voz utiliza inteligência
+                        artificial avançada para garantir taxas de precisão superiores a 95% em condições ideais.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z"
+                                fill="currentColor" />
+                            <path d="M12.5 7H11V13L16.2 16.2L17 14.9L12.5 12.2V7Z" fill="currentColor" />
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Tempo Real</h3>
+                    <p class="feature-description">Transcrição instantânea enquanto você fala, permitindo que você
+                        acompanhe o texto sendo gerado em tempo real.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M19 11H5C3.89543 11 3 11.8954 3 13V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V13C21 11.8954 20.1046 11 19 11Z"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Segurança Garantida</h3>
+                    <p class="feature-description">Todas as suas gravações são processadas localmente no seu navegador,
+                        garantindo total privacidade e segurança dos seus dados.</p>
+                </div>
+            </div>
+
+            <!-- How It Works Section -->
+            <section class="how-it-works">
+                <div class="container">
+                    <h2 class="section-title">Como Funciona</h2>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3 class="step-title">Clique em Iniciar</h3>
+                                <p>Permita o acesso ao microfone quando solicitado pelo navegador. O VoxText só acessa
+                                    seu microfone quando você inicia a gravação.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3 class="step-title">Comece a Falar</h3>
+                                <p>Fale claramente e em um ambiente com pouco ruído para obter os melhores resultados. O
+                                    texto será transcrito em tempo real.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3 class="step-title">Finalize e Edite</h3>
+                                <p>Clique em Parar quando terminar. Você pode copiar o texto gerado ou limpar para
+                                    começar uma nova transcrição.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq" id="sobre">
+                <div class="container">
+                    <h2 class="section-title">Perguntas Frequentes</h2>
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>O VoxText armazena minhas gravações?</span>
+                                <svg class="faq-toggle" width="16" height="10" viewBox="0 0 16 10" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15 1L8 8L1 1" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Não! Todas as gravações são processadas localmente no seu navegador e nunca são
+                                    enviadas para nossos servidores. Sua privacidade é nossa prioridade.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Quais navegadores são compatíveis?</span>
+                                <svg class="faq-toggle" width="16" height="10" viewBox="0 0 16 10" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15 1L8 8L1 1" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="faq-answer">
+                                <p>O VoxText funciona na maioria dos navegadores modernos como Chrome, Firefox, Edge e
+                                    Safari. Para melhor desempenho, recomendamos usar a versão mais recente do seu
+                                    navegador.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Posso usar o VoxText offline?</span>
+                                <svg class="faq-toggle" width="16" height="10" viewBox="0 0 16 10" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15 1L8 8L1 1" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Atualmente, o VoxText requer conexão com a internet para carregar os modelos de
+                                    reconhecimento de voz. No entanto, uma vez carregados, você pode usar o microfone
+                                    mesmo em conexões instáveis.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon">VT</div>
+                    <div class="footer-logo-text">VoxText</div>
+                </div>
+                <p class="footer-about">
+                    O VoxText é uma ferramenta profissional de conversão de voz para texto que utiliza tecnologias
+                    avançadas de reconhecimento de fala para fornecer transcrições precisas e em tempo real. Nosso
+                    objetivo é facilitar a vida de profissionais, estudantes e qualquer pessoa que precise converter
+                    áudio em texto de forma rápida e eficiente.
+                </p>
+                <div class="footer-bottom">
+                    <div class="copyright">© 2025 VoxText. Todos os direitos reservados.</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Modal -->
+    <div class="notification-modal" id="notificationModal">
+        <div class="notification-icon success">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.7088 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M22 4L12 14.01L9 11.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </div>
+        <div class="notification-content">
+            <h4 class="notification-title">Notificação</h4>
+            <p class="notification-message">Mensagem de notificação aqui</p>
+        </div>
+        <button class="notification-close">&times;</button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // FAQ Toggle
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // Notification System
+        const notificationModal = document.getElementById('notificationModal');
+        const notificationClose = document.querySelector('.notification-close');
+
+        function showNotification(type, title, message) {
+            const icon = notificationModal.querySelector('.notification-icon');
+            const contentTitle = notificationModal.querySelector('.notification-title');
+            const contentMessage = notificationModal.querySelector('.notification-message');
+
+            icon.className = 'notification-icon';
+            icon.classList.add(type);
+
+            contentTitle.textContent = title;
+            contentMessage.textContent = message;
+
+            notificationModal.classList.add('show');
+            setTimeout(() => notificationModal.classList.remove('show'), 5000);
+        }
+
+        notificationClose.addEventListener('click', () => {
+            notificationModal.classList.remove('show');
+        });
+
+        // Voice Recognition
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const outputText = document.getElementById('outputText');
+        const visualizer = document.getElementById('visualizer');
+        const recordingIndicator = document.getElementById('recordingIndicator');
+        const languageSelector = document.getElementById('language');
+
+        let recognition;
+        let isRecording = false;
+        let accumulatedTranscript = '';
+        let audioContext, analyser, source, dataArray, rafId;
+
+        // Cria barras do visualizador
+        for (let i = 0; i < 50; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'visualizer-bar';
+            bar.style.height = '0%';
+            visualizer.appendChild(bar);
+        }
+
+        const bars = document.querySelectorAll('.visualizer-bar');
+        function updateVisualizer() {
+            if (!analyser) return;
+            analyser.getByteFrequencyData(dataArray);
+            const step = Math.floor(dataArray.length / bars.length);
+
+            bars.forEach((bar, i) => {
+                const value = dataArray[i * step] / 255; // normalizado (0-1)
+                const height = Math.min(100, value * 100);
+                bar.style.height = `${height}%`;
+            });
+
+            rafId = requestAnimationFrame(updateVisualizer);
+        }
+
+        function stopVisualizer() {
+            cancelAnimationFrame(rafId);
+            if (bars) {
+                bars.forEach(bar => bar.style.height = '0%');
+            }
+        }
+
+        function initializeRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                showNotification('error', 'Erro', 'Seu navegador não suporta reconhecimento de voz. Use Chrome ou Edge.');
+                return false;
+            }
+
+            recognition = new SpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = languageSelector.value;
+
+            recognition.onstart = async () => {
+                isRecording = true;
+                startBtn.disabled = true;
+                stopBtn.disabled = false;
+                recordingIndicator.style.display = 'flex';
+                showNotification('success', 'Sucesso', 'Gravação iniciada com sucesso!');
+
+                // Inicia o Web Audio API visualizer
+                try {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    source = audioContext.createMediaStreamSource(stream);
+                    analyser = audioContext.createAnalyser();
+                    analyser.fftSize = 256;
+                    dataArray = new Uint8Array(analyser.frequencyBinCount);
+                    source.connect(analyser);
+                    updateVisualizer();
+                } catch (err) {
+                    showNotification('error', 'Erro', 'Não foi possível acessar o microfone.');
+                }
+            };
+
+            recognition.onend = () => {
+                if (isRecording) {
+                    recognition.start(); // reinicia automaticamente se ainda está gravando
+                } else {
+                    startBtn.disabled = false;
+                    stopBtn.disabled = true;
+                    recordingIndicator.style.display = 'none';
+                    stopVisualizer();
+                }
+            };
+
+            recognition.onerror = (event) => {
+                showNotification('error', 'Erro', `Ocorreu um erro: ${event.error}`);
+                isRecording = false;
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+                recordingIndicator.style.display = 'none';
+                stopVisualizer();
+            };
+
+            recognition.onresult = (event) => {
+                let interimTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        accumulatedTranscript += transcript + ' ';
+                    } else {
+                        interimTranscript += transcript;
+                    }
+                }
+                outputText.value = accumulatedTranscript + interimTranscript;
+            };
+
+            return true;
+        }
+
+        startBtn.addEventListener('click', () => {
+            if (!isRecording) {
+                if (initializeRecognition()) {
+                    try {
+                        recognition.start();
+                    } catch {
+                        showNotification('error', 'Erro', 'Não foi possível acessar o microfone. Verifique as permissões.');
+                    }
+                }
+            }
+        });
+
+        stopBtn.addEventListener('click', () => {
+            if (isRecording && recognition) {
+                isRecording = false;
+                recognition.stop();
+                showNotification('info', 'Informação', 'Gravação finalizada. Você pode editar o texto antes de copiar.');
+            }
+        });
+
+        copyBtn.addEventListener('click', () => {
+            if (outputText.value.trim() !== '') {
+                navigator.clipboard.writeText(outputText.value)
+                    .then(() => showNotification('success', 'Sucesso', 'Texto copiado para a área de transferência!'))
+                    .catch(() => showNotification('error', 'Erro', 'Falha ao copiar texto.'));
+            } else {
+                showNotification('error', 'Erro', 'Nenhum texto para copiar. Grave algo primeiro.');
+            }
+        });
+
+        clearBtn.addEventListener('click', () => {
+            accumulatedTranscript = '';
+            outputText.value = '';
+            showNotification('info', 'Informação', 'Área de texto limpa com sucesso.');
+        });
+
+        languageSelector.addEventListener('change', () => {
+            if (recognition && isRecording) {
+                recognition.stop();
+                isRecording = false;
+                setTimeout(() => {
+                    initializeRecognition();
+                    recognition.start();
+                }, 500); // pequena pausa para resetar
+                showNotification('info', 'Idioma alterado', `Novo idioma: ${languageSelector.value}`);
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
