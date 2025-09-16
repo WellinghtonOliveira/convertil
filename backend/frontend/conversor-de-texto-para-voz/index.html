@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoxAI - Conversor de Texto para Voz</title>
+    <style>
+        :root {
+            --primary: #2563EB;
+            --secondary: #F59E0B;
+            --light: #F9FAFB;
+            --dark: #1F2937;
+            --danger: #EF4444;
+            --success: #10B981;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary), #1D4ED8);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #E67E22;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+            margin-left: 1rem;
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .features {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .converter {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 4rem;
+        }
+        
+        .converter-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.5rem;
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            resize: vertical;
+        }
+        
+        .textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.5rem;
+            font-family: inherit;
+            font-size: 1rem;
+            background-color: white;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .btn-convert {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-convert:hover {
+            background-color: #1D4ED8;
+        }
+        
+        .player {
+            display: none;
+            background-color: #F3F4F6;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        .player.active {
+            display: block;
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .player-btn {
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .player-btn:hover {
+            background-color: #1D4ED8;
+        }
+        
+        .progress-container {
+            flex: 1;
+            height: 6px;
+            background-color: #E5E7EB;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary);
+            border-radius: 3px;
+            width: 0%;
+        }
+        
+        .time {
+            font-size: 0.9rem;
+            color: #6B7280;
+        }
+        
+        .download-btn {
+            background-color: var(--success);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .download-btn:hover {
+            background-color: #0D9488;
+        }
+        
+        .how-it-works {
+            padding: 4rem 0;
+            background-color: #F3F4F6;
+        }
+        
+        .steps {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background-color: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .faq {
+            padding: 4rem 0;
+        }
+        
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            background-color: white;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background-color: #F9FAFB;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 1rem 1.5rem;
+            max-height: 500px;
+        }
+        
+        .faq-toggle {
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-link {
+            display: block;
+            color: #D1D5DB;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #374151;
+            color: #9CA3AF;
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+            z-index: 1000;
+            max-width: 300px;
+        }
+        
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .notification.success {
+            background-color: var(--success);
+        }
+        
+        .notification.error {
+            background-color: var(--danger);
+        }
+        
+        .notification.warning {
+            background-color: var(--secondary);
+        }
+        
+        .close-notification {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+            
+            .converter {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <span class="logo-icon">🔊</span>
+                    <span>VoxAI</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#" class="nav-link">Voltar</a>
+                    <a href="#about" class="nav-link">Sobre</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">Transforme Texto em Voz com IA</h1>
+            <p class="hero-subtitle">Converte qualquer texto em áudio natural com vozes humanas realistas em diversos idiomas e sotaques. Perfeito para conteúdo audiovisual, acessibilidade e produtividade.</p>
+            <a href="#converter" class="btn btn-primary">Experimente Agora</a>
+            <a href="#how-it-works" class="btn btn-outline">Como Funciona</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Recursos Poderosos</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎙️</div>
+                    <h3 class="feature-title">Vozes Naturais</h3>
+                    <p>Nossa IA gera vozes que soam incrivelmente humanas, com entonação e emoção adequadas ao contexto do texto.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3 class="feature-title">Múltiplos Idiomas</h3>
+                    <p>Suporte para mais de 30 idiomas e diversos sotaques regionais, perfeito para conteúdo globalizado.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Conversão Rápida</h3>
+                    <p>Processamento em tempo real para textos curtos e rápida conversão mesmo para documentos extensos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎚️</div>
+                    <h3 class="feature-title">Controle Total</h3>
+                    <p>Ajuste velocidade, tom e ênfase para personalizar completamente a saída de áudio conforme sua necessidade.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Privacidade Garantida</h3>
+                    <p>Seus textos não são armazenados em nossos servidores após a conversão, garantindo total confidencialidade.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3 class="feature-title">Formatos Variados</h3>
+                    <p>Exporte o áudio em MP3, WAV ou OGG para usar em qualquer plataforma ou dispositivo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="converter" class="features">
+        <div class="container">
+            <h2 class="section-title">Conversor de Texto para Voz</h2>
+            <div class="converter">
+                <h3 class="converter-title">Digite ou cole seu texto abaixo</h3>
+                <textarea class="textarea" placeholder="Digite aqui o texto que deseja converter em voz..."></textarea>
+                <div class="controls">
+                    <select class="select" id="voice-select">
+                        <option value="pt-BR-Maria">Português (BR) - Feminino</option>
+                        <option value="pt-BR-Joao">Português (BR) - Masculino</option>
+                        <option value="en-US-Jenny">Inglês (EUA) - Feminino</option>
+                        <option value="en-US-David">Inglês (EUA) - Masculino</option>
+                        <option value="es-ES-Sofia">Espanhol - Feminino</option>
+                        <option value="fr-FR-Julie">Francês - Feminino</option>
+                        <option value="de-DE-Klaus">Alemão - Masculino</option>
+                        <option value="it-IT-Giulia">Italiano - Feminino</option>
+                    </select>
+                    <select class="select" id="speed-select">
+                        <option value="1">Velocidade Normal</option>
+                        <option value="0.8">Lento</option>
+                        <option value="1.2">Rápido</option>
+                    </select>
+                    <button class="btn-convert" id="convert-btn">Converter</button>
+                </div>
+                <div class="player" id="player">
+                    <div class="player-controls">
+                        <button class="player-btn" id="play-btn">▶</button>
+                        <div class="progress-container" id="progress-container">
+                            <div class="progress-bar" id="progress-bar"></div>
+                        </div>
+                        <div class="time" id="time">0:00 / 0:00</div>
+                    </div>
+                    <button class="download-btn" id="download-btn">Download do Áudio</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Como Funciona</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Digite ou Cole seu Texto</h3>
+                        <p>Insira qualquer texto que deseja converter em voz no campo designado. Nosso sistema suporta desde frases curtas até documentos extensos.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Personalize as Configurações</h3>
+                        <p>Escolha entre diversas vozes em múltiplos idiomas, ajuste a velocidade de fala e outros parâmetros para obter o resultado perfeito.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Converta e Ouça</h3>
+                        <p>Clique em "Converter" e em segundos você poderá ouvir seu texto transformado em voz natural. O player permite pausar, retomar e controlar o áudio.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Faça o Download</h3>
+                        <p>Exporte o arquivo de áudio no formato desejado para usar em seus projetos, apresentações ou compartilhar com outras pessoas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="faq">
+        <div class="container">
+            <h2 class="section-title">Sobre o VoxAI</h2>
+            <p style="text-align: center; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                O VoxAI utiliza tecnologia de ponta em síntese de voz por inteligência artificial para oferecer a melhor experiência em conversão de texto para áudio. Nossa plataforma foi desenvolvida para ser intuitiva, acessível e poderosa, atendendo desde usuários individuais até empresas que necessitam de soluções de acessibilidade ou produção de conteúdo em escala.
+            </p>
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Quais são os limites de texto para conversão?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Nossa versão gratuita permite converter até 5.000 caracteres por vez. Para textos mais longos, oferecemos planos premium que suportam até 50.000 caracteres em uma única conversão.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Os áudios gerados podem ser usados comercialmente?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Sim, todos os áudios gerados pelo VoxAI são livres de direitos autorais e podem ser utilizados em projetos comerciais, incluindo vídeos, podcasts e aplicações diversas.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Como a IA trata a pronúncia de palavras complexas?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Nossos modelos de IA são treinados com extensos bancos de dados linguísticos, incluindo termos técnicos e nomes próprios. Para casos específicos, você pode inserir a pronúncia fonética entre colchetes para garantir a entonação correta.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>É possível ajustar a entonação emocional da voz?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Atualmente, nossas vozes padrão já possuem entonação natural adequada ao contexto. Estamos desenvolvendo controles avançados de emoção (alegria, seriedade, suspense etc.) para futuras atualizações.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Quanto tempo os áudios ficam disponíveis para download?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Os áudios ficam disponíveis por 7 dias após a conversão. Recomendamos fazer o download imediatamente após a geração para garantir o acesso permanente ao arquivo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">VoxAI</div>
+                    <p>Revolucionando a síntese de voz com inteligência artificial acessível e de alta qualidade.</p>
+                </div>
+                <div>
+                    <h3 class="footer-links-title">Links Rápidos</h3>
+                    <a href="#" class="footer-link">Início</a>
+                    <a href="#converter" class="footer-link">Conversor</a>
+                    <a href="#how-it-works" class="footer-link">Como Funciona</a>
+                    <a href="#about" class="footer-link">Sobre</a>
+                </div>
+                <div>
+                    <h3 class="footer-links-title">Recursos</h3>
+                    <a href="#" class="footer-link">Vozes Disponíveis</a>
+                    <a href="#" class="footer-link">Casos de Uso</a>
+                    <a href="#" class="footer-link">API para Desenvolvedores</a>
+                    <a href="#" class="footer-link">Planos Premium</a>
+                </div>
+                <div>
+                    <h3 class="footer-links-title">Legal</h3>
+                    <a href="#" class="footer-link">Termos de Uso</a>
+                    <a href="#" class="footer-link">Política de Privacidade</a>
+                    <a href="#" class="footer-link">Cookies</a>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 VoxAI. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <div class="notification" id="notification">
+        <button class="close-notification" id="close-notification">×</button>
+        <div id="notification-message">Mensagem de notificação aqui</div>
+    </div>
+
+
+
+    <script>
+    
+            document.getElementById('convert-btn').addEventListener('click', function () {
+        const text = document.querySelector('.textarea').value;
+        if (!text.trim()) {
+            showNotification('Por favor, digite algum texto para converter', 'error');
+            return;
+        }
+
+        // Criar objeto de fala
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        // Selecionar voz
+        const voiceSelect = document.getElementById('voice-select');
+        const speedSelect = document.getElementById('speed-select');
+        utterance.rate = parseFloat(speedSelect.value); // velocidade
+
+        // Tentar aplicar a voz escolhida
+        const voices = speechSynthesis.getVoices();
+        const selectedVoice = voices.find(v => v.name.includes(voiceSelect.value));
+        if (selectedVoice) {
+            utterance.voice = selectedVoice;
+        }
+
+        // Falar
+        speechSynthesis.speak(utterance);
+
+        showNotification('Reproduzindo áudio...', 'success');
+    });
+    
+    // Simulação de conversão de texto para voz
+        document.getElementById('convert-btn').addEventListener('click', function() {
+            const text = document.querySelector('.textarea').value;
+            if (!text.trim()) {
+                showNotification('Por favor, digite algum texto para converter', 'error');
+                return;
+            }
+            
+            // Simular processamento
+            showNotification('Convertendo texto em áudio...', 'warning');
+            
+            setTimeout(() => {
+                document.getElementById('player').classList.add('active');
+                showNotification('Conversão concluída com sucesso!', 'success');
+                
+                // Simular áudio (na implementação real, seria um blob ou arquivo de áudio)
+                setupAudioPlayer();
+            }, 2000);
+        });
+        
+        function setupAudioPlayer() {
+            const playBtn = document.getElementById('play-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const timeDisplay = document.getElementById('time');
+            let isPlaying = false;
+            let progress = 0;
+            let duration = 120; // 2 minutos em segundos (simulado)
+            
+            // Formatar tempo
+            function formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+            
+            // Atualizar tempo
+            timeDisplay.textContent = `0:00 / ${formatTime(duration)}`;
+            
+            // Simular reprodução
+            playBtn.addEventListener('click', function() {
+                isPlaying = !isPlaying;
+                
+                if (isPlaying) {
+                    playBtn.textContent = '❚❚';
+                    
+                    // Simular progresso do áudio
+                    const interval = setInterval(() => {
+                        if (progress >= 100) {
+                            clearInterval(interval);
+                            isPlaying = false;
+                            playBtn.textContent = '▶';
+                            return;
+                        }
+                        
+                        progress += 0.5;
+                        progressBar.style.width = `${progress}%`;
+                        
+                        // Atualizar tempo decorrido
+                        const currentTime = (progress / 100) * duration;
+                        timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+                        
+                        if (!isPlaying) {
+                            clearInterval(interval);
+                        }
+                    }, 100);
+                } else {
+                    playBtn.textContent = '▶';
+                }
+            });
+            
+            // Permitir clicar na barra de progresso
+            document.getElementById('progress-container').addEventListener('click', function(e) {
+                const rect = this.getBoundingClientRect();
+                const pos = (e.clientX - rect.left) / rect.width;
+                progress = pos * 100;
+                progressBar.style.width = `${progress}%`;
+                
+                // Atualizar tempo decorrido
+                const currentTime = (progress / 100) * duration;
+                timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+            });
+            
+            // Download simulado
+            document.getElementById('download-btn').addEventListener('click', function() {
+                showNotification('Download iniciado com sucesso!', 'success');
+            });
+        }
+        
+        // FAQ accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Notificação
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notification-message');
+            
+            notification.className = 'notification';
+            notification.classList.add(type);
+            notificationMessage.textContent = message;
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+        
+        document.getElementById('close-notification').addEventListener('click', function() {
+            document.getElementById('notification').classList.remove('show');
+        });
+    </script>
+</body>
+</html>
