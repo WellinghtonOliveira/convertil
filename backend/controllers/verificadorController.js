@@ -1,6 +1,9 @@
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args))
 const dados = require('../utils/utils')
 const cheerio = require('cheerio')
+const { exec } = require('child_process');
+const path = require('path');
+const fs = require('fs');
 
 let contReq = 0
 
@@ -92,4 +95,25 @@ async function apiAnalyze(req, res) {
     }
 }
 
-module.exports = { verificadorValor, listarCategorias, funcSubmitForm, getMetadata, getVida, apiAnalyze }
+function conversorTextoParaVoz(req, res) {
+    const text = req.body.text;
+    if (!text) return res.status(400).send('Texto vazio');
+
+    const outputFile = path.join(__dirname, 'saida.wav');
+
+    exec(`espeak -w ${outputFile} "${text}"`, (err) => {
+        if (err) {
+            console.error('Erro ao executar espeak:', err);
+            return res.status(500).send('Erro ao gerar áudio');
+        }
+
+        res.download(outputFile, 'voz.wav', (err) => {
+            if (!err) fs.unlinkSync(outputFile); // apaga depois
+        });
+    });
+}
+
+module.exports = { verificadorValor, listarCategorias, funcSubmitForm, getMetadata, getVida, apiAnalyze, conversorTextoParaVoz }
+
+
+// TODO lembrar de colocar banco de dados para salvar os emails
