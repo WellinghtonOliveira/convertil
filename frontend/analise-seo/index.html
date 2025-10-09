@@ -380,7 +380,7 @@
             button.textContent = 'Analisando...';
 
             try {
-                const res = await fetch(`https://megasitebackend.onrender.com/get-metadata?url=${encodeURIComponent(targetUrl)}`);
+                const res = await fetch(`https://megasitebackend-4il9.onrender.com/get-metadata?url=${encodeURIComponent(targetUrl)}`);
                 const data = await res.json();
                 const audits = data.audits || {};
                 const categories = data.categories || {};

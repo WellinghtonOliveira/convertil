@@ -766,7 +766,7 @@
                 const tag = hashtag.replace('#', '').toLowerCase();
 
                 try {
-                    const response = await fetch(`https://megasitebackend.onrender.com/analyze?tag=${encodeURIComponent(tag)}`);
+                    const response = await fetch(`https://megasitebackend-4il9.onrender.com/analyze?tag=${encodeURIComponent(tag)}`);
                     if (!response.ok) throw new Error('Erro ao buscar dados');
 
                     const json = await response.json();
