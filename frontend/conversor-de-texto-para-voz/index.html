@@ -770,7 +770,7 @@
             showNotification('Convertendo...', 'warning');
 
             try {
-                const res = await fetch("http://localhost:8080/ctpv", { // 👈 API no Render
+                const res = await fetch("http://localhost:8080/ctpv", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ text })
