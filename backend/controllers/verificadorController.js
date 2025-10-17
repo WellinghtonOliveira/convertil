@@ -4,9 +4,30 @@ const cheerio = require('cheerio')
 const { exec } = require('child_process');
 const path = require('path');
 const fs = require('fs');
-const say = require('say');
+const mongoose = require('mongoose')
 
 
+const MONGO_URI = 'mongodb+srv://000devhome:35xqnaqw@convertil.30xesl4.mongodb.net/?retryWrites=true&w=majority&appName=Convertil';
+
+mongoose.connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+    .then(() => console.log('🟢 Conectado ao MongoDB'))
+    .catch(err => console.error('🔴 Erro ao conectar MongoDB:', err));
+
+
+const MensagemSchema = new mongoose.Schema({
+    nome: String,
+    email: String,
+    mensagem: String,
+    criadoEm: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+const Mensagem = mongoose.model('Mensagem', MensagemSchema);
 let contReq = 0
 
 function getVida(req, res) {
@@ -29,15 +50,22 @@ function listarCategorias(req, res) {
     res.json({ categorias, nome, descricao, link })
 }
 
-function funcSubmitForm(req, res) {
-    const { nome, email, mensagem } = req.body
-    console.log(`Dados recebidos => NOME:-- ${nome} --, EMAIL:-- ${email} --, MENSAGEM:-- ${mensagem} --`)
+async function funcSubmitForm(req, res) {
+  const { nome, email, mensagem } = req.body;
+  console.log(`Dados recebidos => NOME:-- ${nome} --, EMAIL:-- ${email} --, MENSAGEM:-- ${mensagem} --`);
 
-    // Aqui você pode enviar e-mail, salvar no banco, etc
-    return res.status(200).json({ mensagem: 'Recebido com sucesso' })
+  try {
+    const novaMensagem = new Mensagem({ nome, email, mensagem });
+    await novaMensagem.save(); // salva no MongoDB
+
+    return res.status(201).json({ mensagem: 'Salvo com sucesso no banco!' });
+  } catch (err) {
+    console.error('Erro ao salvar no MongoDB:', err);
+    return res.status(500).json({ erro: 'Erro interno ao salvar' });
+  }
 }
 
-async function getMetadata(req, res) {
+async function getMetadata(req, res) {  
     const API_KEY = 'AIzaSyA0EqtqtjlUng3Yt_cWNlfWhDxJP_QkvoQ';
 
     const siteUrl = req.query.url;
@@ -97,60 +125,5 @@ async function apiAnalyze(req, res) {
     }
 }
 
-function conversorTextoParaVoz(req, res) {
-    const text = req.body.text;
-    if (!text) {
-        console.log('Texto vazio recebido');
-        return res.status(400).send('Texto vazio');
-    }
+module.exports = { verificadorValor, listarCategorias, funcSubmitForm, getMetadata, getVida, apiAnalyze }
 
-    // Cria um nome de arquivo único para cada requisição
-    const filename = `saida-${Date.now()}.wav`;
-    const outputFile = path.join(__dirname, 'tmp', filename);
-
-    console.log(`Iniciando geração do áudio para texto: "${text}"`);
-    console.log(`Arquivo de saída: ${outputFile}`);
-
-    say.export(text, null, 0.9, outputFile, (err) => {
-        if (err) {
-            console.error('Erro ao gerar áudio:', err);
-            return res.status(500).send('Erro ao gerar áudio');
-        }
-
-        // Verifica se arquivo foi criado
-        fs.access(outputFile, fs.constants.F_OK, (accessErr) => {
-            if (accessErr) {
-                console.error('Arquivo de áudio não encontrado após geração:', outputFile);
-                return res.status(500).send('Arquivo de áudio não encontrado');
-            }
-
-            res.setHeader('Content-Type', 'audio/wav');
-
-            const stream = fs.createReadStream(outputFile);
-
-            stream.on('error', (streamErr) => {
-                console.error('Erro ao ler o arquivo:', streamErr);
-                return res.status(500).send('Erro ao enviar áudio'); 
-            });
-
-            stream.pipe(res);
-
-            stream.on('close', () => {
-                // Apaga o arquivo depois de enviar
-                fs.unlink(outputFile, (unlinkErr) => {
-                    if (unlinkErr) {
-                        console.error('Erro ao apagar arquivo:', unlinkErr);
-                    } else {
-                        console.log(`Arquivo temporário apagado: ${outputFile}`);
-                    }
-                });
-            });
-        });
-    });
-}
-
-
-module.exports = { verificadorValor, listarCategorias, funcSubmitForm, getMetadata, getVida, apiAnalyze, conversorTextoParaVoz }
-
-
-// TODO lembrar de colocar banco de dados para salvar os emails
