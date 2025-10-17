@@ -97,56 +97,38 @@ async function apiAnalyze(req, res) {
     }
 }
 
-function conversorTextoParaVoz(req, res) {
+async function conversorTextoParaVoz(req, res) {
     const text = req.body.text;
-    if (!text) {
-        console.log('Texto vazio recebido');
-        return res.status(400).send('Texto vazio');
-    }
+    if (!text) return res.status(400).send('Texto vazio');
 
-    // Cria um nome de arquivo único para cada requisição
-    const filename = `saida-${Date.now()}.wav`;
+    const filename = `saida-${Date.now()}.mp3`;
     const outputFile = path.join(__dirname, filename);
 
-    console.log(`Iniciando geração do áudio para texto: "${text}"`);
-    console.log(`Arquivo de saída: ${outputFile}`);
+    // Script Python inline para gerar TTS com pyttsx3
+    const pythonScript = `
+import pyttsx3
+engine = pyttsx3.init()
+engine.setProperty('rate', 150)  # velocidade
+engine.setProperty('voice', 'brazil')  # voz em português
+engine.save_to_file('${text}', '${outputFile}')
+engine.runAndWait()
+`;
 
-    say.export(text, null, 1.0, outputFile, (err) => {
+    // Executa Python via command line
+    const command = `python -c "${pythonScript.replace(/\n/g, '')}"`;
+
+    exec(command, (err) => {
         if (err) {
             console.error('Erro ao gerar áudio:', err);
             return res.status(500).send('Erro ao gerar áudio');
         }
 
-        // Verifica se arquivo foi criado
-        fs.access(outputFile, fs.constants.F_OK, (accessErr) => {
-            if (accessErr) {
-                console.error('Arquivo de áudio não encontrado após geração:', outputFile);
-                return res.status(500).send('Arquivo de áudio não encontrado');
-            }
+        res.setHeader('Content-Type', 'audio/mpeg');
+        const stream = fs.createReadStream(outputFile);
+        stream.pipe(res);
 
-            console.log('Arquivo gerado com sucesso, enviando para cliente');
-
-            res.setHeader('Content-Type', 'audio/wav');
-
-            const stream = fs.createReadStream(outputFile);
-
-            stream.on('error', (streamErr) => {
-                console.error('Erro ao ler o arquivo:', streamErr);
-                return res.status(500).send('Erro ao enviar áudio');
-            });
-
-            stream.pipe(res);
-
-            stream.on('close', () => {
-                // Apaga o arquivo depois de enviar
-                fs.unlink(outputFile, (unlinkErr) => {
-                    if (unlinkErr) {
-                        console.error('Erro ao apagar arquivo:', unlinkErr);
-                    } else {
-                        console.log(`Arquivo temporário apagado: ${outputFile}`);
-                    }
-                });
-            });
+        stream.on('close', () => {
+            fs.unlink(outputFile, () => { });
         });
     });
 }
