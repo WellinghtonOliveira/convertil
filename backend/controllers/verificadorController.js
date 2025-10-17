@@ -99,9 +99,17 @@ async function apiAnalyze(req, res) {
 
 function conversorTextoParaVoz(req, res) {
     const text = req.body.text;
-    if (!text) return res.status(400).send('Texto vazio');
+    if (!text) {
+        console.log('Texto vazio recebido');
+        return res.status(400).send('Texto vazio');
+    }
 
-    const outputFile = path.join(__dirname, 'saida.wav');
+    // Cria um nome de arquivo único para cada requisição
+    const filename = `saida-${Date.now()}.wav`;
+    const outputFile = path.join(__dirname, filename);
+
+    console.log(`Iniciando geração do áudio para texto: "${text}"`);
+    console.log(`Arquivo de saída: ${outputFile}`);
 
     say.export(text, null, 1.0, outputFile, (err) => {
         if (err) {
@@ -109,12 +117,14 @@ function conversorTextoParaVoz(req, res) {
             return res.status(500).send('Erro ao gerar áudio');
         }
 
-        // Verifica se o arquivo foi criado
+        // Verifica se arquivo foi criado
         fs.access(outputFile, fs.constants.F_OK, (accessErr) => {
             if (accessErr) {
-                console.error('Arquivo de áudio não encontrado:', outputFile);
+                console.error('Arquivo de áudio não encontrado após geração:', outputFile);
                 return res.status(500).send('Arquivo de áudio não encontrado');
             }
+
+            console.log('Arquivo gerado com sucesso, enviando para cliente');
 
             res.setHeader('Content-Type', 'audio/wav');
 
@@ -128,12 +138,16 @@ function conversorTextoParaVoz(req, res) {
             stream.pipe(res);
 
             stream.on('close', () => {
-                // Apaga o arquivo após envio
+                // Apaga o arquivo depois de enviar
                 fs.unlink(outputFile, (unlinkErr) => {
-                    if (unlinkErr) console.error('Erro ao apagar arquivo:', unlinkErr);
+                    if (unlinkErr) {
+                        console.error('Erro ao apagar arquivo:', unlinkErr);
+                    } else {
+                        console.log(`Arquivo temporário apagado: ${outputFile}`);
+                    }
                 });
             });
-        }); 
+        });
     });
 }
 
