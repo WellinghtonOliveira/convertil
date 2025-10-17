@@ -4,6 +4,8 @@ const cheerio = require('cheerio')
 const { exec } = require('child_process');
 const path = require('path');
 const fs = require('fs');
+const say = require('say');
+
 
 let contReq = 0
 
@@ -101,17 +103,40 @@ function conversorTextoParaVoz(req, res) {
 
     const outputFile = path.join(__dirname, 'saida.wav');
 
-    exec(`espeak -w ${outputFile} "${text}"`, (err) => {
+    say.export(text, null, 1.0, outputFile, (err) => {
         if (err) {
-            console.error('Erro ao executar espeak:', err);
+            console.error('Erro ao gerar áudio:', err);
             return res.status(500).send('Erro ao gerar áudio');
         }
 
-        res.download(outputFile, 'voz.wav', (err) => {
-            if (!err) fs.unlinkSync(outputFile); // apaga depois
-        });
+        // Verifica se o arquivo foi criado
+        fs.access(outputFile, fs.constants.F_OK, (accessErr) => {
+            if (accessErr) {
+                console.error('Arquivo de áudio não encontrado:', outputFile);
+                return res.status(500).send('Arquivo de áudio não encontrado');
+            }
+
+            res.setHeader('Content-Type', 'audio/wav');
+
+            const stream = fs.createReadStream(outputFile);
+
+            stream.on('error', (streamErr) => {
+                console.error('Erro ao ler o arquivo:', streamErr);
+                return res.status(500).send('Erro ao enviar áudio');
+            });
+
+            stream.pipe(res);
+
+            stream.on('close', () => {
+                // Apaga o arquivo após envio
+                fs.unlink(outputFile, (unlinkErr) => {
+                    if (unlinkErr) console.error('Erro ao apagar arquivo:', unlinkErr);
+                });
+            });
+        }); 
     });
 }
+
 
 module.exports = { verificadorValor, listarCategorias, funcSubmitForm, getMetadata, getVida, apiAnalyze, conversorTextoParaVoz }
 
