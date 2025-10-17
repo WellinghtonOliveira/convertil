@@ -760,9 +760,11 @@
 
 
     <script>
-        document.getElementById('convert-btn').addEventListener('click', async function () {
-            const text = document.querySelector('.textarea').value;
-            if (!text.trim()) {
+        let currentAudioUrl = null;
+
+        document.getElementById('convert-btn').addEventListener('click', async () => {
+            const text = document.querySelector('.textarea').value.trim();
+            if (!text) {
                 showNotification('Digite algum texto', 'error');
                 return;
             }
@@ -779,33 +781,41 @@
                 if (!res.ok) throw new Error("Erro no servidor");
 
                 const blob = await res.blob();
-                const url = URL.createObjectURL(blob);
 
-                // player
-                const audio = new Audio(url);
-                audio.controls = true;
+                if (currentAudioUrl) URL.revokeObjectURL(currentAudioUrl);
+                currentAudioUrl = URL.createObjectURL(blob);
 
-                const player = document.getElementById('player');
-                player.classList.add('active');
-                player.innerHTML = '';
-                player.appendChild(audio);
+                // Abre em nova aba para testar
+                window.open(currentAudioUrl, '_blank');
 
-                // download
-                const downloadBtn = document.getElementById('download-btn');
-                downloadBtn.onclick = () => {
-                    const a = document.createElement("a");
-                    a.href = url;
-                    a.download = "voz.wav";
-                    a.click();
-                };
+                showNotification('Conversão concluída! Áudio aberto em nova aba.', 'success');
 
-                showNotification('Conversão concluída!', 'success');
             } catch (err) {
                 console.error(err);
+                alert('Erro ao converter: ' + err.message);
                 showNotification('Erro ao converter', 'error');
             }
         });
 
+
+        document.getElementById('close-notification').addEventListener('click', () => {
+            document.getElementById('notification').classList.remove('show');
+        });
+
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notification-message');
+
+            notification.className = 'notification';
+            notification.classList.add(type);
+            notificationMessage.textContent = message;
+
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
 
 
         // FAQ accordion
