@@ -13,35 +13,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Técnica Pomodoro – Aumente seu foco | Convertil</title>
+    <!-- Título otimizado para SEO -->
+    <title>Técnica Pomodoro: Aumente seu foco e produtividade | Convertil</title>
 
     <!-- Meta tags SEO -->
     <meta name="description"
-        content="Aprenda como usar a Técnica Pomodoro para melhorar sua produtividade com períodos de foco e pausas. Ideal para estudos e trabalho.">
-    <meta name="keywords" content="Técnica Pomodoro, produtividade, foco, tempo, estudo, trabalho, método Pomodoro">
+        content="Aprenda a usar a Técnica Pomodoro para aumentar sua produtividade com períodos de foco de 25 minutos e pausas estratégicas. Ideal para estudos e trabalho. Melhore sua performance e organize seu tempo com essa técnica simples e eficaz.">
+    <meta name="keywords"
+        content="Técnica Pomodoro, produtividade, foco, técnica de foco, gestão do tempo, estudo, trabalho, método Pomodoro, produtividade no trabalho">
     <meta name="author" content="Convertil.com">
 
-    <link rel="canonical" href="https://convertil.com/tecnica-pomodoro/index.html">
+    <!-- Canonical -->
+    <link rel="canonical" href="https://convertil.com/tecnica-pomodoro/">
 
     <!-- Meta Open Graph (Facebook e redes sociais) -->
-    <meta property="og:title" content="Técnica Pomodoro – Aumente seu foco | Convertil">
+    <meta property="og:title" content="Técnica Pomodoro: Aumente seu foco e produtividade | Convertil">
     <meta property="og:description"
-        content="Melhore sua concentração usando a Técnica Pomodoro. 25 minutos de foco, 5 minutos de pausa. Simples e eficaz.">
+        content="Descubra como a Técnica Pomodoro pode transformar sua produtividade. 25 minutos de foco intenso seguidos de uma pausa breve. Uma estratégia simples e eficaz para estudos e trabalho.">
     <meta property="og:image" content="https://convertil.com/assets/logo.png">
     <meta property="og:url" content="https://convertil.com/tecnica-pomodoro/">
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Técnica Pomodoro – Aumente seu foco | Convertil">
+    <meta name="twitter:title" content="Técnica Pomodoro: Aumente seu foco e produtividade | Convertil">
     <meta name="twitter:description"
-        content="Use a Técnica Pomodoro para focar mais e render melhor nos estudos ou no trabalho.">
+        content="Aplique a Técnica Pomodoro para melhorar sua produtividade. Foco e pausas alternadas para um desempenho superior em estudos e trabalho.">
     <meta name="twitter:image" content="https://convertil.com/assets/logo.png">
 
-    <!-- Favicon e fontes -->
-    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://convertil.com/favicon.ico" type="image/x-icon">
+
+    <!-- Fontes -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+
+    <!-- Script para Tailwind CSS (presumindo uso de Tailwind CSS) -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Marcação Semântica e SEO Local -->
+    <!-- Se aplicável, adicione dados de marcação semântica como Schema.org ou Microdados -->
+
+    <!-- Melhorando Mobile e Responsividade -->
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+
 
     <!-- Estilos personalizados -->
     <style>
@@ -219,153 +235,167 @@
     </footer>
 
     <style>
-    @keyframes blinkRed {
-        0%, 100% { background-color: #EF4444; }
-        50% { background-color: #ffffff; }
-    }
+        @keyframes blinkRed {
 
-    @keyframes blinkGreen {
-        0%, 100% { background-color: #10B981; }
-        50% { background-color: #ffffff; }
-    }
+            0%,
+            100% {
+                background-color: #EF4444;
+            }
 
-    .blinking-red {
-        animation: blinkRed 0.5s ease-in-out 3;
-    }
+            50% {
+                background-color: #ffffff;
+            }
+        }
 
-    .blinking-green {
-        animation: blinkGreen 0.5s ease-in-out 3;
-    }
-</style>
+        @keyframes blinkGreen {
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    let timer
-    let totalSeconds = 25 * 60
-    let remainingSeconds = totalSeconds
-    let isRunning = false
-    let currentMode = 'focus'
-    let pomodoroCount = 0
+            0%,
+            100% {
+                background-color: #10B981;
+            }
 
-    const timeDisplay = document.getElementById('time-display')
-    const timerState = document.getElementById('timer-state')
-    const progressRing = document.getElementById('progress-ring')
-    const startBtn = document.getElementById('start-btn')
-    const pauseBtn = document.getElementById('pause-btn')
-    const resetBtn = document.getElementById('reset-btn')
-    const focusBtn = document.getElementById('focus-btn')
-    const shortBreakBtn = document.getElementById('short-break-btn')
-    const longBreakBtn = document.getElementById('long-break-btn')
-    const pomodoroCountElement = document.getElementById('pomodoro-count')
+            50% {
+                background-color: #ffffff;
+            }
+        }
 
-    const radius = progressRing.r.baseVal.value
-    const circumference = 2 * Math.PI * radius
-    progressRing.style.strokeDasharray = circumference
-    progressRing.style.strokeDashoffset = circumference
+        .blinking-red {
+            animation: blinkRed 0.5s ease-in-out 3;
+        }
 
-    function updateDisplay() {
-        const minutes = Math.floor(remainingSeconds / 60)
-        const seconds = remainingSeconds % 60
-        timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
-        const progress = circumference - (remainingSeconds / totalSeconds) * circumference
-        progressRing.style.strokeDashoffset = progress
-    }
+        .blinking-green {
+            animation: blinkGreen 0.5s ease-in-out 3;
+        }
+    </style>
 
-    function startTimer() {
-        if (!isRunning) {
-            isRunning = true
-            startBtn.classList.add('hidden')
-            pauseBtn.classList.remove('hidden')
-            timerState.textContent = currentMode === 'focus' ? 'Focando' : 'Em pausa'
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let timer
+            let totalSeconds = 25 * 60
+            let remainingSeconds = totalSeconds
+            let isRunning = false
+            let currentMode = 'focus'
+            let pomodoroCount = 0
 
-            timer = setInterval(() => {
-                remainingSeconds--
-                updateDisplay()
+            const timeDisplay = document.getElementById('time-display')
+            const timerState = document.getElementById('timer-state')
+            const progressRing = document.getElementById('progress-ring')
+            const startBtn = document.getElementById('start-btn')
+            const pauseBtn = document.getElementById('pause-btn')
+            const resetBtn = document.getElementById('reset-btn')
+            const focusBtn = document.getElementById('focus-btn')
+            const shortBreakBtn = document.getElementById('short-break-btn')
+            const longBreakBtn = document.getElementById('long-break-btn')
+            const pomodoroCountElement = document.getElementById('pomodoro-count')
 
-                if (remainingSeconds <= 0) {
-                    clearInterval(timer)
-                    isRunning = false
-                    timerState.textContent = 'Concluído'
+            const radius = progressRing.r.baseVal.value
+            const circumference = 2 * Math.PI * radius
+            progressRing.style.strokeDasharray = circumference
+            progressRing.style.strokeDashoffset = circumference
 
-                    if (currentMode === 'focus') {
-                        document.body.classList.add('blinking-red')
-                        pomodoroCount++
-                        pomodoroCountElement.textContent = pomodoroCount
+            function updateDisplay() {
+                const minutes = Math.floor(remainingSeconds / 60)
+                const seconds = remainingSeconds % 60
+                timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+                const progress = circumference - (remainingSeconds / totalSeconds) * circumference
+                progressRing.style.strokeDashoffset = progress
+            }
 
-                        setTimeout(() => {
-                            document.body.classList.remove('blinking-red')
-                            setMode('shortBreak')
-                            startTimer()
-                        }, 1500)
+            function startTimer() {
+                if (!isRunning) {
+                    isRunning = true
+                    startBtn.classList.add('hidden')
+                    pauseBtn.classList.remove('hidden')
+                    timerState.textContent = currentMode === 'focus' ? 'Focando' : 'Em pausa'
 
-                    } else if (currentMode === 'shortBreak' || currentMode === 'longBreak') {
-                        document.body.classList.add('blinking-green')
+                    timer = setInterval(() => {
+                        remainingSeconds--
+                        updateDisplay()
 
-                        setTimeout(() => {
-                            document.body.classList.remove('blinking-green')
-                            setMode('focus')
-                            startTimer()
-                        }, 1500)
-                    }
+                        if (remainingSeconds <= 0) {
+                            clearInterval(timer)
+                            isRunning = false
+                            timerState.textContent = 'Concluído'
+
+                            if (currentMode === 'focus') {
+                                document.body.classList.add('blinking-red')
+                                pomodoroCount++
+                                pomodoroCountElement.textContent = pomodoroCount
+
+                                setTimeout(() => {
+                                    document.body.classList.remove('blinking-red')
+                                    setMode('shortBreak')
+                                    startTimer()
+                                }, 1500)
+
+                            } else if (currentMode === 'shortBreak' || currentMode === 'longBreak') {
+                                document.body.classList.add('blinking-green')
+
+                                setTimeout(() => {
+                                    document.body.classList.remove('blinking-green')
+                                    setMode('focus')
+                                    startTimer()
+                                }, 1500)
+                            }
+                        }
+                    }, 1000)
                 }
-            }, 1000)
-        }
-    }
+            }
 
-    function pauseTimer() {
-        clearInterval(timer)
-        isRunning = false
-        startBtn.classList.remove('hidden')
-        pauseBtn.classList.add('hidden')
-        timerState.textContent = 'Pausado'
-    }
+            function pauseTimer() {
+                clearInterval(timer)
+                isRunning = false
+                startBtn.classList.remove('hidden')
+                pauseBtn.classList.add('hidden')
+                timerState.textContent = 'Pausado'
+            }
 
-    function resetTimer() {
-        clearInterval(timer)
-        isRunning = false
-        remainingSeconds = totalSeconds
-        updateDisplay()
-        startBtn.classList.remove('hidden')
-        pauseBtn.classList.add('hidden')
-        timerState.textContent = 'Pronto'
-        document.body.classList.remove('blinking-red', 'blinking-green')
-    }
+            function resetTimer() {
+                clearInterval(timer)
+                isRunning = false
+                remainingSeconds = totalSeconds
+                updateDisplay()
+                startBtn.classList.remove('hidden')
+                pauseBtn.classList.add('hidden')
+                timerState.textContent = 'Pronto'
+                document.body.classList.remove('blinking-red', 'blinking-green')
+            }
 
-    function setMode(mode) {
-        currentMode = mode
-        if (isRunning) pauseTimer()
+            function setMode(mode) {
+                currentMode = mode
+                if (isRunning) pauseTimer()
 
-        document.body.classList.remove('focus-bg', 'short-break-bg', 'long-break-bg', 'blinking-red', 'blinking-green')
+                document.body.classList.remove('focus-bg', 'short-break-bg', 'long-break-bg', 'blinking-red', 'blinking-green')
 
-        switch (mode) {
-            case 'focus':
-                totalSeconds = 25 * 60
-                document.body.classList.add('focus-bg')
-                break
-            case 'shortBreak':
-                totalSeconds = 5 * 60
-                document.body.classList.add('short-break-bg')
-                break
-            case 'longBreak':
-                totalSeconds = 15 * 60
-                document.body.classList.add('long-break-bg')
-                break
-        }
+                switch (mode) {
+                    case 'focus':
+                        totalSeconds = 25 * 60
+                        document.body.classList.add('focus-bg')
+                        break
+                    case 'shortBreak':
+                        totalSeconds = 5 * 60
+                        document.body.classList.add('short-break-bg')
+                        break
+                    case 'longBreak':
+                        totalSeconds = 15 * 60
+                        document.body.classList.add('long-break-bg')
+                        break
+                }
 
-        remainingSeconds = totalSeconds
-        updateDisplay()
-    }
+                remainingSeconds = totalSeconds
+                updateDisplay()
+            }
 
-    startBtn.addEventListener('click', startTimer)
-    pauseBtn.addEventListener('click', pauseTimer)
-    resetBtn.addEventListener('click', resetTimer)
-    focusBtn.addEventListener('click', () => setMode('focus'))
-    shortBreakBtn.addEventListener('click', () => setMode('shortBreak'))
-    longBreakBtn.addEventListener('click', () => setMode('longBreak'))
+            startBtn.addEventListener('click', startTimer)
+            pauseBtn.addEventListener('click', pauseTimer)
+            resetBtn.addEventListener('click', resetTimer)
+            focusBtn.addEventListener('click', () => setMode('focus'))
+            shortBreakBtn.addEventListener('click', () => setMode('shortBreak'))
+            longBreakBtn.addEventListener('click', () => setMode('longBreak'))
 
-    updateDisplay()
-})
-</script>
+            updateDisplay()
+        })
+    </script>
 
 </body>
 
