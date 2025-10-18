@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "dotenv": "^17.2.3",
     "espeak": "^0.0.3"
   },
   "name": "megasite",

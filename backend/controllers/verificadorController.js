@@ -1,13 +1,14 @@
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args))
 const dados = require('../utils/utils')
 const cheerio = require('cheerio')
-const { exec } = require('child_process');
-const path = require('path');
-const fs = require('fs');
+require('dotenv').config();
 const mongoose = require('mongoose')
 
+// const { exec } = require('child_process');
+// const path = require('path');
+// const fs = require('fs');
 
-const MONGO_URI = 'mongodb+srv://000devhome:35xqnaqw@convertil.30xesl4.mongodb.net/?retryWrites=true&w=majority&appName=Convertil';
+const MONGO_URI = process.env.MONGO_API_KEY
 
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
@@ -17,17 +18,18 @@ mongoose.connect(MONGO_URI, {
     .catch(err => console.error('🔴 Erro ao conectar MongoDB:', err));
 
 
-const MensagemSchema = new mongoose.Schema({
-    nome: String,
-    email: String,
-    mensagem: String,
-    criadoEm: {
-        type: Date,
-        default: Date.now
-    }
+    const MensagemSchema = new mongoose.Schema({
+        nome: String,
+        email: String,
+        mensagem: String,
+        criadoEm: {
+            type: Date,
+            default: Date.now
+        }
 });
 
-const Mensagem = mongoose.model('Mensagem', MensagemSchema);
+const Mensagens = mongoose.model('Mensagens', MensagemSchema);
+
 let contReq = 0
 
 function getVida(req, res) {
@@ -51,21 +53,20 @@ function listarCategorias(req, res) {
 }
 
 async function funcSubmitForm(req, res) {
-  const { nome, email, mensagem } = req.body;
-  console.log(`Dados recebidos => NOME:-- ${nome} --, EMAIL:-- ${email} --, MENSAGEM:-- ${mensagem} --`);
+    const { nome, email, mensagem } = req.body;
 
-  try {
-    const novaMensagem = new Mensagem({ nome, email, mensagem });
-    await novaMensagem.save(); // salva no MongoDB
+    try {
+        const novaMensagem = new Mensagens({ nome, email, mensagem });
+        await novaMensagem.save();
 
-    return res.status(201).json({ mensagem: 'Salvo com sucesso no banco!' });
-  } catch (err) {
-    console.error('Erro ao salvar no MongoDB:', err);
-    return res.status(500).json({ erro: 'Erro interno ao salvar' });
-  }
+        return res.status(201).json({ mensagem: 'Salvo com sucesso no banco!' });
+    } catch (err) {
+        console.error('Erro ao salvar no MongoDB:', err);
+        return res.status(500).json({ erro: 'Erro interno ao salvar' });
+    }
 }
 
-async function getMetadata(req, res) {  
+async function getMetadata(req, res) {
     const API_KEY = 'AIzaSyA0EqtqtjlUng3Yt_cWNlfWhDxJP_QkvoQ';
 
     const siteUrl = req.query.url;
