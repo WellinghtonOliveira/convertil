@@ -1,55 +1,89 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <!-- Google Analytics -->
+    <!-- ================== Google Analytics ================== -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX61BYEH4E"></script>
     <script>
-        window.dataLayer = window.dataLayer || []
-        function gtag() { dataLayer.push(arguments) }
-        gtag('js', new Date())
-        gtag('config', 'G-RX61BYEH4E')
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RX61BYEH4E');
     </script>
-    <!-- Meta padrão -->
+
+    <!-- ================== Meta Básico ================== -->
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- SEO: título e descrição -->
-    <title>Contador de Caracteres e Palavras | TextMetrics - Convertil</title>
+    <!-- ================== SEO Avançado ================== -->
+    <title>Contador de Caracteres e Palavras Online | TextMetrics da Convertil</title>
     <meta name="description"
-        content="Use o TextMetrics para contar caracteres, palavras, linhas, tempo de leitura e frequência de palavras. Ferramenta online gratuita e fácil de usar.">
+        content="Conte caracteres, palavras, linhas e tempo de leitura em segundos. O TextMetrics da Convertil é uma ferramenta gratuita, rápida e fácil de usar para análise de texto online." />
+    <meta name="keywords"
+        content="contador de caracteres, contador de palavras, contador online, análise de texto, tempo de leitura, textmetrics, convertil" />
+    <link rel="canonical" href="https://convertil.com/contador-de-caracteres-e-palavras/" />
 
-    <!-- Canonical -->
-    <link rel="canonical" href="https://convertil.com/contador-de-caracteres-e-palavras/index.html" />
+    <!-- ================== Favicon & Identidade Visual ================== -->
+    <link rel="icon" href="./icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="./icon.png" />
+    <meta name="theme-color" content="#0ea5e9" />
 
-    <!-- Favicon -->
-     <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
-
-    <!-- Logo para redes sociais e buscadores -->
-    <meta property="og:image" content="https://convertil.com/assets/logo.png" />
-    <meta property="og:image:alt" content="Logo da ferramenta TextMetrics do site Convertil" />
-
-    <!-- Open Graph para redes sociais -->
-    <meta property="og:title" content="TextMetrics | Contador de Caracteres e Palavras" />
-    <meta property="og:description"
-        content="Ferramenta online para contar caracteres, palavras, linhas, tempo de leitura e mais." />
+    <!-- ================== Open Graph (Facebook, LinkedIn, etc.) ================== -->
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Convertil" />
     <meta property="og:type" content="website" />
+    <meta property="og:title" content="Contador de Caracteres e Palavras Online | TextMetrics da Convertil" />
+    <meta property="og:description"
+        content="Ferramenta gratuita para contar caracteres, palavras, tempo de leitura e mais. Ideal para redatores, estudantes e profissionais de SEO." />
+    <meta property="og:url" content="https://convertil.com/contador-de-caracteres-e-palavras/" />
+    <meta property="og:image" content="https://convertil.com/assets/logo.png" />
+    <meta property="og:image:alt" content="Logo da ferramenta TextMetrics da Convertil" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-    <!-- Twitter Cards -->
+    <!-- ================== Twitter Card ================== -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="TextMetrics | Contador de Caracteres e Palavras" />
+    <meta name="twitter:site" content="@convertil" />
+    <meta name="twitter:title" content="Contador de Caracteres e Palavras | TextMetrics" />
     <meta name="twitter:description"
-        content="Conte palavras e caracteres com facilidade usando o TextMetrics da Convertil." />
+        content="Analise textos com rapidez — conte palavras, caracteres e tempo de leitura com o TextMetrics da Convertil." />
     <meta name="twitter:image" content="https://convertil.com/assets/logo.png" />
 
-    <!-- Robots -->
-    <meta name="robots" content="index, follow" />
+    <!-- ================== Robots & Indexação ================== -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
 
-    <!-- Palavras-chave (útil apenas se for bem usado) -->
-    <meta name="keywords"
-        content="contador de caracteres, contador de palavras, análise de texto, tempo de leitura, ferramentas online, convertil" />
+    <!-- ================== Dados Estruturados (JSON-LD) ================== -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "TextMetrics - Contador de Caracteres e Palavras",
+  "url": "https://convertil.com/contador-de-caracteres-e-palavras/",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "All",
+  "description": "Ferramenta online gratuita para contar palavras, caracteres, tempo de leitura e frequência de palavras.",
+  "image": "https://convertil.com/assets/logo.png",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Convertil",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://convertil.com/assets/logo.png"
+    }
+  }
+}
+</script>
 
-    <!-- Tailwind -->
+    <!-- ================== Performance e CSS ================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" />
     <script src="https://cdn.tailwindcss.com"></script>
+
 
     <!-- Fontes e estilos -->
     <style>
@@ -160,7 +194,8 @@
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="logo">TextMetrics</div>
             <nav class="flex space-x-6">
-                <a href="https://convertil.com/" class="text-gray-600 hover:text-primary font-medium transition-colors">Voltar</a>
+                <a href="https://convertil.com/"
+                    class="text-gray-600 hover:text-primary font-medium transition-colors">Voltar</a>
                 <a href="#about" class="text-gray-600 hover:text-primary font-medium transition-colors">Sobre</a>
             </nav>
         </div>
