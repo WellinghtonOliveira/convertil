@@ -1,57 +1,76 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+    <!-- Google Analytics / GA4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX61BYEH4E"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-        gtag('config', 'G-RX61BYEH4E');
+        gtag('config', 'G-RX61BYEH4E', { 'anonymize_ip': true });
     </script>
+
+    <!-- Meta Básicas -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="Convertil" />
+    <meta name="theme-color" content="#4CAF50" />
 
-    <title>HarmonyPalette | Gerador de Paletas de Cores Harmoniosas</title>
-
+    <!-- SEO On-Page -->
+    <title>HarmonyPalette | Gerador de Paletas de Cores Harmoniosas Online</title>
     <meta name="description"
-        content="Gere paletas de cores harmoniosas com facilidade usando o HarmonyPalette. Ideal para designers, desenvolvedores e criadores de conteúdo." />
-
+        content="Crie paletas de cores harmoniosas de forma fácil e rápida com o HarmonyPalette. Ideal para designers, desenvolvedores e criadores de conteúdo. Experimente grátis!" />
+    <meta name="keywords"
+        content="paletas de cores, cores harmoniosas, gerador de paletas, design gráfico, web design, HarmonyPalette" />
     <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://convertil.com/gerador-de-paletas-de-cores/" />
 
-    <link rel="canonical" href="https://convertil.com/gerador-de-paletas-de-cores/index.html" />
-
+    <!-- Favicon -->
     <link rel="shortcut icon" href="icon.png" type="image/x-icon" />
 
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
     <meta property="og:title" content="HarmonyPalette - Gerador de Paletas de Cores Harmoniosas" />
     <meta property="og:description"
         content="Descubra combinações de cores perfeitas com o HarmonyPalette. Gere paletas de design para seus projetos em segundos." />
-    <meta property="og:type" content="website" />
     <meta property="og:url" content="https://convertil.com/gerador-de-paletas-de-cores/" />
     <meta property="og:image" content="https://convertil.com/assets/logo.png" />
+    <meta property="og:site_name" content="Convertil" />
+    <meta property="og:locale" content="pt_BR" />
 
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="HarmonyPalette - Gerador de Paletas" />
+    <meta name="twitter:title" content="HarmonyPalette - Gerador de Paletas de Cores" />
     <meta name="twitter:description"
-        content="Ferramenta online para gerar paletas de cores harmoniosas para seus projetos." />
+        content="Ferramenta online gratuita para gerar paletas de cores harmoniosas para seus projetos de design." />
     <meta name="twitter:image" content="https://convertil.com/assets/logo.png" />
+    <meta name="twitter:site" content="@Convertil" />
 
+    <!-- Schema.org / JSON-LD -->
     <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "HarmonyPalette",
-    "url": "https://convertil.com/harmonypalette",
-    "applicationCategory": "DesignApplication",
-    "description": "Gere paletas de cores harmoniosas online com o HarmonyPalette. Ideal para projetos de design, interfaces e conteúdo visual.",
-    "inLanguage": "pt-BR",
-    "image": "https://convertil.com/icon/og-harmonypalette.png",
-    "offers": {
-      "@type": "Offer",
-      "price": "0.00",
-      "priceCurrency": "BRL"
-    }
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "HarmonyPalette",
+  "url": "https://convertil.com/gerador-de-paletas-de-cores/",
+  "applicationCategory": "DesignApplication",
+  "description": "Gere paletas de cores harmoniosas online com o HarmonyPalette. Ideal para projetos de design, interfaces e conteúdo visual.",
+  "inLanguage": "pt-BR",
+  "image": "https://convertil.com/assets/logo.png",
+  "offers": {
+    "@type": "Offer",
+    "price": "0.00",
+    "priceCurrency": "BRL"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Convertil"
   }
-  </script>
+}
+</script>
+
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -115,6 +134,7 @@
             .titulo-paleta {
                 flex-direction: column !important;
             }
+
             .titulo-paleta h3 {
                 margin: 5px 0 15px 0 !important;
             }
@@ -129,7 +149,10 @@
                 margin: 10px 0;
             }
 
-            .logo-tam, i, h1, h1 > span {
+            .logo-tam,
+            i,
+            h1,
+            h1>span {
                 font-size: 20px !important;
             }
         }
