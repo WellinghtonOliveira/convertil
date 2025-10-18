@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const dados = Object.fromEntries(formData.entries())
 
         try {
-            const res = await fetch('http://localhost:8080/submitForm', {//https://megasitebackend-4il9.onrender.com
+            const res = await fetch('https://megasitebackend-4il9.onrender.com/submitForm', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
