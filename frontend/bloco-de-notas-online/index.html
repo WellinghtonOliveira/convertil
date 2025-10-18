@@ -1,35 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <!-- Google Analytics -->
+    <!-- ✅ Google Analytics (Otimizado) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX61BYEH4E"></script>
     <script>
-        window.dataLayer = window.dataLayer || []
-        function gtag() { dataLayer.push(arguments) }
-        gtag('js', new Date())
-        gtag('config', 'G-RX61BYEH4E')
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-RX61BYEH4E', { anonymize_ip: true });
     </script>
 
-    <!-- SEO básico -->
+    <!-- ✅ SEO On-Page Avançado -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NotaWeb - Bloco de Notas Online | Convertil</title>
+    <title>NotaWeb - Bloco de Notas Online Grátis e Rápido | Convertil</title>
     <meta name="description"
-        content="NotaWeb é um bloco de notas online gratuito do Convertil para você anotar e salvar ideias rapidamente. Acesse agora!">
+        content="Use o NotaWeb, o bloco de notas online gratuito do Convertil. Anote ideias, listas e lembretes em segundos — sem precisar criar conta. Rápido, leve e seguro.">
+    <meta name="keywords"
+        content="bloco de notas online, anotações online, notas rápidas, editor de texto online, convertil, notaweb">
     <meta name="author" content="Convertil">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://convertil.com/bloco-de-notas-online/index.html">
-    <!-- Open Graph (para redes sociais) -->
-    <meta property="og:title" content="NotaWeb - Bloco de Notas Online | Convertil">
-    <meta property="og:description"
-        content="Anote ideias, listas e pensamentos rapidamente com o NotaWeb, o bloco de notas online gratuito da Convertil.">
-    <meta property="og:image" content="https://convertil.com/favicon.png">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://convertil.com/bloco-de-notas-online/">
+
+    <!-- ✅ Open Graph / Social Preview -->
+    <meta property="og:locale" content="pt_BR">
     <meta property="og:type" content="website">
+    <meta property="og:title" content="NotaWeb - Bloco de Notas Online Grátis e Rápido | Convertil">
+    <meta property="og:description"
+        content="Anote ideias, listas e lembretes com o NotaWeb. Bloco de notas online gratuito, leve e sem cadastro — direto do Convertil.">
+    <meta property="og:url" content="https://convertil.com/bloco-de-notas-online/">
+    <meta property="og:site_name" content="Convertil">
+    <meta property="og:image" content="https://convertil.com/assets/logo.png">
+    <meta property="og:image:alt" content="Logo do Convertil - NotaWeb">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="315">
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
+    <!-- ✅ Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NotaWeb - Bloco de Notas Online Grátis | Convertil">
+    <meta name="twitter:description"
+        content="Crie anotações online em segundos com o NotaWeb — gratuito, leve e prático.">
+    <meta name="twitter:image" content="https://convertil.com/assets/logo.png">
+    <meta name="twitter:creator" content="@Convertil">
 
-    <!-- Tailwind CSS via CDN (uso apenas em dev) -->
+    <!-- ✅ Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "NotaWeb - Bloco de Notas Online",
+  "url": "https://convertil.com/bloco-de-notas-online/",
+  "image": "https://convertil.com/assets/logo.png",
+  "description": "O NotaWeb é um bloco de notas online gratuito criado pela Convertil. Escreva, edite e salve ideias sem precisar de login.",
+  "author": {
+    "@type": "Organization",
+    "name": "Convertil",
+    "url": "https://convertil.com"
+  },
+  "applicationCategory": "ProductivityApplication",
+  "operatingSystem": "All"
+}
+</script>
+
+    <!-- ✅ Favicon -->
+    <link rel="icon" href="./icon.png" type="image/png">
+
+    <!-- ✅ Preconnect para Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- ✅ Tailwind CSS (apenas para desenvolvimento) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -47,6 +89,7 @@
             }
         }
     </script>
+
 
     <!-- Estilos customizados -->
     <style>
@@ -76,6 +119,7 @@
         }
     </style>
 </head>
+
 <body class="bg-light font-sans antialiased text-dark">
     <!-- Header -->
     <header class="bg-primary text-white shadow-md">
@@ -246,7 +290,7 @@
             aboutBtn.addEventListener('click', showAboutModal);
             closeAboutModal.addEventListener('click', hideAboutModal);
             closeAboutModalBtn.addEventListener('click', hideAboutModal);
-            
+
 
             // Functions
             function updateCounts() {
