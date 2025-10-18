@@ -1,16 +1,14 @@
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args))
+require('dotenv').config();
 const dados = require('../utils/utils')
 const cheerio = require('cheerio')
-require('dotenv').config();
 const mongoose = require('mongoose')
 
 // const { exec } = require('child_process');
 // const path = require('path');
 // const fs = require('fs');
 
-const MONGO_URI = process.env.MONGO_API_KEY
-
-mongoose.connect(MONGO_URI, {
+mongoose.connect(process.env.MONGO_API_KEY, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -50,7 +48,7 @@ function listarCategorias(req, res) {
     const descricao = dados.map(obj => obj.description)
     const link = dados.map(obj => obj.link)
     res.json({ categorias, nome, descricao, link })
-}
+} 
 
 async function funcSubmitForm(req, res) {
     const { nome, email, mensagem } = req.body;
