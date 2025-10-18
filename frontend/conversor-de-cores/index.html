@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 
 <head>
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX61BYEH4E"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,43 +10,78 @@
         gtag('js', new Date());
         gtag('config', 'G-RX61BYEH4E');
     </script>
+
     <!-- Favicon -->
-    <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
+    <link rel="icon" href="./icon.png" type="image/png" />
 
-    <!-- SEO básico -->
-    <link rel="canonical" href="https://convertil.com/conversor-de-cores/index.html" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ColorConvert | ConvertilTools - Conversor de Cores HEX, RGB e HSL</title>
+    <!-- Canonical -->
+    <link rel="canonical" href="https://convertil.com/conversor-de-cores/" />
+
+    <!-- Metadados essenciais -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+    <title>ColorConvert | Conversor de Cores HEX, RGB e HSL Online - ConvertilTools</title>
+
     <meta name="description"
-        content="Use o ColorConvert da ConvertilTools para converter cores com precisão entre HEX, RGB e HSL. Ferramenta online gratuita e profissional.">
+        content="Converta cores com precisão entre os formatos HEX, RGB e HSL com o ColorConvert da ConvertilTools. Ferramenta online gratuita e profissional para designers, desenvolvedores e criadores." />
     <meta name="keywords"
-        content="conversor de cores, HEX para RGB, RGB para HSL, converter cor online, color converter, ferramenta de cores, color convert, convertil, convertiltools, design gráfico, cores web, código de cores, tabela de cores">
-    <meta name="author" content="ConvertilTools">
+        content="conversor de cores, converter HEX para RGB, converter RGB para HSL, color converter online, conversão de cores web, códigos de cores, ferramenta de cores, design gráfico, desenvolvedor front-end, tabela de cores, ConvertilTools" />
+    <meta name="author" content="ConvertilTools" />
+    <meta name="theme-color" content="#4f46e5" />
 
-    <!-- Open Graph (Facebook, WhatsApp etc.) -->
-    <meta property="og:title" content="ColorConvert | ConvertilTools">
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ConvertilTools" />
+    <meta property="og:title" content="ColorConvert | Conversor de Cores HEX, RGB e HSL Online - ConvertilTools" />
     <meta property="og:description"
-        content="Ferramenta online para converter cores entre HEX, RGB e HSL. Simples, eficaz e gratuita.">
-    <meta property="og:image" content="https://convertil.com/assets/logo.png">
-    <!-- Atualize conforme imagem -->
-    <meta property="og:url" content="https://convertil.com/">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="ConvertilTools">
+        content="Ferramenta gratuita e profissional para converter cores entre HEX, RGB e HSL. Simples, precisa e rápida." />
+    <meta property="og:url" content="https://convertil.com/conversor-de-cores/" />
+    <meta property="og:image" content="https://convertil.com/assets/logo.png" />
+    <meta property="og:image:alt" content="Logo da ConvertilTools - Conversor de cores online" />
 
-    <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ColorConvert | ConvertilTools">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@ConvertilTools" />
+    <meta name="twitter:title" content="ColorConvert | ConvertilTools" />
     <meta name="twitter:description"
-        content="Converta cores com facilidade entre os formatos HEX, RGB e HSL. Gratuito e 100% online.">
-    <meta name="twitter:image" content="https://convertil.com/assets/logo.png">
-    <!-- Atualize conforme imagem -->
+        content="Converta cores entre HEX, RGB e HSL com precisão. 100% online e gratuito." />
+    <meta name="twitter:image" content="https://convertil.com/assets/logo.png" />
 
-    <!-- Tailwind CSS -->
+    <!-- Dados estruturados (Schema.org) -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "ColorConvert | Conversor de Cores HEX, RGB e HSL Online - ConvertilTools",
+  "description": "Converta cores com precisão entre HEX, RGB e HSL com o ColorConvert da ConvertilTools. Ferramenta online gratuita e profissional para designers e desenvolvedores.",
+  "url": "https://convertil.com/conversor-de-cores/",
+  "publisher": {
+    "@type": "Organization",
+    "name": "ConvertilTools",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://convertil.com/assets/logo.png"
+    }
+  },
+  "inLanguage": "pt-BR"
+}
+</script>
+
+    <!-- Performance e recursos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Fonte Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- SEO adicional -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon" href="./icon.png" />
+
 
     <!-- Estilos personalizados -->
     <style>
@@ -124,10 +160,12 @@
         @media (max-width: 400px) {
             .correc {
                 flex-direction: column !important;
-                margin: 10px  0 !important;
+                margin: 10px 0 !important;
             }
 
-            .correc, input, button {
+            .correc,
+            input,
+            button {
                 border-radius: 3px !important;
                 margin: 3px !important;
                 width: 100% !important;
