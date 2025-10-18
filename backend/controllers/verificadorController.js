@@ -14,8 +14,6 @@ mongoose.connect(process.env.MONGO_API_KEY, {
 })
     .then(() => console.log('🟢 Conectado ao MongoDB'))
     .catch(err => console.error('🔴 Erro ao conectar MongoDB:', err));
-
-
     const MensagemSchema = new mongoose.Schema({
         nome: String,
         email: String,
@@ -65,14 +63,12 @@ async function funcSubmitForm(req, res) {
 }
 
 async function getMetadata(req, res) {
-    const API_KEY = 'AIzaSyA0EqtqtjlUng3Yt_cWNlfWhDxJP_QkvoQ';
-
     const siteUrl = req.query.url;
     if (!siteUrl) return res.status(400).json({ error: 'URL ausente' });
 
     try {
         // Chamada à API PageSpeed
-        const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(siteUrl)}&key=${API_KEY}&category=performance&category=seo`;
+        const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(siteUrl)}&key=${process.env.PAGESPEED_API_KEY}&category=performance&category=seo`;
         const apiRes = await fetch(apiUrl);
         const apiData = await apiRes.json();
 
@@ -106,7 +102,6 @@ async function getMetadata(req, res) {
 }
 
 async function apiAnalyze(req, res) {
-    const API_KEY = '14299872be3fd205be014943456b6a8f3e8739341144';
     const { tag } = req.query;
 
     if (!tag) {
@@ -114,7 +109,7 @@ async function apiAnalyze(req, res) {
     }
 
     try {
-        const apiUrl = `https://api.ritekit.com/v1/stats/hashtag-suggestions?text=${encodeURIComponent(tag)}&client_id=${API_KEY}`;
+        const apiUrl = `https://api.ritekit.com/v1/stats/hashtag-suggestions?text=${encodeURIComponent(tag)}&client_id=${process.env.ANALYZE_API_KEY}`;
         const response = await fetch(apiUrl);
         const data = await response.json();
         res.json(data);
