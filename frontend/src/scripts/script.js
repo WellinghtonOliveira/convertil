@@ -252,6 +252,8 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     })
 
+    
+
     function showModal(message) {
         // Definir a mensagem no modal
         document.getElementById('modal-message').innerText = message;

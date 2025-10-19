@@ -556,7 +556,25 @@
         const toggleBtn = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
 
+        let ative = false
+        window.addEventListener("resize", () => {
+            if (ative) {
+                let cont2 = 1;
+                let interval2 = setInterval(() => {
+                    cont2 -= 0.1;
+                    mobileMenu.style.opacity = cont2;
+
+                    if (cont2 <= 0) {
+                        clearInterval(interval2);
+                        mobileMenu.classList.add('hidden'); // esconde de vez
+                    }
+                }, 15);
+                ative = false
+            }
+        })
+
         toggleBtn.addEventListener('click', () => {
+            ative = true
             let cont = 0;
 
             if (mobileMenu.classList.contains('hidden')) {
