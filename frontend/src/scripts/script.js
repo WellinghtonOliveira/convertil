@@ -45,6 +45,32 @@ document.addEventListener('DOMContentLoaded', async function () {
     form.addEventListener('submit', async function (e) {
         e.preventDefault()
 
+        const nome = form.nome.value.trim();
+        const email = form.email.value.trim();
+        const mensagem = form.mensagem.value.trim()
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+        console.log(nome, email, mensagem)
+
+        if (!/^[a-zA-Z\s]+$/.test(nome)) {
+            showModal('Erro! Digite um nome válido.');
+            e.preventDefault();
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            alert('Digite um email válido!');
+            closeModal()
+            e.preventDefault();
+            return;
+        }
+
+        if (mensagem.length < 5 || mensagem.length > 150) {
+            alert('A mensagem deve ter pelo menos 5 caracteres e menos que 150.');
+            e.preventDefault();
+            return;
+        }
+
         const formData = new FormData(form)
         const dados = Object.fromEntries(formData.entries())
 
@@ -169,4 +195,86 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     renderTools(currentPage)
     renderPagination()
+
+    // Contatar ---
+
+    // spans
+    const spanNome = document.getElementById("span-nome")
+    const spanEmail = document.getElementById("span-email")
+    const spanMsg = document.getElementById("span-msg")
+
+    // inputs
+    const form1 = document.getElementById("input-form-text-0")
+    const form2 = document.getElementById("input-form-text-1")
+    const form3 = document.getElementById("input-form-text-2")
+
+    form1.addEventListener("focus", () => {
+        spanNome.style.top = "0"
+        spanNome.style.color = "white"
+        spanNome.style.textShadow = "1px 1px 3px rgba(255, 255, 255, 0.4)"
+    })
+
+    form2.addEventListener("focus", () => {
+        spanEmail.style.top = "0"
+        spanEmail.style.color = "white"
+        spanEmail.style.textShadow = "1px 1px 3px rgba(255, 255, 255, 0.4)"
+    })
+
+    form3.addEventListener("focus", () => {
+        spanMsg.style.top = "0"
+        spanMsg.style.color = "white"
+        spanMsg.style.textShadow = "1px 1px 3px rgba(255, 255, 255, 0.4)"
+    })
+
+    // blur
+    form1.addEventListener("blur", () => {
+        if (form1.value == 0) {
+            spanNome.style.top = "3.3em"
+            spanNome.style.color = "black"
+            spanNome.style.textShadow = "none"
+        }
+
+    })
+
+    form2.addEventListener("blur", () => {
+        if (form2.value == 0) {
+            spanEmail.style.top = "3.3em"
+            spanEmail.style.color = "black"
+            spanEmail.style.textShadow = "none"
+        }
+
+    })
+
+    form3.addEventListener("blur", () => {
+        if (form3.value == 0) {
+            spanMsg.style.top = "3.3em"
+            spanMsg.style.color = "black"
+            spanMsg.style.textShadow = "none"
+        }
+
+    })
+
+    function showModal(message) {
+        // Definir a mensagem no modal
+        document.getElementById('modal-message').innerText = message;
+
+        // Verificar se é uma mensagem de erro ou sucesso
+        if (message.includes('Erro')) {
+            document.getElementById('modal').classList.remove('modal-success');
+        } else {
+            document.getElementById('modal').classList.add('modal-success');
+        }
+
+        // Mostrar o modal
+        document.getElementById('modal').style.display = 'block';
+        setTimeout(() => {closeModal()}, 3000)
+    }
+
+    function closeModal() {
+        // Fechar o modal
+        document.getElementById('modal').style.display = 'none';
+    }
+
 })
+
+
