@@ -50,8 +50,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         const mensagem = form.mensagem.value.trim()
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-        console.log(nome, email, mensagem)
-
         if (!/^[a-zA-Z\s]+$/.test(nome)) {
             showModal('Erro! Digite um nome válido.');
             e.preventDefault();
@@ -59,14 +57,14 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
 
         if (!emailRegex.test(email)) {
-            alert('Digite um email válido!');
+            showModal('Erro! Digite um email válido!');
             closeModal()
             e.preventDefault();
             return;
         }
 
         if (mensagem.length < 5 || mensagem.length > 150) {
-            alert('A mensagem deve ter pelo menos 5 caracteres e menos que 150.');
+            showModal('Erro! A mensagem deve ter de 5 a 150 caracteres.');
             e.preventDefault();
             return;
         }
@@ -84,15 +82,15 @@ document.addEventListener('DOMContentLoaded', async function () {
             })
 
             if (res.ok) {
-                alert('Mensagem enviada com sucesso.')
+                showModal('Sucesso! enviado com sucesso.')
                 form.reset()
                 closeContactModal()
             } else {
-                alert('Erro ao enviar, tente novamente.')
+                showModal('Erro ao enviar, tente novamente.')
             }
         } catch (error) {
             console.log(error)
-            alert('Erro de rede, tente mais tarde.')
+            showModal('Erro de rede, tente mais tarde.')
         }
     })
 

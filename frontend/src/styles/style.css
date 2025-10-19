@@ -3,6 +3,38 @@
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
+#mobile-menu a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 250px) {
+    nav>div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #icon-convert {
+        display: none;
+    }
+
+    #container-btns-como-usar {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+    }
+
+    .cont-btn {
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .a-btn {
+        width: 100%;
+    }
+}
+
 .category-chip {
     transition: all 0.3s ease;
 }

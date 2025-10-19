@@ -121,7 +121,7 @@
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
-                        <i class="fas fa-tools text-2xl mr-2" style="color: #2563EB;"></i>
+                        <i id="icon-convert" class="fas fa-tools text-2xl mr-2" style="color: #2563EB;"></i>
                         <span class="text-xl font-bold text-gray-900">ConvertilTools</span>
                     </div>
                 </div>
@@ -314,16 +314,16 @@
                 <span class="block">Pronto para turbinar sua produtividade?</span>
                 <span class="block text-blue-400">Comece a explorar nossas ferramentas agora.</span>
             </h2>
-            <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-                <div class="inline-flex rounded-md shadow">
+            <div id="container-btns-como-usar" class=" mt-8 flex lg:mt-0 lg:flex-shrink-0">
+                <div class="inline-flex rounded-md shadow cont-btn">
                     <a href="#navTools"
-                        class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                        class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 a-btn">
                         Ver todas ferramentas
                     </a>
                 </div>
-                <div class="ml-3 inline-flex rounded-md shadow">
+                <div class="ml-3 inline-flex rounded-md shadow cont-btn">
                     <a href="javascript:void(0);" onclick="abrirComoUsar()"
-                        class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50">
+                        class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 a-btn">
                         Como usar
                     </a>
                 </div>
@@ -557,8 +557,36 @@
         const mobileMenu = document.getElementById('mobile-menu');
 
         toggleBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+            let cont = 0;
+
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden'); // mostra o menu
+                mobileMenu.style.opacity = 0; // começa invisível
+
+                let interval = setInterval(() => {
+                    cont += 0.1;
+                    mobileMenu.style.opacity = cont;
+
+                    if (cont >= 1) {
+                        clearInterval(interval);
+                    }
+                }, 15);
+                return;
+            }
+
+            // Fade out (sumir)
+            let cont2 = 1;
+            let interval2 = setInterval(() => {
+                cont2 -= 0.1;
+                mobileMenu.style.opacity = cont2;
+
+                if (cont2 <= 0) {
+                    clearInterval(interval2);
+                    mobileMenu.classList.add('hidden'); // esconde de vez
+                }
+            }, 15);
         });
+
 
 
     </script>
