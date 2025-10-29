@@ -1,4 +1,6 @@
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args))
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 require('dotenv').config();
 const dados = require('../utils/utils')
 const cheerio = require('cheerio')
@@ -14,14 +16,14 @@ mongoose.connect(process.env.MONGO_API_KEY, {
 })
     .then(() => console.log('🟢 Conectado ao MongoDB'))
     .catch(err => console.error('🔴 Erro ao conectar MongoDB:', err));
-    const MensagemSchema = new mongoose.Schema({
-        nome: String,
-        email: String,
-        mensagem: String,
-        criadoEm: {
-            type: Date,
-            default: Date.now
-        }
+const MensagemSchema = new mongoose.Schema({
+    nome: String,
+    email: String,
+    mensagem: String,
+    criadoEm: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 const Mensagens = mongoose.model('Mensagens', MensagemSchema);
@@ -46,7 +48,7 @@ function listarCategorias(req, res) {
     const descricao = dados.map(obj => obj.description)
     const link = dados.map(obj => obj.link)
     res.json({ categorias, nome, descricao, link })
-} 
+}
 
 async function funcSubmitForm(req, res) {
     const { nome, email, mensagem } = req.body;
@@ -55,10 +57,22 @@ async function funcSubmitForm(req, res) {
         const novaMensagem = new Mensagens({ nome, email, mensagem });
         await novaMensagem.save();
 
-        return res.status(201).json({ mensagem: 'Salvo com sucesso no banco!' });
+        const msg = {
+            to: '000devhome@gmail.com', 
+            from: '000devhome@gmail.com',
+            subject: `Nova mensagem de ${nome}`,
+            text: `Nome: ${nome}\nEmail: ${email}\nMensagem: ${mensagem}`,
+            html: `<strong>Nome:</strong> ${nome}<br>
+             <strong>Email:</strong> ${email}<br>
+             <strong>Mensagem:</strong> ${mensagem}`,
+        };
+
+        await sgMail.send(msg);
+
+        return res.status(201).json({ mensagem: 'Salvo e e-mail enviado com sucesso!' });
     } catch (err) {
-        console.error('Erro ao salvar no MongoDB:', err);
-        return res.status(500).json({ erro: 'Erro interno ao salvar' });
+        console.error('Erro ao salvar ou enviar e-mail:', err);
+        return res.status(500).json({ erro: 'Erro interno ao salvar ou enviar e-mail' });
     }
 }
 
