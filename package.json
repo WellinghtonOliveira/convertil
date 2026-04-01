@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "espeak": "^0.0.3"
+    "espeak": "^0.0.3",
+    "nodemailer": "^8.0.4"
   },
   "name": "megasite",
   "version": "1.0.0",
